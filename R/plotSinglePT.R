@@ -5,7 +5,7 @@
 #'
 #' @usage plotSinglePT<-function(mPT,RS1,RS2,xlab =" N. of overlaps",main=NA,add_theme = FALSE,colvec = NULL)
 #'
-#' @param mPt an object of class gMXR or a matrix
+#' @param mPt an object of class genoMatriXeR or a matrix
 #' @param RS1 character, name of the first element of gMXR object to test.
 #' @param RS2 character, name of the second element of gMXR object to test.
 #' @param xlab character, label for x axes. (default = NA)
