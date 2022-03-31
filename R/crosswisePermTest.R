@@ -28,7 +28,7 @@
 #' @param max_pv Numeric, the z-scores associate a p-values higher of this parameter will be transform in subEx. (default =0.05)
 #' @param subEx Numeric, (default = 0) substitute this value to a z-score when the p-value is higher than max_pv
 #' @param genome Charachter or GenomicRanges, (defalut = "hg19") genome used to compute the randomization
-#' @param verbose Boolean, if verbose
+#' @param verbose Boolean, if verbose test
 #'
 #' @details ...
 #' @return
