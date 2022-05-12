@@ -37,7 +37,9 @@ plotCrosswiseDimRed <-
            underline = FALSE,
            perplexity = 10,
            theta = 0.1,
-           ellipse=TRUE) {
+           ellipse=TRUE,
+           labMaxOverlap=100,
+           ...) {
 
     if (class(mPt)=="genoMatriXeR"){
       GM <- mPt@matrix$GMat
@@ -117,6 +119,7 @@ plotCrosswiseDimRed <-
       geom_text_repel(
         size  = size_labels,
         aes(label = Name),
+        max.overlaps=labMaxOverlap,
         point.padding = 0.5,
         segment.color = "grey"
       )
