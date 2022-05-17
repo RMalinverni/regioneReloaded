@@ -9,14 +9,14 @@
 #' @param mpt object of class genoMatriXeR or numeric matrix
 #' @param type character, Dimensionality Reduction algorithm selected between ("PCA", "tSNE", "UMAP"). (default  = "PCA")
 #' @param GM_clust vector, vector of cluster using to clusterize the matrix, if NA will the matrix will be clusterize using \code{\link{kmeans}} function. (default = NA)
-#' @param nc numeric, nuber of cluster. (dafault = 5)
+#' @param nc numeric, nuber of cluster. (default = 5)
 #' @param listGene list of vector, if is not NULL this will be a list of element highlighted in the graph. (default = NULL)
 #' @param main character, name of the graph. (defaut = "")
 #' @param size_labels numeric, size for element names in the graph. (default = 2)
 #' @param underline logic, if present listGene and underline is TRUE only the cluster in which the element of listGene are present will be highlighted. (default = FALSE)
 #' @param perplexity numeric, if type = "tSNE" value of perplexity for the function \code{\link{Rtsne}}. (default = 10)
 #' @param theta numeric, if type = "tSNE" value of theta for the function \code{\link{Rtsne}}. (default = 0.1)
-#' @param ellipse logic, if TRUE ellipes will be drawn arount the clusters. (default = FALSE)
+#' @param ellipse logic, if TRUE ellipses will be drawn around the clusters. (default = FALSE)
 #'
 #' @export plotCrosswiseDimRed
 #' @import ggplot2

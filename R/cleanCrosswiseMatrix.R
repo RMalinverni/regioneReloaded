@@ -20,7 +20,7 @@ cleanCrosswiseMatrix <-
     GM[GM_pv > pvcut] <- 0
 
     if (scale == TRUE) {
-      GM2 <- scale(GM2)
+      GM <- scale(GM)
     }
 
     GM[is.nan(GM)] <- 0
