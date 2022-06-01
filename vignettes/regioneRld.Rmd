@@ -75,7 +75,7 @@ AlienGenome and AlienRSList arte described in the vignette
 ```{r load _data, eval=FALSE}
 #NOT RUN
   set.seed(42)
-  cw_Alien_RaR-crosswisePermTest(Alist = AlienRSList,
+  cw_Alien_RaR<-crosswisePermTest(Alist = AlienRSList,
                             sampling = FALSE,
                             mc.cores= 15,
                             ranFUN = "randomizeRegions",
@@ -266,8 +266,8 @@ summary(AlienRSList)
 ## Multi Permutation Test 
 ### Crosswise Analysis
 
-CrosswisePermTest is a core function of the package, using this function is possible to calculate the 
-permutation test between all the combination of two RSs. The results of this is an S4 object of class gMXR
+CrosswisePermTest a package's core function, using it is possible to calculate the 
+permutation test between all the combination of two RSs. Results of this function is an S4 object of class gMXR,
 it contains 3 in three slots, *parameters*, *multiOverlaps* and *matrix*
 
 * gMXR_obj
@@ -297,5 +297,5 @@ it contains 3 in three slots, *parameters*, *multiOverlaps* and *matrix*
 
 ```{r }
 data("cw_Alien_RaR")
-print(cw_Alien_RaR)
+#print(cw_Alien_RaR)
 ```
