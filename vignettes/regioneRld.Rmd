@@ -1,6 +1,7 @@
 ---
 title: "regioneRld"
-output: rmarkdown::html_vignette
+author: "roberto Malinverni"
+output: BiocStyle::html_document   #rmarkdown::html_vignette
 fig_width: 10
 fig_height: 10 
 vignette: >
@@ -18,6 +19,11 @@ knitr::opts_chunk$set(
  fig.align = "center"
 )
 ```
+
+```{r style, echo = FALSE, results = 'asis'}
+BiocStyle::markdown()
+```
+
 
 ```{r setup}
 library("regioneRld")
@@ -295,7 +301,50 @@ it contains 3 in three slots, *parameters*, *multiOverlaps* and *matrix*
     + FitRow
     + FitCol
 
+
+#### Parameters
+
+In the slot "parameters" are present all the paramenteres used to obtain  the 
+gMXR object."
 ```{r }
 data("cw_Alien_RaR")
-#print(cw_Alien_RaR)
+print(cw_Alien_RaR@parameters)
 ```
+#### multiOverlaps
+
+"multiOverlaps" slot contain a list of data frames.
+For each element of Alist, will be create a data frame with 12 column and a nuber of rows equal to ther number of element present in Blist.
+the 12 columns of the data frame represent:
+
++ order.id:       order of comparison
++ name:           name of Blist element 
++ n_regionA       number of regions od Alist using in the permutation test
++ n_regionB       number of regions od Blist using in the permutation test
++ z_score         calucalted z-score of permutation test
++ p_value         p.value of permutation test
++ n_overlaps      number of hits between Alist element and Belement (change name) 
++ mean_perm_test  mean of hits of permutated region set
++ sd_perm_test    standard deviation of hits in permutated region set
++ norm_zscore     z-scores normalized
++ std_zscore      z-score standardized* (maybe is better to eliminate)
++ adj_p_value     p.value adjusted 
+
+
+```{r}
+print(head(cw_Alien_RaR@multiOverlaps$regA01))
+```
+#### matrix
+when gMXR object is created the slot matrix will be NULL
+```{r}
+print(cw_Alien_RaR@matrix)
+```
+
+#Evaluation functions
+regioneReload can use all the evaluation strategies present in
+`r BiocStyle::Biocpkg("regioneR")` 
+
+#Randomization functions
+regioneReload can use all the randomization strategies present in
+`r BiocStyle::Biocpkg("regioneR")` 
+but we introduce new approaches\Rfunction{findOverlaps}
+
