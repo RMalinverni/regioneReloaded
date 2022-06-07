@@ -27,7 +27,8 @@ plotCrosswiseMatrix <- function(mPt,
                        matrix.type = "crosswise",
                        cor = "row",
                        maxVal = 2,
-                       main = "") {
+                       main = "",
+                       ord_mat=NULL) {
 
   if (class(mPt) == "genoMatriXeR") {
 
@@ -64,6 +65,16 @@ plotCrosswiseMatrix <- function(mPt,
     colMatrix<-rev( c( rev(brewer.pal( 9, "PuBuGn" ) ),brewer.pal( 9, "YlOrRd" ) ) )
 
     }
+
+
+  if (!is.null(ord_mat)){
+    if (is.list(ord_mat)){
+      if(length(ord_mat)==2){
+        GM<-GM[ord_mat[[1]],ord_mat[[2]]]
+      }
+    }
+  }
+
 
   DF <- melt(GM, varnames = c("X", "Y"))
 
