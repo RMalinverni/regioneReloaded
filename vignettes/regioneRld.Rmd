@@ -339,11 +339,12 @@ when gMXR object is created the slot matrix will be NULL
 str(cw_Alien_RaR@matrix)
 ```
 
-#Evaluation functions
+### Evaluation functions
 regioneReload can use all the evaluation strategies present in
 `r BiocStyle::Biocpkg("regioneR")` 
 
-#Randomization functions
+### Randomization functions
+
 regioneReload can use all the randomization strategies present in
 `r BiocStyle::Biocpkg("regioneR")` 
 (adding phrases for new approach of resampleRegions)
@@ -400,3 +401,48 @@ cw_Alien_ReR <-  crosswisePermTest(
 
 ```
 
+Using default option the matrix clusterization will be automatic selected 
+
+```{r}
+cw_Alien_RaR <- makeCrosswiseMatrix(cw_Alien_RaR)
+
+cw_Alien_ReG <- makeCrosswiseMatrix(cw_Alien_ReG)
+
+cw_Alien_cRaR <- makeCrosswiseMatrix(cw_Alien_cRaR)
+
+cw_Alien_ReR <- makeCrosswiseMatrix(cw_Alien_ReR)
+```
+
+To compare the output of the matrices created with different randomization functions, 
+we need to fix the clusterization
+
+```{r}
+
+X<-rownames(cw_Alien_ReR@matrix$GMat)
+Y<-colnames(cw_Alien_ReR@matrix$GMat)
+ord<-list(X=X,Y=Y)
+
+plotCrosswiseMatrix(cw_Alien_RaR,matrix.type = "crosswise",maxVal = 0.7,ord_mat = ord)
+plotCrosswiseMatrix(cw_Alien_ReG,matrix.type = "crosswise",maxVal = 0.7,ord_mat = ord)
+plotCrosswiseMatrix(cw_Alien_cRaR,matrix.type = "crosswise",maxVal = 0.7,ord_mat = ord)
+plotCrosswiseMatrix(cw_Alien_ReR,matrix.type = "crosswise",maxVal = 0.7,ord_mat = ord)
+
+plotCrosswiseMatrix(cw_Alien_RaR,matrix.type = "correlation",maxVal = 0.7,ord_mat = ord)
+plotCrosswiseMatrix(cw_Alien_ReG,matrix.type =  "correlation",maxVal = 0.7,ord_mat = ord)
+plotCrosswiseMatrix(cw_Alien_cRaR,matrix.type =  "correlation",maxVal = 0.7,ord_mat = ord)
+plotCrosswiseMatrix(cw_Alien_ReR,matrix.type =  "correlation",maxVal = 0.7,ord_mat = ord)
+
+```
+
+## Plot Single permutation test result
+
+with the function plotSinglePT is possible to plot the association between two regions set form a gMXR object
+
+
+```{r}
+plotSinglePT(cw_Alien_RaR,RS1 = "regB","regB02")
+
+plotSinglePT(cw_Alien_RaR,RS1 = "regA","regAB")
+
+plotSinglePT(cw_Alien_RaR,RS1 = "regA","reg_no_AB")
+```
