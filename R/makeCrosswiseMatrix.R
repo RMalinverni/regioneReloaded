@@ -35,7 +35,7 @@ makeCrosswiseMatrix <-
            zs.type = 'norm_zscore',
            symm_matrix = TRUE,
            selectVec = NULL,
-           pvcut = 0.05,
+           pvcut = 1,
            ...) {
 
   if ( class( mPT ) == "genoMatriXeR" ){

@@ -336,7 +336,7 @@ print(head(cw_Alien_RaR@multiOverlaps$regA01))
 #### matrix
 when gMXR object is created the slot matrix will be NULL
 ```{r}
-print(cw_Alien_RaR@matrix)
+str(cw_Alien_RaR@matrix)
 ```
 
 #Evaluation functions
@@ -346,4 +346,57 @@ regioneReload can use all the evaluation strategies present in
 #Randomization functions
 regioneReload can use all the randomization strategies present in
 `r BiocStyle::Biocpkg("regioneR")` 
-(addding phrases for new approach of resampleRegions)
+(adding phrases for new approach of resampleRegions)
+```{r, eval=FALSE}
+#NOT RUN
+
+set.seed(42)
+cw_Alien_RaR <-  crosswisePermTest(
+                          Alist = AlienRSList,
+                          Blist = AlienRSList,
+                          sampling = FALSE, 
+                          genome = AlienGenome,
+                          per.chromosome=TRUE,
+                          ranFUN = "randomizeRegions",
+                          evFUN = "numOverlaps",
+                          ntimes= 1000,
+                          mc.cores = 25
+                          )
+
+set.seed(42)
+cw_Alien_ReG <-  crosswisePermTest(
+                        Alist = AlienRSList,
+                        Blist = AlienRSList,
+                        sampling = FALSE, 
+                        genome = AlienGenome,
+                        ranFUN = "resampleGenome",
+                        evFUN = "numOverlaps",
+                        ntimes= 1000,
+                        mc.cores = 25
+                        )
+set.seed(42)
+cw_Alien_cRaR <-  crosswisePermTest(
+                        Alist = AlienRSList,
+                        Blist = AlienRSList,
+                        sampling = FALSE, 
+                        genome = AlienGenome,
+                        ranFUN = "circularRandomizeRegions",
+                        evFUN = "numOverlaps",
+                        ntimes= 1000,
+                        mc.cores = 25
+                      )
+set.seed(42)
+cw_Alien_ReR <-  crosswisePermTest(
+                        Alist = AlienRSList,
+                        Blist = AlienRSList,
+                        sampling = FALSE, 
+                        genome = AlienGenome,
+                        ranFUN = "resampleRegions",
+                        evFUN = "numOverlaps",
+                        ntimes= 1000,
+                        mc.cores = 25
+                      )
+#
+
+```
+
