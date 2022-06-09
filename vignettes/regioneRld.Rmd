@@ -334,6 +334,7 @@ the 12 columns of the data frame represent:
 print(head(cw_Alien_RaR@multiOverlaps$regA01))
 ```
 #### matrix
+
 when gMXR object is created the slot matrix will be NULL
 ```{r}
 str(cw_Alien_RaR@matrix)
@@ -446,3 +447,10 @@ plotSinglePT(cw_Alien_RaR,RS1 = "regA","regAB")
 
 plotSinglePT(cw_Alien_RaR,RS1 = "regA","reg_no_AB")
 ```
+
+## Plot Dimensionally Reduction
+```{r}
+```
+
+# Multi Local Zscore
+
