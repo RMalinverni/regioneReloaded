@@ -30,7 +30,7 @@ makeLZMatrix <- function(mlZA,
 
 
   if (class(mlZA) != "multiLocalZScore") {
-    stop("the object mlZA need to be an multiLocalZScore object")
+    stop("the ob ject mlZA need to be an multiLocalZScore object")
   }
 
   mat <- vector(length = length(mlZA@multiLocalZscores$shifts))
@@ -77,6 +77,7 @@ makeLZMatrix <- function(mlZA,
   }
 
   mat_corX <- cor(x = t(mat), method = "pearson")
+  mat_corX[is.na(mat_corX)]<-0
 
   fit2 <-
     chooseHclustMet(mat_corX,
