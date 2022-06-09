@@ -126,9 +126,9 @@ plotCrosswiseDimRed <-
 
 
     if(ellipse==TRUE){
-      p <- p + stat_ellipse(type = "norm",
+      p <- p + stat_ellipse(type = "t",
                      geom = "polygon",
-                     alpha = 0.2)
+                     alpha = 0.15)
     }
 
     if(type=="PCA"){

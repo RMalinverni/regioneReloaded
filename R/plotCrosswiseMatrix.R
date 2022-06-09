@@ -26,7 +26,7 @@ plotCrosswiseMatrix <- function(mPt,
                        colMatrix = "default",
                        matrix.type = "crosswise",
                        cor = "row",
-                       maxVal = 2,
+                       maxVal = NA,
                        main = "",
                        ord_mat=NULL) {
 
@@ -36,7 +36,11 @@ plotCrosswiseMatrix <- function(mPt,
       GM <- mPt@matrix$GMat
       title <- "Association Matrix"
       if (is.na(maxVal)){
-          maxVal<-max(c(abs(max(GM)),abs(min(GM))))
+          #maxVal<-max(c(abs(max(GM)),abs(min(GM))))
+          maxVal<-quantile(abs(GM),.95)
+      }
+      if (maxVal=="max"){
+        maxVal<-max(c(abs(max(GM)),abs(min(GM))))
       }
     }
 
@@ -52,6 +56,7 @@ plotCrosswiseMatrix <- function(mPt,
     }
 
   }
+
 
   if (is.matrix(mPt)){
     GM <- mPt
