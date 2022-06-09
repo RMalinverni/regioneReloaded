@@ -3,17 +3,17 @@
 #' Plot a Dimensionality Reduction visualization of gMXR object (or matrix) selecting between different algorithms (PCA, tSNE and UMAP)
 #' set the result will be store in a gMXR S4 class
 #'
-#' @usage plotCrosswiseDimRed(mPt, type = "PCA", GM_clust = NA, nc = 5, listGene = NULL, main = "", size_labels = 2, underline = FALSE, perplexity = 10, theta = 0.1, ellipse=TRUE)
+#' @usage plotCrosswiseDimRed(mPt, type = "PCA", GM_clust = NA, nc = 5, listRS = NULL, main = "", size_labels = 2, emphasize = FALSE, perplexity = 10, theta = 0.1, ellipse=TRUE)
 #'
 #'
 #' @param mpt object of class genoMatriXeR or numeric matrix
 #' @param type character, Dimensionality Reduction algorithm selected between ("PCA", "tSNE", "UMAP"). (default  = "PCA")
 #' @param GM_clust vector, vector of cluster using to clusterize the matrix, if NA will the matrix will be clusterize using \code{\link{kmeans}} function. (default = NA)
 #' @param nc numeric, nuber of cluster. (default = 5)
-#' @param listGene list of vector, if is not NULL this will be a list of element highlighted in the graph. (default = NULL)
+#' @param listRS list of vector, if is not NULL this will be a list of element highlighted in the graph. (default = NULL)
 #' @param main character, name of the graph. (defaut = "")
 #' @param size_labels numeric, size for element names in the graph. (default = 2)
-#' @param underline logic, if present listGene and underline is TRUE only the cluster in which the element of listGene are present will be highlighted. (default = FALSE)
+#' @param emphasize logic, if present listRS and emphasize is TRUE only the cluster in which the element of listRS are present will be highlighted. (default = FALSE)
 #' @param perplexity numeric, if type = "tSNE" value of perplexity for the function \code{\link{Rtsne}}. (default = 10)
 #' @param theta numeric, if type = "tSNE" value of theta for the function \code{\link{Rtsne}}. (default = 0.1)
 #' @param ellipse logic, if TRUE ellipses will be drawn around the clusters. (default = FALSE)
@@ -31,13 +31,13 @@ plotCrosswiseDimRed <-
            type = "PCA",
            GM_clust = NA,
            nc = 5,
-           listGene = NULL,
+           listRS = NULL,
            main = "",
            size_labels = 2,
-           underline = FALSE,
+           emphasize = FALSE,
            perplexity = 10,
            theta = 0.1,
-           ellipse=TRUE,
+           ellipse=FALSE,
            labMaxOverlap=100,
            ...) {
 
@@ -87,9 +87,9 @@ plotCrosswiseDimRed <-
 
     pdr_df$clust1 <- rep("none", nrow(pdr_df))
 
-    for (i in 1:length(listGene)) {
-      for (x in 1:length(listGene[[i]])){
-        pdr_df$clust1[pdr_df$Name==listGene[[i]][x]]<-names(listGene)[i]
+    for (i in 1:length(listRS)) {
+      for (x in 1:length(listRS[[i]])){
+        pdr_df$clust1[pdr_df$Name==listRS[[i]][x]]<-names(listRS)[i]
       }
     }
 
@@ -100,9 +100,9 @@ plotCrosswiseDimRed <-
       pdr_df$clust2[pdr_df$clust == sel_clust[i]]<- sel_clust[i]
     }
 
-    if (!is.null(listGene)){
+    if (!is.null(listRS)){
       pdr_df$clust<-pdr_df$clust1
-      if (underline==TRUE){
+      if (emphasize==TRUE){
         pdr_df$clust<-pdr_df$clust2
       }
     }

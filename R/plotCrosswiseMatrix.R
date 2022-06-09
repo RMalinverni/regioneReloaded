@@ -35,13 +35,15 @@ plotCrosswiseMatrix <- function(mPt,
     if  (matrix.type == "crosswise") {
       GM <- mPt@matrix$GMat
       title <- "Association Matrix"
+
       if (is.na(maxVal)){
-          #maxVal<-max(c(abs(max(GM)),abs(min(GM))))
           maxVal<-quantile(abs(GM),.95)
       }
+
       if (maxVal=="max"){
         maxVal<-max(c(abs(max(GM)),abs(min(GM))))
       }
+
     }
 
     if  (matrix.type == "correlation") {
