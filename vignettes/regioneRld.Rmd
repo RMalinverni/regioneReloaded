@@ -25,9 +25,6 @@ BiocStyle::markdown()
 ```
 
 
-```{r setup}
-library("regioneRld")
-```
 
 # regioneRld
 
@@ -78,13 +75,18 @@ The results of a follow code is state in the data folder of the package, to load
 use the command data("cw_Alien_RaR").
 AlienGenome and AlienRSList arte described in the vignette  
 
+```{r setup}
+library("regioneRld")
+```
+
+
 ```{r load _data, eval=FALSE}
 #NOT RUN
   set.seed(42)
-  cw_Alien_RaR<-crosswisePermTest(Alist = AlienRSList,
+  cw_Alien_ReG<-crosswisePermTest(Alist = AlienRSList,
                             sampling = FALSE,
-                            mc.cores= 15,
-                            ranFUN = "randomizeRegions",
+                            mc.cores= 25,
+                            ranFUN = "resampleGenome",
                             evFUN = "numOverlaps",
                             genome = AlienGenome,
                             ntimes= 1000
@@ -96,14 +98,14 @@ AlienGenome and AlienRSList arte described in the vignette
 library(regioneR)
 library(RColorBrewer) # now we can delete this
 
-data("cw_Alien_RaR")
+data("cw_Alien")
 
 
-cw_Alien_RaR<-makeCrosswiseMatrix(cw_Alien_RaR,pvcut = 1)
+cw_Alien_ReG<-makeCrosswiseMatrix(cw_Alien_ReG, pvcut = 1)
 
-plotCrosswiseMatrix(cw_Alien_RaR,matrix.type = "crosswise",maxVal = 0.7)
+plotCrosswiseMatrix(cw_Alien_ReG, matrix.type = "crosswise")
 
-plotCrosswiseMatrix(cw_Alien_RaR,matrix.type = "correlation",maxVal = 0.7)
+plotCrosswiseMatrix(cw_Alien_ReG, matrix.type = "correlation")
 ```
 
 
@@ -307,8 +309,8 @@ it contains 3 in three slots, *parameters*, *multiOverlaps* and *matrix*
 In the slot "parameters" are present all the paramenteres used to obtain  the 
 gMXR object."
 ```{r }
-data("cw_Alien_RaR")
-print(cw_Alien_RaR@parameters)
+data("cw_Alien")
+print(cw_Alien_ReG@parameters)
 ```
 #### multiOverlaps
 
@@ -331,13 +333,13 @@ the 12 columns of the data frame represent:
 
 
 ```{r}
-print(head(cw_Alien_RaR@multiOverlaps$regA01))
+print(head(cw_Alien_ReG@multiOverlaps$regA01))
 ```
 #### matrix
 
 when gMXR object is created the slot matrix will be NULL
 ```{r}
-str(cw_Alien_RaR@matrix)
+str(cw_Alien_ReG@matrix)
 ```
 
 ### Evaluation functions
@@ -405,13 +407,13 @@ cw_Alien_ReR <-  crosswisePermTest(
 Using default option the matrix clusterization will be automatic selected 
 
 ```{r}
-cw_Alien_RaR <- makeCrosswiseMatrix(cw_Alien_RaR)
+#cw_Alien_RaR <- makeCrosswiseMatrix(cw_Alien_RaR)
 
 cw_Alien_ReG <- makeCrosswiseMatrix(cw_Alien_ReG)
 
-cw_Alien_cRaR <- makeCrosswiseMatrix(cw_Alien_cRaR)
+#cw_Alien_cRaR <- makeCrosswiseMatrix(cw_Alien_cRaR)
 
-cw_Alien_ReR <- makeCrosswiseMatrix(cw_Alien_ReR)
+#cw_Alien_ReR <- makeCrosswiseMatrix(cw_Alien_ReR)
 ```
 
 To compare the output of the matrices created with different randomization functions, 
@@ -419,19 +421,19 @@ we need to fix the clusterization
 
 ```{r}
 
-X<-rownames(cw_Alien_ReR@matrix$GMat)
-Y<-colnames(cw_Alien_ReR@matrix$GMat)
+X<-rownames(cw_Alien_ReG@matrix$GMat)
+Y<-colnames(cw_Alien_ReG@matrix$GMat)
 ord<-list(X=X,Y=Y)
 
-plotCrosswiseMatrix(cw_Alien_RaR,matrix.type = "crosswise",maxVal = 0.7,ord_mat = ord)
-plotCrosswiseMatrix(cw_Alien_ReG,matrix.type = "crosswise",maxVal = 0.7,ord_mat = ord)
-plotCrosswiseMatrix(cw_Alien_cRaR,matrix.type = "crosswise",maxVal = 0.7,ord_mat = ord)
-plotCrosswiseMatrix(cw_Alien_ReR,matrix.type = "crosswise",maxVal = 0.7,ord_mat = ord)
+#plotCrosswiseMatrix(cw_Alien_RaR,matrix.type = "crosswise",maxVal = 0.7,ord_mat = ord)
+plotCrosswiseMatrix(cw_Alien_ReG,matrix.type = "crosswise" ,ord_mat = ord)
+#plotCrosswiseMatrix(cw_Alien_cRaR,matrix.type = "crosswise",maxVal = 0.7,ord_mat = ord)
+#plotCrosswiseMatrix(cw_Alien_ReR,matrix.type = "crosswise",maxVal = 0.7,ord_mat = ord)
 
-plotCrosswiseMatrix(cw_Alien_RaR,matrix.type = "correlation",maxVal = 0.7,ord_mat = ord)
-plotCrosswiseMatrix(cw_Alien_ReG,matrix.type =  "correlation",maxVal = 0.7,ord_mat = ord)
-plotCrosswiseMatrix(cw_Alien_cRaR,matrix.type =  "correlation",maxVal = 0.7,ord_mat = ord)
-plotCrosswiseMatrix(cw_Alien_ReR,matrix.type =  "correlation",maxVal = 0.7,ord_mat = ord)
+#plotCrosswiseMatrix(cw_Alien_RaR,matrix.type = "correlation",maxVal = 0.7,ord_mat = ord)
+plotCrosswiseMatrix(cw_Alien_ReG,matrix.type =  "correlation" ,ord_mat = ord)
+#plotCrosswiseMatrix(cw_Alien_cRaR,matrix.type =  "correlation",maxVal = 0.7,ord_mat = ord)
+#plotCrosswiseMatrix(cw_Alien_ReR,matrix.type =  "correlation",maxVal = 0.7,ord_mat = ord)
 
 ```
 
@@ -441,16 +443,47 @@ with the function plotSinglePT is possible to plot the association between two r
 
 
 ```{r}
-plotSinglePT(cw_Alien_RaR,RS1 = "regB","regB02")
+plotSinglePT(cw_Alien_ReG, RS1 = "regA","regA05")
 
-plotSinglePT(cw_Alien_RaR,RS1 = "regA","regAB")
+plotSinglePT(cw_Alien_ReG, RS1 = "regA","regC")
 
-plotSinglePT(cw_Alien_RaR,RS1 = "regA","reg_no_AB")
+plotSinglePT(cw_Alien_ReG, RS1 = "regA","reg_no_A")
 ```
 
 ## Plot Dimensionally Reduction
 ```{r}
+cw_Alien_ReG_s <- makeCrosswiseMatrix(cw_Alien_ReG,scale = TRUE)
+
+set.seed(67)
+plotCrosswiseDimRed(cw_Alien_ReG_s, nc = 5, type="PCA")
 ```
+
+```{r}
+set.seed(67)
+plotCrosswiseDimRed(cw_Alien_ReG_s, nc = 5, type="PCA",ellipse = TRUE)
+```
+
+```{r}
+lsRegSet<-list(regA="regA",regB="regB",regC="regC")
+
+set.seed(67)
+plotCrosswiseDimRed(cw_Alien_ReG_s, nc = 5, type="PCA",listRS = lsRegSet)
+
+set.seed(67)
+plotCrosswiseDimRed(cw_Alien_ReG_s, nc = 5, type="PCA",listRS = lsRegSet,ellipse = TRUE, emphasize =TRUE)
+```
+
+```{r}
+set.seed(67)
+plotCrosswiseDimRed(cw_Alien_ReG_s, nc = 5, type="tSNE",listRS = lsRegSet,ellipse = TRUE, emphasize =TRUE)
+```
+
+```{r}
+set.seed(67)
+plotCrosswiseDimRed(cw_Alien_ReG_s, nc = 5, type="UMAP",listRS = lsRegSet,ellipse = TRUE, emphasize =TRUE)
+
+```
+
 
 # Multi Local Zscore
 
