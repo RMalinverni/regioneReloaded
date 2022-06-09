@@ -91,7 +91,7 @@ makeLZMatrix <- function(mlZA,
       LZM = mat,
       LZM_cor = mat_corX,
       FitRow = fit,
-      FitCorr = fit2,
+      FitCorr = fit2
     )
 
   return(mlZA)
