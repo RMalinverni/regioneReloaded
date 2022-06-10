@@ -35,9 +35,16 @@ plotLocalZScoreMatrix <- function(mLz,
   if (matrix.type == "association") {
     GM <- t(mLz@matrix$LZM)
     title <- "Association Matrix"
-    if (is.na(maxVal)) {
-      maxVal <- max(c(abs(max(GM)), abs(min(GM))))
+
+    if (is.na(maxVal)){
+      maxVal<-quantile(abs(GM),.95)
     }
+
+    if (maxVal=="max"){
+      maxVal<-max(c(abs(max(GM)),abs(min(GM))))
+    }
+
+
     if(revert == TRUE){
       GM <-GM[rev(rownames(GM)),]
     }

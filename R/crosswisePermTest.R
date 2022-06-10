@@ -111,6 +111,7 @@ crosswisePermTest <-
 
 
     for (i in 1:length(Alist)) {
+
       print(names(Alist[i]))
       A <- Alist[[i]]
       print(paste0("number of regions: ", length(A)))
