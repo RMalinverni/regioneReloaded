@@ -54,25 +54,25 @@ multiLocalZscore <- function(A,
                              max_pv = 0.05,
                              genome = "hg19",
                              ...) {
-
-  paramList<-list(A = deparse(substitute(A)),
-                  Blist = deparse(substitute(Blist)),
-                  sampling = deparse(substitute(sampling)),
-                  fraction = deparse(substitute(fraction)),
-                  min_sampling = deparse(substitute(fraction)),
-                  ranFUN = ranFUN,
-                  evFUN = evFUN,
-                  universe=deparse(substitute(universe)),
-                  window=window,
-                  step=step,
-                  adj_pv_method=adj_pv_method,
-                  max_pv=deparse(substitute(max_pv))
-                  )
+  paramList <- list(
+    A = deparse(substitute(A)),
+    Blist = deparse(substitute(Blist)),
+    sampling = deparse(substitute(sampling)),
+    fraction = deparse(substitute(fraction)),
+    min_sampling = deparse(substitute(fraction)),
+    ranFUN = ranFUN,
+    evFUN = evFUN,
+    universe = deparse(substitute(universe)),
+    window = window,
+    step = step,
+    adj_pv_method = adj_pv_method,
+    max_pv = deparse(substitute(max_pv))
+  )
 
   ranFUN <- eval(parse(text = ranFUN))
   evFUN <- eval(parse(text = evFUN))
 
-  A<-toGRanges(A)
+  A <- toGRanges(A)
 
   if (sampling == TRUE) {
     if (length(A) >= min_regions) {
@@ -85,15 +85,20 @@ multiLocalZscore <- function(A,
     }
   }
 
-  if(paramList$ranFUN=="resampleRegions" & is.null(universe)){
-    if (is.null(universe)){
-      print("resampleRegions function need that universe parameters in not NULL universe will created using all the regions present in Blist")
-      universe<-createUniverse(Blist) # check well this option
+  if (paramList$ranFUN == "resampleRegions" & is.null(universe)) {
+    if (is.null(universe)) {
+      print(
+        "resampleRegions function need that universe parameters in not NULL universe will created using all the regions present in Blist"
+      )
+      universe <- createUniverse(Blist) # check well this option
     }
   }
 
 
-  funct.list <- createFunctionsList(FUN = evFUN, param.name = "B", values = Blist)
+  funct.list <-
+    createFunctionsList(FUN = evFUN,
+                        param.name = "B",
+                        values = Blist)
 
 
   pt <- permTest(
@@ -101,33 +106,47 @@ multiLocalZscore <- function(A,
     evaluate.function = funct.list,
     randomize.function = ranFUN,
     genome = genome ,
-    universe = universe,
+    universe = universe ,
     ...
   )
 
+  lZs <-
+    lapply(
+      pt,
+      localZScore,
+      A = A ,
+      count.once = TRUE,
+      window = 100,
+      strep = 1
+    )
+  names(lZs) <- names(pt)
 
-  lZs <- list()
-  for (i in 1:length(pt)) {
-    lZs[[i]] <-
-      localZScore(
-        A = A,
-        pt = pt[[i]],
-        count.once = TRUE,
-        window = window,
-        step = step,
-        ...
-      )
-    names(lZs)[i] <- names(pt[i])
-  }
+  # lZs <- list()
+  # for (i in 1:length(pt)) {
+  #   lZs[[i]] <-
+  #     localZScore(
+  #       A = A,
+  #       pt = pt[[i]],
+  #       count.once = TRUE,
+  #       window = window,
+  #       step = step,
+  #       ...
+  #     )
+  #   names(lZs)[i] <- names(pt[i])
+  # }
 
 
 
   Nreg <- length(A)
   p_values <- do.call(c, pt)
   pval <- p_values[grep(".pval", names(p_values))]
+
   means_pemuted <-
     lapply(p_values[grep(".permuted", names(p_values))], mean)
-  sd_pemuted <- lapply(p_values[grep(".permuted", names(p_values))], sd)
+
+  sd_pemuted <-
+    lapply(p_values[grep(".permuted", names(p_values))], sd)
+
   z_score <- p_values[grep(".zscore", names(p_values))]
   observed <- p_values[grep(".observed", names(p_values))]
   localZs <- do.call(c, lZs)
@@ -135,7 +154,9 @@ multiLocalZscore <- function(A,
   shifts <- localZs[grep(".shifts", names(localZs))][[1]]
 
 
-  if(is.null(names(Blist))){names(Blist)<-1:length(Blist)}
+  if (is.null(names(Blist))) {
+    names(Blist) <- 1:length(Blist)
+  }
 
   tab <- data.frame(
     name = names(Blist),
@@ -145,30 +166,32 @@ multiLocalZscore <- function(A,
     sd_perm_test = unlist(sd_pemuted),
     n_overlaps = unlist(observed)
   )
+
   tab$norm_zscore <- tab$z_score / sqrt(Nreg)
   maxzscores <- (Nreg - tab$mean_perm_test) / tab$sd_perm_test
   tab$ranged_zscore <- tab$z_score / maxzscores
   tab$adj.p_value <-
-    round(p.adjust(tab$p_value, method = adj_pv_method), digits = 4)
+  round(p.adjust(tab$p_value, method = adj_pv_method), digits = 4)
 
-  names(shiftedZs)<-names(Blist)
+  names(shiftedZs) <- names(Blist)
 
-  paramList$Nregions<-Nreg
+  paramList$Nregions <- Nreg
 
 
   mLZSobj <- mLZS(
     parameters = paramList ,
-    multiLocalZscores = list(resumeTab= tab,
-                         max_zscores=maxzscores,
-                         shifts=shifts,
-                         shifed_ZSs=shiftedZs),
+    multiLocalZscores = list(
+      resumeTab = tab,
+      max_zscores = maxzscores,
+      shifts = shifts,
+      shifed_ZSs = shiftedZs
+    ),
     matrix = list(NULL)
   )
 
 
   return (mLZSobj)
 }
-
 
 
 
