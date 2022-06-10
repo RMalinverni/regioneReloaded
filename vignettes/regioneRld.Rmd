@@ -487,3 +487,32 @@ plotCrosswiseDimRed(cw_Alien_ReG_s, nc = 5, type="UMAP",listRS = lsRegSet,ellips
 
 # Multi Local Zscore
 
+Descrizione
+
+```{r, eval=FALSE }
+
+#NOT RUN
+mlz_ReG<-multiLocalZscore(A = AlienRSList$regA,
+                 Blist = AlienRSList,
+                 ranFUN = "resampleGenome",
+                 evFUN = "numOverlaps",
+                 window = 100,
+                 step = 1,
+                 max_pv =1,
+                 genome = AlienGenome,
+                 mc.cores = 25)
+```
+
+```{r}
+str(mlz_Alien_ReG)
+```
+creare la matrice
+
+```{r}
+mlz_ReG <- makeLZMatrix(mlz_ReG)
+
+```
+plotting
+```{r}
+plotLocalZScoreMatrix(mlz_ReG, maxVal = "max")
+```
