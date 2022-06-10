@@ -492,7 +492,7 @@ Descrizione
 ```{r, eval=FALSE }
 
 #NOT RUN
-mlz_ReG<-multiLocalZscore(A = AlienRSList$regA,
+mlz_Alien_ReG<-multiLocalZscore(A = AlienRSList$regA,
                  Blist = AlienRSList,
                  ranFUN = "resampleGenome",
                  evFUN = "numOverlaps",
@@ -509,10 +509,10 @@ str(mlz_Alien_ReG)
 creare la matrice
 
 ```{r}
-mlz_ReG <- makeLZMatrix(mlz_ReG)
+mlz_Alien_ReG <- makeLZMatrix(mlz_Alien_ReG)
 
 ```
 plotting
 ```{r}
-plotLocalZScoreMatrix(mlz_ReG, maxVal = "max")
+plotLocalZScoreMatrix(mlz_Alien_ReG, maxVal = "max")
 ```

@@ -16,7 +16,8 @@
 #' @param scale logic, if TRUE the matrix will be scaled (default = FALSE)
 #'
 #'
-#' @export makeCrosswiseMatrix
+#' @export makeLZMatrix
+#'
 #'
 #'
 #'
