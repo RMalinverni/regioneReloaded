@@ -503,16 +503,16 @@ mlz_Alien_ReG<-multiLocalZscore(A = AlienRSList$regA,
                  mc.cores = 25)
 ```
 
-```{r}
+```{r, eval=FALSE }
 str(mlz_Alien_ReG)
 ```
 creare la matrice
 
-```{r}
+```{r, eval=FALSE }
 mlz_Alien_ReG <- makeLZMatrix(mlz_Alien_ReG)
 
 ```
 plotting
-```{r}
+```{r, eval=FALSE }
 plotLocalZScoreMatrix(mlz_Alien_ReG, maxVal = "max")
 ```

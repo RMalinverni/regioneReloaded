@@ -15,7 +15,7 @@
 #'
 #' @import reshape2
 #' @import ggplot2
-#' @export plotCrosswiseMatrix
+#' @export plotLocalZScoreMatrix
 #'
 
 
