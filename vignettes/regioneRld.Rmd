@@ -42,13 +42,17 @@ addition to NGS tools and for whole genome analysis.
 
 `r BiocStyle::Biocpkg("regioneR")` is an R package created to test the associations between genomic region 
 sets. The core of `r BiocStyle::Biocpkg("regioneR")` is a permutation test framework specifically designed 
-to work in a genomic environment. The two main results can be summarized in two 
-graphs. Figure 1A shows the association between the two region sets under study, 
+to work in a genomic environment. The two main results that can be obtained with this method can be summarized in two 
+graphs. Figure 1A shows the association observed between the two region sets under study, 
 highlighting the distance calculated in standard deviations from the random 
-distribution. Figure 1B shows the local z-score, while a flat profile suggests a 
-regional association, a narrow peak, as the one shown, indicates that the 
-association is highly dependent on the exact location of the region.
+distribution. Figure 1B shows the local z-score: a narrow peak, as the one shown, indicates that the 
+association is highly dependent on the exact location of the region. One the contrary, a flat profile would suggest a 
+regional association.
 
+<!-- This section is titled regioneR limitations but it does not address this point directly. 
+Either highlight the limitation of pairwise comparisons or change the title? -->
+
+<!-- Missing Figure -->
 (figure 1)
 
 ### Normalized Z-S
