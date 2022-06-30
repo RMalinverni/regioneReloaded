@@ -4,9 +4,9 @@
 \name{multiLocalZScore-class}
 \alias{multiLocalZScore-class}
 \alias{mLZS}
-\title{An S4 class to represent a bank account.}
+\title{An S4 class for "multiLocalZScore" object.}
 \description{
-An S4 class to represent a bank account.
+An S4 class for "multiLocalZScore" object.
 }
 \section{Slots}{
 
