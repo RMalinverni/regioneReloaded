@@ -55,16 +55,20 @@ Either highlight the limitation of pairwise comparisons or change the title? -->
 <!-- Missing Figure -->
 (figure 1)
 
-### Normalized Z-S
-
-nZS = ZS / $\sqrt{n}$
+### Normalized Z-Score
 
 regioneRld aims to integrate the framework previously developed for `r BiocStyle::Biocpkg("regioneR")`, 
 to calculate associations of different region sets simultaneously. To compare
 associations deriving from different region sets, we introduce the concept of 
-normalized z-score, which allows not only to compare different association 
+**normalized z-score**, which allows not only to compare different association 
 events but also to work with subsets of data and speed up the calculations.
+<!-- Explain what exactly the nZS corrects? The dependency of the ZS value on the number of regions in the
+region sets tested? -->
+The normalized Z-Score is calculated as follows:
 
+nZS = ZS / $\sqrt{n}$
+
+<!-- Missing Figure -->
 (figure 2)
 
 # Quick start
