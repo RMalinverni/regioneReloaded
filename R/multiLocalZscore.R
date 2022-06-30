@@ -55,6 +55,7 @@ multiLocalZscore <- function(A,
                              max_pv = 0.05,
                              genome = "hg19",
                              ...) {
+
   paramList <- list(
     A = deparse(substitute(A)),
     Blist = deparse(substitute(Blist)),

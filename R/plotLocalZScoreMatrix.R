@@ -28,7 +28,7 @@ plotLocalZScoreMatrix <- function(mLz,
                                   maxVal = 2,
                                   main = "",
                                   revert = FALSE) {
-  if (class(mLz) != "multiLocalZScore") {
+  if (class(mLz) != "multiLZS") {
     stop("the object mlZA need to be an multiLocalZScore object")
   }
 

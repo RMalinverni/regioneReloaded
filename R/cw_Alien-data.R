@@ -15,4 +15,7 @@
 #' @export cw_Alien
 #'
 #'
-"cw_Alien"
+#'
+NULL
+
+#"cw_Alien"
