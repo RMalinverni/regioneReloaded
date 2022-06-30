@@ -9,15 +9,6 @@ gMXR <- setClass("genoMatriXeR",
 
 
 
-mLZS <- setClass("multiLocalZScore",
-                slots = c(
-                parameters = "list",
-                multiLocalZscores = "list",
-                matrix = "list"
-                )
-              )
-
-
 
 
 
