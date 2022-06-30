@@ -1,3 +1,9 @@
+#' Prints gMXR object
+
+#' @param x A gMXR object
+
+#' @export
+
 setMethod("print", "genoMatriXeR", function(x)
   list(
     param_slot = data.frame(

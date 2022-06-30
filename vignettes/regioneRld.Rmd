@@ -334,6 +334,7 @@ the 12 columns of the data frame represent:
 
 ```{r}
 print(head(cw_Alien_ReG@multiOverlaps$regA01))
+print(cw_Alien_ReG)
 ```
 #### matrix
 
