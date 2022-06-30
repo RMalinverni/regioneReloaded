@@ -73,17 +73,17 @@ nZS = ZS / $\sqrt{n}$
 
 # Quick start
 
-to calculate a crosswisePermTest starting from a list of Region Sets we can use 
-the following code, the permutation process is time expensive and depend to a 
-number of cores called by the parameter \code{\link{mc.cores}} (see `r BiocStyle::Biocpkg("regioneR")`)
-The results of a follow code is state in the data folder of the package, to load in to the enviroment
-use the command data("cw_Alien_RaR").
-AlienGenome and AlienRSList arte described in the vignette  
-
 ```{r setup}
 library("regioneRld")
 ```
 
+To calculate a crosswisePermTest starting from a list of Region Sets we can use 
+the following code, the permutation process is computing intensive and its calculation time depends on the 
+number of cores called by the parameter \code{\link{mc.cores}} (see `r BiocStyle::Biocpkg("regioneR")`).
+The result of the permutation test obtained by running the code below is included as a precomputed example dataset
+which can be loaded into the environment by running the command `data("cw_Alien_RaR")`.
+
+AlienGenome and AlienRSList are described in the next section of the vignette. 
 
 ```{r load _data, eval=FALSE}
 #NOT RUN
