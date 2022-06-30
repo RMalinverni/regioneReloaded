@@ -508,11 +508,11 @@ str(mlz_Alien_ReG)
 ```
 creare la matrice
 
-```{r, eval=FALSE }
+```{r}
 mlz_Alien_ReG <- makeLZMatrix(mlz_Alien_ReG)
 
 ```
 plotting
-```{r, eval=FALSE }
+```{r }
 plotLocalZScoreMatrix(mlz_Alien_ReG, maxVal = "max")
 ```

@@ -74,6 +74,7 @@ multiLocalZscore <- function(A,
 
   A <- toGRanges(A)
 
+  # here we made the sampling if is necessary
   if (sampling == TRUE) {
     if (length(A) >= min_regions) {
       if (length(A) * fraction > min_regions) {
@@ -84,6 +85,7 @@ multiLocalZscore <- function(A,
       }
     }
   }
+
 
   if (paramList$ranFUN == "resampleRegions" & is.null(universe)) {
     if (is.null(universe)) {

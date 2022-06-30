@@ -101,6 +101,7 @@ crosswisePermTest <-
 
     list.tabs <- list()
     list.pt <- list()
+
     if (sampling == TRUE) {
       Alist <-
         subList (Alist, min_sampling = min_sampling, fraction = fraction)
