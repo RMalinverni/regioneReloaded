@@ -4,28 +4,28 @@
 \alias{plotCrosswiseDimRed}
 \title{Plot Crosswise Dimensionality Reduction}
 \usage{
-plotCrosswiseDimRed(mPt, type = "PCA", GM_clust = NA, nc = 5, listGene = NULL, main = "", size_labels = 2, underline = FALSE, perplexity = 10, theta = 0.1, ellipse=TRUE)
+plotCrosswiseDimRed(mPt, type = "PCA", GM_clust = NA, nc = 5, listRS = NULL, main = "", size_labels = 2, emphasize = FALSE, perplexity = 10, theta = 0.1, ellipse=TRUE)
 }
 \arguments{
 \item{type}{character, Dimensionality Reduction algorithm selected between ("PCA", "tSNE", "UMAP"). (default  = "PCA")}
 
 \item{GM_clust}{vector, vector of cluster using to clusterize the matrix, if NA will the matrix will be clusterize using \code{\link{kmeans}} function. (default = NA)}
 
-\item{nc}{numeric, nuber of cluster. (dafault = 5)}
+\item{nc}{numeric, nuber of cluster. (default = 5)}
 
-\item{listGene}{list of vector, if is not NULL this will be a list of element highlighted in the graph. (default = NULL)}
+\item{listRS}{list of vector, if is not NULL this will be a list of element highlighted in the graph. (default = NULL)}
 
 \item{main}{character, name of the graph. (defaut = "")}
 
 \item{size_labels}{numeric, size for element names in the graph. (default = 2)}
 
-\item{underline}{logic, if present listGene and underline is TRUE only the cluster in which the element of listGene are present will be highlighted. (default = FALSE)}
+\item{emphasize}{logic, if present listRS and emphasize is TRUE only the cluster in which the element of listRS are present will be highlighted. (default = FALSE)}
 
 \item{perplexity}{numeric, if type = "tSNE" value of perplexity for the function \code{\link{Rtsne}}. (default = 10)}
 
 \item{theta}{numeric, if type = "tSNE" value of theta for the function \code{\link{Rtsne}}. (default = 0.1)}
 
-\item{ellipse}{logic, if TRUE ellipes will be drawn arount the clusters. (default = FALSE)}
+\item{ellipse}{logic, if TRUE ellipses will be drawn around the clusters. (default = FALSE)}
 
 \item{mpt}{object of class genoMatriXeR or numeric matrix}
 }

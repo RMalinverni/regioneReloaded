@@ -4,8 +4,9 @@
 #' list of regions set (or GrangedList)
 #'
 #'
-#' @usage listOvelapPermtest( Alist, Blist, sampling=FALSE, fraction=0.15,
-#' ranFun="randomizeRegions", ...)
+#' @usage multiLocalZscore( A, Blist, ranFUN = "randomizeRegions", evFUN = "numOverlaps", sampling = FALSE,
+#' min_sampling = 5000, fraction = 0.15, universe = NULL, window = 2000, step = 100, adj_pv_method = "BH", min_regions = 1000,
+#' max_pv = 0.05, genome = "hg19", ...)
 #'
 #' @param A Region Set of any accepted formats by  \code{\link{regioneR}} package
 #' (\code{\link{GenomicRanges}}, \code{\link{data.frame}} etc...)

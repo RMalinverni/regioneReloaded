@@ -17,9 +17,9 @@ plotSinglePT<-function(mPT,RS1,RS2,xlab =" N. of overlaps",main=NA,add_theme = F
 
 \item{add_theme}{logic, if TRUE will add a default \code{\link{ggplot2}} theme. (default = FALSE)}
 
-\item{colvec}{vector, vector of colors used in the plot, if NULL it will chooose a default vector. (default = NULL)}
+\item{colvec}{vector, vector of colors used in the plot, if NULL it will choose a default vector. (default = NULL)}
 
-\item{mPt}{an object of class gMXR or a matrix}
+\item{mPt}{an object of class genoMatriXeR or a matrix}
 }
 \description{
 Plot the result of a single permutation test from an gMXR object.

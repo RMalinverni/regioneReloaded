@@ -3,8 +3,8 @@
 #'
 #' create a local z-score matrix from an \code{\link{multiLocalZScore }} object and save it in the matrix slot
 #'
-#' @usage makeCrosswiseMatrix( mPt, clusterize = TRUE, hc.method = NA, dist.method = "euclidean",
-#'                            scale = FALSE, symm_matrix = TRUE, selectVec = NULL, ...)
+#' @usage makeLZMatrix( mlZA, normalize = TRUE, clusterize = TRUE, hc.method = NULL, dist.method = "euclidean",
+#'                            scale = FALSE, ...)
 #'
 #' @param mlZA an object of class \code{\link{multiLocalZScore }} or a matrix
 #' @param normalize logic, if TRUE the matrix will be normalize. (default = FALSE)

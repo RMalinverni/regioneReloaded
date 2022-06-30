@@ -12,7 +12,7 @@
 #'
 #' @keywords datasets
 #'
-#'
+#' @export cw_Alien
 #'
 #'
 "cw_Alien"

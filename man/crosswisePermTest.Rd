@@ -41,10 +41,10 @@ to choose between the options of \code{\link{p.adjust}}. (default = "BH")}
 
 \item{genome}{Charachter or GenomicRanges, (defalut = "hg19") genome used to compute the randomization}
 
-\item{verbose}{Boolean, if verbose}
+\item{verbose}{Boolean, if verbose test}
 }
 \value{
-A objet of class \code{gMXR}
+A object of class \code{gMXR}
 }
 \description{
 Perform a multiple permutation test between each elements of 2 list of Region

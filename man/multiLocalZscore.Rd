@@ -4,8 +4,9 @@
 \alias{multiLocalZscore}
 \title{Multiple Local Z-Score test}
 \usage{
-listOvelapPermtest( Alist, Blist, sampling=FALSE, fraction=0.15,
-ranFun="randomizeRegions", ...)
+multiLocalZscore( A, Blist, ranFUN = "randomizeRegions", evFUN = "numOverlaps", sampling = FALSE,
+min_sampling = 5000, fraction = 0.15, universe = NULL, window = 2000, step = 100, adj_pv_method = "BH", min_regions = 1000,
+max_pv = 0.05, genome = "hg19", ...)
 }
 \arguments{
 \item{A}{Region Set of any accepted formats by  \code{\link{regioneR}} package
