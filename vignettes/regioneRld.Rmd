@@ -24,22 +24,19 @@ knitr::opts_chunk$set(
 BiocStyle::markdown()
 ```
 
-
-
 # regioneRld
-# commit test
+
 The meaningful interpretation of overlaps between binding profiles of multiple 
 chromatin regulators is a major challenge in epigenomics. To address this, 
-in 2015 we published `r BiocStyle::Biocpkg("regioneR")` an R package that we developed for statistically  
-assessing the association between genomic regions sets. Here, we now present the 
-regioneRld, an R package that is the natural evolution of `r BiocStyle::Biocpkg("regioneR")` and allows to 
+in 2015 we published `r BiocStyle::Biocpkg("regioneR")` an R package that we developed for the statistical  
+assessment of the association between genomic regions sets. One limitation of regioneR is that it can only
+perform association analyisis between two region sets at a time. Here, we now present  
+**regioneRld**, an R package that is the natural evolution of `r BiocStyle::Biocpkg("regioneR")` and allows to 
 calculate the statistical association between multiple regions sets at the same 
-time. RegioneRld is designed to work with multiple region set associations at 
-the same time. To compare z-scores coming from multiple analysis, different 
+time. To compare z-scores coming from multiple analysis, different 
 strategies have been introduced to normalize the z-score and to improve the 
 p-value calculations. Taken together, regioneRld aims to be a novel and precious 
 addition to NGS tools and for whole genome analysis.
-
 
 ### regioneR limitations
 
