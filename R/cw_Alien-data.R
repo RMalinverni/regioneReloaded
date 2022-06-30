@@ -1,9 +1,11 @@
+
 #' Alien Genome crosswise matrix using \code{\link{randomizeRegions}} , \code{\link{circularRandomizeRegions}},
 #' \code{\link{resampleRegionS}}, \code{\link{resampleGenome}}    functions as permutation strategies
 #'
 #' CrossWise matrix calculated using 39 different regionset vs itself
 #' (description of Region set can be find here:"")
 #'
+#' @name cw_Alien
 #' @docType data
 #'
 #' @usage data(cw_Alien)
@@ -12,10 +14,8 @@
 #'
 #' @keywords datasets
 #'
-#' @export cw_Alien
 #'
 #'
 #'
-NULL
-
-#"cw_Alien"
+#'
+NULL #"cw_Alien"

@@ -31,7 +31,7 @@ makeLZMatrix <- function(mlZA,
 
 
   if (class(mlZA) != "multiLocalZScore") {
-    stop("the ob ject mlZA need to be an multiLocalZScore object")
+    stop("the object mlZA need to be an multiLocalZScore object")
   }
 
   mat <- vector(length = length(mlZA@multiLocalZscores$shifts))
