@@ -76,7 +76,7 @@ nZS = ZS / $\sqrt{n}$
 ```{r setup}
 library("regioneRld")
 ```
-
+<!-- Consider moving this to the Crosswise Analysis section -->
 The permutation test can be performed on a list multiple region sets by the function `crosswisePermTest()`.
 This process is computing intensive and its calculation time depends on the 
 number of cores called by the parameter `mc.cores` (see `r BiocStyle::Biocpkg("regioneR")`).
