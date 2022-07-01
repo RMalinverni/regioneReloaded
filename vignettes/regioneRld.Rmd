@@ -452,7 +452,7 @@ plotCrosswiseMatrix(cw_Alien_ReG,matrix.type =  "correlation" ,ord_mat = ord)
 
 ## Plot Single permutation test result
 
-with the function plotSinglePT is possible to plot the association between two regions set form a gMXR object
+With the function `plotSinglePT()`, it is possible to plot the association between just two regions sest from a gMXR object.
 
 
 ```{r}
@@ -464,6 +464,9 @@ plotSinglePT(cw_Alien_ReG, RS1 = "regA","reg_no_A")
 ```
 
 ## Plot Dimensionally Reduction
+
+<!-- Missing description -->
+
 ```{r}
 cw_Alien_ReG_s <- makeCrosswiseMatrix(cw_Alien_ReG,scale = TRUE)
 
