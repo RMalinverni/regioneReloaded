@@ -417,7 +417,7 @@ cw_Alien_ReR <-  crosswisePermTest(
 
 ```
 
-Using default option the matrix clusterization will be automatic selected 
+Using the default option the matrix clusterization method will be automatically selected.
 
 ```{r}
 #cw_Alien_RaR <- makeCrosswiseMatrix(cw_Alien_RaR)
@@ -430,7 +430,7 @@ cw_Alien_ReG <- makeCrosswiseMatrix(cw_Alien_ReG)
 ```
 
 To compare the output of the matrices created with different randomization functions, 
-we need to fix the clusterization
+we need to use the fixed order of clusterization for all matrixes.
 
 ```{r}
 
