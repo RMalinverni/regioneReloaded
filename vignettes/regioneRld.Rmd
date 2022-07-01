@@ -62,8 +62,8 @@ to calculate associations of different region sets simultaneously. To compare
 associations deriving from different region sets, we introduce the concept of 
 **normalized z-score**, which allows not only to compare different association 
 events but also to work with subsets of data and speed up the calculations.
-<!-- Explain what exactly the nZS corrects? The dependency of the ZS value on the number of regions in the
-region sets tested? -->
+<!-- Explain what exactly the nZS corrects? I mean, describe what is the statistical/mathematical limitation that it aims to solve.
+The dependency of the ZS value on the number of regions in the region sets tested? -->
 The normalized Z-Score is calculated as follows:
 
 nZS = ZS / $\sqrt{n}$
