@@ -283,9 +283,8 @@ summary(AlienRSList)
 ## Multi Permutation Test 
 ### Crosswise Analysis
 
-CrosswisePermTest a package's core function, using it is possible to calculate the 
-permutation test between all the combination of two RSs. Results of this function is an S4 object of class gMXR,
-it contains 3 in three slots, *parameters*, *multiOverlaps* and *matrix*
+`crosswisePermTest()` is the core statistical function of the package. This function calculates the permutation test between all possible combination
+pairs in a list of region sets. The result of this function is an S4 object of class gMXR that contains three slots: *parameteres*, *multiOverlaps* and *matrix*.
 
 * gMXR_obj
   + @parameters
