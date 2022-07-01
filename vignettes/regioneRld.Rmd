@@ -322,7 +322,7 @@ print(cw_Alien_ReG@parameters)
 ```
 
 #### multiOverlaps
-
+<!-- The concept of Alist and Blist have not been introduced before this point, explain in the intro to the crosswiseAnalysis or in the example function call. -->
 The "multiOverlaps" slot contains a list of data frames. For each element of the list of region sets "Alist", a data frame with 12 columns and a number of rows equal to the elements in Blist. The columns of the data frame contain the following information:
 
 + order.id:       order of comparison
