@@ -320,11 +320,10 @@ The slot "parameters" stores all the parameters used to obtain  the gMXR object.
 data("cw_Alien")
 print(cw_Alien_ReG@parameters)
 ```
+
 #### multiOverlaps
 
-"multiOverlaps" slot contain a list of data frames.
-For each element of Alist, will be create a data frame with 12 column and a nuber of rows equal to ther number of element present in Blist.
-the 12 columns of the data frame represent:
+The "multiOverlaps" slot contains a list of data frames. For each element of the list of region sets "Alist", a data frame with 12 columns and a number of rows equal to the elements in Blist. The columns of the data frame contain the following information:
 
 + order.id:       order of comparison
 + name:           name of Blist element 
