@@ -355,7 +355,7 @@ str(cw_Alien_ReG@matrix)
 
 ### Evaluation functions
 regioneReload can use all the evaluation strategies present in
-`r BiocStyle::Biocpkg("regioneR")` 
+`r BiocStyle::Biocpkg("regioneR")`.
 
 ### Randomization functions
 
