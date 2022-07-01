@@ -343,9 +343,12 @@ The "multiOverlaps" slot contains a list of data frames. For each element of the
 print(head(cw_Alien_ReG@multiOverlaps$regA01))
 print(cw_Alien_ReG)
 ```
+
 #### matrix
 
-when gMXR object is created the slot matrix will be NULL
+When the gMXR object is first created, the "matrix" slot will have a NULL value.
+<!-- Explain here how to create the matrix, what is its purpose or where is this explained? -->
+
 ```{r}
 str(cw_Alien_ReG@matrix)
 ```
