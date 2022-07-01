@@ -314,8 +314,8 @@ pairs in a list of region sets. The result of this function is an S4 object of c
 
 #### Parameters
 
-In the slot "parameters" are present all the paramenteres used to obtain  the 
-gMXR object."
+The slot "parameters" stores all the parameters used to obtain  the gMXR object.
+
 ```{r }
 data("cw_Alien")
 print(cw_Alien_ReG@parameters)
