@@ -360,8 +360,10 @@ regioneReload can use all the evaluation strategies present in
 ### Randomization functions
 
 regioneReload can use all the randomization strategies present in
-`r BiocStyle::Biocpkg("regioneR")` 
+`r BiocStyle::Biocpkg("regioneR")`.
+
 (adding phrases for new approach of resampleRegions)
+
 ```{r, eval=FALSE}
 #NOT RUN
 
