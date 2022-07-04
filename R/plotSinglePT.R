@@ -42,8 +42,8 @@ plotSinglePT<-function(mPT,RS1,RS2,xlab=NA,main=NA,add_theme=FALSE,colvec=NULL){
   n<-grep(paste0("^",RS2,"$"),tab$name)
   mean.1 <-tab$mean_perm_test[n]
   sd.1 <- tab$sd_perm_test[n]
-  #max_curve<-max(dnorm(1:mPT@parameters$ntimes,mean = mean.1,sd=sd.1))
-  max_curve<-max(dnorm(1:1000,mean = mean.1,sd=sd.1))
+  max_curve <- max(density(rnorm(1:1000, mean = mean.1, sd = sd.1))$y)
+  print(paste("Max: ", max_curve))
   zstart <- mean.1 -4*sd.1
   zend   <-   mean.1  +4*sd.1
   zs1<-mean.1 +1*sd.1
