@@ -62,6 +62,8 @@ to calculate associations of different region sets simultaneously. To compare
 associations deriving from different region sets, we introduce the concept of 
 **normalized z-score**, which allows not only to compare different association 
 events but also to work with subsets of data and speed up the calculations.
+To compare different z-scores is necessary to normalize them. The values of z-score of different test is not possible to compare.In particular z-score is directly associate to the square root of the  number of regions present in RS1.
+If we empirically evaluate the value of normal z-score using different number of regions.
 <!-- Explain what exactly the nZS corrects? I mean, describe what is the statistical/mathematical limitation that it aims to solve.
 The dependency of the ZS value on the number of regions in the region sets tested? -->
 The normalized Z-Score is calculated as follows:
@@ -70,8 +72,11 @@ nZS = ZS / $\sqrt{n}$
 
 
 ![local zscore  colculation (provisional)](figures/normal_ZScore.png){width=90%}
+
+The normal z-score was stabilized using 30% of the sample, this can be used to reduce the calculation time.
 <!-- Missing Figure -->
-(figure 2)
+![local zscore  colculation (provisional)](figures/ntimes_stabilizations.png){width=90%}
+Other crucial factor for calculate the normal z-score is the ntime, the suggestion after our tests is to use a minimum of 5000 permutation to achieve a reproducible results.
 
 # Quick start
 
@@ -142,7 +147,7 @@ AlienGenome <-
 ```
 
 From this AlienGenome, we define 3 random RegionSet using `createRandomRegions()`. 
-Each region set consists of 100 regions with a mean length of 50bp and are called "regA", "regB" and "regC".
+Each region set consists of 1000 regions with a mean length of 50bp and are called "regA", "regB" and "regC".
 
 ```{r}
 gnm <- AlienGenome
@@ -539,6 +544,7 @@ plotLocalZScoreMatrix(mlz_Alien_ReG, maxVal = "max")
 
 To test how perform  `r BiocStyle::Biocpkg("regioneRld")` in a real scenario we download all transcrption factors present in the ENCODE (ref) project relative to HepG2 (261 ChIPseq experimets from human liver cancer). The complete GRList is possible to download at ("....").
 
+## CrossWiseMatrix calculation
 ```{r, eval=FALSE }
 # NOT run 
 
@@ -591,3 +597,26 @@ plotCrosswiseDimRed(CW,nc = 15,ellipse = TRUE,type = "UMAP",
                     listRS = list(CTCF=c("CTCF_ENCFF237OKO")))
 ```
 
+## Multilocal Z-score Calculation
+
+
+```{r, eval=FALSE}
+mlZ_CTCF<-multiLocalZscore(A = toplGR$CTCF_ENCFF237OKO, Blist = toplGR,
+                           sampling = TRUE, min_sampling = 5000,
+                           ranFUN = "resampleGenome",
+                           window = 1500,
+                           step = 50, mc.cores=20)
+
+
+```
+
+
+```{r, }
+mlZ_CTCF<-makeLZMatrix(mlZ_CTCF,normalize = TRUE,centralize =3)
+```
+```{r}
+plotLocalZScoreMatrix(mlZ_CTCF,
+                      maxVal = "max",
+                      size_lab = 5,
+                      main="CTCF_ENCFF237OKO")
+```
