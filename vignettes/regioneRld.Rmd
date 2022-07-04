@@ -50,8 +50,10 @@ regional association.
 <!-- This section is titled regioneR limitations but it does not address this point directly. 
 Either highlight the limitation of pairwise comparisons or change the title? -->
 
-<!-- Missing Figure -->
+
 (figure 1)
+
+![regioneR basic Graphs](figures/regioner_grphs.png){width=120%}
 
 ## Normalized Z-Score
 
@@ -66,6 +68,8 @@ The normalized Z-Score is calculated as follows:
 
 nZS = ZS / $\sqrt{n}$
 
+
+![local zscore  colculation (provisional)](figures/normal_ZScore.png){width=90%}
 <!-- Missing Figure -->
 (figure 2)
 
@@ -520,7 +524,7 @@ mlz_Alien_ReG<-multiLocalZscore(A = AlienRSList$regA,
 ```{r, eval=FALSE }
 str(mlz_Alien_ReG)
 ```
-creare la matrice
+To create the matrix slot 
 
 ```{r}
 mlz_Alien_ReG <- makeLZMatrix(mlz_Alien_ReG)
@@ -530,3 +534,35 @@ plotting
 ```{r }
 plotLocalZScoreMatrix(mlz_Alien_ReG, maxVal = "max")
 ```
+
+# Analysis with real data
+
+To test how perform  `r BiocStyle::Biocpkg("regioneRld")` in a real scenario we download all transcrption factors present in the ENCODE (ref) project relative to HepG2 (261 ChIPseq experimets from human liver cancer). The complete GRList is possible to download at ("....").
+
+```{r, eval=FALSE }
+# NOT run 
+
+set.seed(42)
+cw_TF_ENCODE_HepG2_ReG <-  crosswisePermTest(
+                        Alist = lGR,
+                        Blist = lGR,
+                        sampling = FALSE, 
+                        genome = hg19,
+                        ranFUN = "resampleGenome",
+                        evFUN = "numOverlaps",
+                        ntimes= 1000,
+                        mc.cores = 25
+                        )
+
+
+cw_TF_ENCODE_HepG2_ReG <- makeCrosswiseMatrix(cw_TF_ENCODE_HepG2_ReG)
+
+plotCrosswiseMatrix(cw_TF_ENCODE_HepG2_ReG, matrix.type = "crosswise" )
+plotCrosswiseMatrix(cw_TF_ENCODE_HepG2_ReG, matrix.type = "correlation")
+
+
+```
+![Crosswise associations matrix Hepg2 Transcription Factors ](figures/test.pdf){width=200%}    
+
+![Crosswise associations matrix Hepg2 Transcription Factors ](figures/HepG2_TF_correlation.pdf.png){width=85%}  
+

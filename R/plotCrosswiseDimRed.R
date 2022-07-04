@@ -114,7 +114,7 @@ plotCrosswiseDimRed <-
         x = x,
         y = y,
         label = Name,
-        color = factor(clust)
+        color = clust
       )) +
       geom_point() +
 
