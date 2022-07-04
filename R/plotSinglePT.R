@@ -130,8 +130,8 @@ plotSinglePT<-function(mPT,RS1,RS2,xlab=NA,main=NA,add_theme=FALSE,colvec=NULL){
     # Ranfun used
     annotate("text", x=eplot*0.5, y=max_curve*0.99, label= mPT@parameters$ranFUN) +
     # Observed and mean random overlaps
-    annotate("text", x=nov*0.98, y=max_curve*0.03, size=4, label= nov, col=colvec[5]) +
-    annotate("text", x=mean.1*0.9, y=-max_curve*0.03,size=3,label= round(mean.1,digits=2), col=colvec[4])
+    annotate("label", x=nov, y=max_curve * 0.03, size=3, label= nov, col=colvec[5], hjust=0.5, fill="#FDFAF6") +
+    annotate("label", x=mean.1, y=-max_curve*0.03, size=3, label= round(mean.1,digits=2), col=colvec[4], hjust=0.5, fill="#FDFAF6") +
 
   if (add_theme==TRUE){
     p<-p + mendel_theme
