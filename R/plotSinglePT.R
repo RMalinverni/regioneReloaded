@@ -99,17 +99,18 @@ plotSinglePT<-function(mPT,RS1,RS2,xlab=NA,main=NA,add_theme=FALSE,colvec=NULL){
                   fill = alpha(colvec[1],alpha = 0.5),
                   args = list(mean = mean.1, sd = sd.1)) +
 
-    # Mean of random overlaps
-    geom_vline(aes(xintercept=c(0,mean.1)),color=colvec[4],linetype="dashed", size=0.4) +
-    #geom_segment(aes(x = mean.1, y = 0 , xend = mean.1, yend = 2,linetype="dashed", size=0.4, col = colvec[4]))+
-    #geom_segment(aes(x = 0, y = 0 , xend = 0, yend = 2, linetype="dashed", size=0.4, col = colvec[4]))+
+    # hline at y = 0
+    geom_hline(yintercept=0,  color =colvec[4], size=0.6) +
+
+    # vline at x = 0
+    geom_vline(xintercept = 0, color =colvec[4], size = 0.4, linetype = "dotted") +
+
+    # Random overlaps
+    geom_vline(xintercept=c(mean.1),color=colvec[4],linetype="dashed", size=0.4) +
 
     # Observed overlaps
     geom_vline(aes(xintercept=nov),color=colvec[5],
                linetype="dashed", size=0.4) +
-
-    # Line at y = 0
-    geom_hline(yintercept=0,  color =colvec[4], size=0.6) +
 
     # Arrow between random and observed
     geom_segment(aes(x = mean.1, y = max_curve/2, xend = nov, yend = max_curve/2),
