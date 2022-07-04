@@ -20,7 +20,7 @@
 plotSinglePT<-function(mPT,RS1,RS2,xlab=NA,main=NA,add_theme=FALSE,colvec=NULL){
 
 
-  if ( class( mPT ) != "genoMatriXeR" ) { stop(' mPT need to be a "genoMatriXeR" class object ')}
+  if (class( mPT ) != "genoMatriXeR") { stop('mPT needs to be a "gMXR" class object')}
 
   if (is.null(colvec)){
     colvec<-c("#57837B","#F1ECC3","#C9D8B6","#515E63","#C05555")
@@ -30,8 +30,6 @@ plotSinglePT<-function(mPT,RS1,RS2,xlab=NA,main=NA,add_theme=FALSE,colvec=NULL){
     xlab="N of overlaps"
    }
 
-
-
   mendel_theme<-theme(panel.background = element_rect(fill = colvec[2],
                                                   colour = colvec[2],
                                                   size = 0.5, linetype = "solid"),
@@ -40,13 +38,11 @@ plotSinglePT<-function(mPT,RS1,RS2,xlab=NA,main=NA,add_theme=FALSE,colvec=NULL){
                   panel.grid.minor = element_line(size = 0.25, linetype = 'solid',
                                                   colour = "#FDFAF6"))
 
-
   tab<-mPT@multiOverlaps[[RS1]]
   n<-grep(paste0("^",RS2,"$"),tab$name)
   mean.1 <-tab$mean_perm_test[n]
   sd.1 <- tab$sd_perm_test[n]
-  #max_curve<-max(dnorm(1:mPT@parameters$ntimes,mean = mean.1,sd=sd.1))
-  max_curve<-max(dnorm(1:1000,mean = mean.1,sd=sd.1))
+  max_curve <- max(density(rnorm(1:1000, mean = mean.1, sd = sd.1))$y)
   zstart <- mean.1 -4*sd.1
   zend   <-   mean.1  +4*sd.1
   zs1<-mean.1 +1*sd.1
@@ -69,24 +65,27 @@ plotSinglePT<-function(mPT,RS1,RS2,xlab=NA,main=NA,add_theme=FALSE,colvec=NULL){
          caption = paste0("Number of Permutations:  ", mPT@parameters$ntimes)) +
     xlab(paste0(xlab," on ",tab$n_regionA[n]," regions")) +
     ylab("Freq") +
-    stat_function(fun = dnorm,geom = "area",
-                  fill = alpha(colvec[1],alpha = 0.5),
+    stat_function(fun = dnorm,
+                  geom = "area",
+                  fill = alpha(colvec[1], alpha = 0.5),
                   args = list(mean = mean.1, sd = sd.1)) +
-
-    stat_function(fun = dnorm,geom = "area",
-                  xlim = c(vec_slices[1],zend),
-                  fill = alpha(colvec[1],alpha = 0.5),
+    stat_function(fun = dnorm,
+                  geom = "area",
+                  xlim = c(vec_slices[1], zend),
+                  fill = alpha(colvec[1], alpha = 0.5),
                   args = list(mean = mean.1, sd = sd.1)) +
-    stat_function(fun = dnorm,geom = "area",
-                  xlim = c(vec_slices[3],zend),
-                  fill = alpha(colvec[1],alpha = 0.5),
+    stat_function(fun = dnorm,
+                  geom = "area",
+                  xlim = c(vec_slices[3], zend),
+                  fill = alpha(colvec[1], alpha = 0.5),
                   args = list(mean = mean.1, sd = sd.1)) +
-    stat_function(fun = dnorm,geom = "area",
-                  xlim = c(vec_slices[5],zend),
-                  fill = alpha(colvec[1],alpha = 0.5),
+    stat_function(fun = dnorm,
+                  geom = "area",
+                  xlim = c(vec_slices[5], zend),
+                  fill = alpha(colvec[1], alpha = 0.5),
                   args = list(mean = mean.1, sd = sd.1)) +
-
-    stat_function(fun = dnorm,geom = "area",
+    stat_function(fun = dnorm,
+                  geom = "area",
                   xlim = c(zstart, vec_slices[2]),
                   fill = alpha(colvec[1],alpha = 0.5),
                   args = list(mean = mean.1, sd = sd.1)) +
@@ -94,31 +93,45 @@ plotSinglePT<-function(mPT,RS1,RS2,xlab=NA,main=NA,add_theme=FALSE,colvec=NULL){
                   xlim = c(zstart, vec_slices[4]),
                   fill = alpha(colvec[1],alpha = 0.5),
                   args = list(mean = mean.1, sd = sd.1)) +
-    stat_function(fun = dnorm,geom = "area",
+    stat_function(fun = dnorm,
+                  geom = "area",
                   xlim = c(zstart, vec_slices[6]),
                   fill = alpha(colvec[1],alpha = 0.5),
                   args = list(mean = mean.1, sd = sd.1)) +
 
-    geom_vline(aes(xintercept=c(0,mean.1)),color=colvec[4],linetype="dashed", size=0.4) +
-    #geom_segment(aes(x = mean.1, y = 0 , xend = mean.1, yend = 2,linetype="dashed", size=0.4, col = colvec[4]))+
-    #geom_segment(aes(x = 0, y = 0 , xend = 0, yend = 2, linetype="dashed", size=0.4, col = colvec[4]))+
+    # hline at y = 0
+    geom_hline(yintercept=0,  color =colvec[4], size=0.6) +
+
+    # vline at x = 0
+    geom_vline(xintercept = 0, color =colvec[4], size = 0.4, linetype = "dotted") +
+
+    # Random overlaps
+    geom_vline(xintercept=c(mean.1),color=colvec[4],linetype="dashed", size=0.4) +
+
+    # Observed overlaps
     geom_vline(aes(xintercept=nov),color=colvec[5],
                linetype="dashed", size=0.4) +
-    geom_hline(yintercept=0,  color =colvec[4], size=0.6) +
+
+    # Arrow between random and observed
     geom_segment(aes(x = mean.1, y = max_curve/2, xend = nov, yend = max_curve/2),
                  linetype="dashed",color=colvec[4],
                  arrow = arrow(length = unit(0.5, "cm"))) +
-    annotate("text", x=mean.1 + ((nov-mean.1)/2), y=max_curve*0.45, label= "z-score",size=3) +
-    annotate("text", x=mean.1 + ((nov-mean.1)/2), y=max_curve*0.42, label= tab$z_score[n],size=3) +
-    annotate("text", x=mean.1 + ((nov-mean.1)/2), y=max_curve*0.39, label= "adj.p-value",size=3) +
-    annotate("text", x=mean.1 + ((nov-mean.1)/2), y=max_curve*0.36, label= tab$adj.p_value[n],size=3) +
-    annotate("rect", xmin = eplot*0.82, xmax =  eplot*0.99, ymin = max_curve*0.80, ymax = max_curve*0.95, fill="#FDFAF6",alpha=.8) +
-    annotate("text", x=eplot*0.9, y=max_curve*0.9,size=2.5, label= paste0("Normal ZScore: ",round(tab$norm_zscore[n],digits = 2))) +
-    annotate("text", x=eplot*0.9, y=max_curve*0.85,size=2.5, label= paste0("Standard ZScore: ",round(tab$std_zscore[n],digits = 2))) +
-    annotate("text", x=eplot*0.5, y=max_curve*0.99, label= mPT@parameters$ranFUN) +
-    annotate("text", x=nov*0.98, y=max_curve*0.03, size=4, label= nov, col=colvec[5]) +
-    annotate("text", x=mean.1*0.9, y=-max_curve*0.03,size=3,label= round(mean.1,digits=2), col=colvec[4])
 
+    # Text labels
+    # Box with ZS and adjpv
+    annotate("label", x=mean.1 + ((nov-mean.1)/2), y=max_curve*0.36,
+             label=paste("z-score", tab$z_score[n], "adj.p-value", tab$adj.p_value[n], sep = "\n"),
+             size=3, fill="#FDFAF6") +
+    # Box with nZS and sZS
+    annotate("label", x=eplot*0.9, y=max_curve*0.9,size=3, fill="#FDFAF6",
+             label = paste(paste0("Normal ZScore: ",round(tab$norm_zscore[n],digits = 2)),
+                           paste0("Standard ZScore: ",round(tab$std_zscore[n],digits = 2)),
+                           sep = "\n")) +
+    # Ranfun used
+    annotate("text", x=eplot*0.5, y=max_curve*0.99, label= mPT@parameters$ranFUN) +
+    # Observed and mean random overlaps
+    annotate("label", x=nov, y=max_curve * 0.03, size=3, label= nov, col=colvec[5], hjust=0.5, fill="#FDFAF6") +
+    annotate("label", x=mean.1, y=-max_curve*0.03, size=3, label= round(mean.1,digits=2), col=colvec[4], hjust=0.5, fill="#FDFAF6") +
 
   if (add_theme==TRUE){
     p<-p + mendel_theme
