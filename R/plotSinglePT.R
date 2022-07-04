@@ -118,15 +118,18 @@ plotSinglePT<-function(mPT,RS1,RS2,xlab=NA,main=NA,add_theme=FALSE,colvec=NULL){
                  arrow = arrow(length = unit(0.5, "cm"))) +
 
     # Text labels
+    # Box with ZS and adjpv
     annotate("label", x=mean.1 + ((nov-mean.1)/2), y=max_curve*0.36,
              label=paste("z-score", tab$z_score[n], "adj.p-value", tab$adj.p_value[n], sep = "\n"),
              size=3, fill="#FDFAF6") +
+    # Box with nZS and sZS
     annotate("label", x=eplot*0.9, y=max_curve*0.9,size=3, fill="#FDFAF6",
              label = paste(paste0("Normal ZScore: ",round(tab$norm_zscore[n],digits = 2)),
                            paste0("Standard ZScore: ",round(tab$std_zscore[n],digits = 2)),
                            sep = "\n")) +
-    # annotate("text", x=eplot*0.9, y=max_curve*0.85,size=2.5, label= paste0("Standard ZScore: ",round(tab$std_zscore[n],digits = 2))) +
+    # Ranfun used
     annotate("text", x=eplot*0.5, y=max_curve*0.99, label= mPT@parameters$ranFUN) +
+    # Observed and mean random overlaps
     annotate("text", x=nov*0.98, y=max_curve*0.03, size=4, label= nov, col=colvec[5]) +
     annotate("text", x=mean.1*0.9, y=-max_curve*0.03,size=3,label= round(mean.1,digits=2), col=colvec[4])
 
