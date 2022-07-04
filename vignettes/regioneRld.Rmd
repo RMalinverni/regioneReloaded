@@ -543,8 +543,7 @@ To test how perform  `r BiocStyle::Biocpkg("regioneRld")` in a real scenario we 
 # NOT run 
 
 set.seed(42)
-cw_TF_ENCODE_HepG2_ReG <-  crosswisePermTest(
-                        Alist = lGR,
+CW <-  crosswisePermTest(Alist = lGR,    # change name
                         Blist = lGR,
                         sampling = FALSE, 
                         genome = hg19,
@@ -553,16 +552,42 @@ cw_TF_ENCODE_HepG2_ReG <-  crosswisePermTest(
                         ntimes= 1000,
                         mc.cores = 25
                         )
+```
 
+```{r}
+data("cw_Real")
+CW <- makeCrosswiseMatrix(CW)
+```
 
-cw_TF_ENCODE_HepG2_ReG <- makeCrosswiseMatrix(cw_TF_ENCODE_HepG2_ReG)
+```{r}
+plotCrosswiseMatrix(CW, matrix.type = "crosswise" )
+```
 
-plotCrosswiseMatrix(cw_TF_ENCODE_HepG2_ReG, matrix.type = "crosswise" )
-plotCrosswiseMatrix(cw_TF_ENCODE_HepG2_ReG, matrix.type = "correlation")
-
+```{r}
+plotCrosswiseMatrix(CW, matrix.type = "correlation")
 
 ```
-![Crosswise associations matrix Hepg2 Transcription Factors ](figures/test.pdf){width=200%}    
 
-![Crosswise associations matrix Hepg2 Transcription Factors ](figures/HepG2_TF_correlation.pdf.png){width=85%}  
+```{r}
+set.seed(42)
+plotCrosswiseDimRed(CW,nc = 15,ellipse = TRUE,type = "UMAP")
+```
+
+```{r}
+set.seed(42)
+plotCrosswiseDimRed(CW,nc = 15,ellipse = TRUE,type = "PCA",
+                    emphasize = TRUE,
+                    listRS = list(RAD21=c("CTCF_ENCFF237OKO")))
+
+set.seed(42)
+plotCrosswiseDimRed(CW,nc = 15,ellipse = TRUE,type = "tSNE",
+                    emphasize = TRUE,
+                    listRS = list(RAD21=c("CTCF_ENCFF237OKO")))
+
+
+set.seed(42)
+plotCrosswiseDimRed(CW,nc = 15,ellipse = TRUE,type = "UMAP",
+                    emphasize = TRUE,
+                    listRS = list(CTCF=c("CTCF_ENCFF237OKO")))
+```
 
