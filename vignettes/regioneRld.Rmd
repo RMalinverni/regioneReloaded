@@ -1,6 +1,6 @@
 ---
 title: "regioneRld"
-author: "roberto Malinverni"
+author: "Roberto Malinverni"
 output: BiocStyle::html_document   #rmarkdown::html_vignette
 fig_width: 10
 fig_height: 10 
@@ -24,61 +24,64 @@ knitr::opts_chunk$set(
 BiocStyle::markdown()
 ```
 
-
-
 # regioneRld
 
 The meaningful interpretation of overlaps between binding profiles of multiple 
 chromatin regulators is a major challenge in epigenomics. To address this, 
-in 2015 we published `r BiocStyle::Biocpkg("regioneR")` an R package that we developed for statistically  
-assessing the association between genomic regions sets. Here, we now present the 
-regioneRld, an R package that is the natural evolution of `r BiocStyle::Biocpkg("regioneR")` and allows to 
+in 2015 we published `r BiocStyle::Biocpkg("regioneR")`, an R package that we developed for the statistical
+assessment of the association between genomic regions sets. One limitation of regioneR is that it can only
+perform association analyisis between two region sets at a time. Here, we now present 
+**regioneRld**, an R package that is the natural evolution of `r BiocStyle::Biocpkg("regioneR")` and allows to 
 calculate the statistical association between multiple regions sets at the same 
-time. RegioneRld is designed to work with multiple region set associations at 
-the same time. To compare z-scores coming from multiple analysis, different 
-strategies have been introduced to normalize the z-score and to improve the 
-p-value calculations. Taken together, regioneRld aims to be a novel and precious 
-addition to NGS tools and for whole genome analysis.
+time. To compare z-scores coming from multiple analysis, different strategies have been introduced to normalize the z-score and to improve the 
+p-value calculations. Taken together, regioneRld aims to be a novel and precious addition to NGS tools and for whole genome analysis.
 
-
-### regioneR limitations
+## regioneR limitations
 
 `r BiocStyle::Biocpkg("regioneR")` is an R package created to test the associations between genomic region 
 sets. The core of `r BiocStyle::Biocpkg("regioneR")` is a permutation test framework specifically designed 
-to work in a genomic environment. The two main results can be summarized in two 
-graphs. Figure 1A shows the association between the two region sets under study, 
+to work in a genomic environment. The two main results that can be obtained with this method can be summarized in two 
+graphs. Figure 1A shows the association observed between the two region sets under study, 
 highlighting the distance calculated in standard deviations from the random 
-distribution. Figure 1B shows the local z-score, while a flat profile suggests a 
-regional association, a narrow peak, as the one shown, indicates that the 
-association is highly dependent on the exact location of the region.
+distribution. Figure 1B shows the local z-score: a narrow peak, as the one shown, indicates that the 
+association is highly dependent on the exact location of the region. One the contrary, a flat profile would suggest a 
+regional association.
 
+<!-- This section is titled regioneR limitations but it does not address this point directly. 
+Either highlight the limitation of pairwise comparisons or change the title? -->
+
+<!-- Missing Figure -->
 (figure 1)
 
-### Normalized Z-S
+## Normalized Z-Score
+
+regioneRld aims to integrate the framework previously developed for `r BiocStyle::Biocpkg("regioneR")` 
+to calculate associations of different region sets simultaneously. To compare
+associations deriving from different region sets, we introduce the concept of 
+**normalized z-score**, which allows not only to compare different association 
+events but also to work with subsets of data and speed up the calculations.
+<!-- Explain what exactly the nZS corrects? I mean, describe what is the statistical/mathematical limitation that it aims to solve.
+The dependency of the ZS value on the number of regions in the region sets tested? -->
+The normalized Z-Score is calculated as follows:
 
 nZS = ZS / $\sqrt{n}$
 
-regioneRld aims to integrate the framework previously developed for `r BiocStyle::Biocpkg("regioneR")`, 
-to calculate associations of different region sets simultaneously. To compare
-associations deriving from different region sets, we introduce the concept of 
-normalized z-score, which allows not only to compare different association 
-events but also to work with subsets of data and speed up the calculations.
-
+<!-- Missing Figure -->
 (figure 2)
 
 # Quick start
 
-to calculate a crosswisePermTest starting from a list of Region Sets we can use 
-the following code, the permutation process is time expensive and depend to a 
-number of cores called by the parameter \code{\link{mc.cores}} (see `r BiocStyle::Biocpkg("regioneR")`)
-The results of a follow code is state in the data folder of the package, to load in to the enviroment
-use the command data("cw_Alien_RaR").
-AlienGenome and AlienRSList arte described in the vignette  
-
 ```{r setup}
 library("regioneRld")
 ```
+<!-- Consider moving this to the Crosswise Analysis section -->
+The permutation test can be performed on a list multiple region sets by the function `crosswisePermTest()`.
+This process is computing intensive and its calculation time depends on the 
+number of cores called by the parameter `mc.cores` (see `r BiocStyle::Biocpkg("regioneR")`).
+The result of the permutation test obtained by running the code below is included as a pre-computed example dataset
+which can be loaded into the environment by running the command `data("cw_Alien_RaR")`.
 
+`AlienGenome` and `AlienRSList` are described in the next section of the vignette. 
 
 ```{r load _data, eval=FALSE}
 #NOT RUN
@@ -107,14 +110,12 @@ plotCrosswiseMatrix(cw_Alien_ReG, matrix.type = "crosswise")
 
 plotCrosswiseMatrix(cw_Alien_ReG, matrix.type = "correlation")
 ```
+<!-- Briefly describe the plots? -->
 
+## Alien Genome and Alien RegionSet List
 
-### Alien Genome and Alien RegionSet List
-
-calculate the associations between genomic regionset can be very time consuming, 
-to reduce the time of calculation and to better understand the interpretation of 
-the regioneRld results, we create a fake genome of 4 chromosomes that we call 
-Alien genome.
+Calculating the associations between genomic region sets can be very time consuming. We have created a fake "AlienGenome" consisting of
+four chromosomes to reduce the calculation time for testing and understanding the results generated by regioneRld.
 
 ![Graphical descrition of the AlienGenome](figures/AlienGenDesc.png){width=85%}
 
@@ -135,7 +136,9 @@ AlienGenome <-
   ))
 
 ```
-We create 3 regionSet on AlienGenome each one of 100 region an called "regA","regB" and "regC"
+
+From this AlienGenome, we define 3 random RegionSet using `createRandomRegions()`. 
+Each region set consists of 100 regions with a mean length of 50bp and are called "regA", "regB" and "regC".
 
 ```{r}
 gnm <- AlienGenome
@@ -170,8 +173,10 @@ regC <-
   )
 
 ```
-Using the regioneRld function similarRegionSet.R we create for each regionset 9
-different regionset that shares a percentage (from 90 to 10) with the original one
+
+To generate "artificial" associations we can use the function `similarRegionSet()`, which produces random region sets with a certain degree of similarity
+to the input. For each region set regA, regB and regC, we create a list of region sets that share a percentage (from 90% to 10%) of regions with the original one.
+
 ```{r}
 
 vectorPerc <- seq(0.1, 0.9, 0.1)
@@ -200,8 +205,8 @@ RsetC <-
 
 ```
 
-Using the same approach we create a regionset that share half a regions of regA 
-and half of regB, from this region set we create a list of similar regions set using vectorPerc2
+We then create a RegionSet that shares half the regions of regA and half of regB and call it regAB. 
+From this RegionSet we create again similar region sets using `similarRegionSet()`.
 
 ```{r}
 vectorPerc2 <- seq(0.2, 0.8, 0.2)
@@ -215,8 +220,9 @@ RsetAB <-
   )
 
 ```
-last step is to create random RSs that not contain regions of regA, regB, regC, 
-regAB and put all this regionsets in a unique regionSet List called AlienRSList
+
+As a last step, we create random RegionSets that do **not** contain regions of regA, regB, regC or regAB.
+Finally, we store all the generated region sets in a list called `AlienRSList` that we can use as input for the `crosswisePermTest()` function.
 
 ```{r}
 reg_no_A <-
@@ -271,12 +277,12 @@ AlienRSList <- c(RsetA, RsetB, RsetC, RsetAB, Rset_NO)
 summary(AlienRSList)
 
 ```
+
 ## Multi Permutation Test 
 ### Crosswise Analysis
 
-CrosswisePermTest a package's core function, using it is possible to calculate the 
-permutation test between all the combination of two RSs. Results of this function is an S4 object of class gMXR,
-it contains 3 in three slots, *parameters*, *multiOverlaps* and *matrix*
+`crosswisePermTest()` is the core statistical function of the package. This function calculates the permutation test between all possible combination
+pairs in a list of region sets. The result of this function is an S4 object of class gMXR that contains three slots: *parameteres*, *multiOverlaps* and *matrix*.
 
 * gMXR_obj
   + @parameters
@@ -306,52 +312,56 @@ it contains 3 in three slots, *parameters*, *multiOverlaps* and *matrix*
 
 #### Parameters
 
-In the slot "parameters" are present all the paramenteres used to obtain  the 
-gMXR object."
+The slot "parameters" stores all the parameters used to obtain  the gMXR object.
+
 ```{r }
 data("cw_Alien")
 print(cw_Alien_ReG@parameters)
 ```
+
 #### multiOverlaps
+<!-- The concept of Alist and Blist have not been introduced before this point, explain in the intro to the crosswiseAnalysis or in the example function call. -->
+The "multiOverlaps" slot contains a list of data frames. For each element of the list of region sets "Alist", a data frame is stored with 12 columns and a number of rows equal to the elements in "Blist". The columns of the data frame contain the following information:
 
-"multiOverlaps" slot contain a list of data frames.
-For each element of Alist, will be create a data frame with 12 column and a nuber of rows equal to ther number of element present in Blist.
-the 12 columns of the data frame represent:
-
-+ order.id:       order of comparison
-+ name:           name of Blist element 
-+ n_regionA       number of regions od Alist using in the permutation test
-+ n_regionB       number of regions od Blist using in the permutation test
-+ z_score         calucalted z-score of permutation test
-+ p_value         p.value of permutation test
-+ n_overlaps      number of hits between Alist element and Belement (change name) 
-+ mean_perm_test  mean of hits of permutated region set
-+ sd_perm_test    standard deviation of hits in permutated region set
-+ norm_zscore     z-scores normalized
-+ std_zscore      z-score standardized* (maybe is better to eliminate)
-+ adj_p_value     p.value adjusted 
++ **order.id:**       order of comparison
++ **name:**           name of Blist element 
++ **n_regionA:**       number of regions in Alist using in the permutation test
++ **n_regionB:**       number of regions in Blist using in the permutation test
++ **z_score:**         calculated z-score of permutation test
++ **p_value:**         p.value of permutation test
++ **n_overlaps:**      number of overlaps between Alist element and Belement (change name) 
++ **mean_perm_test:**  mean of overlaps of the permutated region set
++ **sd_perm_test:**    standard deviation of hits in permutated region set
++ **norm_zscore:**     z-scores normalized
++ **std_zscore:**      z-score standardized* (maybe is better to eliminate)
++ **adj_p_value:**     p.value adjusted 
 
 
 ```{r}
 print(head(cw_Alien_ReG@multiOverlaps$regA01))
 print(cw_Alien_ReG)
 ```
+
 #### matrix
 
-when gMXR object is created the slot matrix will be NULL
+When the gMXR object is first created, the "matrix" slot will have a NULL value.
+<!-- Explain here how to create the matrix, what is its purpose or where is this explained? -->
+
 ```{r}
 str(cw_Alien_ReG@matrix)
 ```
 
 ### Evaluation functions
-regioneReload can use all the evaluation strategies present in
-`r BiocStyle::Biocpkg("regioneR")` 
+regioneRld can use all the evaluation strategies present in
+`r BiocStyle::Biocpkg("regioneR")`.
 
 ### Randomization functions
 
-regioneReload can use all the randomization strategies present in
-`r BiocStyle::Biocpkg("regioneR")` 
+regioneRld can use all the randomization strategies present in
+`r BiocStyle::Biocpkg("regioneR")`.
+
 (adding phrases for new approach of resampleRegions)
+
 ```{r, eval=FALSE}
 #NOT RUN
 
@@ -405,7 +415,7 @@ cw_Alien_ReR <-  crosswisePermTest(
 
 ```
 
-Using default option the matrix clusterization will be automatic selected 
+Using the default option the matrix clusterization method will be automatically selected.
 
 ```{r}
 #cw_Alien_RaR <- makeCrosswiseMatrix(cw_Alien_RaR)
@@ -418,7 +428,7 @@ cw_Alien_ReG <- makeCrosswiseMatrix(cw_Alien_ReG)
 ```
 
 To compare the output of the matrices created with different randomization functions, 
-we need to fix the clusterization
+we need to use the fixed order of clusterization for all matrixes.
 
 ```{r}
 
@@ -440,7 +450,7 @@ plotCrosswiseMatrix(cw_Alien_ReG,matrix.type =  "correlation" ,ord_mat = ord)
 
 ## Plot Single permutation test result
 
-with the function plotSinglePT is possible to plot the association between two regions set form a gMXR object
+With the function `plotSinglePT()`, it is possible to plot the association between just two regions sest from a gMXR object.
 
 
 ```{r}
@@ -452,6 +462,9 @@ plotSinglePT(cw_Alien_ReG, RS1 = "regA","reg_no_A")
 ```
 
 ## Plot Dimensionally Reduction
+
+<!-- Missing description -->
+
 ```{r}
 cw_Alien_ReG_s <- makeCrosswiseMatrix(cw_Alien_ReG,scale = TRUE)
 
