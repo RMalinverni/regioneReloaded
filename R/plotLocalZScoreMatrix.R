@@ -27,6 +27,7 @@ plotLocalZScoreMatrix <- function(mLz,
                                   cor = "row",
                                   maxVal = 2,
                                   main = "",
+                                  size_lab= 6,
                                   revert = FALSE) {
   if (class(mLz) != "multiLocalZScore") {
     stop("the object mlZA need to be an multiLocalZScore object")
@@ -82,7 +83,7 @@ plotLocalZScoreMatrix <- function(mLz,
         hjust = 0.95,
         vjust = 0.2
       ),
-      axis.text.y = element_text(size = 6)
+      axis.text.y = element_text(size = size_lab)
     ) +
     labs(
       subtitle = title,

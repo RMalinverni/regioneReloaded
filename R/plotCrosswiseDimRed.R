@@ -26,6 +26,7 @@
 #'
 #'
 #'
+#'
 plotCrosswiseDimRed <-
   function(mPt,
            type = "PCA",
@@ -66,7 +67,7 @@ plotCrosswiseDimRed <-
 
     if (type == "tSNE") {
 
-      pdr_out <- Rtsne(GM, perplexity = perplexity, theta = theta,check_duplicates = FALSE)
+      pdr_out <- Rtsne(GM, perplexity = perplexity, theta = theta, check_duplicates = FALSE)
       pdr_df <- data.frame(x = pdr_out$Y[, 1],
                    y = pdr_out$Y[, 2],
                    Name = rownames(GM))
@@ -102,6 +103,7 @@ plotCrosswiseDimRed <-
 
     if (!is.null(listRS)){
       pdr_df$clust<-pdr_df$clust1
+
       if (emphasize==TRUE){
         pdr_df$clust<-pdr_df$clust2
       }
@@ -112,7 +114,7 @@ plotCrosswiseDimRed <-
         x = x,
         y = y,
         label = Name,
-        color = clust
+        color = factor(clust)
       )) +
       geom_point() +
 

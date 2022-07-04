@@ -120,8 +120,8 @@ multiLocalZscore <- function(A,
       localZScore,
       A = A ,
       count.once = TRUE,
-      window = 100,
-      strep = 1
+      window = window,
+      step = step
     )
   names(lZs) <- names(pt)
 
