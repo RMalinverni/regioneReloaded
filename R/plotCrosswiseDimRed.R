@@ -17,6 +17,8 @@
 #' @param perplexity numeric, if type = "tSNE" value of perplexity for the function \code{\link{Rtsne}}. (default = 10)
 #' @param theta numeric, if type = "tSNE" value of theta for the function \code{\link{Rtsne}}. (default = 0.1)
 #' @param ellipse logic, if TRUE ellipses will be drawn around the clusters. (default = FALSE)
+#' @param label_all logical, if TRUE data points which are not in listRS when emphasize = TRUE are labelled (default = FALSE)
+#' @param return_table logical, if TRUE a table with the cluster assigned to each region is returned instead of the plot (default = FALSE)
 #'
 #' @export plotCrosswiseDimRed
 #' @import ggplot2
@@ -36,10 +38,12 @@ plotCrosswiseDimRed <-
            main = "",
            size_labels = 2,
            emphasize = FALSE,
+           label_all = FALSE,
            perplexity = 10,
            theta = 0.1,
            ellipse=FALSE,
            labMaxOverlap=100,
+           return_table = FALSE,
            ...) {
 
     if (class(mPt)=="genoMatriXeR"){
@@ -95,18 +99,15 @@ plotCrosswiseDimRed <-
     }
 
     pdr_df$clust2 <- rep("none", nrow(pdr_df))
-    sel_clust<-pdr_df$clust[pdr_df$clust1!="none"]
+    sel_clust<-pdr_df$clust[pdr_df$clust1 != "none"]
 
     for (i in 1:length(sel_clust)){
-      pdr_df$clust2[pdr_df$clust == sel_clust[i]]<- sel_clust[i]
+      pdr_df$clust2[pdr_df$clust == sel_clust[i]] <- sel_clust[i]
     }
 
-    if (!is.null(listRS)){
-      pdr_df$clust<-pdr_df$clust1
-
-      if (emphasize==TRUE){
-        pdr_df$clust<-pdr_df$clust2
-      }
+    if (!is.null(listRS) & emphasize){
+      pdr_df$clust<-pdr_df$clust2
+      pdr_df_emph <- pdr_df[pdr_df$clust != "none",]
     }
 
     p <-
@@ -116,21 +117,32 @@ plotCrosswiseDimRed <-
         label = Name,
         color = clust
       )) +
-      geom_point() +
+      geom_point()
 
-      geom_text_repel(
-        size  = size_labels,
-        aes(label = Name),
-        max.overlaps=labMaxOverlap,
-        point.padding = 0.5,
-        segment.color = "grey"
-      )
-
-
-    if(ellipse==TRUE){
+    if(emphasize & ellipse){ # ellipse only for emphasized clusters
+      p <- p + stat_ellipse(data = pdr_df_emph,
+                            type = "t",
+                            geom = "polygon",
+                            alpha = 0.15)
+    } else if (ellipse) { # ellipse for all clusters
       p <- p + stat_ellipse(type = "t",
-                     geom = "polygon",
-                     alpha = 0.15)
+                            geom = "polygon",
+                            alpha = 0.15)
+    }
+
+    if (emphasize & !label_all) { # label all clusters
+      p <- p + geom_text_repel(data = pdr_df_emph,
+                               size  = size_labels,
+                               aes(label = Name),
+                               max.overlaps=labMaxOverlap,
+                               point.padding = 0.5,
+                               segment.color = "grey")
+    } else {
+      p <- p + geom_text_repel(size  = size_labels,
+                               aes(label = Name),
+                               max.overlaps=labMaxOverlap,
+                               point.padding = 0.5,
+                               segment.color = "grey")
     }
 
     if(type=="PCA"){
@@ -149,8 +161,13 @@ plotCrosswiseDimRed <-
       p <- p + labs(title = "UMAP plot" ,
                     subtitle = main)
     }
-
-    return(p)
+    if (return_table) {
+      tab <- pdr_df[,3:4]
+      rownames(tab) <- NULL
+      return(tab)
+    } else {
+      return(p)
+    }
 
   }
 
