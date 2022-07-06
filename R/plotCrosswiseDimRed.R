@@ -17,6 +17,7 @@
 #' @param perplexity numeric, if type = "tSNE" value of perplexity for the function \code{\link{Rtsne}}. (default = 10)
 #' @param theta numeric, if type = "tSNE" value of theta for the function \code{\link{Rtsne}}. (default = 0.1)
 #' @param ellipse logic, if TRUE ellipses will be drawn around the clusters. (default = FALSE)
+#' @param label_none logical, if TRUE data points which are not in listRS when emphasize = TRUE are labelled (default = FALSE)
 #'
 #' @export plotCrosswiseDimRed
 #' @import ggplot2
