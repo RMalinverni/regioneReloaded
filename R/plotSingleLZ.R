@@ -9,6 +9,10 @@
 #' @param RS character, name of regionSet to test.
 #' @param xlab character, label for x axes. (default = NA)
 #' @param main character, title for the plot. (default = NA)
+#' @param normZS logical, indicates whether the normalized Z-score values should be plotted. If FALSE, the raw
+#' Z-score is used (default = TRUE).
+#' @param colpal character vector of custom colors to use as palette source for the plot. If NULL, predetermined
+#' colors are used.
 #'
 #' @export plotSingleLZ
 #' @import ggplot2
