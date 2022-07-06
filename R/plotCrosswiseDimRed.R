@@ -95,7 +95,7 @@ plotCrosswiseDimRed <-
     }
 
     pdr_df$clust2 <- rep("none", nrow(pdr_df))
-    sel_clust<-pdr_df$clust[pdr_df$clust1!="none"]
+    sel_clust<-pdr_df$clust[pdr_df$clust1 != "none"]
 
     for (i in 1:length(sel_clust)){
       pdr_df$clust2[pdr_df$clust == sel_clust[i]]<- sel_clust[i]
@@ -127,10 +127,15 @@ plotCrosswiseDimRed <-
       )
 
 
-    if(ellipse==TRUE){
+    if(ellipse & emphasize){
+      p <- p + stat_ellipse(data = pdr_df[pdr_df$clust2 != "none",],
+                            type = "t",
+                            geom = "polygon",
+                            alpha = 0.15)
+    } else if (emphasize==TRUE){
       p <- p + stat_ellipse(type = "t",
-                     geom = "polygon",
-                     alpha = 0.15)
+                            geom = "polygon",
+                            alpha = 0.15)
     }
 
     if(type=="PCA"){
