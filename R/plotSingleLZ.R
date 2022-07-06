@@ -53,24 +53,6 @@ plotSingleLZ <-
     df<-do.call("rbind", lapply(X=RS, FUN = DFfromLZ, mLZ=mLZ))
 
 
-    # lineLZ <-
-    #   mLZ@multiLocalZscores$shifed_ZSs[[grep(RS2, names(mLZ@multiLocalZscores$shifed_ZSs))]]
-    # nreg <- mLZ@parameters$Nregions
-    # nameRS <-
-    #   mLZ@multiLocalZscores$resumeTab$name[which(mLZ@multiLocalZscores$resumeTab$n_overlaps == nreg)]
-    # zs <-
-    #   mLZ@multiLocalZscores$resumeTab$z_score[which(mLZ@multiLocalZscores$resumeTab$name == RS2)]
-    # pv <-
-    #   mLZ@multiLocalZscores$resumeTab$adj.p_value[which(mLZ@multiLocalZscores$resumeTab$name == RS2)]
-    # mLZ@multiLocalZscores$resumeTab$n_overlaps == nreg
-    #
-    # df <-
-    #   data.frame(
-    #     lzscore = lineLZ,
-    #     normLocalZsore = lineLZ / (sqrt(nreg)),
-    #     shift = mLZ@multiLocalZscores$shifts
-    #   )
-    #
 
     p <- ggplot(df, aes(x = shift, y = normLocalZsore, group_by=name)) +
       geom_line(size = 2, col = colvec[5]) +
