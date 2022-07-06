@@ -37,7 +37,7 @@ plotCrosswiseDimRed <-
            main = "",
            size_labels = 2,
            emphasize = FALSE,
-           label_none = FALSE,
+           label_all = FALSE,
            perplexity = 10,
            theta = 0.1,
            ellipse=FALSE,
