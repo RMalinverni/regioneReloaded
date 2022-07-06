@@ -74,10 +74,10 @@ plotSingleLZ <-
       scale_color_manual(values = pal(length(RS))) +
       scale_fill_manual(values = pal(length(RS))) +
       labs(title = ref,
-             subtitle = paste("ranFUN: ", ranfun, "\nevFUN: ", evfun),
-             y = ylabel,
-             x = "bp")
-      ylab(ylabel)
+           caption = paste("ranFUN: ", ranfun, "\nevFUN: ", evfun),
+           y = ylabel,
+           x = "bp") +
+      theme(legend.title = element_blank())
 
     # Labels
     if(labValues) {
