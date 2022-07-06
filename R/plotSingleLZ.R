@@ -21,6 +21,8 @@ plotSingleLZ <-
            limH = NA,
            main = NA) {
 
+    colvec <- c("#57837B", "#F1ECC3", "#C9D8B6", "#515E63", "#C05555")
+
     mendel_theme <-
       theme(
         panel.background = element_rect(
@@ -41,9 +43,6 @@ plotSingleLZ <-
         )
       )
 
-    colvec <-
-      c("#57837B", "#F1ECC3", "#C9D8B6", "#515E63", "#C05555")
-
     if (mLZ@parameters$evFUN == "numOverlaps") {
       mLZ@parameters$evFUN <- "N. of overlaps"
     }
@@ -51,8 +50,6 @@ plotSingleLZ <-
 
     RS <- as.list(RS)
     df<-do.call("rbind", lapply(X=RS, FUN = DFfromLZ, mLZ=mLZ))
-
-
 
     p <- ggplot(df, aes(x = shift, y = normLocalZsore, group_by=name)) +
       geom_line(size = 2, col = colvec[5]) +
@@ -65,13 +62,10 @@ plotSingleLZ <-
       ) +
       ylab("normalized z-score") +
       xlab("bp") +
-      labs(
-        title = nameRS ,
-        subtitle = paste0("Local z-score:  ", nameRS, " vs ", RS2),
-        caption = paste0("Original z-score :  ", zs, " - Original adj.pvalue :  ", pv)
-      ) +
-      mendel_theme +
-      scale_fill_discrete(name = nameRS, labels = RS2)
+      # labs(subtitle = paste0("Local z-score:  ", nameRS, " vs ", RS2),
+      #      caption = paste0("Original z-score :  ", zs, " - Original adj.pvalue :  ", pv)
+      # ) +
+      mendel_theme
 
     if (!is.na(limH)) {
       p <- p + ylim(-limH, limH)
