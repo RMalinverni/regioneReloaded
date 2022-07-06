@@ -100,16 +100,12 @@ plotCrosswiseDimRed <-
     sel_clust<-pdr_df$clust[pdr_df$clust1 != "none"]
 
     for (i in 1:length(sel_clust)){
-      pdr_df$clust2[pdr_df$clust == sel_clust[i]]<- sel_clust[i]
+      pdr_df$clust2[pdr_df$clust == sel_clust[i]] <- sel_clust[i]
     }
 
-    if (!is.null(listRS)){
-      pdr_df$clust<-pdr_df$clust1
-
-      if (emphasize==TRUE){
-        pdr_df$clust<-pdr_df$clust2
-        pdr_df_emph <- pdr_df[pdr_df$clust2 != "none",]
-      }
+    if (!is.null(listRS) & emphasize){
+      pdr_df$clust<-pdr_df$clust2
+      pdr_df_emph <- pdr_df[pdr_df$clust != "none",]
     }
 
     p <-
@@ -126,7 +122,7 @@ plotCrosswiseDimRed <-
                             type = "t",
                             geom = "polygon",
                             alpha = 0.15)
-    } else if (ellipse){ # ellipse for all clusters
+    } else if (ellipse) { # ellipse for all clusters
       p <- p + stat_ellipse(type = "t",
                             geom = "polygon",
                             alpha = 0.15)
