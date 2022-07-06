@@ -21,7 +21,7 @@ DFfromLZ <- function(mLZ, RS) {
     data.frame(
       name = rep(RS, length(lineLZ)),
       lzscore = lineLZ,
-      normLocalZsore = lineLZ / (sqrt(nreg)),
+      normLocalZscore = lineLZ / (sqrt(nreg)),
       shift = mLZ@multiLocalZscores$shifts
     )
 
