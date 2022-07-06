@@ -51,15 +51,13 @@ plotSingleLZ <-
     RS <- as.list(RS)
     df<-do.call("rbind", lapply(X=RS, FUN = DFfromLZ, mLZ=mLZ))
 
-    p <- ggplot(df, aes(x = shift, y = normLocalZsore, group_by=name)) +
-      geom_line(size = 2, col = colvec[5]) +
-      geom_area(aes(fill = colvec[2])) +
-      geom_vline(
-        aes(xintercept = 0),
-        color = colvec[4],
-        linetype = "dashed",
-        size = 0.4
-      ) +
+    p <- ggplot(df, aes(x = shift, y = normLocalZsore, group_by=name, fill = name)) +
+      # hline at y = 0
+      geom_hline(yintercept=0,  color =colvec[4], size=0.6) +
+      # vline at x = 0
+      geom_vline(xintercept = 0, color =colvec[4], size = 0.4, linetype = "dotted") +
+      geom_line() +
+      geom_area(alpha = 0.5) +
       ylab("normalized z-score") +
       xlab("bp") +
       # labs(subtitle = paste0("Local z-score:  ", nameRS, " vs ", RS2),
