@@ -78,7 +78,8 @@ plotSingleLZ <-
         geom_label_repel(data = df_label, inherit.aes = FALSE,
                          aes(label = text, x = shift, y = score, color = name),
                          fill = "#FDFAF6", size = label_size,
-                         xlim = c(0.2 * max(df$shift), NA))
+                         xlim = c(0.2 * max(df$shift), NA),
+                         show.legend = FALSE)
     }
 
     if (!is.na(limH)) {
