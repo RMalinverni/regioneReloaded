@@ -42,6 +42,10 @@ plotSingleLZ <-
     RS <- as.list(RS)
     df<-do.call("rbind", lapply(X=RS, FUN = DFfromLZ, mLZ=mLZ))
 
+    ref <- mLZ@parameters$A
+    evfun <- mLZ@parameters$evFUN
+    ranfun <- mLZ@parameters$ranFUN
+
     if (is.null(colpal)) { # Palette
       colpal <- brewer.pal(n = 5, "Set2")
       pal <- colorRampPalette(colpal)
@@ -69,13 +73,16 @@ plotSingleLZ <-
       # geom_line() +
       scale_color_manual(values = pal(length(RS))) +
       scale_fill_manual(values = pal(length(RS))) +
-      ylab(ylabel) +
-      xlab("bp")
+      labs(title = ref,
+             subtitle = paste("ranFUN: ", ranfun, "\nevFUN: ", evfun),
+             y = ylabel,
+             x = "bp")
+      ylab(ylabel)
 
     # Labels
     if(labValues) {
       df_label <- df[df$shift == 0,]
-      df_label$text <- paste(df_label$name, "\nnZS: ", round(df_label$score, digits = 2), sep = "")
+      df_label$text <- paste(df_label$name, "\nZS: ", round(df_label$score, digits = 2), sep = "")
       p <- p +
         geom_label_repel(data = df_label, inherit.aes = FALSE,
                          aes(label = text, x = shift, y = score, color = name),
