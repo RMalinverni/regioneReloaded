@@ -17,6 +17,7 @@
 #' @export plotSingleLZ
 #' @import ggplot2
 #' @import RColorBrewer
+#' @import ggrepel
 
 
 plotSingleLZ <-
@@ -26,7 +27,9 @@ plotSingleLZ <-
            normZS = TRUE,
            limH = NA,
            main = NA,
-           colpal = NULL) {
+           colpal = NULL,
+           labValues = TRUE,
+           label_size = 2.5) {
 
     if (is.null(colpal)) {
       colpal <- brewer.pal(n = 5, "Set2")
@@ -51,14 +54,14 @@ plotSingleLZ <-
     df<-do.call("rbind", lapply(X=RS, FUN = DFfromLZ, mLZ=mLZ))
 
     if (normZS) {
-      p <- ggplot(df, aes(x = shift, y = normLocalZscore, group = name, fill = name, color = name))
+      df$score <- df$normLocalZscore
       ylabel <- "Normalized Z-score"
     } else {
-      p <- ggplot(df, aes(x = shift, y = lzscore, group = name, fill = name, color = name))
+      df$score <- df$lzscore
       ylabel <- "Z-score"
     }
 
-    p <- p +
+    p <- ggplot(df, aes(x = shift, y = score, group = name, fill = name, color = name)) +
       geom_hline(yintercept=0,  color ="#515E63", size=0.6) +
       geom_vline(xintercept = 0, color ="#515E63", size = 0.4, linetype = "dotted") +
       geom_density(alpha = 0.2, stat = "identity") +
@@ -67,6 +70,16 @@ plotSingleLZ <-
       scale_fill_manual(values = pal(length(RS))) +
       ylab(ylabel) +
       xlab("bp")
+
+    if(labValues) {
+      df_label <- df[df$shift == 0,]
+      df_label$text <- paste(df_label$name, "\nnZS: ", round(df_label$score, digits = 2), sep = "")
+      p <- p +
+        geom_label_repel(data = df_label, inherit.aes = FALSE,
+                         aes(label = text, x = shift, y = score, color = name),
+                         fill = "#FDFAF6", size = label_size,
+                         xlim = c(0.2 * max(df$shift), NA))
+    }
 
     if (!is.na(limH)) {
       p <- p + ylim(-limH, limH)
