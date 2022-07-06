@@ -39,6 +39,9 @@ plotSingleLZ <-
                         panel.grid.minor = element_line(size = 0.25, linetype = 'solid',
                                                         colour = "#FDFAF6"))
 
+    RS <- as.list(RS)
+    df<-do.call("rbind", lapply(X=RS, FUN = DFfromLZ, mLZ=mLZ))
+
     if (is.null(colpal)) {
       colpal <- brewer.pal(n = 5, "Set2")
       pal <- colorRampPalette(colpal)
@@ -49,9 +52,6 @@ plotSingleLZ <-
     if (mLZ@parameters$evFUN == "numOverlaps") {
       mLZ@parameters$evFUN <- "N. of overlaps"
     }
-
-    RS <- as.list(RS)
-    df<-do.call("rbind", lapply(X=RS, FUN = DFfromLZ, mLZ=mLZ))
 
     if (normZS) {
       df$score <- df$normLocalZscore
