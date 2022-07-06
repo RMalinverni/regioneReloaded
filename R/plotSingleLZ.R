@@ -48,8 +48,10 @@ plotSingleLZ <-
 
     if (normZS) {
       p <- ggplot(df, aes(x = shift, y = normLocalZscore, group = name, fill = name, color = name))
+      ylabel <- "Normalized Z-score"
     } else {
       p <- ggplot(df, aes(x = shift, y = lzscore, group = name, fill = name, color = name))
+      ylabel <- "Z-score"
     }
 
     p <- p +
@@ -59,7 +61,7 @@ plotSingleLZ <-
       # geom_line() +
       scale_color_manual(values = pal(length(RS))) +
       scale_fill_manual(values = pal(length(RS))) +
-      ylab("normalized z-score") +
+      ylab(ylabel) +
       xlab("bp")
 
     if (!is.na(limH)) {
