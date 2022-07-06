@@ -42,7 +42,7 @@ plotSingleLZ <-
     RS <- as.list(RS)
     df<-do.call("rbind", lapply(X=RS, FUN = DFfromLZ, mLZ=mLZ))
 
-    if (is.null(colpal)) {
+    if (is.null(colpal)) { # Palette
       colpal <- brewer.pal(n = 5, "Set2")
       pal <- colorRampPalette(colpal)
     } else {
@@ -53,7 +53,7 @@ plotSingleLZ <-
       mLZ@parameters$evFUN <- "N. of overlaps"
     }
 
-    if (normZS) {
+    if (normZS) { # Raw or norm ZS
       df$score <- df$normLocalZscore
       ylabel <- "Normalized Z-score"
     } else {
@@ -61,6 +61,7 @@ plotSingleLZ <-
       ylabel <- "Z-score"
     }
 
+    # Plot
     p <- ggplot(df, aes(x = shift, y = score, group = name, fill = name, color = name)) +
       geom_hline(yintercept=0,  color ="#515E63", size=0.6) +
       geom_vline(xintercept = 0, color ="#515E63", size = 0.4, linetype = "dotted") +
@@ -71,6 +72,7 @@ plotSingleLZ <-
       ylab(ylabel) +
       xlab("bp")
 
+    # Labels
     if(labValues) {
       df_label <- df[df$shift == 0,]
       df_label$text <- paste(df_label$name, "\nnZS: ", round(df_label$score, digits = 2), sep = "")
@@ -82,6 +84,7 @@ plotSingleLZ <-
                          show.legend = FALSE)
     }
 
+    # Ylims
     if (!is.na(limH)) {
       p <- p + ylim(-limH, limH)
     }
