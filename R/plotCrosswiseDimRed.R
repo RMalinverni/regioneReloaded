@@ -132,15 +132,15 @@ plotCrosswiseDimRed <-
                             alpha = 0.15)
     }
 
-    if (label_all) { # label all clusters
-      p <- p + geom_text_repel(size  = size_labels,
+    if (emphasize & !label_all) { # label all clusters
+      p <- p + geom_text_repel(data = pdr_df_emph,
+                               size  = size_labels,
                                aes(label = Name),
                                max.overlaps=labMaxOverlap,
                                point.padding = 0.5,
                                segment.color = "grey")
     } else {
-      p <- p + geom_text_repel(data = pdr_df_emph,
-                               size  = size_labels,
+      p <- p + geom_text_repel(size  = size_labels,
                                aes(label = Name),
                                max.overlaps=labMaxOverlap,
                                point.padding = 0.5,
