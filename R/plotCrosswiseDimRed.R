@@ -18,6 +18,7 @@
 #' @param theta numeric, if type = "tSNE" value of theta for the function \code{\link{Rtsne}}. (default = 0.1)
 #' @param ellipse logic, if TRUE ellipses will be drawn around the clusters. (default = FALSE)
 #' @param label_all logical, if TRUE data points which are not in listRS when emphasize = TRUE are labelled (default = FALSE)
+#' @param return_table logical, if TRUE a table with the cluster assigned to each region is returned instead of the plot (default = FALSE)
 #'
 #' @export plotCrosswiseDimRed
 #' @import ggplot2
@@ -42,6 +43,7 @@ plotCrosswiseDimRed <-
            theta = 0.1,
            ellipse=FALSE,
            labMaxOverlap=100,
+           return_table = FALSE,
            ...) {
 
     if (class(mPt)=="genoMatriXeR"){
@@ -159,8 +161,13 @@ plotCrosswiseDimRed <-
       p <- p + labs(title = "UMAP plot" ,
                     subtitle = main)
     }
-
-    return(p)
+    if (return_table) {
+      tab <- pdr_df[,3:4]
+      rownames(tab) <- NULL
+      return(tab)
+    } else {
+      return(p)
+    }
 
   }
 
