@@ -19,6 +19,7 @@ plotSingleLZ <-
   function(mLZ,
            RS,
            xlab = "",
+           normZS = TRUE,
            limH = NA,
            main = NA,
            colpal = NULL) {
@@ -45,7 +46,13 @@ plotSingleLZ <-
     RS <- as.list(RS)
     df<-do.call("rbind", lapply(X=RS, FUN = DFfromLZ, mLZ=mLZ))
 
-    p <- ggplot(df, aes(x = shift, y = normLocalZscore, group = name, fill = name, color = name)) +
+    if (normZS) {
+      p <- ggplot(df, aes(x = shift, y = normLocalZscore, group = name, fill = name, color = name))
+    } else {
+      p <- ggplot(df, aes(x = shift, y = lzscore, group = name, fill = name, color = name))
+    }
+
+    p <- p +
       geom_hline(yintercept=0,  color ="#515E63", size=0.6) +
       geom_vline(xintercept = 0, color ="#515E63", size = 0.4, linetype = "dotted") +
       geom_density(alpha = 0.2, stat = "identity") +
