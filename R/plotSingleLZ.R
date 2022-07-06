@@ -31,13 +31,6 @@ plotSingleLZ <-
            labValues = TRUE,
            label_size = 2.5) {
 
-    if (is.null(colpal)) {
-      colpal <- brewer.pal(n = 5, "Set2")
-      pal <- colorRampPalette(colpal)
-    } else {
-      pal <- colorRampPalette(colpal)
-    }
-
     mendel_theme<-theme(panel.background = element_rect(fill = "#F1ECC3",
                                                         colour = "#F1ECC3",
                                                         size = 0.5, linetype = "solid"),
@@ -45,6 +38,13 @@ plotSingleLZ <-
                                                         colour = "#FDFAF6"),
                         panel.grid.minor = element_line(size = 0.25, linetype = 'solid',
                                                         colour = "#FDFAF6"))
+
+    if (is.null(colpal)) {
+      colpal <- brewer.pal(n = 5, "Set2")
+      pal <- colorRampPalette(colpal)
+    } else {
+      pal <- colorRampPalette(colpal)
+    }
 
     if (mLZ@parameters$evFUN == "numOverlaps") {
       mLZ@parameters$evFUN <- "N. of overlaps"
