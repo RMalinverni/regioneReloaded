@@ -36,6 +36,7 @@ plotCrosswiseDimRed <-
            main = "",
            size_labels = 2,
            emphasize = FALSE,
+           label_none = FALSE,
            perplexity = 10,
            theta = 0.1,
            ellipse=FALSE,
@@ -106,6 +107,7 @@ plotCrosswiseDimRed <-
 
       if (emphasize==TRUE){
         pdr_df$clust<-pdr_df$clust2
+        pdr_df_emph <- pdr_df[pdr_df$clust2 != "none",]
       }
     }
 
@@ -116,26 +118,32 @@ plotCrosswiseDimRed <-
         label = Name,
         color = clust
       )) +
-      geom_point() +
+      geom_point()
 
-      geom_text_repel(
-        size  = size_labels,
-        aes(label = Name),
-        max.overlaps=labMaxOverlap,
-        point.padding = 0.5,
-        segment.color = "grey"
-      )
-
-
-    if(ellipse & emphasize){
-      p <- p + stat_ellipse(data = pdr_df[pdr_df$clust2 != "none",],
+    if(emphasize & ellipse){ # ellipse only for emphasized clusters
+      p <- p + stat_ellipse(data = pdr_df_emph,
                             type = "t",
                             geom = "polygon",
                             alpha = 0.15)
-    } else if (emphasize==TRUE){
+    } else if (ellipse){ # ellipse for all clusters
       p <- p + stat_ellipse(type = "t",
                             geom = "polygon",
                             alpha = 0.15)
+    }
+
+    if (label_none) { # label all clusters
+      p <- p + geom_text_repel(size  = size_labels,
+                               aes(label = Name),
+                               max.overlaps=labMaxOverlap,
+                               point.padding = 0.5,
+                               segment.color = "grey")
+    } else {
+      p <- p + geom_text_repel(data = pdr_df_emph,
+                               size  = size_labels,
+                               aes(label = Name),
+                               max.overlaps=labMaxOverlap,
+                               point.padding = 0.5,
+                               segment.color = "grey")
     }
 
     if(type=="PCA"){
