@@ -36,6 +36,7 @@ makeCrosswiseMatrix <-
            symm_matrix = TRUE,
            selectVec = NULL,
            pvcut = 1,
+           subEx=0,
            ...) {
 
   if ( class( mPT ) == "genoMatriXeR" ){
@@ -102,7 +103,9 @@ makeCrosswiseMatrix <-
 
   mat_corX <- cor(x = mat, method = "pearson")
   mat_corY <- cor(x = t(mat), method = "pearson")
-  mat <- cleanCrosswiseMatrix(GM = mat,GM_pv = mat_pv , pvcut = pvcut,scale = scale)
+  mat <- cleanCrosswiseMatrix(GM = mat,GM_pv = mat_pv ,
+                              pvcut = pvcut,scale = scale,
+                              subEX =subEX)
   mat1 <- list( GMat = mat, GMat_pv = mat_pv, GMat_corX = mat_corX , GMat_corY = mat_corY, FitRow = fit, FitCol = fit2)
   mPT@matrix <- mat1
 

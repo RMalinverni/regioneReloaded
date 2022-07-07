@@ -21,11 +21,15 @@ plotCrosswiseDimRed(mPt, type = "PCA", GM_clust = NA, nc = 5, listRS = NULL, mai
 
 \item{emphasize}{logic, if present listRS and emphasize is TRUE only the cluster in which the element of listRS are present will be highlighted. (default = FALSE)}
 
+\item{label_all}{logical, if TRUE data points which are not in listRS when emphasize = TRUE are labelled (default = FALSE)}
+
 \item{perplexity}{numeric, if type = "tSNE" value of perplexity for the function \code{\link{Rtsne}}. (default = 10)}
 
 \item{theta}{numeric, if type = "tSNE" value of theta for the function \code{\link{Rtsne}}. (default = 0.1)}
 
 \item{ellipse}{logic, if TRUE ellipses will be drawn around the clusters. (default = FALSE)}
+
+\item{return_table}{logical, if TRUE a table with the cluster assigned to each region is returned instead of the plot (default = FALSE)}
 
 \item{mpt}{object of class genoMatriXeR or numeric matrix}
 }

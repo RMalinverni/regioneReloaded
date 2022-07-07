@@ -15,15 +15,16 @@ cleanCrosswiseMatrix <-
   function(GM,
            GM_pv,
            pvcut,
-           scale) {
+           scale,
+           subEx) {
 
-    GM[GM_pv > pvcut] <- 0
+    GM[GM_pv > pvcut] <- subEx
 
     if (scale == TRUE) {
       GM <- scale(GM)
     }
 
-    GM[is.nan(GM)] <- 0
+    GM[is.nan(GM)] <- subEx
     if (sum(GM) == 0) {
       stop("all values of the matrix is 0")
     }
