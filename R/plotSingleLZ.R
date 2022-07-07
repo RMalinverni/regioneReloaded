@@ -9,70 +9,89 @@
 #' @param RS character, name of regionSet to test.
 #' @param xlab character, label for x axes. (default = NA)
 #' @param main character, title for the plot. (default = NA)
+#' @param normZS logical, indicates whether the normalized Z-score values should be plotted. If FALSE, the raw
+#' Z-score is used (default = TRUE).
+#' @param colpal character vector of custom colors to use as palette source for the plot. If NULL, predetermined
+#' colors are used.
 #'
 #' @export plotSingleLZ
 #' @import ggplot2
+#' @import RColorBrewer
+#' @import ggrepel
 
 
 plotSingleLZ <-
   function(mLZ,
            RS,
            xlab = "",
+           normZS = TRUE,
            limH = NA,
-           main = NA) {
+           main = NA,
+           colpal = NULL,
+           labValues = TRUE,
+           label_size = 2.5) {
 
-    mendel_theme <-
-      theme(
-        panel.background = element_rect(
-          fill = colvec[2],
-          colour = colvec[2],
-          size = 0.5,
-          linetype = "solid"
-        ),
-        panel.grid.major = element_line(
-          size = 0.5,
-          linetype = 'solid',
-          colour = "#FDFAF6"
-        ),
-        panel.grid.minor = element_line(
-          size = 0.25,
-          linetype = 'solid',
-          colour = "#FDFAF6"
-        )
-      )
+    mendel_theme<-theme(panel.background = element_rect(fill = "#F1ECC3",
+                                                        colour = "#F1ECC3",
+                                                        size = 0.5, linetype = "solid"),
+                        panel.grid.major = element_line(size = 0.5, linetype = 'solid',
+                                                        colour = "#FDFAF6"),
+                        panel.grid.minor = element_line(size = 0.25, linetype = 'solid',
+                                                        colour = "#FDFAF6"))
 
-    colvec <-
-      c("#57837B", "#F1ECC3", "#C9D8B6", "#515E63", "#C05555")
+    RS <- as.list(RS)
+    df<-do.call("rbind", lapply(X=RS, FUN = DFfromLZ, mLZ=mLZ))
+
+    ref <- mLZ@parameters$A
+    evfun <- mLZ@parameters$evFUN
+    ranfun <- mLZ@parameters$ranFUN
+
+    if (is.null(colpal)) { # Palette
+      colpal <- brewer.pal(n = 5, "Set2")
+      pal <- colorRampPalette(colpal)
+    } else {
+      pal <- colorRampPalette(colpal)
+    }
 
     if (mLZ@parameters$evFUN == "numOverlaps") {
       mLZ@parameters$evFUN <- "N. of overlaps"
     }
 
+    if (normZS) { # Raw or norm ZS
+      df$score <- df$normLocalZscore
+      ylabel <- "Normalized Z-score"
+    } else {
+      df$score <- df$lzscore
+      ylabel <- "Z-score"
+    }
 
-    RS <- as.list(RS)
-    df<-do.call("rbind", lapply(X=RS, FUN = DFfromLZ, mLZ=mLZ))
+    # Plot
+    p <- ggplot(df, aes(x = shift, y = score, group = name, fill = name, color = name)) +
+      geom_hline(yintercept=0,  color ="#515E63", size=0.6) +
+      geom_vline(xintercept = 0, color ="#515E63", size = 0.4, linetype = "dotted") +
+      geom_density(alpha = 0.2, stat = "identity") +
+      # geom_line() +
+      scale_color_manual(values = pal(length(RS))) +
+      scale_fill_manual(values = pal(length(RS))) +
+      labs(title = ref,
+           subtitle = paste("ranFUN: ", ranfun, "\nevFUN: ", evfun),
+           y = ylabel,
+           x = "bp") +
+      theme(legend.title = element_blank())
 
+    # Labels
+    if(labValues) {
+      df_label <- df[df$shift == 0,]
+      df_label$text <- paste(df_label$name, "\nZS: ", round(df_label$score, digits = 2), sep = "")
+      p <- p +
+        geom_label_repel(data = df_label, inherit.aes = FALSE,
+                         aes(label = text, x = shift, y = score, color = name),
+                         fill = "#FDFAF6", size = label_size,
+                         xlim = c(0.2 * max(df$shift), NA),
+                         show.legend = FALSE)
+    }
 
-
-    p <- ggplot(df, aes(x = shift, y = normLocalZsore, group_by=name)) +
-      geom_line(size = 2, col = colvec[5]) +
-      geom_area(aes(fill = colvec[2])) +
-      geom_vline(
-        aes(xintercept = 0),
-        color = colvec[4],
-        linetype = "dashed",
-        size = 0.4
-      ) +
-      ylab("normalized z-score") +
-      xlab("bp") +
-      labs(
-        title = nameRS ,
-        subtitle = paste0("Local z-score:  ", nameRS, " vs ", RS2),
-        caption = paste0("Original z-score :  ", zs, " - Original adj.pvalue :  ", pv)
-      ) +
-      mendel_theme +
-      scale_fill_discrete(name = nameRS, labels = RS2)
-
+    # Ylims
     if (!is.na(limH)) {
       p <- p + ylim(-limH, limH)
     }
