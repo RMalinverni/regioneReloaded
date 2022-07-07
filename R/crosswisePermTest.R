@@ -58,6 +58,8 @@ crosswisePermTest <-
            verbose = FALSE,
            ...){
 
+# control parameters
+
     if (!hasArg(Alist))
       stop("Alist is missing")
     if (!is.logical(sampling))
@@ -74,10 +76,6 @@ crosswisePermTest <-
       stop("ntimes must be numeric")
     if (!is.numeric(min_sampling))
       stop("min_sampling must be numeric")
-
-
-# control parameters
-
 
 
 # create @parameters slot

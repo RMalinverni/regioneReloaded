@@ -106,7 +106,8 @@ makeCrosswiseMatrix <-
   mat <- cleanCrosswiseMatrix(GM = mat,GM_pv = mat_pv ,
                               pvcut = pvcut,scale = scale,
                               subEX =subEX)
-  mat1 <- list( GMat = mat, GMat_pv = mat_pv, GMat_corX = mat_corX , GMat_corY = mat_corY, FitRow = fit, FitCol = fit2)
+  mat1 <- list( GMat = mat, GMat_pv = mat_pv, GMat_corX = mat_corX ,
+                GMat_corY = mat_corY, FitRow = fit, FitCol = fit2)
   mPT@matrix <- mat1
 
   return( mPT )
