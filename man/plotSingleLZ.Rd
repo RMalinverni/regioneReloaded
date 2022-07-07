@@ -13,7 +13,13 @@ plotSingleLZ<-function(mLZ, RS2,  colvec = NA, xlab = " N. of overlaps", limH = 
 
 \item{xlab}{character, label for x axes. (default = NA)}
 
+\item{normZS}{logical, indicates whether the normalized Z-score values should be plotted. If FALSE, the raw
+Z-score is used (default = TRUE).}
+
 \item{main}{character, title for the plot. (default = NA)}
+
+\item{colpal}{character vector of custom colors to use as palette source for the plot. If NULL, predetermined
+colors are used.}
 }
 \description{
 Plot the result of a single local Z-Score test from an mLZ object.
