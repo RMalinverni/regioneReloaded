@@ -1,4 +1,8 @@
-resampleGenome<-function (A ,simple=FALSE,per.chromosome = FALSE, genome="hg19",...)
+resampleGenome<- function (A ,
+                           simple=FALSE,
+                           per.chromosome = FALSE,
+                           genome="hg19",
+                           ...)
 {
   if (!hasArg(A))
     stop("A is missing")

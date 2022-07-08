@@ -19,7 +19,7 @@ similarRegionSet<-function(GR, name,genome,vectorPerc)
 A list of class GenomicRanges
 }
 \description{
-Create a list of Genomic Ranges objects similar to a reference Region Set
+Create a list of class GenomicRanges similar to a reference RegionSet
 }
 \examples{
 
@@ -28,6 +28,18 @@ data("cw_Alien")
 A<-createRandomRegions(nregions = 20, length.mean = 1000, length.sd = 100, genome = AlienGenome)
 similAList <- similarRegionSet(GR = A, genome = AlienGenome,vectorPerc = seq(0.1,0.9,0.2), name = "test")
 summary (similAlist)
+
+data("cw_Alien")
+
+regA <- createRandomRegions(
+  nregions = 100,
+  length.mean = 10,
+ length.sd = 5,
+ genome = AlienGenome
+)
+
+listRegA <- similarRegionList(GR = regA, gernome = AlienGenome)
+summary(listRegA)
 
 }
 \seealso{

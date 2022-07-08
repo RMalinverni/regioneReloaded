@@ -20,11 +20,16 @@
 #' @param label_all logical, if TRUE data points which are not in listRS when emphasize = TRUE are labelled (default = FALSE)
 #' @param return_table logical, if TRUE a table with the cluster assigned to each region is returned instead of the plot (default = FALSE)
 #'
+#'
+#'
+#'
+#'
 #' @export plotCrosswiseDimRed
 #' @import ggplot2
 #' @import Rtsne
 #' @import umap
 #' @import ggrepel
+#'
 #'
 #'
 #'

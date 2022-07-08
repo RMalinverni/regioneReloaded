@@ -4,7 +4,7 @@
 \alias{plotSinglePT}
 \title{Plot Single Permutation Test}
 \usage{
-plotSinglePT<-function(mPT,RS1,RS2,xlab =" N. of overlaps",main=NA,add_theme = FALSE,colvec = NULL)
+plotSinglePT<-function(mPT, RS1, RS2, xlab =NA, main=NA,add_theme = FALSE,colvec = NULL)
 }
 \arguments{
 \item{RS1}{character, name of the first element of gMXR object to test.}
@@ -22,5 +22,12 @@ plotSinglePT<-function(mPT,RS1,RS2,xlab =" N. of overlaps",main=NA,add_theme = F
 \item{mPt}{an object of class genoMatriXeR or a matrix}
 }
 \description{
-Plot the result of a single permutation test from an gMXR object.
+Plot the result of a single permutation test from an genomicRangersProject object.
+}
+\examples{
+
+data("cw_Alien")
+plotSinglePT(cw_Alien_ReG, RS1 = "regA","regA05")
+plotSinglePT(cw_Alien_ReG, RS1 = "regA","regC")
+
 }

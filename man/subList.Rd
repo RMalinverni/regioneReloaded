@@ -9,12 +9,11 @@ subList(Alist, min_sampling, fraction)
 \arguments{
 \item{Alist, }{GRangesList or list of Region Set of any accepted formats by  \code{\link{regioneR}} package}
 
-\item{min_sampling}{numeric, minimun number of regions for each element of the list, if the number of regions is less than min_samplig as subsempilg will be take all the regionset}
+\item{min_sampling}{numeric, minimum number of regions for each element of the list,
+if the number of regions is less than min_samplnig as subsempilng will be take the entire regionset}
 
 \item{fraction}{numeric, percentage of regions selected for the subsampling}
 }
 \description{
-crerate a samples sublist starting from a list of Regin  Set
+create a samples sublist starting from a list of Region Set
 }
-\keyword{function}
-\keyword{internal}

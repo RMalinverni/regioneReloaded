@@ -1,7 +1,7 @@
 #' similar RegionSets
 #'
 #'
-#' Create a list of Genomic Ranges objects similar to a reference Region Set
+#' Create a list of class GenomicRanges similar to a reference RegionSet
 #'
 #' @usage similarRegionSet<-function(GR, name,genome,vectorPerc)
 #'
@@ -23,6 +23,20 @@
 #' @seealso \code{\link{GenomiCRanges}}
 #'
 #' @import GenomicRanges
+#'
+#' @examples
+#' data("cw_Alien")
+#'
+#' regA <- createRandomRegions(
+#'   nregions = 100,
+#'   length.mean = 10,
+#'  length.sd = 5,
+#'  genome = AlienGenome
+#' )
+#'
+#' listRegA <- similarRegionList(GR = regA, gernome = AlienGenome)
+#' summary(listRegA)
+#'
 #' @export similarRegionSet
 #'
 similarRegionSet <- function(GR,
@@ -44,5 +58,6 @@ similarRegionSet <- function(GR,
   GRL <- c(GRL, GR)
   vectorNames <- c(vectorNames, name)
   names(GRL) <- vectorNames
+
   return(GRL)
 }

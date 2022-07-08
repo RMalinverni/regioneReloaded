@@ -33,16 +33,19 @@
 #' @details ...
 #' @return
 #'
-#' A object of class \code{genoMatriXeR}
+#' A object of class \code{genoMatriXeR} containing three slots
+#'
 #' \itemize{
 #' \item \bold{\code{@parameters}}
+#' \item \bold{\code{@multioverlaps}}
+#' \item \bold{\code{@matrix}}
 #'
 #' }
 #'
 #'
 #'
 #'
-#' @seealso    \code{\link{regioneR}}, \code{\link{permTest}}, \code{\link{overlapPermTest}}
+#' @seealso    \code{\link{genoMatriXeR_classes}} \code{\link{regioneR}} \code{\link{regioneR}}, \code{\link{permTest}}, \code{\link{overlapPermTest}} ,
 #'
 #' @examples  ...
 #' @import regioneR
