@@ -2,12 +2,12 @@
 % Please edit documentation in R/similarRegionSet.R
 \name{similarRegionSet}
 \alias{similarRegionSet}
-\title{similar RegionSet}
+\title{similar RegionSets}
 \usage{
 similarRegionSet<-function(GR, name,genome,vectorPerc)
 }
 \arguments{
-\item{GR}{an object of class gMXR or a matrix}
+\item{GR}{an object of class GenomigRanges}
 
 \item{name}{character, name of the first element of gMXR object to test.}
 
@@ -15,6 +15,21 @@ similarRegionSet<-function(GR, name,genome,vectorPerc)
 
 \item{vectorPerc}{character, label for x axes. (default = NA)}
 }
+\value{
+A list of class GenomicRanges
+}
 \description{
-create a similar region set.
+Create a list of Genomic Ranges objects similar to a reference Region Set
+}
+\examples{
+
+data("cw_Alien")
+
+A<-createRandomRegions(nregions = 20, length.mean = 1000, length.sd = 100, genome = AlienGenome)
+similAList <- similarRegionSet(GR = A, genome = AlienGenome,vectorPerc = seq(0.1,0.9,0.2), name = "test")
+summary (similAlist)
+
+}
+\seealso{
+\code{\link{GenomiCRanges}}
 }

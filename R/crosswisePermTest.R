@@ -32,7 +32,16 @@
 #'
 #' @details ...
 #' @return
-#' A object of class \code{gMXR}
+#'
+#' A object of class \code{genoMatriXeR}
+#' \itemize{
+#' \item \bold{\code{@parameters}}
+#'
+#' }
+#'
+#'
+#'
+#'
 #' @seealso    \code{\link{regioneR}}, \code{\link{permTest}}, \code{\link{overlapPermTest}}
 #'
 #' @examples  ...

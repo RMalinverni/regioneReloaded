@@ -44,7 +44,11 @@ to choose between the options of \code{\link{p.adjust}}. (default = "BH")}
 \item{verbose}{Boolean, if verbose test}
 }
 \value{
-A object of class \code{gMXR}
+A object of class \code{genoMatriXeR}
+\itemize{
+\item \bold{\code{@parameters}}
+
+}
 }
 \description{
 Perform a multiple permutation test between each elements of 2 list of Region
