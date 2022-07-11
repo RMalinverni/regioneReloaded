@@ -20,7 +20,18 @@
 #' @param label_all logical, if TRUE data points which are not in listRS when emphasize = TRUE are labelled (default = FALSE)
 #' @param return_table logical, if TRUE a table with the cluster assigned to each region is returned instead of the plot (default = FALSE)
 #'
+#' @return A plot is created on the current graphics device.
 #'
+#' @seealso \code{\link{crosswisePermTest}}
+#'
+#' @examples
+#' data("cw_Alien)
+#'
+#' cw_Alien_ReG <- makeCrosswiseMatrix( cw_Alien_ReG)
+#'
+#' plotCrosswiseDimRed(cw_Alien_ReG, type = "PCA")
+#'
+#' plotCrosswiseDimRed(cw_Alien_ReG, type = "UMAP")
 #'
 #'
 #'

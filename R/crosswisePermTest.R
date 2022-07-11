@@ -43,11 +43,21 @@
 #' }
 #'
 #'
-#'
-#'
 #' @seealso    \code{\link{genoMatriXeR_classes}} \code{\link{regioneR}} \code{\link{regioneR}}, \code{\link{permTest}}, \code{\link{overlapPermTest}} ,
 #'
-#' @examples  ...
+#' @examples
+#'
+#' \dontrun{
+#'
+#' data(cw_Alien)
+#'
+#' CW_Alien <- crosswisePermTest(Alist = AlienRSList, Blist = AlienRSList)
+#'
+#' summary(CW_Alien)
+#'
+#' }
+#'
+#'
 #' @import regioneR
 #' @import knitr
 #' @export crosswisePermTest

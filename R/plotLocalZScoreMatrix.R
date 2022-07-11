@@ -12,6 +12,19 @@
 #' @param matrix.type character ("association" or "correlation") is the kind of matrix that will be plotted (default = "association")
 #' @param maxVal numeric, maximum abs(value) reached by the plot. (default = 2)
 #' @param main character, plot title
+#' @param size_lab numeric, size for the plot lab
+#' @param revert logic, revert the order of the plotted elements
+#'
+#' @return A plot is created on the current graphics device.
+#'
+#' @seealso \code{\link{multiLocalZScore}} \code{\link{makeLZMatrix}}
+#'
+#' @examples
+#'
+#' data("cw_Alien)
+#'
+#' plotLocalZscoreMatrix(mlz_Alien_ReG)
+#'
 #'
 #' @import reshape2
 #' @import ggplot2
@@ -29,6 +42,8 @@ plotLocalZScoreMatrix <- function(mLz,
                                   main = "",
                                   size_lab= 6,
                                   revert = FALSE) {
+
+
   if (class(mLz) != "multiLocalZScore") {
     stop("the object mlZA need to be an multiLocalZScore object")
   }

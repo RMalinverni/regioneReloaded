@@ -4,6 +4,20 @@
 #' @keywords internal function
 #' @usage multiPermTest A, Blist, ranFUN, evFUN, universe, genome, rFUN, verbose = FALSE, ntimes, adj_pv_method, ...)
 #'
+#' @param A Genomic Ranges or any accepted formats by  \code{\link{regioneR}} package
+#' (\code{\link{GenomicRanges}}, \code{\link{data.frame}} etc...)
+#' @param Blist GRangesList or list of Region Set of any accepted formats by  \code{\link{regioneR}} package
+#' (\code{\link{GenomicRanges}}, \code{\link{data.frame}} etc...)
+#' @param ranFUN (default = "randomizeRegions") choose the randomization strategy used for the test see  \code{\link{regioneR}}
+#' @param evFUN  (default = "numOverlaps) choose the evaluation strategy used for the test see  \code{\link{regioneR}}
+#' @param universe (default = NULL) used only when \code{\link{resampleRegions}} function is selected
+#' @param adj_pv_method Charachter, the method used for the calculation of the adjusted p-value,
+#' to choose between the options of \code{\link{p.adjust}}. (default = "BH")
+#' @param genome Charachter or GenomicRanges, (defalut = "hg19") genome used to compute the randomization
+#' @param verbose Boolean, if verbose test
+#'
+#'
+#' @keywords internal function
 
 multiPermTest <-
   function(A,

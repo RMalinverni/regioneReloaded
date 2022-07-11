@@ -8,7 +8,7 @@
 #' @param GM_pv matrix, numerical matrix that represent p-value from gMXR object.
 #' @param pvcut maximum pvalue accepted, (all the z-score vales with pvalue higher than "pvcut" will be transform in 0)
 #' @param logic, if the matrix GM will be scaled using the function \code{link{scale}}. (default = FALSE)
-#' @export
+#'
 #' @keywords internal
 
 cleanCrosswiseMatrix <-

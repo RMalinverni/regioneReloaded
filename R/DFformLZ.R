@@ -5,6 +5,8 @@
 #' @usage DFfromLZ( mLZ, RS )
 #' @param mLZ object class MultilocalZScore
 #' @param RS string name of single region set present in the mLZ object
+#'
+#' @keywords internal function
 
 DFfromLZ <- function(mLZ, RS) {
 

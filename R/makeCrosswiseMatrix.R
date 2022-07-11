@@ -20,6 +20,25 @@
 #' @param pvcut maximum adj.pvalue accepted, all the associations with a adj.pvalue (defined in \code{\link{crosswisePermTest}}) higher than pvcut were transformed in 0. (default = 0.05)
 #' @param ... urther arguments to be passed to other methods.
 #'
+#' @return
+#'
+#' A object of class \code{genoMatriXeR} containing three slots
+#'
+#' \itemize{
+#' \item \bold{\code{@parameters}}
+#' \item \bold{\code{@multioverlaps}}
+#' \item \bold{\code{@matrix}}
+#'
+#' }
+#'
+#' @examples
+#'
+#' data(cw_Alien)
+#'
+#' cw_Alien_ReG <- makeCrossWiseMatrix(cw_Alien_ReG)
+#'
+#' summary(cw_Alien_ReG)
+#'
 #' @import stats
 #' @export makeCrosswiseMatrix
 

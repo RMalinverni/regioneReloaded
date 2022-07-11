@@ -1,9 +1,10 @@
 #' Plot Crosswise Matrix
 #'
 #'
-#' Plot matrix of associations/correlations stored in a gMXR object.
+#' Plot matrix of associations/correlations stored in a genoMatriXeR object.
 #'
-#' @usage plotCrosswiseMatrix(mPt,  lineColor = NA, interpolate = FALSE, colMatrix = "default", matrix.type = "crosswise", cor = "row", main = "")
+#' @usage plotCrosswiseMatrix(mPt,  lineColor = NA, interpolate = FALSE, colMatrix = "default",
+#' matrix.type = "crosswise", cor = "row", main = "")
 #'
 #' @param mPt an object of class gMXR or a matrix
 #' @param lineColor logic if TRUE a grid matrix will be draw (default: FALSE)
@@ -13,11 +14,28 @@
 #' @param cor character ("row" or "col"). If matrix variable is "correlation", defined if the function \code{"cor"} will be executed on rows or columns of the matrix
 #' @param maxVal numeric, maximun abs(value) reached by the plot. (default = 2)
 #' @param main charachter, graph title
+#' @ord_mat numeric list, list with two vectors X and Y as element, that
+#' represent the order of rows and column of the matrix (default = NULL)
+#'
+#' @return A plot is created on the current graphics device.
+#'
+#' @seealso \code{\link{crosswisePermTest}} \code{\link{makeCrosswiseMatrix}}
+#'
+#' @examples
+#' data("cw_Alien)
+#'
+#' cw_Alien_ReG <- makeCrosswiseMatrix( cw_Alien_ReG)
+#'
+#' plotCrosswiseMatrix(cw_Alien_ReG, matrix.type = "crosswise")
+#'
+#' plotCrosswiseMatrix(cw_Alien_ReG, matrix.type = "correlation")
 #'
 #' @import reshape2
 #' @import ggplot2
 #' @import RColorBrewer
 #' @export plotCrosswiseMatrix
+#'
+#'
 #'
 
 plotCrosswiseMatrix <- function(mPt,

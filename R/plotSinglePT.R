@@ -3,15 +3,20 @@
 #'
 #' Plot the result of a single permutation test from an genomicRangersProject object.
 #'
-#' @usage plotSinglePT<-function(mPT, RS1, RS2, xlab =NA, main=NA,add_theme = FALSE,colvec = NULL)
+#' @usage plotSinglePT<-function(mPT, RS, xlab = NA, main = NA, add_theme = FALSE, colvec = NULL)
 #'
-#' @param mPt an object of class genoMatriXeR or a matrix
-#' @param RS1 character, name of the first element of gMXR object to test.
-#' @param RS2 character, name of the second element of gMXR object to test.
+#' @param mPt an object of class genoMatriXeR
+#' @param RS1 character, name of the first element of genoMatriXeR object to test.
+#' @param RS2 character, name of the second element of genoMatriXeR object to test.
 #' @param xlab character, label for x axes. (default = NA)
-#' @param main character, title for the plot. (default = NA)
 #' @param add_theme logic, if TRUE will add a default \code{\link{ggplot2}} theme. (default = FALSE)
 #' @param colvec vector, vector of colors used in the plot, if NULL it will choose a default vector. (default = NULL)
+#'
+#' @return A plot is created on the current graphics device.
+#'
+#' @seealso \code{\link{crosswisePermTest}} \code{\link{makeCrosswiseMatrix}}
+#'
+#'
 #' @examples
 #'
 #' data("cw_Alien")
@@ -28,11 +33,10 @@ plotSinglePT <-
            RS2,
            xlab = NA,
            main = NA,
-           add_theme = FALSE,
            colvec = NULL) {
 
     if (class(mPT) != "genoMatriXeR") {
-      stop('mPT needs to be a "gMXR" class object')
+      stop('mPT needs to be a "genoMatriXeR" class object')
     }
 
     if (is.null(colvec)) {
@@ -43,25 +47,25 @@ plotSinglePT <-
       xlab = "N of overlaps"
     }
 
-    mendel_theme <-
-      theme(
-        panel.background = element_rect(
-          fill = colvec[2],
-          colour = colvec[2],
-          size = 0.5,
-          linetype = "solid"
-        ),
-        panel.grid.major = element_line(
-          size = 0.5,
-          linetype = 'solid',
-          colour = "#FDFAF6"
-        ),
-        panel.grid.minor = element_line(
-          size = 0.25,
-          linetype = 'solid',
-          colour = "#FDFAF6"
-        )
-      )
+    # mendel_theme <-
+    #   theme(
+    #     panel.background = element_rect(
+    #       fill = colvec[2],
+    #       colour = colvec[2],
+    #       size = 0.5,
+    #       linetype = "solid"
+    #     ),
+    #     panel.grid.major = element_line(
+    #       size = 0.5,
+    #       linetype = 'solid',
+    #       colour = "#FDFAF6"
+    #     ),
+    #     panel.grid.minor = element_line(
+    #       size = 0.25,
+    #       linetype = 'solid',
+    #       colour = "#FDFAF6"
+    #     )
+    #   )
 
     tab <- mPT@multiOverlaps[[RS1]]
     n <- grep(paste0("^", RS2, "$"), tab$name)

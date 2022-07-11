@@ -13,6 +13,19 @@
 #' Z-score is used (default = TRUE).
 #' @param colpal character vector of custom colors to use as palette source for the plot. If NULL, predetermined
 #' colors are used.
+#' @param labValues logical, if TRUE retrieve the value of z-score and adjusted pvaue for each tested associations
+#' @param label_size numerical, size for the label in the plot
+#'
+#' @return A plot is created on the current graphics device.
+#'
+#' @seealso \code{\link{multiLocalZScore}} \code{\link{makeLZMatrix}}
+#'
+#' @examples
+#'
+#' data("cw_Alien")
+#'
+#' plotSingleLZ(mlz_Alien_Reg, RS = "regAB")
+#'
 #'
 #' @export plotSingleLZ
 #' @import ggplot2
@@ -31,13 +44,13 @@ plotSingleLZ <-
            labValues = TRUE,
            label_size = 2.5) {
 
-    mendel_theme<-theme(panel.background = element_rect(fill = "#F1ECC3",
-                                                        colour = "#F1ECC3",
-                                                        size = 0.5, linetype = "solid"),
-                        panel.grid.major = element_line(size = 0.5, linetype = 'solid',
-                                                        colour = "#FDFAF6"),
-                        panel.grid.minor = element_line(size = 0.25, linetype = 'solid',
-                                                        colour = "#FDFAF6"))
+    # mendel_theme<-theme(panel.background = element_rect(fill = "#F1ECC3",
+    #                                                     colour = "#F1ECC3",
+    #                                                     size = 0.5, linetype = "solid"),
+    #                     panel.grid.major = element_line(size = 0.5, linetype = 'solid',
+    #                                                     colour = "#FDFAF6"),
+    #                     panel.grid.minor = element_line(size = 0.25, linetype = 'solid',
+    #                                                     colour = "#FDFAF6"))
 
     RS <- as.list(RS)
     df<-do.call("rbind", lapply(X=RS, FUN = DFfromLZ, mLZ=mLZ))

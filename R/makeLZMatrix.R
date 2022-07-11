@@ -15,6 +15,29 @@
 #' @param centralize numeric, number of "steps" around the center of the local association in which will be apply the clusterization algorithm, if NA all the values in the matrix will be utilize. (default = NA)
 #' @param scale logic, if TRUE the matrix will be scaled (default = FALSE)
 #'
+#' @return
+#'
+#' A object of class \code{multiLocalZScore} containing three slots
+#'
+#' \itemize{
+#' \item \bold{\code{@parameters}}
+#' \item \bold{\code{@multiLocalZscores}}
+#' \item \bold{\code{@matrix}}
+#'
+#' }
+#'
+#'
+#' @seealso  \code{\link{localZscore}}
+#'
+#' @examples
+#'
+#' data(cw_Alien)
+#'
+#' mlz_Alien_ReG <- makeLZMatrix(mlz_Alien_ReG)
+#'
+#' summary(mlz_Alien_ReG)
+#'
+#'
 #'
 #' @export makeLZMatrix
 #'

@@ -30,11 +30,32 @@
 #' \code{\link{circularRandomizeRegions}}, \code{\link{resampleRegions}} or a
 #' custom function), but use only an \code{"evaluation.function"}
 #' \code{\link{numOverlaps}}
-#' @return ...
+#'
+#' @return
+#'
+#' A object of class \code{multiLocalZScore} containing three slots
+#'
+#' \itemize{
+#' \item \bold{\code{@parameters}}
+#' \item \bold{\code{@multiLocalZscores}}
+#' \item \bold{\code{@matrix}}
+#'
+#' }
+#'
 #'
 #' @seealso  \code{\link{localZscore}}
 #'
-#' @examples  ...
+#' @examples
+#'
+#' \dontrun{
+#'
+#' data(cw_Alien)
+#'
+#' mlz_Alien_regB <- multiLocalZscore(A = AlienRSList$regB, Blist = AlienRSList)
+#'
+#' summary(mlz_Alien_regB)
+#'
+#' }
 #'
 #' @export multiLocalZscore
 

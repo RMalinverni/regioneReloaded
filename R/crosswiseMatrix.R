@@ -4,8 +4,16 @@
 #'
 #' @usage crosswiseMatrix(mPT, zs.type='norm_zscore',...)
 #'
-#' @param mPt,  object of class = "gMXR"
-#' @param zs.type Character, choose if create the matrix using every column from MultiOverlap slot of gMXR object default: 'norm_zscore'
+#' @param mPt,  object of class = "genoMatriXeR"
+#' @param zs.type Character, choose if create the matrix using every column from MultiOverlap slot of genoMatriXeR object default: 'norm_zscore'
+#'
+#' @return a numeric matrix
+#'
+#' @examples
+#'
+#' data("cw_Alien)
+#'
+#' matrix_CW_Alien <- crosswiseMatrix("cw_Alien_ReG")
 #'
 #' @export
 #' @keywords  internal function
