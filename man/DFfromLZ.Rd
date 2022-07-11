@@ -14,3 +14,5 @@ DFfromLZ( mLZ, RS )
 \description{
 Dataframe from MultiLocalZScore object
 }
+\keyword{function}
+\keyword{internal}

@@ -14,7 +14,7 @@
 #' @param cor character ("row" or "col"). If matrix variable is "correlation", defined if the function \code{"cor"} will be executed on rows or columns of the matrix
 #' @param maxVal numeric, maximun abs(value) reached by the plot. (default = 2)
 #' @param main charachter, graph title
-#' @ord_mat numeric list, list with two vectors X and Y as element, that
+#' @param ord_mat numeric list, list with two vectors X and Y as element, that
 #' represent the order of rows and column of the matrix (default = NULL)
 #'
 #' @return A plot is created on the current graphics device.
@@ -22,7 +22,7 @@
 #' @seealso \code{\link{crosswisePermTest}} \code{\link{makeCrosswiseMatrix}}
 #'
 #' @examples
-#' data("cw_Alien)
+#' data("cw_Alien")
 #'
 #' cw_Alien_ReG <- makeCrosswiseMatrix( cw_Alien_ReG)
 #'

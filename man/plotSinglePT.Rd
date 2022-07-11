@@ -4,22 +4,23 @@
 \alias{plotSinglePT}
 \title{Plot Single Permutation Test}
 \usage{
-plotSinglePT<-function(mPT, RS1, RS2, xlab =NA, main=NA,add_theme = FALSE,colvec = NULL)
+plotSinglePT<-function(mPT, RS, xlab = NA, main = NA, add_theme = FALSE, colvec = NULL)
 }
 \arguments{
-\item{RS1}{character, name of the first element of gMXR object to test.}
+\item{RS1}{character, name of the first element of genoMatriXeR object to test.}
 
-\item{RS2}{character, name of the second element of gMXR object to test.}
+\item{RS2}{character, name of the second element of genoMatriXeR object to test.}
 
 \item{xlab}{character, label for x axes. (default = NA)}
 
-\item{main}{character, title for the plot. (default = NA)}
-
-\item{add_theme}{logic, if TRUE will add a default \code{\link{ggplot2}} theme. (default = FALSE)}
-
 \item{colvec}{vector, vector of colors used in the plot, if NULL it will choose a default vector. (default = NULL)}
 
-\item{mPt}{an object of class genoMatriXeR or a matrix}
+\item{mPt}{an object of class genoMatriXeR}
+
+\item{add_theme}{logic, if TRUE will add a default \code{\link{ggplot2}} theme. (default = FALSE)}
+}
+\value{
+A plot is created on the current graphics device.
 }
 \description{
 Plot the result of a single permutation test from an genomicRangersProject object.
@@ -30,4 +31,7 @@ data("cw_Alien")
 plotSinglePT(cw_Alien_ReG, RS1 = "regA","regA05")
 plotSinglePT(cw_Alien_ReG, RS1 = "regA","regC")
 
+}
+\seealso{
+\code{\link{crosswisePermTest}} \code{\link{makeCrosswiseMatrix}}
 }

@@ -4,7 +4,8 @@
 \alias{plotCrosswiseMatrix}
 \title{Plot Crosswise Matrix}
 \usage{
-plotCrosswiseMatrix(mPt,  lineColor = NA, interpolate = FALSE, colMatrix = "default", matrix.type = "crosswise", cor = "row", main = "")
+plotCrosswiseMatrix(mPt,  lineColor = NA, interpolate = FALSE, colMatrix = "default",
+matrix.type = "crosswise", cor = "row", main = "")
 }
 \arguments{
 \item{mPt}{an object of class gMXR or a matrix}
@@ -22,7 +23,26 @@ plotCrosswiseMatrix(mPt,  lineColor = NA, interpolate = FALSE, colMatrix = "defa
 \item{maxVal}{numeric, maximun abs(value) reached by the plot. (default = 2)}
 
 \item{main}{charachter, graph title}
+
+\item{ord_mat}{numeric list, list with two vectors X and Y as element, that
+represent the order of rows and column of the matrix (default = NULL)}
+}
+\value{
+A plot is created on the current graphics device.
 }
 \description{
-Plot matrix of associations/correlations stored in a gMXR object.
+Plot matrix of associations/correlations stored in a genoMatriXeR object.
+}
+\examples{
+data("cw_Alien")
+
+cw_Alien_ReG <- makeCrosswiseMatrix( cw_Alien_ReG)
+
+plotCrosswiseMatrix(cw_Alien_ReG, matrix.type = "crosswise")
+
+plotCrosswiseMatrix(cw_Alien_ReG, matrix.type = "correlation")
+
+}
+\seealso{
+\code{\link{crosswisePermTest}} \code{\link{makeCrosswiseMatrix}}
 }

@@ -7,12 +7,22 @@
 crosswiseMatrix(mPT, zs.type='norm_zscore',...)
 }
 \arguments{
-\item{zs.type}{Character, choose if create the matrix using every column from MultiOverlap slot of gMXR object default: 'norm_zscore'}
+\item{zs.type}{Character, choose if create the matrix using every column from MultiOverlap slot of genoMatriXeR object default: 'norm_zscore'}
 
-\item{mPt, }{object of class = "gMXR"}
+\item{mPt, }{object of class = "genoMatriXeR"}
+}
+\value{
+a numeric matrix
 }
 \description{
-create a matrix from a gMXR object
+create a matrix from a genoMatriXeR object
+}
+\examples{
+
+data("cw_Alien")
+
+matrix_CW_Alien <- crosswiseMatrix("cw_Alien_ReG")
+
 }
 \keyword{function}
 \keyword{internal}

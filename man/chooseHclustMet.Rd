@@ -7,9 +7,9 @@
 chooseHclustMet(GM, scale = FALSE, vecMet = NA,distHC = "euclidean")
 }
 \arguments{
-\item{GM}{matrix,  numerical matrix from gMXR object.}
+\item{GM}{matrix,  numerical matrix.}
 
-\item{scale}{logic, if TRUE, the clusterization will be perform using the scale version of the mnatrix. (default = FALSE)}
+\item{scale}{logic, if TRUE, the clusterization will be perform using the scale version of the matrix. (default = FALSE)}
 
 \item{vecMet}{vector, vector of method that will be tested from the function
 if NULL the follow methods will be tested "complete","average","single","ward.D2","median","centroid" and "mcquitty. (default = NULL)}

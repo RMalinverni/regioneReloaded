@@ -4,8 +4,8 @@
 #'
 #' @usage chooseHclustMet(GM, scale = FALSE, vecMet = NA,distHC = "euclidean")
 #'
-#' @param GM matrix,  numerical matrix from gMXR object.
-#' @param scale logic, if TRUE, the clusterization will be perform using the scale version of the mnatrix. (default = FALSE)
+#' @param GM matrix,  numerical matrix.
+#' @param scale logic, if TRUE, the clusterization will be perform using the scale version of the matrix. (default = FALSE)
 #' @param vecMet vector, vector of method that will be tested from the function
 #' if NULL the follow methods will be tested "complete","average","single","ward.D2","median","centroid" and "mcquitty. (default = NULL)
 #' @param distHC character, algorithm use for calculate distance. (default = "euclidean")

@@ -20,7 +20,25 @@ Z-score is used (default = TRUE).}
 
 \item{colpal}{character vector of custom colors to use as palette source for the plot. If NULL, predetermined
 colors are used.}
+
+\item{labValues}{logical, if TRUE retrieve the value of z-score and adjusted pvaue for each tested associations}
+
+\item{label_size}{numerical, size for the label in the plot}
+}
+\value{
+A plot is created on the current graphics device.
 }
 \description{
 Plot the result of a single local Z-Score test from an mLZ object.
+}
+\examples{
+
+data("cw_Alien")
+
+plotSingleLZ(mlz_Alien_Reg, RS = "regAB")
+
+
+}
+\seealso{
+\code{\link{multiLocalZScore}} \code{\link{makeLZMatrix}}
 }

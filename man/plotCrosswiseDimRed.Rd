@@ -33,7 +33,25 @@ plotCrosswiseDimRed(mPt, type = "PCA", GM_clust = NA, nc = 5, listRS = NULL, mai
 
 \item{mpt}{object of class genoMatriXeR or numeric matrix}
 }
+\value{
+A plot is created on the current graphics device.
+}
 \description{
 Plot a Dimensionality Reduction visualization of gMXR object (or matrix) selecting between different algorithms (PCA, tSNE and UMAP)
 set the result will be store in a gMXR S4 class
+}
+\examples{
+data("cw_Alien")
+
+cw_Alien_ReG <- makeCrosswiseMatrix( cw_Alien_ReG)
+
+plotCrosswiseDimRed(cw_Alien_ReG, type = "PCA")
+
+plotCrosswiseDimRed(cw_Alien_ReG, type = "UMAP")
+
+
+
+}
+\seealso{
+\code{\link{crosswisePermTest}}
 }

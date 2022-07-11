@@ -6,6 +6,26 @@
 \usage{
 multiPermTest A, Blist, ranFUN, evFUN, universe, genome, rFUN, verbose = FALSE, ntimes, adj_pv_method, ...)
 }
+\arguments{
+\item{A}{Genomic Ranges or any accepted formats by  \code{\link{regioneR}} package
+(\code{\link{GenomicRanges}}, \code{\link{data.frame}} etc...)}
+
+\item{Blist}{GRangesList or list of Region Set of any accepted formats by  \code{\link{regioneR}} package
+(\code{\link{GenomicRanges}}, \code{\link{data.frame}} etc...)}
+
+\item{ranFUN}{(default = "randomizeRegions") choose the randomization strategy used for the test see  \code{\link{regioneR}}}
+
+\item{evFUN}{(default = "numOverlaps) choose the evaluation strategy used for the test see  \code{\link{regioneR}}}
+
+\item{universe}{(default = NULL) used only when \code{\link{resampleRegions}} function is selected}
+
+\item{genome}{Charachter or GenomicRanges, (defalut = "hg19") genome used to compute the randomization}
+
+\item{verbose}{Boolean, if verbose test}
+
+\item{adj_pv_method}{Charachter, the method used for the calculation of the adjusted p-value,
+to choose between the options of \code{\link{p.adjust}}. (default = "BH")}
+}
 \description{
 Perform a multiple permutation test
 }

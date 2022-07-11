@@ -23,6 +23,30 @@ if hc.method == NULL, the methods used for clusterize the matrix will be selecte
 
 \item{scale}{logic, if TRUE the matrix will be scaled (default = FALSE)}
 }
+\value{
+A object of class \code{multiLocalZScore} containing three slots
+
+\itemize{
+\item \bold{\code{@parameters}}
+\item \bold{\code{@multiLocalZscores}}
+\item \bold{\code{@matrix}}
+
+}
+}
 \description{
 create a local z-score matrix from an \code{\link{multiLocalZScore }} object and save it in the matrix slot
+}
+\examples{
+
+data(cw_Alien)
+
+mlz_Alien_ReG <- makeLZMatrix(mlz_Alien_ReG)
+
+summary(mlz_Alien_ReG)
+
+
+
+}
+\seealso{
+\code{\link{localZscore}}
 }

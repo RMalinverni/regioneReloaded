@@ -21,7 +21,7 @@
 #'
 #' @examples
 #'
-#' data("cw_Alien)
+#' data("cw_Alien")
 #'
 #' plotLocalZscoreMatrix(mlz_Alien_ReG)
 #'

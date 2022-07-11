@@ -44,9 +44,12 @@ to choose between the options of \code{\link{p.adjust}}. (default = "BH")}
 \item{verbose}{Boolean, if verbose test}
 }
 \value{
-A object of class \code{genoMatriXeR}
+A object of class \code{genoMatriXeR} containing three slots
+
 \itemize{
 \item \bold{\code{@parameters}}
+\item \bold{\code{@multioverlaps}}
+\item \bold{\code{@matrix}}
 
 }
 }
@@ -58,8 +61,19 @@ set the result will be store in a gMXR S4 class
 ...
 }
 \examples{
- ...
+
+\dontrun{
+
+data(cw_Alien)
+
+CW_Alien <- crosswisePermTest(Alist = AlienRSList, Blist = AlienRSList)
+
+summary(CW_Alien)
+
+}
+
+
 }
 \seealso{
-\code{\link{regioneR}}, \code{\link{permTest}}, \code{\link{overlapPermTest}}
+\code{\link{genoMatriXeR_classes}} \code{\link{regioneR}} \code{\link{regioneR}}, \code{\link{permTest}}, \code{\link{overlapPermTest}} ,
 }

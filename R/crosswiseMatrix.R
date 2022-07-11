@@ -11,7 +11,7 @@
 #'
 #' @examples
 #'
-#' data("cw_Alien)
+#' data("cw_Alien")
 #'
 #' matrix_CW_Alien <- crosswiseMatrix("cw_Alien_ReG")
 #'

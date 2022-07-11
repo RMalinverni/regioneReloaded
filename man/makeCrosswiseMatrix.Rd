@@ -32,6 +32,25 @@ if hc.method == NA, the methods used for clusterize the matrix will be selected 
 
 \item{mPt}{an object of class gMXR or a matrix}
 }
+\value{
+A object of class \code{genoMatriXeR} containing three slots
+
+\itemize{
+\item \bold{\code{@parameters}}
+\item \bold{\code{@multioverlaps}}
+\item \bold{\code{@matrix}}
+
+}
+}
 \description{
 Accept as input a gMXR object an create in the slot Matrix all the fields.
+}
+\examples{
+
+data(cw_Alien)
+
+cw_Alien_ReG <- makeCrossWiseMatrix(cw_Alien_ReG)
+
+summary(cw_Alien_ReG)
+
 }

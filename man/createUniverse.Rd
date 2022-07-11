@@ -9,7 +9,17 @@ createUniverse(Alist)
 \arguments{
 \item{Alist}{list of regions set in format accepted from \code{\link{regioneR}}}
 }
+\value{
+A list of Genomic Ranges objects
+}
 \description{
-create the universe parameter for \code{\link{resampleRegions}} function
+create the universe parameter for \code{\link{resampleRegions}} function using all unique region present in Alist
+}
+\examples{
+
+data("cw_Alien")
+
+universe <- createUniverse(AlienRSList)
+
 }
 \keyword{internal}

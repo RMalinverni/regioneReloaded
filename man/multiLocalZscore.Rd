@@ -37,7 +37,14 @@ for details see \code{\link{regioneR}}}
 \item{verbose}{Boolean, if verbose}
 }
 \value{
-...
+A object of class \code{multiLocalZScore} containing three slots
+
+\itemize{
+\item \bold{\code{@parameters}}
+\item \bold{\code{@multiLocalZscores}}
+\item \bold{\code{@matrix}}
+
+}
 }
 \description{
 Perform a multiple permutation test and local z-score calculation between a region set and
@@ -51,7 +58,16 @@ custom function), but use only an \code{"evaluation.function"}
 \code{\link{numOverlaps}}
 }
 \examples{
- ...
+
+\dontrun{
+
+data(cw_Alien)
+
+mlz_Alien_regB <- multiLocalZscore(A = AlienRSList$regB, Blist = AlienRSList)
+
+summary(mlz_Alien_regB)
+
+}
 
 }
 \seealso{

@@ -20,7 +20,25 @@ plotLocalZScoreMatrix <- function(mLz, lineColor = NA, interpolate = FALSE, colM
 \item{maxVal}{numeric, maximum abs(value) reached by the plot. (default = 2)}
 
 \item{main}{character, plot title}
+
+\item{size_lab}{numeric, size for the plot lab}
+
+\item{revert}{logic, revert the order of the plotted elements}
+}
+\value{
+A plot is created on the current graphics device.
 }
 \description{
 Plot Local Z-Score Matrix of associations/correlations stored in a multiLocaZScore object.
+}
+\examples{
+
+data("cw_Alien")
+
+plotLocalZscoreMatrix(mlz_Alien_ReG)
+
+
+}
+\seealso{
+\code{\link{multiLocalZScore}} \code{\link{makeLZMatrix}}
 }
