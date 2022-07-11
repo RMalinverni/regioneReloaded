@@ -141,7 +141,7 @@ AlienGenome <-
   toGRanges(data.frame(
     chr = c("AlChr1", "AlChr2", "AlChr3", "AlChr4"),
     start = c(rep(1, 4)),
-    end = c(1e4, 2e3, 1e3, 5e3)
+    end = c(1e6, 2e5, 1e5, 5e5)
   ))
 
 ```
@@ -157,8 +157,8 @@ nreg=100
 regA <-
   createRandomRegions(
     nregions = nreg,
-    length.mean = 50,
-    length.sd = 5,
+    length.mean = 100,
+    length.sd = 10,
     non.overlapping = TRUE,
     genome = gnm
   )
@@ -166,8 +166,8 @@ regA <-
 regB <-
   createRandomRegions(
     nregions = nreg,
-    length.mean = 50,
-    length.sd = 5,
+    length.mean =  100,
+    length.sd = 10 ,
     non.overlapping = TRUE,
     genome = gnm
   )
@@ -175,8 +175,8 @@ regB <-
 regC <-
   createRandomRegions(
     nregions = nreg,
-    length.mean = 50,
-    length.sd = 5,
+    length.mean = 100,
+    length.sd = 10,
     non.overlapping = TRUE,
     genome = gnm
   )

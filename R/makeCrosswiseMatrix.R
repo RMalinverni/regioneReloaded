@@ -55,7 +55,7 @@ makeCrosswiseMatrix <-
            symm_matrix = TRUE,
            selectVec = NULL,
            pvcut = 1,
-           subEx=0,
+           subEX=0,
            ...) {
 
   if ( class( mPT ) == "genoMatriXeR" ){
