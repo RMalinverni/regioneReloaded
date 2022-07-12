@@ -6,7 +6,7 @@
 #' label_all = FALSE, labMaxOverlap = 100, ellipse = TRUE, perplexity = 10, theta = 0.1, return_table = FALSE)
 #'
 #'
-#' @param mpt an object of class genoMatriXeR or numeric matrix.
+#' @param mPT an object of class genoMatriXeR or numeric matrix.
 #' @param type character, Dimensionality Reduction algorithm to use ("PCA", "tSNE", "UMAP"). (default  = "PCA")
 #' @param GM_clust numeric, vector of clusters used to clusterize the matrix, if NA will the matrix will be clusterized using the \code{\link{kmeans}} function. (default = NA)
 #' @param nc numeric, number of cluster to define if using the default kmeans method. (default = 5)
@@ -43,7 +43,7 @@
 #'
 
 plotCrosswiseDimRed <-
-  function(mPt,
+  function(mPT,
            type = "PCA",
            GM_clust = NA,
            nc = 5,
@@ -58,13 +58,14 @@ plotCrosswiseDimRed <-
            theta = 0.1,
            return_table = FALSE,
            ...) {
-
-    if (class(mPt)=="genoMatriXeR"){
-      GM <- mPt@matrix$GMat
-    }
-
-    if (is.matrix(mPt)){
-      GM <- mPt
+    if (!hasArg(mPT)){
+      stop("mPT is missing")
+    } else if (class(mPT)=="genoMatriXeR"){
+      GM <- mPT@matrix$GMat
+    } else if (is.matrix(mPT)){
+      GM <- mPT
+    } else {
+      stop("mPT needs to be a genoMatriXeR object or a numeric matrix")
     }
 
     if (is.na(GM_clust)) {
