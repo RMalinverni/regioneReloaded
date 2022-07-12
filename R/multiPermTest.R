@@ -31,12 +31,13 @@ multiPermTest <-
            ntimes,
            adj_pv_method,
            ...) {
-    #print(nameRS)
+
+    #print(deparse(substitute(A)))
     print(paste0("number of regions: ", length(A)))
 
     new.names <- names(Blist)
     func.list <-
-      createFunctionsList(FUN = evFUN,
+      regioneR::createFunctionsList(FUN = evFUN,
                           param.name = "B",
                           values = Blist)
     ptm <- proc.time()
@@ -46,7 +47,7 @@ multiPermTest <-
 
         uniList <- data.frame()
         for (u in 1:length(Alist)) {
-          df <- toDataframe(Alist[[u]])[, 1:3]
+          df <- regioneR::toDataframe(Alist[[u]])[, 1:3]
           uniList <- rbind(uniList, df)
         }
         universe <- uniList
@@ -55,7 +56,7 @@ multiPermTest <-
 
     # controllare se passano le variabili
 
-    pt <- permTest(
+    pt <- regioneR::permTest(
       A = A,
       evaluate.function = func.list,
       randomize.function = rFUN,
@@ -77,7 +78,6 @@ multiPermTest <-
       if (pt[[j]]$zscore == 0 |
           is.na(pt[[j]]$zscore) |
           is.nan((pt[[j]]$zscore))) {
-        # modifica per non andare in errore
         zscore.norm <- 0
         zscore.std <- 0
       } else{
@@ -104,7 +104,6 @@ multiPermTest <-
     tab$std_zscore <- tab$z_score / max_zscore
     tab$adj.p_value <-
       round(p.adjust(tab$p_value, method = adj_pv_method), digits = 4)
-
 
     if (verbose == TRUE) {
       print(tab)
