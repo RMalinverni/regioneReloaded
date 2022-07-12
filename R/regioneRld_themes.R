@@ -18,6 +18,7 @@
 #'
 #'
 
+colvec <- c("#57837B", "#F1ECC3", "#C9D8B6", "#515E63", "#C05555")
 
 mendel_theme <- function(base_size = 11, base_family = ""){
   theme(

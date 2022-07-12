@@ -221,7 +221,8 @@ plotSinglePT <-
           paste0("Normal ZScore: ", round(tab$norm_zscore[n], digits = 2)),
           paste0("Standard ZScore: ", round(tab$std_zscore[n], digits = 2)),
           sep = "\n"
-        )
+        ),
+        hjust = 1
       ) +
       # Ranfun used
       annotate(
@@ -251,10 +252,7 @@ plotSinglePT <-
         hjust = 0.5,
         fill = "#FDFAF6"
       ) +
-
-      if (add_theme == TRUE) {
-        p <- p + mendel_theme
-      }
+      mendel_theme()
 
     return(p)
   }
