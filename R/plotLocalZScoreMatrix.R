@@ -14,6 +14,8 @@
 #' @param main character, plot title
 #' @param size_lab numeric, size for the plot lab
 #' @param revert logic, revert the order of the plotted elements
+#' @param highlight character vector indicating the regionset names to highlight by adding labels pointing to the 0 position (default = NULL)
+#' @param highlight_size numeric, size of the highlight labels
 #'
 #' @return A plot is created on the current graphics device.
 #'
@@ -28,6 +30,7 @@
 #'
 #' @import reshape2
 #' @import ggplot2
+#' @import ggrepel
 #' @export plotLocalZScoreMatrix
 #'
 
@@ -41,7 +44,9 @@ plotLocalZScoreMatrix <- function(mLz,
                                   maxVal = 2,
                                   main = "",
                                   size_lab= 6,
-                                  revert = FALSE) {
+                                  revert = FALSE,
+                                  highlight = NULL,
+                                  highlight_size = 2.5) {
 
 
   if (class(mLz) != "multiLocalZScore") {
@@ -81,6 +86,9 @@ plotLocalZScoreMatrix <- function(mLz,
 
   DF <- melt(GM, varnames = c("X", "Y"))
 
+  if (!is.null(highlight)) {
+    DF_label <- DF[DF$Y %in% highlight & DF$X == 0,]
+  }
 
   ggplot(DF, aes(x = X, y = Y)) +
 
@@ -91,6 +99,11 @@ plotLocalZScoreMatrix <- function(mLz,
       limits = c(-maxVal, maxVal),
       oob = scales::squish
     )  +
+    geom_label_repel(data = DF_label, aes(label = Y), max.overlaps = Inf, size = highlight_size,
+                     min.segment.length = 0, xlim = c(0.4 * max(DF$X), NA),
+                     segment.curvature = -0.1,
+                     segment.ncp = 3,
+                     segment.angle = 20) +
     theme(
       axis.text.x = element_text(
         angle = 90,
