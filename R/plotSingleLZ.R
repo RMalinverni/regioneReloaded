@@ -44,14 +44,6 @@ plotSingleLZ <-
            labValues = TRUE,
            label_size = 2.5) {
 
-    # mendel_theme<-theme(panel.background = element_rect(fill = "#F1ECC3",
-    #                                                     colour = "#F1ECC3",
-    #                                                     size = 0.5, linetype = "solid"),
-    #                     panel.grid.major = element_line(size = 0.5, linetype = 'solid',
-    #                                                     colour = "#FDFAF6"),
-    #                     panel.grid.minor = element_line(size = 0.25, linetype = 'solid',
-    #                                                     colour = "#FDFAF6"))
-
     RS <- as.list(RS)
     df<-do.call("rbind", lapply(X=RS, FUN = DFfromLZ, mLZ=mLZ))
 
@@ -106,7 +98,8 @@ plotSingleLZ <-
 
     # Ylims
     if (!is.na(limH)) {
-      p <- p + ylim(-limH, limH)
+      p <- p + coord_cartesian(ylim = c(-limH, limH))
     }
+    p <- p + mendel_theme()
     return(p)
   }
