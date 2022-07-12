@@ -1,16 +1,14 @@
 #' Plot Single Permutation Test
 #'
 #'
-#' Plot the result of a single permutation test from an genomicRangersProject object.
+#' Plot the result of a single pairwise permutation test from a genoMatriXeR object.
 #'
-#' @usage plotSinglePT<-function(mPT, RS, xlab = NA, main = NA, add_theme = FALSE, colvec = NULL)
+#' @usage plotSinglePT<-function(mPT, RS1, RS2, xlab = NA, main = NA)
 #'
 #' @param mPt an object of class genoMatriXeR
 #' @param RS1 character, name of the first element of genoMatriXeR object to test.
 #' @param RS2 character, name of the second element of genoMatriXeR object to test.
-#' @param xlab character, label for x axes. (default = NA)
-#' @param add_theme logic, if TRUE will add a default \code{\link{ggplot2}} theme. (default = FALSE)
-#' @param colvec vector, vector of colors used in the plot, if NULL it will choose a default vector. (default = NULL)
+#' @param xlab character, label for x axis (default = NA)
 #'
 #' @return A plot is created on the current graphics device.
 #'
@@ -20,52 +18,32 @@
 #' @examples
 #'
 #' data("cw_Alien")
-#' plotSinglePT(cw_Alien_ReG, RS1 = "regA","regA05")
-#' plotSinglePT(cw_Alien_ReG, RS1 = "regA","regC")
+#' plotSinglePT(cw_Alien_ReG, RS1 = "regA", RS2 = "regA05")
+#' plotSinglePT(cw_Alien_ReG, RS1 = "regA", RS2 = "regC")
 #'
 #' @export plotSinglePT
 #' @import ggplot2
-
 
 plotSinglePT <-
   function(mPT,
            RS1,
            RS2,
            xlab = NA,
-           main = NA,
-           colvec = NULL) {
+           main = NA) {
 
     if (class(mPT) != "genoMatriXeR") {
       stop('mPT needs to be a "genoMatriXeR" class object')
     }
 
-    if (is.null(colvec)) {
-      colvec <- c("#57837B", "#F1ECC3", "#C9D8B6", "#515E63", "#C05555")
+    if (!(hasArg(RS1) & hasArg(RS2))) {
+      stop("RS1 and RS2 are required")
     }
 
     if (is.na(xlab) & mPT@parameters$evFUN == "numOverlaps") {
       xlab = "N of overlaps"
     }
 
-    # mendel_theme <-
-    #   theme(
-    #     panel.background = element_rect(
-    #       fill = colvec[2],
-    #       colour = colvec[2],
-    #       size = 0.5,
-    #       linetype = "solid"
-    #     ),
-    #     panel.grid.major = element_line(
-    #       size = 0.5,
-    #       linetype = 'solid',
-    #       colour = "#FDFAF6"
-    #     ),
-    #     panel.grid.minor = element_line(
-    #       size = 0.25,
-    #       linetype = 'solid',
-    #       colour = "#FDFAF6"
-    #     )
-    #   )
+    colvec <- c("#57837B", "#F1ECC3", "#C9D8B6", "#515E63", "#C05555")
 
     tab <- mPT@multiOverlaps[[RS1]]
     n <- grep(paste0("^", RS2, "$"), tab$name)
@@ -253,6 +231,5 @@ plotSinglePT <-
         fill = "#FDFAF6"
       ) +
       mendel_theme()
-
     return(p)
   }
