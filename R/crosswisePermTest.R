@@ -1,7 +1,7 @@
 #' Multiple Permutation test
 #'
-#' Perform a multiple permutation test between each elements of 2 list of Region
-#' set the result will be store in a gMXR S4 class
+#' Perform a multiple permutation test between each elements of two list of Region
+#' set the result will be store in a genoMatriXeR S4 class
 #'
 #' @usage crosswisePermTest(Alist, Blist, sampling=FALSE, fraction=0.15,
 #'                          ranFUN = "randomizeRegions",evFUN = "numOverlaps",
@@ -118,7 +118,6 @@ crosswisePermTest <-
       matOrder = NULL
     )
 
-
     if (is.null(Blist)) {
       Blist <- Alist
     }
@@ -132,7 +131,13 @@ crosswisePermTest <-
 
     if (sampling == TRUE) {
       Alist <-
-        subList (Alist, min_sampling = min_sampling, fraction = fraction)
+        subList(Alist, min_sampling = min_sampling, fraction = fraction)
+    }
+
+    if ((ranFUN == "resampleRegions") & (is.null(universe))) {
+    warning(
+      "resampleRegions function need that 'universe' is not NULL, universe was created using all the regions present in Alist"
+    )
     }
 
 # create @multiOverlaps slot

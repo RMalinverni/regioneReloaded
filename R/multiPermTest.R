@@ -43,9 +43,7 @@ multiPermTest <-
 
     if (ranFUN == "resampleRegions") {
       if (is.null(universe)) {
-        warning(
-          "resampleRegions function need that 'universe' is not NULL, universe was created using all the regions present in Alist"
-        )
+
         uniList <- data.frame()
         for (u in 1:length(Alist)) {
           df <- toDataframe(Alist[[u]])[, 1:3]
