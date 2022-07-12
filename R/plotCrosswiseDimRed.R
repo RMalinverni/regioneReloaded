@@ -102,6 +102,10 @@ plotCrosswiseDimRed <-
                    Name = rownames(GM))
     }
 
+    if (main=="") {
+      main <- deparse(substitute(mPt))
+    }
+
 
     pdr_df$clust <-
       paste0("clust_", as.factor(GM_clust$cluster))
