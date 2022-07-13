@@ -7,7 +7,6 @@
 #'
 #' @param mLz an object of class multiLocaZScore or a matrix
 #' @param lineColor logic if TRUE a grid matrix will be draw (default: FALSE)
-#' @param interpolate logic the image will be interpolate using the function (\code{\link{geom_raster}}
 #' @param colMatrix character or vector of colors, if "default" will be used a default selection see..
 #' @param matrix.type character ("association" or "correlation") is the kind of matrix that will be plotted (default = "association")
 #' @param maxVal numeric, maximum abs(value) reached by the plot. (default = 2)
@@ -37,7 +36,6 @@
 
 plotLocalZScoreMatrix <- function(mLz,
                                   lineColor = NA,
-                                  interpolate = FALSE,
                                   colMatrix = "default",
                                   matrix.type = "association",
                                   cor = "row",
