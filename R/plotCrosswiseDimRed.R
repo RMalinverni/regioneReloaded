@@ -1,13 +1,25 @@
-#' Plot Crosswise Dimensionality Reduction
+#' plotCrosswiseDimRed
 #'
-#' Plot a Dimensionality Reduction visualization of gMXR object (or matrix) selecting between different algorithms (PCA, tSNE and UMAP)
+#' @description
 #'
-#' @usage plotCrosswiseDimRed(mPt, type = "PCA", GM_clust = NA, nc = 5, listRS = NULL, main = "", labSize = 2, emphasize = FALSE,
+#' Plot a visualization of a genomeMatriXeR object (or matrix) using different
+#' dimensional reduction algorithms (PCA, tSNE and UMAP).
+#'
+#' @details
+#'
+#' This function generates a plot with a two-dimensional representation of the
+#' association data stored in a genomeMatriXeR by using either PCA, tSNE or UMAP
+#' transformations of the data. This function incorporates a clustering step and
+#' allows to highlight specific region sets of interest and the clusters they
+#' belong to. In addition to generating a plot, a table with the cluster
+#' assignments can be retrieved by setting return_table as TRUE.
+#'
+#' @usage plotCrosswiseDimRed(mPT, type = "PCA", GM_clust = NA, nc = 5, listRS = NULL, main = "", labSize = 2, emphasize = FALSE,
 #' labAll = FALSE, labMaxOverlap = 100, ellipse = TRUE, perplexity = 10, theta = 0.1, return_table = FALSE)
 #'
 #'
-#' @param mPT an object of class genoMatriXeR or numeric matrix.
-#' @param type character, Dimensionality Reduction algorithm to use ("PCA", "tSNE", "UMAP"). (default  = "PCA")
+#' @param mPT an object of class genoMatriXeR or a numeric matrix.
+#' @param type character, Dimensional Reduction algorithm to use ("PCA", "tSNE", "UMAP"). (default  = "PCA")
 #' @param GM_clust numeric, vector of clusters used to clusterize the matrix, if NA will the matrix will be clusterized using the \code{\link{kmeans}} function. (default = NA)
 #' @param nc numeric, number of cluster to define if using the default kmeans method. (default = 5)
 #' @param listRS list of vector, a list of names of regionset of interest to be highlighted in the graph. (default = NULL)
@@ -21,7 +33,7 @@
 #' @param theta numeric, if type = "tSNE" value of theta for the function \code{\link{Rtsne}}. (default = 0.1)
 #' @param return_table logical, if TRUE a table with the cluster assigned to each region is returned instead of the plot. (default = FALSE)
 #'
-#' @return A plot is created on the current graphics device or a table with cluster assignments is returned.
+#' @return A ggplot object or a table with cluster assignments is returned.
 #'
 #' @seealso \code{\link{crosswisePermTest}}
 #'
