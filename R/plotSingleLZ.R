@@ -3,19 +3,20 @@
 #'
 #' Plot the result of a single local Z-Score test from an mLZ object.
 #'
-#' @usage plotSingleLZ<-function(mLZ, RS2,  colvec = NA, xlab = " N. of overlaps", limH = NA, main = NA)
+#' @usage plotSingleLZ <- function(mLZ, RS, xlab = "", normZS = TRUE, ylim = NA, main = NA, colpal = NULL, labValues = TRUE, label_size = 2.5)
 #'
-#' @param mLZ an object of class multilocalZscore
-#' @param RS character, name of regionSet to test.
-#' @param xlab character, label for x axes. (default = NA)
+#' @param mLZ an object of class multiLocalZscore.
+#' @param RS character, vector of regionSet names to for which to plot the local Z-score results.
+#' @param xlab character, label for the x axis. (default = NA)
 #' @param main character, title for the plot. (default = NA)
 #' @param normZS logical, indicates whether the normalized Z-score values should be plotted. If FALSE, the raw
 #' Z-score is used (default = TRUE).
+#' @param ylim numeric, vector with minum and maximum Y values of the plot. If NULL, the plot limits are set by default so all data points can be plotted. (default = NULL)
+#' @param labValues logical, if TRUE each local Z-score profile is labelled at position 0 with the name of the regionset
+#' and its Z-score value at the central position. (default = TRUE)
+#' @param label_size numerical, size of the labels from labValues in the plot. (default = 2.5)
 #' @param colpal character vector of custom colors to use as palette source for the plot. If NULL, predetermined
-#' colors are used.
-#' @param labValues logical, if TRUE retrieve the value of z-score and adjusted pvaue for each tested associations
-#' @param label_size numerical, size for the label in the plot
-#'
+#' colors from RColorBrewer Set2 palette are used.
 #' @return A plot is created on the current graphics device.
 #'
 #' @seealso \code{\link{multiLocalZScore}} \code{\link{makeLZMatrix}}
@@ -32,13 +33,12 @@
 #' @import RColorBrewer
 #' @import ggrepel
 
-
 plotSingleLZ <-
   function(mLZ,
            RS,
            xlab = "",
            normZS = TRUE,
-           limH = NA,
+           ylim = NULL,
            main = NA,
            colpal = NULL,
            labValues = TRUE,
@@ -97,8 +97,8 @@ plotSingleLZ <-
     }
 
     # Ylims
-    if (!is.na(limH)) {
-      p <- p + coord_cartesian(ylim = c(-limH, limH))
+    if (!is.null(ylim)) {
+      p <- p + coord_cartesian(ylim = ylim)
     }
     p <- p + mendel_theme()
     return(p)
