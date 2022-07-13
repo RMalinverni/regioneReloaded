@@ -1,4 +1,4 @@
-Package: regioneRld
+Package: regioneReload
 Type: Package
 Title: What the Package Does (Title Case)
 Version: 0.1.0
@@ -11,7 +11,18 @@ Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.2.0
 Depends: 
-    R (>= 2.10)
+    R (>= 3.4),
+    regioneR
+Imports:
+    GenomicRanges,
+    RColorBrewer,
+    Rtsne,
+    umap,
+    ggplot2,
+    ggrepel,
+    reshape2,
+    stats,
+    knitr
 Suggests: 
     rmarkdown,
     knitr
