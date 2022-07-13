@@ -81,13 +81,13 @@ plotCrosswiseDimRed <-
     }
 
     if (is.na(GM_clust)) {
-      GM_clust <- kmeans(GM, centers = nc)
+      GM_clust <- stats::kmeans(GM, centers = nc)
 
     }
 
     if (type == "PCA") {
 
-      pdr_out = princomp(GM, scores = TRUE)
+      pdr_out = stats::princomp(GM, scores = TRUE)
       pdr_df = data.frame(pdr_out$scores)
       pdr_df <- pdr_df[, c("Comp.1", "Comp.2")]
       colnames(pdr_df) <- c("x", "y")
@@ -97,7 +97,7 @@ plotCrosswiseDimRed <-
 
     if (type == "tSNE") {
 
-      pdr_out <- Rtsne(GM, perplexity = perplexity, theta = theta, check_duplicates = FALSE)
+      pdr_out <- Rtsne::Rtsne(GM, perplexity = perplexity, theta = theta, check_duplicates = FALSE)
       pdr_df <- data.frame(x = pdr_out$Y[, 1],
                    y = pdr_out$Y[, 2],
                    Name = rownames(GM))
@@ -105,7 +105,7 @@ plotCrosswiseDimRed <-
     }
 
     if (type == "UMAP"){
-      pdr_out <- umap(GM)
+      pdr_out <- umap::umap(GM)
       pdr_df <-
         data.frame(x = pdr_out$layout[,1],
                    y = pdr_out$layout[,2],
@@ -141,34 +141,34 @@ plotCrosswiseDimRed <-
     }
 
     p <-
-      ggplot(pdr_df, aes(
+      ggplot2::ggplot(pdr_df, aes(
         x = x,
         y = y,
         label = Name,
         color = clust
       )) +
-      geom_point()
+      ggplot2::geom_point()
 
     if(emphasize & ellipse){ # ellipse only for emphasized clusters
-      p <- p + stat_ellipse(data = pdr_df_emph,
+      p <- p + ggplot2::stat_ellipse(data = pdr_df_emph,
                             type = "t",
                             geom = "polygon",
                             alpha = 0.15)
     } else if (ellipse) { # ellipse for all clusters
-      p <- p + stat_ellipse(type = "t",
+      p <- p + ggplot2::stat_ellipse(type = "t",
                             geom = "polygon",
                             alpha = 0.15)
     }
 
     if (emphasize & !labAll) { # label all clusters
-      p <- p + geom_text_repel(data = pdr_df_emph,
+      p <- p + ggrepel::geom_text_repel(data = pdr_df_emph,
                                size  = labSize,
                                aes(label = Name),
                                max.overlaps=labMaxOverlap,
                                point.padding = 0.5,
                                segment.color = "grey")
     } else {
-      p <- p + geom_text_repel(size  = labSize,
+      p <- p + ggrepel::geom_text_repel(size  = labSize,
                                aes(label = Name),
                                max.overlaps=labMaxOverlap,
                                point.padding = 0.5,
@@ -176,19 +176,19 @@ plotCrosswiseDimRed <-
     }
 
     if(type=="PCA"){
-      p <- p + labs(title = "PCA plot" ,
+      p <- p + ggplot2::labs(title = "PCA plot" ,
                     subtitle = main
                    )
     }
 
     if(type=="tSNE"){
-      p <- p + labs(title = "tSNE plot" ,
+      p <- p + ggplot2::labs(title = "tSNE plot" ,
         subtitle = main,
         caption = paste0("perplexity: ", perplexity, " theta: ", theta))
     }
 
     if(type=="UMAP"){
-      p <- p + labs(title = "UMAP plot" ,
+      p <- p + ggplot2::labs(title = "UMAP plot" ,
                     subtitle = main)
     }
     if (return_table) {
