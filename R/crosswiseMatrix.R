@@ -27,7 +27,9 @@ crosswiseMatrix <- function(mPT,
 
   mat <- vector()
   for (i in 1:length(A.obj)) {
+
     mat <- cbind(mat, as.numeric(A.obj[[i]][, zs.type]))
+
   }
 
   colnames(mat) <- names(A.obj)

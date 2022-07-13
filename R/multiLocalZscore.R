@@ -121,12 +121,12 @@ multiLocalZscore <- function(A,
 
 
   funct.list <-
-    createFunctionsList(FUN = evFUN,
+    regioneR::createFunctionsList(FUN = evFUN,
                         param.name = "B",
                         values = Blist)
 
 
-  pt <- permTest(
+  pt <- regioneR::permTest(
     A = A,
     evaluate.function = funct.list,
     randomize.function = ranFUN,
@@ -138,28 +138,13 @@ multiLocalZscore <- function(A,
   lZs <-
     lapply(
       pt,
-      localZScore,
+      regioneR::localZScore,
       A = A ,
       count.once = TRUE,
       window = window,
       step = step
     )
   names(lZs) <- names(pt)
-
-  # lZs <- list()
-  # for (i in 1:length(pt)) {
-  #   lZs[[i]] <-
-  #     localZScore(
-  #       A = A,
-  #       pt = pt[[i]],
-  #       count.once = TRUE,
-  #       window = window,
-  #       step = step,
-  #       ...
-  #     )
-  #   names(lZs)[i] <- names(pt[i])
-  # }
-
 
 
   Nreg <- length(A)

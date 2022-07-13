@@ -11,6 +11,7 @@
 #' @param distHC character, algorithm use for calculate distance. (default = "euclidean")
 #'
 #' @export
+#' @import stats
 #' @keywords internal function
 
 
@@ -35,19 +36,23 @@ chooseHclustMet <-
           "mcquitty")
     }
 
-    mat_dist <- dist(x = GM, method = distHC)
+    mat_dist <- stats::dist(x = GM, method = distHC)
 
     resMetList <- list()
     resMetVec <- vector()
+
     for (i in 1:length(vecMet)) {
-      resMetList[[i]] <- hclust(d = mat_dist, method = vecMet[[i]])
-      resMetVec[i] <- cor(x = mat_dist, cophenetic(resMetList[[i]]))
+
+      resMetList[[i]] <- stats::hclust(d = mat_dist, method = vecMet[[i]])
+      resMetVec[i] <- stats::cor(x = mat_dist, cophenetic(resMetList[[i]]))
+
     }
 
     names(resMetList) <- vecMet
     names(resMetVec) <- vecMet
 
     name_model <- vecMet[which(resMetVec == max(resMetVec))]
+
     if (length(name_model) > 1) {
       name_model <- name_model[1]
     }
