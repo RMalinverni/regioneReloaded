@@ -30,8 +30,9 @@ plotSinglePT <-
            RS2,
            xlab = NA,
            main = NA) {
-
-    if (class(mPT) != "genoMatriXeR") {
+    if (!hasArg(mPT)) {
+      stop("mPT is missing")
+    } else if (class(mPT) != "genoMatriXeR") {
       stop('mPT needs to be a "genoMatriXeR" class object')
     }
 
