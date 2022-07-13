@@ -44,6 +44,16 @@ plotSingleLZ <-
            labValues = TRUE,
            label_size = 2.5) {
 
+    if(!hasArg(mLZ)) {
+      stop("mLZ is missing")
+    } else if (class(mLZ) != "multiLocalZScore") {
+      stop("mLZ needs to be a multiLocalZScore object")
+    } else if (!hasArg(RS)) {
+      stop("RS is missing")
+    } else if (!(all(RS %in% names(mLZ@multiLocalZscores$shifed_ZSs)))) {
+      stop("One or more elements in RS do not match region set names in mLZ")
+    }
+
     RS <- as.list(RS)
     df<-do.call("rbind", lapply(X=RS, FUN = DFfromLZ, mLZ=mLZ))
 
