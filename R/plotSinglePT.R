@@ -48,6 +48,8 @@ plotSinglePT <-
 
     if (!(hasArg(RS1) & hasArg(RS2))) {
       stop("RS1 and RS2 are required")
+    } else if (!all(c(RS1, RS2) %in% names(mPT@multiOverlaps))) {
+      stop("RS1 or RS2 do not match region set names in the mPT genoMatriXeR object")
     }
 
     if (is.na(xlab) & mPT@parameters$evFUN == "numOverlaps") {
