@@ -1,19 +1,29 @@
-#' Plot Single Permutation Test
+#' plotSinglePT
 #'
+#' @description
 #'
 #' Plot the result of a single pairwise permutation test from a genoMatriXeR object.
 #'
-#' @usage plotSinglePT<-function(mPT, RS1, RS2, xlab = NA, main = NA)
+#' @details
 #'
-#' @param mPt an object of class genoMatriXeR
-#' @param RS1 character, name of the first element of genoMatriXeR object to test.
-#' @param RS2 character, name of the second element of genoMatriXeR object to test.
+#' This function generates a plot representing the result of a single
+#' permutation test stored in a genoMatriXeR object. This includes a plot of the
+#' density distribution of the randomized evaluations and a vertical line
+#' showing the observed evaluation in the original region set. The values of the
+#' mean randomized evaluations and the value of the observed evaluation are
+#' shown, in addition to the calculated Z-score, normalized Z-score and adjusted
+#' p-value.
+#'
+#' @usage plotSinglePT(mPT, RS1, RS2, xlab = NA, main = NA)
+#'
+#' @param mPT an object of class genoMatriXeR
+#' @param RS1,RS2 character, names of region sets in genoMatriXeR object for which to represent the pairwise permutation test results.
 #' @param xlab character, label for x axis (default = NA)
+#' @param main title for the plot, if NA the name of the genoMatriXeR object is used (default = NA)
 #'
-#' @return A plot is created on the current graphics device.
+#' @return Returns a ggplot object.
 #'
 #' @seealso \code{\link{crosswisePermTest}} \code{\link{makeCrosswiseMatrix}}
-#'
 #'
 #' @examples
 #'
