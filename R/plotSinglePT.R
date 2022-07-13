@@ -192,7 +192,7 @@ plotSinglePT <-
         x = mean.1 + ((nov - mean.1) / 2),
         y = max_curve * 0.36,
         label = paste(
-          "z-score",
+          "Z-score",
           tab$z_score[n],
           "adj.p-value",
           tab$adj.p_value[n],
@@ -209,8 +209,8 @@ plotSinglePT <-
         size = 3,
         fill = "#FDFAF6",
         label = paste(
-          paste0("Normal ZScore: ", round(tab$norm_zscore[n], digits = 2)),
-          paste0("Standard ZScore: ", round(tab$std_zscore[n], digits = 2)),
+          paste0("Normal Z-score: ", round(tab$norm_zscore[n], digits = 2)),
+          paste0("Standard Z-score: ", round(tab$std_zscore[n], digits = 2)),
           sep = "\n"
         ),
         hjust = 1
