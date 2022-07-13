@@ -24,6 +24,10 @@ plotLocalZScoreMatrix <- function(mLz, lineColor = NA, interpolate = FALSE, colM
 \item{size_lab}{numeric, size for the plot lab}
 
 \item{revert}{logic, revert the order of the plotted elements}
+
+\item{highlight}{character vector indicating the regionset names to highlight by adding labels pointing to the 0 position (default = NULL)}
+
+\item{highlight_size}{numeric, size of the highlight labels}
 }
 \value{
 A plot is created on the current graphics device.

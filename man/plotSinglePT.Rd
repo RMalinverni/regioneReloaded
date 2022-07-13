@@ -4,32 +4,28 @@
 \alias{plotSinglePT}
 \title{Plot Single Permutation Test}
 \usage{
-plotSinglePT<-function(mPT, RS, xlab = NA, main = NA, add_theme = FALSE, colvec = NULL)
+plotSinglePT<-function(mPT, RS1, RS2, xlab = NA, main = NA)
 }
 \arguments{
 \item{RS1}{character, name of the first element of genoMatriXeR object to test.}
 
 \item{RS2}{character, name of the second element of genoMatriXeR object to test.}
 
-\item{xlab}{character, label for x axes. (default = NA)}
-
-\item{colvec}{vector, vector of colors used in the plot, if NULL it will choose a default vector. (default = NULL)}
+\item{xlab}{character, label for x axis (default = NA)}
 
 \item{mPt}{an object of class genoMatriXeR}
-
-\item{add_theme}{logic, if TRUE will add a default \code{\link{ggplot2}} theme. (default = FALSE)}
 }
 \value{
 A plot is created on the current graphics device.
 }
 \description{
-Plot the result of a single permutation test from an genomicRangersProject object.
+Plot the result of a single pairwise permutation test from a genoMatriXeR object.
 }
 \examples{
 
 data("cw_Alien")
-plotSinglePT(cw_Alien_ReG, RS1 = "regA","regA05")
-plotSinglePT(cw_Alien_ReG, RS1 = "regA","regC")
+plotSinglePT(cw_Alien_ReG, RS1 = "regA", RS2 = "regA05")
+plotSinglePT(cw_Alien_ReG, RS1 = "regA", RS2 = "regC")
 
 }
 \seealso{

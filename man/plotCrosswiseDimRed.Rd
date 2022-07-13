@@ -4,52 +4,52 @@
 \alias{plotCrosswiseDimRed}
 \title{Plot Crosswise Dimensionality Reduction}
 \usage{
-plotCrosswiseDimRed(mPt, type = "PCA", GM_clust = NA, nc = 5, listRS = NULL, main = "", size_labels = 2, emphasize = FALSE, perplexity = 10, theta = 0.1, ellipse=TRUE)
+plotCrosswiseDimRed(mPt, type = "PCA", GM_clust = NA, nc = 5, listRS = NULL, main = "", label_size = 2, emphasize = FALSE,
+label_all = FALSE, labMaxOverlap = 100, ellipse = TRUE, perplexity = 10, theta = 0.1, return_table = FALSE)
 }
 \arguments{
-\item{type}{character, Dimensionality Reduction algorithm selected between ("PCA", "tSNE", "UMAP"). (default  = "PCA")}
+\item{mPT}{an object of class genoMatriXeR or numeric matrix.}
 
-\item{GM_clust}{vector, vector of cluster using to clusterize the matrix, if NA will the matrix will be clusterize using \code{\link{kmeans}} function. (default = NA)}
+\item{type}{character, Dimensionality Reduction algorithm to use ("PCA", "tSNE", "UMAP"). (default  = "PCA")}
 
-\item{nc}{numeric, nuber of cluster. (default = 5)}
+\item{GM_clust}{numeric, vector of clusters used to clusterize the matrix, if NA will the matrix will be clusterized using the \code{\link{kmeans}} function. (default = NA)}
 
-\item{listRS}{list of vector, if is not NULL this will be a list of element highlighted in the graph. (default = NULL)}
+\item{nc}{numeric, number of cluster to define if using the default kmeans method. (default = 5)}
 
-\item{main}{character, name of the graph. (defaut = "")}
+\item{listRS}{list of vector, a list of names of regionset of interest to be highlighted in the graph. (default = NULL)}
 
-\item{size_labels}{numeric, size for element names in the graph. (default = 2)}
+\item{main}{character, title for the plot. (default = "")}
 
-\item{emphasize}{logic, if present listRS and emphasize is TRUE only the cluster in which the element of listRS are present will be highlighted. (default = FALSE)}
+\item{label_size}{numeric, size for point labels in the plot, if 0 no labels will be plotted (default = 2)}
 
-\item{label_all}{logical, if TRUE data points which are not in listRS when emphasize = TRUE are labelled (default = FALSE)}
+\item{emphasize}{logical, if listRS is not NULL and emphasize is TRUE only the cluster in which the elements of listRS are present will be highlighted. (default = FALSE)}
+
+\item{label_all}{logical, if TRUE data points which are not in listRS when emphasize = TRUE are labelled. (default = FALSE)}
+
+\item{labMaxOverlap}{numeric, max.overlaps for \code{\link{geom_text_repel}}. (default = 100)}
+
+\item{ellipse}{logical, if TRUE ellipses will be drawn around the clusters. (default = FALSE)}
 
 \item{perplexity}{numeric, if type = "tSNE" value of perplexity for the function \code{\link{Rtsne}}. (default = 10)}
 
 \item{theta}{numeric, if type = "tSNE" value of theta for the function \code{\link{Rtsne}}. (default = 0.1)}
 
-\item{ellipse}{logic, if TRUE ellipses will be drawn around the clusters. (default = FALSE)}
-
-\item{return_table}{logical, if TRUE a table with the cluster assigned to each region is returned instead of the plot (default = FALSE)}
-
-\item{mpt}{object of class genoMatriXeR or numeric matrix}
+\item{return_table}{logical, if TRUE a table with the cluster assigned to each region is returned instead of the plot. (default = FALSE)}
 }
 \value{
-A plot is created on the current graphics device.
+A plot is created on the current graphics device or a table with cluster assignments is returned.
 }
 \description{
 Plot a Dimensionality Reduction visualization of gMXR object (or matrix) selecting between different algorithms (PCA, tSNE and UMAP)
-set the result will be store in a gMXR S4 class
 }
 \examples{
 data("cw_Alien")
 
-cw_Alien_ReG <- makeCrosswiseMatrix( cw_Alien_ReG)
+cw_Alien_ReG <- makeCrosswiseMatrix(cw_Alien_ReG)
 
 plotCrosswiseDimRed(cw_Alien_ReG, type = "PCA")
 
 plotCrosswiseDimRed(cw_Alien_ReG, type = "UMAP")
-
-
 
 }
 \seealso{

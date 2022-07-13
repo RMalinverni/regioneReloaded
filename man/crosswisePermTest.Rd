@@ -54,8 +54,8 @@ A object of class \code{genoMatriXeR} containing three slots
 }
 }
 \description{
-Perform a multiple permutation test between each elements of 2 list of Region
-set the result will be store in a gMXR S4 class
+Perform a multiple permutation test between each elements of two list of Region
+set the result will be store in a genoMatriXeR S4 class
 }
 \details{
 ...

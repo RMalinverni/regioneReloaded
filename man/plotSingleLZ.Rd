@@ -4,26 +4,29 @@
 \alias{plotSingleLZ}
 \title{Plot Single Local Z-Score Test}
 \usage{
-plotSingleLZ<-function(mLZ, RS2,  colvec = NA, xlab = " N. of overlaps", limH = NA, main = NA)
+plotSingleLZ <- function(mLZ, RS, xlab = "", normZS = TRUE, ylim = NA, main = NA, colpal = NULL, labValues = TRUE, label_size = 2.5)
 }
 \arguments{
-\item{mLZ}{an object of class multilocalZscore}
+\item{mLZ}{an object of class multiLocalZscore.}
 
-\item{RS}{character, name of regionSet to test.}
+\item{RS}{character, vector of regionSet names to for which to plot the local Z-score results.}
 
-\item{xlab}{character, label for x axes. (default = NA)}
+\item{xlab}{character, label for the x axis. (default = NA)}
 
 \item{normZS}{logical, indicates whether the normalized Z-score values should be plotted. If FALSE, the raw
 Z-score is used (default = TRUE).}
 
+\item{ylim}{numeric, vector with minum and maximum Y values of the plot. If NULL, the plot limits are set by default so all data points can be plotted. (default = NULL)}
+
 \item{main}{character, title for the plot. (default = NA)}
 
 \item{colpal}{character vector of custom colors to use as palette source for the plot. If NULL, predetermined
-colors are used.}
+colors from RColorBrewer Set2 palette are used.}
 
-\item{labValues}{logical, if TRUE retrieve the value of z-score and adjusted pvaue for each tested associations}
+\item{labValues}{logical, if TRUE each local Z-score profile is labelled at position 0 with the name of the regionset
+and its Z-score value at the central position. (default = TRUE)}
 
-\item{label_size}{numerical, size for the label in the plot}
+\item{label_size}{numerical, size of the labels from labValues in the plot. (default = 2.5)}
 }
 \value{
 A plot is created on the current graphics device.
