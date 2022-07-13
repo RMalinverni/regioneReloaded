@@ -134,11 +134,11 @@ crosswisePermTest <-
         subList(Alist, min_sampling = min_sampling, fraction = fraction)
     }
 
-    if ((ranFUN == "resampleRegions") & (is.null(universe))) {
-    warning(
-      "resampleRegions function need that 'universe' is not NULL, universe was created using all the regions present in Alist"
-    )
-    }
+    # if ((ranFUN == "resampleRegions") & (is.null(universe))) {
+    # warning(
+    #   "resampleRegions function need that 'universe' is not NULL, universe was created using all the regions present in Alist"
+    # )
+    # }
 
 # create @multiOverlaps slot
 
