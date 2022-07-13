@@ -63,7 +63,7 @@ plotSinglePT <-
     mean.1 <- tab$mean_perm_test[n]
     sd.1 <- tab$sd_perm_test[n]
     max_curve <-
-      max(density(rnorm(1:1000, mean = mean.1, sd = sd.1))$y)
+      max(stats::density(stats::rnorm(1:1000, mean = mean.1, sd = sd.1))$y)
     zstart <- mean.1 - 4 * sd.1
     zend   <-   mean.1  + 4 * sd.1
     zs1 <- mean.1 + 1 * sd.1
@@ -86,56 +86,56 @@ plotSinglePT <-
     if (is.na(main)) {
       main <- deparse(substitute(mPT))
     }
-    p <- ggplot(data.frame(x = c(splot, eplot)), aes(x)) +
-      labs(
+    p <- ggplot2::ggplot(data.frame(x = c(splot, eplot)), aes(x)) +
+      ggplot2::labs(
         title = main,
         subtitle = paste0("PermTest:  ", RS1, " vs ", RS2),
         caption = paste0("Number of Permutations:  ", mPT@parameters$ntimes)
       ) +
-      xlab(paste0(xlab, " on ", tab$n_regionA[n], " regions")) +
-      ylab("Freq") +
-      stat_function(
+      ggplot2::xlab(paste0(xlab, " on ", tab$n_regionA[n], " regions")) +
+      ggplot2::ylab("Freq") +
+      ggplot2::stat_function(
         fun = dnorm,
         geom = "area",
         fill = alpha(colvec[1], alpha = 0.5),
         args = list(mean = mean.1, sd = sd.1)
       ) +
-      stat_function(
+      ggplot2::stat_function(
         fun = dnorm,
         geom = "area",
         xlim = c(vec_slices[1], zend),
         fill = alpha(colvec[1], alpha = 0.5),
         args = list(mean = mean.1, sd = sd.1)
       ) +
-      stat_function(
+      ggplot2::stat_function(
         fun = dnorm,
         geom = "area",
         xlim = c(vec_slices[3], zend),
         fill = alpha(colvec[1], alpha = 0.5),
         args = list(mean = mean.1, sd = sd.1)
       ) +
-      stat_function(
+      ggplot2::stat_function(
         fun = dnorm,
         geom = "area",
         xlim = c(vec_slices[5], zend),
         fill = alpha(colvec[1], alpha = 0.5),
         args = list(mean = mean.1, sd = sd.1)
       ) +
-      stat_function(
+      ggplot2::stat_function(
         fun = dnorm,
         geom = "area",
         xlim = c(zstart, vec_slices[2]),
         fill = alpha(colvec[1], alpha = 0.5),
         args = list(mean = mean.1, sd = sd.1)
       ) +
-      stat_function(
+      ggplot2::stat_function(
         fun = dnorm,
         geom = "area",
         xlim = c(zstart, vec_slices[4]),
         fill = alpha(colvec[1], alpha = 0.5),
         args = list(mean = mean.1, sd = sd.1)
       ) +
-      stat_function(
+      ggplot2::stat_function(
         fun = dnorm,
         geom = "area",
         xlim = c(zstart, vec_slices[6]),
@@ -144,12 +144,12 @@ plotSinglePT <-
       ) +
 
       # hline at y = 0
-      geom_hline(yintercept = 0,
+      ggplot2::geom_hline(yintercept = 0,
                  color = colvec[4],
                  size = 0.6) +
 
       # vline at x = 0
-      geom_vline(
+      ggplot2::geom_vline(
         xintercept = 0,
         color = colvec[4],
         size = 0.4,
@@ -157,7 +157,7 @@ plotSinglePT <-
       ) +
 
       # Random overlaps
-      geom_vline(
+      ggplot2::geom_vline(
         xintercept = c(mean.1),
         color = colvec[4],
         linetype = "dashed",
@@ -165,7 +165,7 @@ plotSinglePT <-
       ) +
 
       # Observed overlaps
-      geom_vline(
+      ggplot2::geom_vline(
         aes(xintercept = nov),
         color = colvec[5],
         linetype = "dashed",
@@ -173,7 +173,7 @@ plotSinglePT <-
       ) +
 
       # Arrow between random and observed
-      geom_segment(
+      ggplot2::geom_segment(
         aes(
           x = mean.1,
           y = max_curve / 2,
@@ -187,7 +187,7 @@ plotSinglePT <-
 
       # Text labels
       # Box with ZS and adjpv
-      annotate(
+      ggplot2::annotate(
         "label",
         x = mean.1 + ((nov - mean.1) / 2),
         y = max_curve * 0.36,
@@ -202,7 +202,7 @@ plotSinglePT <-
         fill = "#FDFAF6"
       ) +
       # Box with nZS and sZS
-      annotate(
+      ggplot2::annotate(
         "label",
         x = eplot * 0.9,
         y = max_curve * 0.9,
@@ -216,14 +216,14 @@ plotSinglePT <-
         hjust = 1
       ) +
       # Ranfun used
-      annotate(
+      ggplot2::annotate(
         "text",
         x = eplot * 0.5,
         y = max_curve * 0.99,
         label = mPT@parameters$ranFUN
       ) +
       # Observed and mean random overlaps
-      annotate(
+      ggplot2::annotate(
         "label",
         x = nov,
         y = max_curve * 0.03,
@@ -233,7 +233,7 @@ plotSinglePT <-
         hjust = 0.5,
         fill = "#FDFAF6"
       ) +
-      annotate(
+      ggplot2::annotate(
         "label",
         x = mean.1,
         y = -max_curve * 0.03,
