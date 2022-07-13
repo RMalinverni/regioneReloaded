@@ -3,7 +3,7 @@
 #'
 #' Plot the result of a single local Z-Score test from an mLZ object.
 #'
-#' @usage plotSingleLZ <- function(mLZ, RS, xlab = "", normZS = TRUE, ylim = NA, main = NA, colpal = NULL, labValues = TRUE, label_size = 2.5)
+#' @usage plotSingleLZ <- function(mLZ, RS, xlab = "", normZS = TRUE, ylim = NA, main = NA, colPal = NULL, labValues = TRUE, labSize = 2.5)
 #'
 #' @param mLZ an object of class multiLocalZscore.
 #' @param RS character, vector of regionSet names to for which to plot the local Z-score results.
@@ -14,8 +14,8 @@
 #' @param ylim numeric, vector with minum and maximum Y values of the plot. If NULL, the plot limits are set by default so all data points can be plotted. (default = NULL)
 #' @param labValues logical, if TRUE each local Z-score profile is labelled at position 0 with the name of the regionset
 #' and its Z-score value at the central position. (default = TRUE)
-#' @param label_size numerical, size of the labels from labValues in the plot. (default = 2.5)
-#' @param colpal character vector of custom colors to use as palette source for the plot. If NULL, predetermined
+#' @param labSize numerical, size of the labels from labValues in the plot. (default = 2.5)
+#' @param colPal character vector of custom colors to use as palette source for the plot. If NULL, predetermined
 #' colors from RColorBrewer Set2 palette are used.
 #' @return A plot is created on the current graphics device.
 #'
@@ -40,9 +40,9 @@ plotSingleLZ <-
            normZS = TRUE,
            ylim = NULL,
            main = NA,
-           colpal = NULL,
+           colPal = NULL,
            labValues = TRUE,
-           label_size = 2.5) {
+           labSize = 2.5) {
 
     if(!hasArg(mLZ)) {
       stop("mLZ is missing")
@@ -61,11 +61,11 @@ plotSingleLZ <-
     evfun <- mLZ@parameters$evFUN
     ranfun <- mLZ@parameters$ranFUN
 
-    if (is.null(colpal)) { # Palette
-      colpal <- brewer.pal(n = 5, "Set2")
-      pal <- colorRampPalette(colpal)
+    if (is.null(colPal)) { # Palette
+      colPal <- brewer.pal(n = 5, "Set2")
+      pal <- colorRampPalette(colPal)
     } else {
-      pal <- colorRampPalette(colpal)
+      pal <- colorRampPalette(colPal)
     }
 
     if (mLZ@parameters$evFUN == "numOverlaps") {
@@ -101,7 +101,7 @@ plotSingleLZ <-
       p <- p +
         geom_label_repel(data = df_label, inherit.aes = FALSE,
                          aes(label = text, x = shift, y = score, color = name),
-                         fill = "#FDFAF6", size = label_size,
+                         fill = "#FDFAF6", size = labSize,
                          xlim = c(0.2 * max(df$shift), NA),
                          show.legend = FALSE)
     }

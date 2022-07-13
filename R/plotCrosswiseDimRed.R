@@ -2,8 +2,8 @@
 #'
 #' Plot a Dimensionality Reduction visualization of gMXR object (or matrix) selecting between different algorithms (PCA, tSNE and UMAP)
 #'
-#' @usage plotCrosswiseDimRed(mPt, type = "PCA", GM_clust = NA, nc = 5, listRS = NULL, main = "", label_size = 2, emphasize = FALSE,
-#' label_all = FALSE, labMaxOverlap = 100, ellipse = TRUE, perplexity = 10, theta = 0.1, return_table = FALSE)
+#' @usage plotCrosswiseDimRed(mPt, type = "PCA", GM_clust = NA, nc = 5, listRS = NULL, main = "", labSize = 2, emphasize = FALSE,
+#' labAll = FALSE, labMaxOverlap = 100, ellipse = TRUE, perplexity = 10, theta = 0.1, return_table = FALSE)
 #'
 #'
 #' @param mPT an object of class genoMatriXeR or numeric matrix.
@@ -12,9 +12,9 @@
 #' @param nc numeric, number of cluster to define if using the default kmeans method. (default = 5)
 #' @param listRS list of vector, a list of names of regionset of interest to be highlighted in the graph. (default = NULL)
 #' @param main character, title for the plot. (default = "")
-#' @param label_size numeric, size for point labels in the plot, if 0 no labels will be plotted (default = 2)
+#' @param labSize numeric, size for point labels in the plot, if 0 no labels will be plotted (default = 2)
 #' @param emphasize logical, if listRS is not NULL and emphasize is TRUE only the cluster in which the elements of listRS are present will be highlighted. (default = FALSE)
-#' @param label_all logical, if TRUE data points which are not in listRS when emphasize = TRUE are labelled. (default = FALSE)
+#' @param labAll logical, if TRUE data points which are not in listRS when emphasize = TRUE are labelled. (default = FALSE)
 #' @param labMaxOverlap numeric, max.overlaps for \code{\link{geom_text_repel}}. (default = 100)
 #' @param ellipse logical, if TRUE ellipses will be drawn around the clusters. (default = FALSE)
 #' @param perplexity numeric, if type = "tSNE" value of perplexity for the function \code{\link{Rtsne}}. (default = 10)
@@ -49,9 +49,9 @@ plotCrosswiseDimRed <-
            nc = 5,
            listRS = NULL,
            main = "",
-           label_size = 2,
+           labSize = 2,
            emphasize = FALSE,
-           label_all = FALSE,
+           labAll = FALSE,
            labMaxOverlap = 100,
            ellipse = FALSE,
            perplexity = 10,
@@ -148,15 +148,15 @@ plotCrosswiseDimRed <-
                             alpha = 0.15)
     }
 
-    if (emphasize & !label_all) { # label all clusters
+    if (emphasize & !labAll) { # label all clusters
       p <- p + geom_text_repel(data = pdr_df_emph,
-                               size  = label_size,
+                               size  = labSize,
                                aes(label = Name),
                                max.overlaps=labMaxOverlap,
                                point.padding = 0.5,
                                segment.color = "grey")
     } else {
-      p <- p + geom_text_repel(size  = label_size,
+      p <- p + geom_text_repel(size  = labSize,
                                aes(label = Name),
                                max.overlaps=labMaxOverlap,
                                point.padding = 0.5,
