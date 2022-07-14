@@ -43,6 +43,7 @@
 #' @export plotSingleLZ
 #' @import ggplot2
 #' @import ggrepel
+#' @importFrom methods hasArg
 #' @importFrom RColorBrewer brewer.pal
 
 plotSingleLZ <-
@@ -56,7 +57,7 @@ plotSingleLZ <-
            labValues = TRUE,
            labSize = 2.5) {
 
-    if(!hasArg(mLZ)) {
+    if(!methods::hasArg(mLZ)) {
       stop("mLZ is missing")
     } else if (class(mLZ) != "multiLocalZScore") {
       stop("mLZ needs to be a multiLocalZScore object")
@@ -74,7 +75,7 @@ plotSingleLZ <-
     ranfun <- mLZ@parameters$ranFUN
 
     if (is.null(colPal)) { # Palette
-      colPal <- brewer.pal(n = 5, "Set2")
+      colPal <- RColorBrewer::brewer.pal(n = 5, "Set2")
       pal <- grDevices::colorRampPalette(colPal)
     } else {
       pal <- grDevices::colorRampPalette(colPal)
