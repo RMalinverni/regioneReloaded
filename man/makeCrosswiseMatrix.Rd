@@ -4,11 +4,13 @@
 \alias{makeCrosswiseMatrix}
 \title{Make Crosswise Matrix}
 \usage{
-makeCrosswiseMatrix( mPt, clusterize = TRUE, hc.method = NA,dist.method = "euclidean",transform = FALSE,
-                           scale = FALSE, zs.type = 'norm_zscore', symm_matrix = TRUE, selectVec = NULL,
-                           maxNZS = 100, pvcut = 0.05, ...)
+makeCrosswiseMatrix( mPT, clusterize = TRUE, hc.method = NULL, dist.method = "euclidean",
+transform = FALSE, scale = FALSE, zs.type = 'norm_zscore', symm_matrix = TRUE,
+selectVec = NULL, pvcut = 1, subEX=0, ...)
 }
 \arguments{
+\item{mPT}{an object of class gMXR or a matrix}
+
 \item{clusterize}{logic, if TRUE the matrix will be clusterize using a method selected with the variable \code{hc.method} (default = TRUE)}
 
 \item{hc.method}{character, select the \code{hclust} method to use for clusterize the matrix,
@@ -28,9 +30,9 @@ if hc.method == NA, the methods used for clusterize the matrix will be selected 
 
 \item{pvcut}{maximum adj.pvalue accepted, all the associations with a adj.pvalue (defined in \code{\link{crosswisePermTest}}) higher than pvcut were transformed in 0. (default = 0.05)}
 
-\item{...}{urther arguments to be passed to other methods.}
+\item{subEX}{value used to substitute the z-score when they don't pass the pvalue test}
 
-\item{mPt}{an object of class gMXR or a matrix}
+\item{...}{further arguments to be passed to other methods.}
 }
 \value{
 A object of class \code{genoMatriXeR} containing three slots

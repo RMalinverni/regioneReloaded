@@ -5,7 +5,7 @@
 #' @usage createUniverse(Alist, joinR = TRUE)
 #'
 #' @param Alist list of regions set in format accepted from \code{\link{regioneR}}
-#' @param joinR logical, if TRUE all the regions will be joiner using the function \code{\link{regioneR::joinRegions}}.(default == TRUE)
+#' @param joinR logical, if TRUE all the regions will be joiner using the function \code{\link[regioneR]{joinRegions}}.(default == TRUE)
 #'
 #' @return A list of Genomic Ranges objects
 #'

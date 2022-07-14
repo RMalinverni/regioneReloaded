@@ -1,4 +1,6 @@
-
+#' cw_Alien
+#'
+#'
 #' Alien Genome crosswise matrix using \code{\link{randomizeRegions}} , \code{\link{circularRandomizeRegions}},
 #' \code{\link{resampleRegionS}}, \code{\link{resampleGenome}}    functions as permutation strategies
 #'

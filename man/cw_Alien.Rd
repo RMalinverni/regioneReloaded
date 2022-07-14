@@ -3,8 +3,7 @@
 \docType{data}
 \name{cw_Alien}
 \alias{cw_Alien}
-\title{Alien Genome crosswise matrix using \code{\link{randomizeRegions}} , \code{\link{circularRandomizeRegions}},
-\code{\link{resampleRegionS}}, \code{\link{resampleGenome}}    functions as permutation strategies}
+\title{cw_Alien}
 \format{
 Four objects of class \code{"genoMatriXeR"}; see \code{\link{makeCrosswiseMatrix}}.
 }
@@ -12,6 +11,10 @@ Four objects of class \code{"genoMatriXeR"}; see \code{\link{makeCrosswiseMatrix
 data(cw_Alien)
 }
 \description{
+Alien Genome crosswise matrix using \code{\link{randomizeRegions}} , \code{\link{circularRandomizeRegions}},
+\code{\link{resampleRegionS}}, \code{\link{resampleGenome}}    functions as permutation strategies
+}
+\details{
 CrossWise matrix calculated using 39 different regionset vs itself
 (description of Region set can be find here:"")
 }

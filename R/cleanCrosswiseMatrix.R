@@ -2,7 +2,7 @@
 #'
 #' clean and scale a matrix from a gMXR object
 #'
-#' @usage cleanCrosswiseMatrix(GM, GM_pv, pvcut,scale)
+#' @usage cleanCrosswiseMatrix(GM, GM_pv, pvcut, scale, subEX)
 #'
 #' @param GM matrix,  numerical matrix from gMXR object.
 #' @param GM_pv matrix, numerical matrix that represent p-value from gMXR object.

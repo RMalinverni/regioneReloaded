@@ -4,7 +4,7 @@
 \alias{cleanCrosswiseMatrix}
 \title{Clean Crosswise Matrix}
 \usage{
-cleanCrosswiseMatrix(GM, GM_pv, pvcut,scale)
+cleanCrosswiseMatrix(GM, GM_pv, pvcut, scale, subEX)
 }
 \arguments{
 \item{GM}{matrix,  numerical matrix from gMXR object.}

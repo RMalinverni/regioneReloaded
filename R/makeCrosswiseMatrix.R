@@ -3,11 +3,11 @@
 #'
 #' Accept as input a gMXR object an create in the slot Matrix all the fields.
 #'
-#' @usage makeCrosswiseMatrix( mPt, clusterize = TRUE, hc.method = NA,dist.method = "euclidean",transform = FALSE,
-#'                            scale = FALSE, zs.type = 'norm_zscore', symm_matrix = TRUE, selectVec = NULL,
-#'                            maxNZS = 100, pvcut = 0.05, ...)
+#' @usage makeCrosswiseMatrix( mPT, clusterize = TRUE, hc.method = NULL, dist.method = "euclidean",
+#' transform = FALSE, scale = FALSE, zs.type = 'norm_zscore', symm_matrix = TRUE,
+#' selectVec = NULL, pvcut = 1, subEX=0, ...)
 #'
-#' @param mPt an object of class gMXR or a matrix
+#' @param mPT an object of class gMXR or a matrix
 #' @param clusterize logic, if TRUE the matrix will be clusterize using a method selected with the variable \code{hc.method} (default = TRUE)
 #' @param hc.method character, select the \code{hclust} method to use for clusterize the matrix,
 #' if hc.method == NA, the methods used for clusterize the matrix will be selected using the function \code{\link{chooseHclustMet}} (default = "NA")
@@ -18,7 +18,8 @@
 #' @param symm_matrix logic, if TRUE the matrix will be treated as symmetrical (same clusterization for row and column). (default = TRUE)
 #' @param selectVec vector, teh matrix will be reduced using only the row/column content. (default = NULL)
 #' @param pvcut maximum adj.pvalue accepted, all the associations with a adj.pvalue (defined in \code{\link{crosswisePermTest}}) higher than pvcut were transformed in 0. (default = 0.05)
-#' @param ... urther arguments to be passed to other methods.
+#' @param subEX value used to substitute the z-score when they don't pass the pvalue test
+#' @param ... further arguments to be passed to other methods.
 #'
 #' @return
 #'

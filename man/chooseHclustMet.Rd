@@ -4,7 +4,7 @@
 \alias{chooseHclustMet}
 \title{Choose HClust Method}
 \usage{
-chooseHclustMet(GM, scale = FALSE, vecMet = NA,distHC = "euclidean")
+chooseHclustMet(GM, scale = FALSE, vecMet = NULL ,distHC = "euclidean")
 }
 \arguments{
 \item{GM}{matrix,  numerical matrix.}

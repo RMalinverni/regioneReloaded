@@ -4,7 +4,7 @@
 \name{genoMatriXeR-class}
 \alias{genoMatriXeR-class}
 \alias{gMXR}
-\title{An S4 class for "genoMatriXeR" object.}
+\title{genoMatriXeR Class}
 \description{
 An S4 class for "genoMatriXeR" object.
 }

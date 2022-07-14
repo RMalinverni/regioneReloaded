@@ -9,7 +9,7 @@ createUniverse(Alist, joinR = TRUE)
 \arguments{
 \item{Alist}{list of regions set in format accepted from \code{\link{regioneR}}}
 
-\item{joinR}{logical, if TRUE all the regions will be joiner using the function \code{\link{regioneR::joinRegions}}.(default == TRUE)}
+\item{joinR}{logical, if TRUE all the regions will be joiner using the function \code{\link[regioneR]{joinRegions}}.(default == TRUE)}
 }
 \value{
 A list of Genomic Ranges objects

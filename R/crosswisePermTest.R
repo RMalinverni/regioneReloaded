@@ -3,11 +3,9 @@
 #' Perform a multiple permutation test between each elements of two list of Region
 #' set the result will be store in a genoMatriXeR S4 class
 #'
-#' @usage crosswisePermTest(Alist, Blist, sampling=FALSE, fraction=0.15,
-#'                          ranFUN = "randomizeRegions",evFUN = "numOverlaps",
-#'                          universe = NULL, adj_pv_method = "BH", max_pv = 0.05,
-#'                          verbose = FALSE, subEx = 0, genome = "hg19",
-#'                          verbose = FALSE...)
+#' @usage crosswisePermTest(Alist, Blist = NULL, sampling = FALSE, fraction = 0.15, min_sampling = 5000,
+#' ranFUN = "randomizeRegions", evFUN = "numOverlaps", ntimes = 100, universe = NULL,
+#' adj_pv_method = "BH", max_pv = 0.05, subEx = 0, genome = "hg19", verbose = FALSE, ... )
 #'
 #'
 #' @param Alist GRangesList or list of Region Set of any accepted formats by  \code{\link{regioneR}} package
@@ -22,6 +20,7 @@
 #' regions is less than min_sampling will be used min_sampling value as number of regions
 #' @param ranFUN (default = "randomizeRegions") choose the randomization strategy used for the test see  \code{\link{regioneR}}
 #' @param evFUN  (default = "numOverlaps) choose the evaluation strategy used for the test see  \code{\link{regioneR}}
+#' @param ntimes numeric. Number of permutation used in the test. (default = 100)
 #' @param universe (default = NULL) used only when \code{\link{resampleRegions}} function is selected
 #' @param adj_pv_method Charachter, the method used for the calculation of the adjusted p-value,
 #' to choose between the options of \code{\link{p.adjust}}. (default = "BH")
@@ -29,6 +28,7 @@
 #' @param subEx Numeric, (default = 0) substitute this value to a z-score when the p-value is higher than max_pv
 #' @param genome Charachter or GenomicRanges, (defalut = "hg19") genome used to compute the randomization
 #' @param verbose Boolean, if verbose test
+#' @param ... other eventual parameters
 #'
 #' @details ...
 #' @return
@@ -59,7 +59,9 @@
 #'
 #'
 #' @import regioneR
-#' @import knitr
+#'
+#'
+#'
 #' @export crosswisePermTest
 
 
@@ -82,7 +84,7 @@ crosswisePermTest <-
 
 # control parameters
 
-    if (!hasArg(Alist))
+    if (!methods::hasArg(Alist))
       stop("Alist is missing")
     if (!is.logical(sampling))
       stop("sampling must be logical")

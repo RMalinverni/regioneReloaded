@@ -2,7 +2,7 @@
 #'
 #' evaluate and choose the better method for clusterize a matrix using hclust function
 #'
-#' @usage chooseHclustMet(GM, scale = FALSE, vecMet = NA,distHC = "euclidean")
+#' @usage chooseHclustMet(GM, scale = FALSE, vecMet = NULL ,distHC = "euclidean")
 #'
 #' @param GM matrix,  numerical matrix.
 #' @param scale logic, if TRUE, the clusterization will be perform using the scale version of the matrix. (default = FALSE)

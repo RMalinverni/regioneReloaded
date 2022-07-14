@@ -4,7 +4,7 @@
 \name{multiLocalZScore-class}
 \alias{multiLocalZScore-class}
 \alias{mLZS}
-\title{An S4 class for "multiLocalZScore" object.}
+\title{multiLocalZScore Class}
 \description{
 An S4 class for "multiLocalZScore" object.
 }

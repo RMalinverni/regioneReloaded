@@ -4,10 +4,9 @@ resampleGenome<- function (A ,
                            genome="hg19",
                            ...)
 {
-  if (!hasArg(A))
+  if (!method::hasArg(A))
     stop("A is missing")
-  # if (!hasArg(universe))
-  #   stop("universe is missing")
+
   if (!is.logical(per.chromosome))
     stop("per.chromosome must be logical")
   A <- toGRanges(A)
@@ -32,7 +31,7 @@ resampleGenome<- function (A ,
       return(resample.chr)
     }
 
-    chr.resampled <- lapply(as.list(seqlevels(A)), chrResample)
+    chr.resampled <- lapply(as.list(GenomeInfoDb::seqlevels(A)), chrResample)
     resampled <- do.call(c, chr.resampled)
   } else {
 

@@ -1,3 +1,5 @@
+#' multiLocalZScore Class
+#'
 #' An S4 class for "multiLocalZScore" object.
 #'
 #' @slot parameters List of parameters used to create the object

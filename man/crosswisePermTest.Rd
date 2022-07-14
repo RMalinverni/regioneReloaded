@@ -4,11 +4,9 @@
 \alias{crosswisePermTest}
 \title{Multiple Permutation test}
 \usage{
-crosswisePermTest(Alist, Blist, sampling=FALSE, fraction=0.15,
-                         ranFUN = "randomizeRegions",evFUN = "numOverlaps",
-                         universe = NULL, adj_pv_method = "BH", max_pv = 0.05,
-                         verbose = FALSE, subEx = 0, genome = "hg19",
-                         verbose = FALSE...)
+crosswisePermTest(Alist, Blist = NULL, sampling = FALSE, fraction = 0.15, min_sampling = 5000,
+ranFUN = "randomizeRegions", evFUN = "numOverlaps", ntimes = 100, universe = NULL,
+adj_pv_method = "BH", max_pv = 0.05, subEx = 0, genome = "hg19", verbose = FALSE, ... )
 }
 \arguments{
 \item{Alist}{GRangesList or list of Region Set of any accepted formats by  \code{\link{regioneR}} package
@@ -30,6 +28,8 @@ regions is less than min_sampling will be used min_sampling value as number of r
 
 \item{evFUN}{(default = "numOverlaps) choose the evaluation strategy used for the test see  \code{\link{regioneR}}}
 
+\item{ntimes}{numeric. Number of permutation used in the test. (default = 100)}
+
 \item{universe}{(default = NULL) used only when \code{\link{resampleRegions}} function is selected}
 
 \item{adj_pv_method}{Charachter, the method used for the calculation of the adjusted p-value,
@@ -42,6 +42,8 @@ to choose between the options of \code{\link{p.adjust}}. (default = "BH")}
 \item{genome}{Charachter or GenomicRanges, (defalut = "hg19") genome used to compute the randomization}
 
 \item{verbose}{Boolean, if verbose test}
+
+\item{...}{other eventual parameters}
 }
 \value{
 A object of class \code{genoMatriXeR} containing three slots
