@@ -110,6 +110,7 @@ plotSingleLZ <-
       df_label <- df[df$shift == 0,]
       df_label$text <- paste(df_label$name, "\nZS: ", round(df_label$score, digits = 2), sep = "")
       p <- p +
+        ggplot2::coord_cartesian(clip = "off") +
         ggrepel::geom_label_repel(data = df_label, inherit.aes = FALSE,
                          ggplot2::aes_string(label = "text", x = "shift", y = "score", color = "name"),
                          fill = "#FDFAF6", size = labSize,
