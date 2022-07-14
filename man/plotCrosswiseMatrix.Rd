@@ -5,7 +5,7 @@
 \title{Plot Crosswise Matrix}
 \usage{
 plotCrosswiseMatrix(mPt,  lineColor = NA, interpolate = FALSE, colMatrix = "default",
-matrix.type = "crosswise", cor = "row", main = "")
+matrix_type = "crosswise", cor = "row", main = "")
 }
 \arguments{
 \item{mPt}{an object of class gMXR or a matrix}
@@ -16,7 +16,7 @@ matrix.type = "crosswise", cor = "row", main = "")
 
 \item{colMatrix}{character or vector of colors, if "default" will be used a default selection see..}
 
-\item{matrix.type}{character ("crosswise" or "correlation") is the kind of matrix that will be plotted.}
+\item{matrix_type}{character ("crosswise" or "correlation") is the kind of matrix that will be plotted.}
 
 \item{cor}{character ("row" or "col"). If matrix variable is "correlation", defined if the function \code{"cor"} will be executed on rows or columns of the matrix}
 
@@ -38,9 +38,9 @@ data("cw_Alien")
 
 cw_Alien_ReG <- makeCrosswiseMatrix( cw_Alien_ReG)
 
-plotCrosswiseMatrix(cw_Alien_ReG, matrix.type = "crosswise")
+plotCrosswiseMatrix(cw_Alien_ReG, matrix_type = "crosswise")
 
-plotCrosswiseMatrix(cw_Alien_ReG, matrix.type = "correlation")
+plotCrosswiseMatrix(cw_Alien_ReG, matrix_type = "correlation")
 
 }
 \seealso{

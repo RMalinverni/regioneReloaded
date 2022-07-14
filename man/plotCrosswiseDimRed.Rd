@@ -2,15 +2,15 @@
 % Please edit documentation in R/plotCrosswiseDimRed.R
 \name{plotCrosswiseDimRed}
 \alias{plotCrosswiseDimRed}
-\title{Plot Crosswise Dimensionality Reduction}
+\title{plotCrosswiseDimRed}
 \usage{
-plotCrosswiseDimRed(mPt, type = "PCA", GM_clust = NA, nc = 5, listRS = NULL, main = "", label_size = 2, emphasize = FALSE,
-label_all = FALSE, labMaxOverlap = 100, ellipse = TRUE, perplexity = 10, theta = 0.1, return_table = FALSE)
+plotCrosswiseDimRed(mPT, type = "PCA", GM_clust = NA, nc = 5, listRS = NULL, main = "", labSize = 2, emphasize = FALSE,
+labAll = FALSE, labMaxOverlap = 100, ellipse = TRUE, perplexity = 10, theta = 0.1, return_table = FALSE)
 }
 \arguments{
-\item{mPT}{an object of class genoMatriXeR or numeric matrix.}
+\item{mPT}{an object of class genoMatriXeR or a numeric matrix.}
 
-\item{type}{character, Dimensionality Reduction algorithm to use ("PCA", "tSNE", "UMAP"). (default  = "PCA")}
+\item{type}{character, Dimensional Reduction algorithm to use ("PCA", "tSNE", "UMAP"). (default  = "PCA")}
 
 \item{GM_clust}{numeric, vector of clusters used to clusterize the matrix, if NA will the matrix will be clusterized using the \code{\link{kmeans}} function. (default = NA)}
 
@@ -20,11 +20,11 @@ label_all = FALSE, labMaxOverlap = 100, ellipse = TRUE, perplexity = 10, theta =
 
 \item{main}{character, title for the plot. (default = "")}
 
-\item{label_size}{numeric, size for point labels in the plot, if 0 no labels will be plotted (default = 2)}
+\item{labSize}{numeric, size for point labels in the plot, if 0 no labels will be plotted (default = 2)}
 
 \item{emphasize}{logical, if listRS is not NULL and emphasize is TRUE only the cluster in which the elements of listRS are present will be highlighted. (default = FALSE)}
 
-\item{label_all}{logical, if TRUE data points which are not in listRS when emphasize = TRUE are labelled. (default = FALSE)}
+\item{labAll}{logical, if TRUE data points which are not in listRS when emphasize = TRUE are labelled. (default = FALSE)}
 
 \item{labMaxOverlap}{numeric, max.overlaps for \code{\link{geom_text_repel}}. (default = 100)}
 
@@ -37,10 +37,19 @@ label_all = FALSE, labMaxOverlap = 100, ellipse = TRUE, perplexity = 10, theta =
 \item{return_table}{logical, if TRUE a table with the cluster assigned to each region is returned instead of the plot. (default = FALSE)}
 }
 \value{
-A plot is created on the current graphics device or a table with cluster assignments is returned.
+A ggplot object or a table with cluster assignments is returned.
 }
 \description{
-Plot a Dimensionality Reduction visualization of gMXR object (or matrix) selecting between different algorithms (PCA, tSNE and UMAP)
+Plot a visualization of a genomeMatriXeR object (or matrix) using different
+dimensional reduction algorithms (PCA, tSNE and UMAP).
+}
+\details{
+This function generates a plot with a two-dimensional representation of the
+association data stored in a genomeMatriXeR by using either PCA, tSNE or UMAP
+transformations of the data. This function incorporates a clustering step and
+allows to highlight specific region sets of interest and the clusters they
+belong to. In addition to generating a plot, a table with the cluster
+assignments can be retrieved by setting return_table as TRUE.
 }
 \examples{
 data("cw_Alien")

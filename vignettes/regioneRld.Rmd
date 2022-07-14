@@ -107,7 +107,7 @@ which can be loaded into the environment by running the command `data("cw_Alien_
 ```
 
 ```{r}
-#library(regioneR)
+library(regioneReload)
 #library(RColorBrewer) # now we can delete this
 
 data("cw_Alien")

@@ -4,14 +4,12 @@
 \alias{plotLocalZScoreMatrix}
 \title{Plot Local Z-Score Matrix}
 \usage{
-plotLocalZScoreMatrix <- function(mLz, lineColor = NA, interpolate = FALSE, colMatrix = "default", matrix.type = "association" , maxVal = 2, main = "",  revert = FALSE)
+plotLocalZScoreMatrix <- function(mLZ, lineColor = NA, interpolate = FALSE, colMatrix = "default", matrix.type = "association" , maxVal = 2, main = "",  revert = FALSE)
 }
 \arguments{
-\item{mLz}{an object of class multiLocaZScore or a matrix}
+\item{mLZ}{an object of class multiLocaZScore or a matrix}
 
 \item{lineColor}{logic if TRUE a grid matrix will be draw (default: FALSE)}
-
-\item{interpolate}{logic the image will be interpolate using the function (\code{\link{geom_raster}}}
 
 \item{colMatrix}{character or vector of colors, if "default" will be used a default selection see..}
 
@@ -21,7 +19,7 @@ plotLocalZScoreMatrix <- function(mLz, lineColor = NA, interpolate = FALSE, colM
 
 \item{main}{character, plot title}
 
-\item{size_lab}{numeric, size for the plot lab}
+\item{labSize}{numeric, size for the plot lab}
 
 \item{revert}{logic, revert the order of the plotted elements}
 
@@ -39,7 +37,7 @@ Plot Local Z-Score Matrix of associations/correlations stored in a multiLocaZSco
 
 data("cw_Alien")
 
-plotLocalZscoreMatrix(mlz_Alien_ReG)
+plotLocalZscoreMatrix(mLZ_Alien_ReG)
 
 
 }
