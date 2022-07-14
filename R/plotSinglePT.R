@@ -31,8 +31,12 @@
 #' plotSinglePT(cw_Alien_ReG, RS1 = "regA", RS2 = "regA05")
 #' plotSinglePT(cw_Alien_ReG, RS1 = "regA", RS2 = "regC")
 #'
-#' @export plotSinglePT
 #' @import ggplot2
+#' @importFrom grid unit
+#' @importFrom grid arrow
+#' @importFrom methods hasArg
+#' @importFrom scales alpha
+#' @export plotSinglePT
 
 plotSinglePT <-
   function(mPT,
@@ -40,13 +44,13 @@ plotSinglePT <-
            RS2,
            xlab = NA,
            main = NA) {
-    if (!hasArg(mPT)) {
+    if (!methods::hasArg(mPT)) {
       stop("mPT is missing")
     } else if (class(mPT) != "genoMatriXeR") {
       stop('mPT needs to be a "genoMatriXeR" class object')
     }
 
-    if (!(hasArg(RS1) & hasArg(RS2))) {
+    if (!(methods::hasArg(RS1) & methods::hasArg(RS2))) {
       stop("RS1 and RS2 are required")
     } else if (!all(c(RS1, RS2) %in% names(mPT@multiOverlaps))) {
       stop("RS1 or RS2 do not match region set names in the mPT genoMatriXeR object")
@@ -86,7 +90,7 @@ plotSinglePT <-
     if (is.na(main)) {
       main <- deparse(substitute(mPT))
     }
-    p <- ggplot2::ggplot(data.frame(x = c(splot, eplot)), aes(x)) +
+    p <- ggplot2::ggplot(data.frame(x = c(splot, eplot)), ggplot2::aes_string("x")) +
       ggplot2::labs(
         title = main,
         subtitle = paste0("PermTest:  ", RS1, " vs ", RS2),
@@ -97,49 +101,49 @@ plotSinglePT <-
       ggplot2::stat_function(
         fun = dnorm,
         geom = "area",
-        fill = alpha(colvec[1], alpha = 0.5),
+        fill = scales::alpha(colvec[1], alpha = 0.5),
         args = list(mean = mean.1, sd = sd.1)
       ) +
       ggplot2::stat_function(
         fun = dnorm,
         geom = "area",
         xlim = c(vec_slices[1], zend),
-        fill = alpha(colvec[1], alpha = 0.5),
+        fill = scales::alpha(colvec[1], alpha = 0.5),
         args = list(mean = mean.1, sd = sd.1)
       ) +
       ggplot2::stat_function(
         fun = dnorm,
         geom = "area",
         xlim = c(vec_slices[3], zend),
-        fill = alpha(colvec[1], alpha = 0.5),
+        fill = scales::alpha(colvec[1], alpha = 0.5),
         args = list(mean = mean.1, sd = sd.1)
       ) +
       ggplot2::stat_function(
         fun = dnorm,
         geom = "area",
         xlim = c(vec_slices[5], zend),
-        fill = alpha(colvec[1], alpha = 0.5),
+        fill = scales::alpha(colvec[1], alpha = 0.5),
         args = list(mean = mean.1, sd = sd.1)
       ) +
       ggplot2::stat_function(
         fun = dnorm,
         geom = "area",
         xlim = c(zstart, vec_slices[2]),
-        fill = alpha(colvec[1], alpha = 0.5),
+        fill = scales::alpha(colvec[1], alpha = 0.5),
         args = list(mean = mean.1, sd = sd.1)
       ) +
       ggplot2::stat_function(
         fun = dnorm,
         geom = "area",
         xlim = c(zstart, vec_slices[4]),
-        fill = alpha(colvec[1], alpha = 0.5),
+        fill = scales::alpha(colvec[1], alpha = 0.5),
         args = list(mean = mean.1, sd = sd.1)
       ) +
       ggplot2::stat_function(
         fun = dnorm,
         geom = "area",
         xlim = c(zstart, vec_slices[6]),
-        fill = alpha(colvec[1], alpha = 0.5),
+        fill = scales::alpha(colvec[1], alpha = 0.5),
         args = list(mean = mean.1, sd = sd.1)
       ) +
 
@@ -166,7 +170,7 @@ plotSinglePT <-
 
       # Observed overlaps
       ggplot2::geom_vline(
-        aes(xintercept = nov),
+        ggplot2::aes_string(xintercept = "nov"),
         color = colvec[5],
         linetype = "dashed",
         size = 0.4
@@ -174,7 +178,7 @@ plotSinglePT <-
 
       # Arrow between random and observed
       ggplot2::geom_segment(
-        aes(
+        ggplot2::aes(
           x = mean.1,
           y = max_curve / 2,
           xend = nov,
@@ -182,7 +186,7 @@ plotSinglePT <-
         ),
         linetype = "dashed",
         color = colvec[4],
-        arrow = arrow(length = unit(0.5, "cm"))
+        arrow = grid::arrow(length = grid::unit(0.5, "cm"))
       ) +
 
       # Text labels
