@@ -101,53 +101,53 @@ plotCrosswiseMatrix <- function(mPt,
   }
 
 
-  DF <- melt(GM, varnames = c("X", "Y"))
+  DF <- reshape2::melt(GM, varnames = c("X", "Y"))
 
   if (interpolate == FALSE) {
 
-    ggplot(DF, aes(x = X, y = Y)) +
+    ggplot2::ggplot(DF, ggplot2::aes_string(x = "X", y = "Y")) +
 
       #geom_raster(aes(fill = value), interpolate = FALSE, color  = "white") +
-      geom_tile(aes(fill = value), color = lineColor) +
-      scale_fill_gradientn(
+      ggplot2::geom_tile(ggplot2::aes_string(fill = "value"), color = lineColor) +
+      ggplot2::scale_fill_gradientn(
         colours = rev(colMatrix),
         limits = c(-maxVal, maxVal),
         oob = scales::squish
       )  +
-      theme(
-        axis.text.x = element_text(
+      ggplot2::theme(
+        axis.text.x = ggplot2::element_text(
           angle = 90,
           size = 6,
           hjust = 0.95,
           vjust = 0.2
         ),
-        axis.text.y = element_text(size = 6)
+        axis.text.y = ggplot2::element_text(size = 6)
       ) +
-      labs(subtitle = title, title=main, caption = mPt@parameters$ranFUN) +
-      coord_equal()
+      ggplot2::labs(subtitle = title, title=main, caption = mPt@parameters$ranFUN) +
+      ggplot2::coord_equal()
 
   } else{
 
-    ggplot(DF, aes(x = X, y = Y)) +
+    ggplot2::ggplot(DF, ggplot2::aes_string(x = "X", y = "Y")) +
 
-      geom_raster(aes(fill = value), interpolate = TRUE) +
+      ggplot2::geom_raster(aes(fill = value), interpolate = TRUE) +
       #geom_tile(aes(fill = value), color = "withe") +
-      scale_fill_gradientn(
+      ggplot2::scale_fill_gradientn(
         colours = rev(colMatrix),
         limits = c(-maxVal, maxVal),
         oob = scales::squish
       )  +
-      theme(
-        axis.text.x = element_text(
+      ggplot2::theme(
+        axis.text.x = ggplot2::element_text(
           angle = 90,
           size = 6,
           hjust = 0.95,
           vjust = 0.2
         ),
-        axis.text.y = element_text(size = 6)
+        axis.text.y = ggplot2::element_text(size = 6)
       ) +
-      labs(subtitle =  title, title=main,caption = mPt@parameters$ranFUN) +
-       coord_equal()
+      ggplot2::labs(subtitle =  title, title=main,caption = mPt@parameters$ranFUN) +
+       ggplot2::coord_equal()
 
   }
 }
