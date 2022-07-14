@@ -30,6 +30,9 @@
 #' @import reshape2
 #' @import ggplot2
 #' @import ggrepel
+#' @import stats
+#' @importFrom RColorBrewer brewer.pal
+#' @importFrom methods hasArg
 #' @export plotLocalZScoreMatrix
 #'
 
@@ -46,9 +49,10 @@ plotLocalZScoreMatrix <- function(mLZ,
                                   highlight = NULL,
                                   highlight_size = 2.5) {
 
-
-  if (class(mLZ) != "multiLocalZScore") {
-    stop("the object mLZA need to be an multiLocalZScore object")
+  if (!methods::hasArg(mLZ)) {
+    stop("mLZ is missing")
+  } else if (class(mLZ) != "multiLocalZScore") {
+    stop("the object mLZA needs to be an multiLocalZScore object")
   }
 
   if (matrix.type == "association") {
@@ -56,7 +60,7 @@ plotLocalZScoreMatrix <- function(mLZ,
     title <- "Association Matrix"
 
     if (is.na(maxVal)){
-      maxVal<-quantile(abs(GM),.95)
+      maxVal<- stats::quantile(abs(GM),.95)
     }
 
     if (maxVal=="max"){
@@ -78,46 +82,44 @@ plotLocalZScoreMatrix <- function(mLZ,
 
   if (colMatrix == "default") {
     colMatrix <-
-      rev(c(rev(brewer.pal(9, "PuBuGn")), brewer.pal(9, "YlOrRd")))
+      rev(c(rev(RColorBrewer::brewer.pal(9, "PuBuGn")), RColorBrewer::brewer.pal(9, "YlOrRd")))
 
   }
 
-  DF <- melt(GM, varnames = c("X", "Y"))
+  DF <- reshape2::melt(GM, varnames = c("X", "Y"))
 
   if (!is.null(highlight)) {
     DF_label <- DF[DF$Y %in% highlight & DF$X == 0,]
   }
 
-  ggplot(DF, aes(x = X, y = Y)) +
+  ggplot2::ggplot(DF, ggplot2::aes_string(x = "X", y = "Y")) +
 
     #geom_raster(aes(fill = value), interpolate = FALSE, color  = "white") +
-    geom_tile(aes(fill = value), color = lineColor) +
-    scale_fill_gradientn(
+    ggplot2::geom_tile(ggplot2::aes_string(fill = "value"), color = lineColor) +
+    ggplot2::scale_fill_gradientn(
       colours = rev(colMatrix),
       limits = c(-maxVal, maxVal),
       oob = scales::squish
     )  +
-    geom_label_repel(data = DF_label, aes(label = Y), max.overlaps = Inf, size = highlight_size,
+    ggrepel::geom_label_repel(data = DF_label, ggplot2::aes_string(label = "Y"), max.overlaps = Inf, size = highlight_size,
                      min.segment.length = 0, xlim = c(0.4 * max(DF$X), NA),
                      segment.curvature = -0.1,
                      segment.ncp = 3,
                      segment.angle = 20) +
-    theme(
-      axis.text.x = element_text(
+    ggplot2::theme(
+      axis.text.x = ggplot2::element_text(
         angle = 90,
         size = 6,
         hjust = 0.95,
         vjust = 0.2
       ),
-      axis.text.y = element_text(size = labSize)
+      axis.text.y = ggplot2::element_text(size = labSize)
     ) +
-    labs(
+    ggplot2::labs(
       subtitle = title,
       title = main,
       caption = mLZ@parameters$ranFUN
     )
-
-
 }
 
 

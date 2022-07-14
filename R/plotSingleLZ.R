@@ -43,6 +43,7 @@
 #' @export plotSingleLZ
 #' @import ggplot2
 #' @import ggrepel
+#' @importFrom methods hasArg
 #' @importFrom RColorBrewer brewer.pal
 
 plotSingleLZ <-
@@ -56,7 +57,7 @@ plotSingleLZ <-
            labValues = TRUE,
            labSize = 2.5) {
 
-    if(!hasArg(mLZ)) {
+    if(!methods::hasArg(mLZ)) {
       stop("mLZ is missing")
     } else if (class(mLZ) != "multiLocalZScore") {
       stop("mLZ needs to be a multiLocalZScore object")
@@ -74,10 +75,10 @@ plotSingleLZ <-
     ranfun <- mLZ@parameters$ranFUN
 
     if (is.null(colPal)) { # Palette
-      colPal <- brewer.pal(n = 5, "Set2")
-      pal <- grdevices::colorRampPalette(colPal)
+      colPal <- RColorBrewer::brewer.pal(n = 5, "Set2")
+      pal <- grDevices::colorRampPalette(colPal)
     } else {
-      pal <- grdevices::colorRampPalette(colPal)
+      pal <- grDevices::colorRampPalette(colPal)
     }
 
     if (mLZ@parameters$evFUN == "numOverlaps") {
@@ -93,7 +94,7 @@ plotSingleLZ <-
     }
 
     # Plot
-    p <- ggplot2::ggplot(df, aes(x = shift, y = score, group = name, fill = name, color = name)) +
+    p <- ggplot2::ggplot(df, ggplot2::aes_string(x = "shift", y = "score", group = "name", fill = "name", color = "name")) +
       ggplot2::geom_hline(yintercept=0,  color ="#515E63", size=0.6) +
       ggplot2::geom_vline(xintercept = 0, color ="#515E63", size = 0.4, linetype = "dotted") +
       ggplot2::geom_density(alpha = 0.2, stat = "identity") +
@@ -103,15 +104,16 @@ plotSingleLZ <-
            subtitle = paste("ranFUN: ", ranfun, "\nevFUN: ", evfun),
            y = ylabel,
            x = "bp") +
-      ggplot2::theme(legend.title = element_blank())
+      ggplot2::theme(legend.title = ggplot2::element_blank())
 
     # Labels
     if(labValues) {
       df_label <- df[df$shift == 0,]
       df_label$text <- paste(df_label$name, "\nZS: ", round(df_label$score, digits = 2), sep = "")
       p <- p +
+        ggplot2::coord_cartesian(clip = "off") +
         ggrepel::geom_label_repel(data = df_label, inherit.aes = FALSE,
-                         aes(label = text, x = shift, y = score, color = name),
+                         ggplot2::aes_string(label = "text", x = "shift", y = "score", color = "name"),
                          fill = "#FDFAF6", size = labSize,
                          xlim = c(0.2 * max(df$shift), NA),
                          show.legend = FALSE)
