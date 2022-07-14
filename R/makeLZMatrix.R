@@ -80,6 +80,7 @@ makeLZMatrix <- function(mlZA,
   }
   rownames(mat) <- names(mlZA@multiLocalZscores$shifed_ZSs)
   colnames(mat) <- mlZA@multiLocalZscores$shifts
+
   # I need to add a matLim integration
 
   if (clusterize == TRUE) {

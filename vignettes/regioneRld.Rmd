@@ -1,11 +1,11 @@
 ---
-title: "regioneRld"
+title: "regioneReload"
 author: "Roberto Malinverni"
 output: BiocStyle::html_document   #rmarkdown::html_vignette
 fig_width: 10
 fig_height: 10 
 vignette: >
-  %\VignetteIndexEntry{regioneRld}
+  %\VignetteIndexEntry{regioneReload}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -24,7 +24,7 @@ knitr::opts_chunk$set(
 BiocStyle::markdown()
 ```
 
-# regioneRld
+# regioneReload
 
 The meaningful interpretation of overlaps between binding profiles of multiple 
 chromatin regulators is a major challenge in epigenomics. To address this, 
@@ -81,7 +81,7 @@ Other crucial factor for calculate the normal z-score is the ntime, the suggesti
 # Quick start
 
 ```{r setup}
-library("regioneRld")
+library("regioneReload")
 ```
 <!-- Consider moving this to the Crosswise Analysis section -->
 The permutation test can be performed on a list multiple region sets by the function `crosswisePermTest()`.
@@ -107,17 +107,17 @@ which can be loaded into the environment by running the command `data("cw_Alien_
 ```
 
 ```{r}
-library(regioneR)
-library(RColorBrewer) # now we can delete this
+#library(regioneR)
+#library(RColorBrewer) # now we can delete this
 
 data("cw_Alien")
 
 
 cw_Alien_ReG<-makeCrosswiseMatrix(cw_Alien_ReG, pvcut = 1)
 
-plotCrosswiseMatrix(cw_Alien_ReG, matrix.type = "crosswise")
+plotCrosswiseMatrix(cw_Alien_ReG, matrix_type = "crosswise")
 
-plotCrosswiseMatrix(cw_Alien_ReG, matrix.type = "correlation")
+plotCrosswiseMatrix(cw_Alien_ReG, matrix_type = "correlation")
 ```
 <!-- Briefly describe the plots? -->
 
@@ -130,7 +130,7 @@ four chromosomes to reduce the calculation time for testing and understanding th
 
 ```{r}
 
-library("regioneRld")
+library("regioneReload")
 
 ```
 
@@ -141,8 +141,9 @@ AlienGenome <-
   toGRanges(data.frame(
     chr = c("AlChr1", "AlChr2", "AlChr3", "AlChr4"),
     start = c(rep(1, 4)),
-    end = c(1e6, 2e5, 1e5, 5e5)
+    end = c(2e6, 1e6, 5e5, 1e5)
   ))
+
 
 ```
 
@@ -228,6 +229,7 @@ RsetAB <-
     vectorPerc = vectorPerc2
   )
 
+
 ```
 
 As a last step, we create random RegionSets that do **not** contain regions of regA, regB, regC or regAB.
@@ -237,8 +239,8 @@ Finally, we store all the generated region sets in a list called `AlienRSList` t
 reg_no_A <-
   createRandomRegions(
     nregions = nreg,
-    length.mean = 10,
-    length.sd = 5,
+    length.mean = 100,
+    length.sd = 50,
     non.overlapping = TRUE,
     genome = subtractRegions(gnm, regA)
   )
@@ -246,8 +248,8 @@ reg_no_A <-
 reg_no_B <-
   createRandomRegions(
     nregions = nreg,
-    length.mean = 10,
-    length.sd = 5,
+    length.mean = 100,
+    length.sd = 50,
     non.overlapping = TRUE,
     genome = subtractRegions(gnm, regB)
   )
@@ -255,23 +257,33 @@ reg_no_B <-
 reg_no_C <-
   createRandomRegions(
     nregions = nreg,
-    length.mean = 10,
-    length.sd = 5,
+    length.mean = 100,
+    length.sd = 50,
     non.overlapping = TRUE,
     genome = subtractRegions(gnm, regC)
   )
 reg_no_AB <-
   createRandomRegions(
     nregions = nreg,
-    length.mean = 10,
-    length.sd = 5,
+    length.mean = 100,
+    length.sd = 50,
     non.overlapping = TRUE,
     genome = subtractRegions(gnm, c(regA, regB))
   )
 
-Rset_NO <- list(reg_no_A, reg_no_B, reg_no_C, reg_no_AB)
+reg_no_ABC <-
+  createRandomRegions(
+    nregions = nreg,
+    length.mean = 100,
+    length.sd = 50,
+    non.overlapping = TRUE,
+    genome = subtractRegions(gnm, c(regA, regB, regC))
+  )
 
-names(Rset_NO) <- c("reg_no_A", "reg_no_B", "reg_no_C", "reg_no_AB")
+
+Rset_NO <- list(reg_no_A, reg_no_B, reg_no_C, reg_no_AB, reg_no_ABC)
+
+names(Rset_NO) <- c("reg_no_A", "reg_no_B", "reg_no_C", "reg_no_AB", "reg_no_ABC")
 
 RsetAB <-
   similarRegionSet(
@@ -281,9 +293,9 @@ RsetAB <-
     vectorPerc = vectorPerc2
   )
 
-AlienRSList <- c(RsetA, RsetB, RsetC, RsetAB, Rset_NO)
+AlienRSList_narrow <- c(RsetA, RsetB, RsetC, RsetAB, Rset_NO)
 
-summary(AlienRSList)
+summary(AlienRSList_narrow)
 
 ```
 
@@ -347,8 +359,10 @@ The "multiOverlaps" slot contains a list of data frames. For each element of the
 
 
 ```{r}
+
 print(head(cw_Alien_ReG@multiOverlaps$regA01))
 print(cw_Alien_ReG)
+
 ```
 
 #### matrix
@@ -357,7 +371,9 @@ When the gMXR object is first created, the "matrix" slot will have a NULL value.
 <!-- Explain here how to create the matrix, what is its purpose or where is this explained? -->
 
 ```{r}
+
 str(cw_Alien_ReG@matrix)
+
 ```
 
 ### Evaluation functions
@@ -376,50 +392,56 @@ regioneRld can use all the randomization strategies present in
 
 set.seed(42)
 cw_Alien_RaR <-  crosswisePermTest(
-                          Alist = AlienRSList,
-                          Blist = AlienRSList,
-                          sampling = FALSE, 
-                          genome = AlienGenome,
-                          per.chromosome=TRUE,
-                          ranFUN = "randomizeRegions",
-                          evFUN = "numOverlaps",
-                          ntimes= 1000,
-                          mc.cores = 25
-                          )
+  Alist = AlienRSList_narrow,
+  Blist = AlienRSList_narrow,
+  sampling = FALSE,
+  genome = AlienGenome,
+  per.chromosome=TRUE,
+  ranFUN = "randomizeRegions",
+  evFUN = "numOverlaps",
+  ntimes= 1000,
+  mc.cores = 20
+)
+
+set.seed(42)
+cw_Alien_cRaR <-  crosswisePermTest(
+  Alist = AlienRSList_narrow,
+  Blist = AlienRSList_narrow,
+  sampling = FALSE,
+  genome = AlienGenome,
+  per.chromosome=TRUE,
+  ranFUN = "circularRandomizeRegions",
+  evFUN = "numOverlaps",
+  ntimes= 1000,
+  mc.cores = 20
+)
+
+set.seed(42)
+cw_Alien_ReR <-  crosswisePermTest(
+  Alist = AlienRSList_narrow,
+  Blist = AlienRSList_narrow,
+  sampling = FALSE,
+  genome = AlienGenome,
+  per.chromosome=TRUE,
+  ranFUN = "resampleRegions",
+  evFUN = "numOverlaps",
+  ntimes= 1000,
+  mc.cores = 20
+)
 
 set.seed(42)
 cw_Alien_ReG <-  crosswisePermTest(
-                        Alist = AlienRSList,
-                        Blist = AlienRSList,
-                        sampling = FALSE, 
-                        genome = AlienGenome,
-                        ranFUN = "resampleGenome",
-                        evFUN = "numOverlaps",
-                        ntimes= 1000,
-                        mc.cores = 25
-                        )
-set.seed(42)
-cw_Alien_cRaR <-  crosswisePermTest(
-                        Alist = AlienRSList,
-                        Blist = AlienRSList,
-                        sampling = FALSE, 
-                        genome = AlienGenome,
-                        ranFUN = "circularRandomizeRegions",
-                        evFUN = "numOverlaps",
-                        ntimes= 1000,
-                        mc.cores = 25
-                      )
-set.seed(42)
-cw_Alien_ReR <-  crosswisePermTest(
-                        Alist = AlienRSList,
-                        Blist = AlienRSList,
-                        sampling = FALSE, 
-                        genome = AlienGenome,
-                        ranFUN = "resampleRegions",
-                        evFUN = "numOverlaps",
-                        ntimes= 1000,
-                        mc.cores = 25
-                      )
+  Alist = AlienRSList_narrow,
+  Blist = AlienRSList_narrow,
+  sampling = FALSE,
+  genome = AlienGenome,
+  per.chromosome=TRUE,
+  ranFUN = "resampleGenome",
+  evFUN = "numOverlaps",
+  ntimes= 100,
+  mc.cores = 20
+)
+
 #
 
 ```
@@ -427,13 +449,15 @@ cw_Alien_ReR <-  crosswisePermTest(
 Using the default option the matrix clusterization method will be automatically selected.
 
 ```{r}
-#cw_Alien_RaR <- makeCrosswiseMatrix(cw_Alien_RaR)
+
+cw_Alien_RaR <- makeCrosswiseMatrix(cw_Alien_RaR)
 
 cw_Alien_ReG <- makeCrosswiseMatrix(cw_Alien_ReG)
 
-#cw_Alien_cRaR <- makeCrosswiseMatrix(cw_Alien_cRaR)
+cw_Alien_cRaR <- makeCrosswiseMatrix(cw_Alien_cRaR)
 
-#cw_Alien_ReR <- makeCrosswiseMatrix(cw_Alien_ReR)
+cw_Alien_ReR <- makeCrosswiseMatrix(cw_Alien_ReR)
+
 ```
 
 To compare the output of the matrices created with different randomization functions, 
@@ -445,15 +469,15 @@ X<-rownames(cw_Alien_ReG@matrix$GMat)
 Y<-colnames(cw_Alien_ReG@matrix$GMat)
 ord<-list(X=X,Y=Y)
 
-plotCrosswiseMatrix(cw_Alien_RaR,matrix.type = "crosswise",maxVal = 0.7,ord_mat = ord)
-plotCrosswiseMatrix(cw_Alien_ReG,matrix.type = "crosswise" ,ord_mat = ord)
-plotCrosswiseMatrix(cw_Alien_cRaR,matrix.type = "crosswise",maxVal = 0.7,ord_mat = ord)
-plotCrosswiseMatrix(cw_Alien_ReR,matrix.type = "crosswise",maxVal = 0.7,ord_mat = ord)
+plotCrosswiseMatrix(cw_Alien_RaR,matrix_type = "crosswise",ord_mat = ord)
+plotCrosswiseMatrix(cw_Alien_ReG,matrix_type = "crosswise" ,ord_mat = ord)
+plotCrosswiseMatrix(cw_Alien_cRaR,matrix_type = "crosswise",ord_mat = ord)
+plotCrosswiseMatrix(cw_Alien_ReR,matrix_type = "crosswise",ord_mat = ord)
 
-plotCrosswiseMatrix(cw_Alien_RaR,matrix.type = "correlation",maxVal = 0.7,ord_mat = ord)
-plotCrosswiseMatrix(cw_Alien_ReG,matrix.type =  "correlation" ,ord_mat = ord)
-plotCrosswiseMatrix(cw_Alien_cRaR,matrix.type =  "correlation",maxVal = 0.7,ord_mat = ord)
-plotCrosswiseMatrix(cw_Alien_ReR,matrix.type =  "correlation",maxVal = 0.7,ord_mat = ord)
+plotCrosswiseMatrix(cw_Alien_RaR,matrix_type = "correlation",ord_mat = ord)
+plotCrosswiseMatrix(cw_Alien_ReG,matrix_type =  "correlation" ,ord_mat = ord)
+plotCrosswiseMatrix(cw_Alien_cRaR,matrix_type =  "correlation",ord_mat = ord)
+plotCrosswiseMatrix(cw_Alien_ReR,matrix_type =  "correlation",ord_mat = ord)
 
 ```
 
@@ -463,11 +487,13 @@ With the function `plotSinglePT()`, it is possible to plot the association betwe
 
 
 ```{r}
-plotSinglePT(cw_Alien_ReG, RS1 = "regA","regA05")
 
-plotSinglePT(cw_Alien_ReG, RS1 = "regA","regC")
+plotSinglePT(cw_Alien_ReG, RS1 = "regA", RS2 = "regA_05")
 
-plotSinglePT(cw_Alien_ReG, RS1 = "regA","reg_no_A")
+plotSinglePT(cw_Alien_ReG, RS1 = "regA", RS2 = "regC")
+
+plotSinglePT(cw_Alien_ReG, RS1 = "regA", RS2 = "reg_no_A")
+ 
 ```
 
 ## Plot Dimensionally Reduction
@@ -475,18 +501,23 @@ plotSinglePT(cw_Alien_ReG, RS1 = "regA","reg_no_A")
 <!-- Missing description -->
 
 ```{r}
-cw_Alien_ReG_s <- makeCrosswiseMatrix(cw_Alien_ReG,scale = TRUE)
+
+cw_Alien_ReG_s <- makeCrosswiseMatrix(cw_Alien_ReG, scale = TRUE)
 
 set.seed(67)
 plotCrosswiseDimRed(cw_Alien_ReG_s, nc = 5, type="PCA")
+
 ```
 
 ```{r}
+
 set.seed(67)
 plotCrosswiseDimRed(cw_Alien_ReG_s, nc = 5, type="PCA",ellipse = TRUE)
+
 ```
 
 ```{r}
+
 lsRegSet<-list(regA="regA",regB="regB",regC="regC")
 
 set.seed(67)
@@ -497,6 +528,7 @@ plotCrosswiseDimRed(cw_Alien_ReG_s, nc = 5, type="PCA",listRS = lsRegSet,ellipse
 ```
 
 ```{r}
+
 set.seed(67)
 plotCrosswiseDimRed(cw_Alien_ReG_s, nc = 5, type="tSNE",listRS = lsRegSet,ellipse = TRUE, emphasize =TRUE)
 ```
@@ -531,12 +563,12 @@ str(mlz_Alien_ReG)
 ```
 To create the matrix slot 
 
-```{r}
+```{r, eval=FALSE }
 mlz_Alien_ReG <- makeLZMatrix(mlz_Alien_ReG)
 
 ```
 plotting
-```{r }
+```{r , eval=FALSE }
 plotLocalZScoreMatrix(mlz_Alien_ReG, maxVal = "max")
 ```
 
@@ -560,16 +592,16 @@ CW <-  crosswisePermTest(Alist = lGR,    # change name
                         )
 ```
 
-```{r}
+```{r, eval=FALSE }
 data("cw_Real")
 CW <- makeCrosswiseMatrix(CW)
 ```
 
-```{r}
+```{r, eval=FALSE }
 plotCrosswiseMatrix(CW, matrix.type = "crosswise" )
 ```
 
-```{r}
+```{r, eval=FALSE }
 plotCrosswiseMatrix(CW, matrix.type = "correlation")
 
 ```
@@ -579,13 +611,13 @@ set.seed(42)
 plotCrosswiseDimRed(CW,nc = 15,ellipse = TRUE,type = "UMAP")
 ```
 
-```{r}
+```{r, eval=FALSE }
 set.seed(42)
 plotCrosswiseDimRed(CW,nc = 15,ellipse = TRUE,type = "PCA",
                     emphasize = TRUE,
                     listRS = list(RAD21=c("CTCF_ENCFF237OKO")))
 
-set.seed(42)
+set.seed(42, eval=FALSE )
 plotCrosswiseDimRed(CW,nc = 15,ellipse = TRUE,type = "tSNE",
                     emphasize = TRUE,
                     listRS = list(RAD21=c("CTCF_ENCFF237OKO")))
@@ -611,10 +643,10 @@ mlZ_CTCF<-multiLocalZscore(A = toplGR$CTCF_ENCFF237OKO, Blist = toplGR,
 ```
 
 
-```{r, }
+```{r, eval=FALSE  }
 mlZ_CTCF<-makeLZMatrix(mlZ_CTCF,normalize = TRUE,centralize =3)
 ```
-```{r}
+```{r, eval=FALSE }
 plotLocalZScoreMatrix(mlZ_CTCF,
                       maxVal = "max",
                       size_lab = 5,

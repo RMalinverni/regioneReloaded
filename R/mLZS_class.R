@@ -5,6 +5,7 @@
 #' @slot matrix ...
 #' @export
 #'
+#'
 mLZS <- setClass("multiLocalZScore",
                  slots = c(
                    parameters = "list",
