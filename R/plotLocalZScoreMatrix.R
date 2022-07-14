@@ -3,16 +3,15 @@
 #'
 #' Plot Local Z-Score Matrix of associations/correlations stored in a multiLocaZScore object.
 #'
-#' @usage plotLocalZScoreMatrix <- function(mLz, lineColor = NA, interpolate = FALSE, colMatrix = "default", matrix.type = "association" , maxVal = 2, main = "",  revert = FALSE)
+#' @usage plotLocalZScoreMatrix <- function(mLZ, lineColor = NA, interpolate = FALSE, colMatrix = "default", matrix.type = "association" , maxVal = 2, main = "",  revert = FALSE)
 #'
-#' @param mLz an object of class multiLocaZScore or a matrix
+#' @param mLZ an object of class multiLocaZScore or a matrix
 #' @param lineColor logic if TRUE a grid matrix will be draw (default: FALSE)
-#' @param interpolate logic the image will be interpolate using the function (\code{\link{geom_raster}}
 #' @param colMatrix character or vector of colors, if "default" will be used a default selection see..
 #' @param matrix.type character ("association" or "correlation") is the kind of matrix that will be plotted (default = "association")
 #' @param maxVal numeric, maximum abs(value) reached by the plot. (default = 2)
 #' @param main character, plot title
-#' @param size_lab numeric, size for the plot lab
+#' @param labSize numeric, size for the plot lab
 #' @param revert logic, revert the order of the plotted elements
 #' @param highlight character vector indicating the regionset names to highlight by adding labels pointing to the 0 position (default = NULL)
 #' @param highlight_size numeric, size of the highlight labels
@@ -25,7 +24,7 @@
 #'
 #' data("cw_Alien")
 #'
-#' plotLocalZscoreMatrix(mlz_Alien_ReG)
+#' plotLocalZscoreMatrix(mLZ_Alien_ReG)
 #'
 #'
 #' @import reshape2
@@ -35,26 +34,25 @@
 #'
 
 
-plotLocalZScoreMatrix <- function(mLz,
+plotLocalZScoreMatrix <- function(mLZ,
                                   lineColor = NA,
-                                  interpolate = FALSE,
                                   colMatrix = "default",
                                   matrix.type = "association",
                                   cor = "row",
                                   maxVal = 2,
                                   main = "",
-                                  size_lab= 6,
+                                  labSize= 6,
                                   revert = FALSE,
                                   highlight = NULL,
                                   highlight_size = 2.5) {
 
 
-  if (class(mLz) != "multiLocalZScore") {
-    stop("the object mlZA need to be an multiLocalZScore object")
+  if (class(mLZ) != "multiLocalZScore") {
+    stop("the object mLZA need to be an multiLocalZScore object")
   }
 
   if (matrix.type == "association") {
-    GM <- t(mLz@matrix$LZM)
+    GM <- t(mLZ@matrix$LZM)
     title <- "Association Matrix"
 
     if (is.na(maxVal)){
@@ -72,7 +70,7 @@ plotLocalZScoreMatrix <- function(mLz,
   }
 
   if (matrix.type == "correlation") {
-    GM <- mLz@matrix$LZM_cor
+    GM <- mLZ@matrix$LZM_cor
 
     title <- "Correlation Matrix"
     maxVal <- 1
@@ -111,12 +109,12 @@ plotLocalZScoreMatrix <- function(mLz,
         hjust = 0.95,
         vjust = 0.2
       ),
-      axis.text.y = element_text(size = size_lab)
+      axis.text.y = element_text(size = labSize)
     ) +
     labs(
       subtitle = title,
       title = main,
-      caption = mLz@parameters$ranFUN
+      caption = mLZ@parameters$ranFUN
     )
 
 

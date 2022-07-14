@@ -4,13 +4,13 @@
 #' Plot matrix of associations/correlations stored in a genoMatriXeR object.
 #'
 #' @usage plotCrosswiseMatrix(mPt,  lineColor = NA, interpolate = FALSE, colMatrix = "default",
-#' matrix.type = "crosswise", cor = "row", main = "")
+#' matrix_type = "crosswise", cor = "row", main = "")
 #'
 #' @param mPt an object of class gMXR or a matrix
 #' @param lineColor logic if TRUE a grid matrix will be draw (default: FALSE)
 #' @param interpolate logic the image will be interpolate using the function (\code{\link{geom_raster}}
 #' @param colMatrix character or vector of colors, if "default" will be used a default selection see..
-#' @param matrix.type character ("crosswise" or "correlation") is the kind of matrix that will be plotted.
+#' @param matrix_type character ("crosswise" or "correlation") is the kind of matrix that will be plotted.
 #' @param cor character ("row" or "col"). If matrix variable is "correlation", defined if the function \code{"cor"} will be executed on rows or columns of the matrix
 #' @param maxVal numeric, maximun abs(value) reached by the plot. (default = 2)
 #' @param main charachter, graph title
@@ -26,9 +26,9 @@
 #'
 #' cw_Alien_ReG <- makeCrosswiseMatrix( cw_Alien_ReG)
 #'
-#' plotCrosswiseMatrix(cw_Alien_ReG, matrix.type = "crosswise")
+#' plotCrosswiseMatrix(cw_Alien_ReG, matrix_type = "crosswise")
 #'
-#' plotCrosswiseMatrix(cw_Alien_ReG, matrix.type = "correlation")
+#' plotCrosswiseMatrix(cw_Alien_ReG, matrix_type = "correlation")
 #'
 #' @import reshape2
 #' @import ggplot2
@@ -42,7 +42,7 @@ plotCrosswiseMatrix <- function(mPt,
                        lineColor = NA,
                        interpolate = FALSE,
                        colMatrix = "default",
-                       matrix.type = "crosswise",
+                       matrix_type = "crosswise",
                        cor = "row",
                        maxVal = NA,
                        main = "",
@@ -50,7 +50,7 @@ plotCrosswiseMatrix <- function(mPt,
 
   if (class(mPt) == "genoMatriXeR") {
 
-    if  (matrix.type == "crosswise") {
+    if  (matrix_type == "crosswise") {
       GM <- mPt@matrix$GMat
       title <- "Association Matrix"
 
@@ -64,7 +64,7 @@ plotCrosswiseMatrix <- function(mPt,
 
     }
 
-    if  (matrix.type == "correlation") {
+    if  (matrix_type == "correlation") {
       if (cor == "row") {
         GM <- mPt@matrix$GMat_corX
       }

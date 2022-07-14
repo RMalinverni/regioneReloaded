@@ -1,19 +1,29 @@
-#' Plot Single Permutation Test
+#' plotSinglePT
 #'
+#' @description
 #'
 #' Plot the result of a single pairwise permutation test from a genoMatriXeR object.
 #'
-#' @usage plotSinglePT<-function(mPT, RS1, RS2, xlab = NA, main = NA)
+#' @details
 #'
-#' @param mPt an object of class genoMatriXeR
-#' @param RS1 character, name of the first element of genoMatriXeR object to test.
-#' @param RS2 character, name of the second element of genoMatriXeR object to test.
+#' This function generates a plot representing the result of a single
+#' permutation test stored in a genoMatriXeR object. This includes a plot of the
+#' density distribution of the randomized evaluations and a vertical line
+#' showing the observed evaluation in the original region set. The values of the
+#' mean randomized evaluations and the value of the observed evaluation are
+#' shown, in addition to the calculated Z-score, normalized Z-score and adjusted
+#' p-value.
+#'
+#' @usage plotSinglePT(mPT, RS1, RS2, xlab = NA, main = NA)
+#'
+#' @param mPT an object of class genoMatriXeR
+#' @param RS1,RS2 character, names of region sets in genoMatriXeR object for which to represent the pairwise permutation test results.
 #' @param xlab character, label for x axis (default = NA)
+#' @param main title for the plot, if NA the name of the genoMatriXeR object is used (default = NA)
 #'
-#' @return A plot is created on the current graphics device.
+#' @return Returns a ggplot object.
 #'
 #' @seealso \code{\link{crosswisePermTest}} \code{\link{makeCrosswiseMatrix}}
-#'
 #'
 #' @examples
 #'
@@ -30,13 +40,16 @@ plotSinglePT <-
            RS2,
            xlab = NA,
            main = NA) {
-
-    if (class(mPT) != "genoMatriXeR") {
+    if (!hasArg(mPT)) {
+      stop("mPT is missing")
+    } else if (class(mPT) != "genoMatriXeR") {
       stop('mPT needs to be a "genoMatriXeR" class object')
     }
 
     if (!(hasArg(RS1) & hasArg(RS2))) {
       stop("RS1 and RS2 are required")
+    } else if (!all(c(RS1, RS2) %in% names(mPT@multiOverlaps))) {
+      stop("RS1 or RS2 do not match region set names in the mPT genoMatriXeR object")
     }
 
     if (is.na(xlab) & mPT@parameters$evFUN == "numOverlaps") {
@@ -50,7 +63,7 @@ plotSinglePT <-
     mean.1 <- tab$mean_perm_test[n]
     sd.1 <- tab$sd_perm_test[n]
     max_curve <-
-      max(density(rnorm(1:1000, mean = mean.1, sd = sd.1))$y)
+      max(stats::density(stats::rnorm(1:1000, mean = mean.1, sd = sd.1))$y)
     zstart <- mean.1 - 4 * sd.1
     zend   <-   mean.1  + 4 * sd.1
     zs1 <- mean.1 + 1 * sd.1
@@ -73,56 +86,56 @@ plotSinglePT <-
     if (is.na(main)) {
       main <- deparse(substitute(mPT))
     }
-    p <- ggplot(data.frame(x = c(splot, eplot)), aes(x)) +
-      labs(
+    p <- ggplot2::ggplot(data.frame(x = c(splot, eplot)), aes(x)) +
+      ggplot2::labs(
         title = main,
         subtitle = paste0("PermTest:  ", RS1, " vs ", RS2),
         caption = paste0("Number of Permutations:  ", mPT@parameters$ntimes)
       ) +
-      xlab(paste0(xlab, " on ", tab$n_regionA[n], " regions")) +
-      ylab("Freq") +
-      stat_function(
+      ggplot2::xlab(paste0(xlab, " on ", tab$n_regionA[n], " regions")) +
+      ggplot2::ylab("Freq") +
+      ggplot2::stat_function(
         fun = dnorm,
         geom = "area",
         fill = alpha(colvec[1], alpha = 0.5),
         args = list(mean = mean.1, sd = sd.1)
       ) +
-      stat_function(
+      ggplot2::stat_function(
         fun = dnorm,
         geom = "area",
         xlim = c(vec_slices[1], zend),
         fill = alpha(colvec[1], alpha = 0.5),
         args = list(mean = mean.1, sd = sd.1)
       ) +
-      stat_function(
+      ggplot2::stat_function(
         fun = dnorm,
         geom = "area",
         xlim = c(vec_slices[3], zend),
         fill = alpha(colvec[1], alpha = 0.5),
         args = list(mean = mean.1, sd = sd.1)
       ) +
-      stat_function(
+      ggplot2::stat_function(
         fun = dnorm,
         geom = "area",
         xlim = c(vec_slices[5], zend),
         fill = alpha(colvec[1], alpha = 0.5),
         args = list(mean = mean.1, sd = sd.1)
       ) +
-      stat_function(
+      ggplot2::stat_function(
         fun = dnorm,
         geom = "area",
         xlim = c(zstart, vec_slices[2]),
         fill = alpha(colvec[1], alpha = 0.5),
         args = list(mean = mean.1, sd = sd.1)
       ) +
-      stat_function(
+      ggplot2::stat_function(
         fun = dnorm,
         geom = "area",
         xlim = c(zstart, vec_slices[4]),
         fill = alpha(colvec[1], alpha = 0.5),
         args = list(mean = mean.1, sd = sd.1)
       ) +
-      stat_function(
+      ggplot2::stat_function(
         fun = dnorm,
         geom = "area",
         xlim = c(zstart, vec_slices[6]),
@@ -131,12 +144,12 @@ plotSinglePT <-
       ) +
 
       # hline at y = 0
-      geom_hline(yintercept = 0,
+      ggplot2::geom_hline(yintercept = 0,
                  color = colvec[4],
                  size = 0.6) +
 
       # vline at x = 0
-      geom_vline(
+      ggplot2::geom_vline(
         xintercept = 0,
         color = colvec[4],
         size = 0.4,
@@ -144,7 +157,7 @@ plotSinglePT <-
       ) +
 
       # Random overlaps
-      geom_vline(
+      ggplot2::geom_vline(
         xintercept = c(mean.1),
         color = colvec[4],
         linetype = "dashed",
@@ -152,7 +165,7 @@ plotSinglePT <-
       ) +
 
       # Observed overlaps
-      geom_vline(
+      ggplot2::geom_vline(
         aes(xintercept = nov),
         color = colvec[5],
         linetype = "dashed",
@@ -160,7 +173,7 @@ plotSinglePT <-
       ) +
 
       # Arrow between random and observed
-      geom_segment(
+      ggplot2::geom_segment(
         aes(
           x = mean.1,
           y = max_curve / 2,
@@ -174,12 +187,12 @@ plotSinglePT <-
 
       # Text labels
       # Box with ZS and adjpv
-      annotate(
+      ggplot2::annotate(
         "label",
         x = mean.1 + ((nov - mean.1) / 2),
         y = max_curve * 0.36,
         label = paste(
-          "z-score",
+          "Z-score",
           tab$z_score[n],
           "adj.p-value",
           tab$adj.p_value[n],
@@ -189,28 +202,28 @@ plotSinglePT <-
         fill = "#FDFAF6"
       ) +
       # Box with nZS and sZS
-      annotate(
+      ggplot2::annotate(
         "label",
         x = eplot * 0.9,
         y = max_curve * 0.9,
         size = 3,
         fill = "#FDFAF6",
         label = paste(
-          paste0("Normal ZScore: ", round(tab$norm_zscore[n], digits = 2)),
-          paste0("Standard ZScore: ", round(tab$std_zscore[n], digits = 2)),
+          paste0("Normal Z-score: ", round(tab$norm_zscore[n], digits = 2)),
+          paste0("Standard Z-score: ", round(tab$std_zscore[n], digits = 2)),
           sep = "\n"
         ),
         hjust = 1
       ) +
       # Ranfun used
-      annotate(
+      ggplot2::annotate(
         "text",
         x = eplot * 0.5,
         y = max_curve * 0.99,
         label = mPT@parameters$ranFUN
       ) +
       # Observed and mean random overlaps
-      annotate(
+      ggplot2::annotate(
         "label",
         x = nov,
         y = max_curve * 0.03,
@@ -220,7 +233,7 @@ plotSinglePT <-
         hjust = 0.5,
         fill = "#FDFAF6"
       ) +
-      annotate(
+      ggplot2::annotate(
         "label",
         x = mean.1,
         y = -max_curve * 0.03,
