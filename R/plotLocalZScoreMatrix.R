@@ -32,6 +32,7 @@
 #' @import ggrepel
 #' @import stats
 #' @importFrom RColorBrewer brewer.pal
+#' @importFrom methods hasArg
 #' @export plotLocalZScoreMatrix
 #'
 
@@ -48,9 +49,10 @@ plotLocalZScoreMatrix <- function(mLZ,
                                   highlight = NULL,
                                   highlight_size = 2.5) {
 
-
-  if (class(mLZ) != "multiLocalZScore") {
-    stop("the object mLZA need to be an multiLocalZScore object")
+  if (!methods::hasArg(mLZ)) {
+    stop("mLZ is missing")
+  } else if (class(mLZ) != "multiLocalZScore") {
+    stop("the object mLZA needs to be an multiLocalZScore object")
   }
 
   if (matrix.type == "association") {
@@ -93,7 +95,7 @@ plotLocalZScoreMatrix <- function(mLZ,
   ggplot2::ggplot(DF, ggplot2::aes_string(x = "X", y = "Y")) +
 
     #geom_raster(aes(fill = value), interpolate = FALSE, color  = "white") +
-    ggplot2::geom_tile(aes(fill = value), color = lineColor) +
+    ggplot2::geom_tile(ggplot2::aes_string(fill = "value"), color = lineColor) +
     ggplot2::scale_fill_gradientn(
       colours = rev(colMatrix),
       limits = c(-maxVal, maxVal),
