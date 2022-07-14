@@ -30,6 +30,8 @@
 #' @import reshape2
 #' @import ggplot2
 #' @import ggrepel
+#' @import stats
+#' @importFrom RColorBrewer brewer.pal
 #' @export plotLocalZScoreMatrix
 #'
 
@@ -56,7 +58,7 @@ plotLocalZScoreMatrix <- function(mLZ,
     title <- "Association Matrix"
 
     if (is.na(maxVal)){
-      maxVal<-quantile(abs(GM),.95)
+      maxVal<- stats::quantile(abs(GM),.95)
     }
 
     if (maxVal=="max"){
@@ -78,7 +80,7 @@ plotLocalZScoreMatrix <- function(mLZ,
 
   if (colMatrix == "default") {
     colMatrix <-
-      rev(c(rev(brewer.pal(9, "PuBuGn")), brewer.pal(9, "YlOrRd")))
+      rev(c(rev(RColorBrewer::brewer.pal(9, "PuBuGn")), RColorBrewer::brewer.pal(9, "YlOrRd")))
 
   }
 
