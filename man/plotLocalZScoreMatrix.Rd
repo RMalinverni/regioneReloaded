@@ -39,7 +39,7 @@ Plot Local Z-Score Matrix of associations/correlations stored in a multiLocaZSco
 
 data("cw_Alien")
 
-plotLocalZScoreMatrix(mLZ_Alien_ReG)
+# plotLocalZScoreMatrix(mLZ_Alien_ReG)
 
 
 }
