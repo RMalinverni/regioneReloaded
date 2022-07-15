@@ -62,6 +62,9 @@
 #'
 #'
 #'
+
+#' @import knitr
+#' @importFrom methods hasArg
 #' @export crosswisePermTest
 
 

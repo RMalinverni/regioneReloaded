@@ -61,7 +61,7 @@ plotSingleLZ <-
       stop("mLZ is missing")
     } else if (class(mLZ) != "multiLocalZScore") {
       stop("mLZ needs to be a multiLocalZScore object")
-    } else if (!hasArg(RS)) {
+    } else if (!methods::hasArg(RS)) {
       stop("RS is missing")
     } else if (!(all(RS %in% names(mLZ@multiLocalZscores$shifed_ZSs)))) {
       stop("One or more elements in RS do not match region set names in mLZ")

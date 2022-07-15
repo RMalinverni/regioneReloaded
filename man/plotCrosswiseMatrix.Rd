@@ -4,11 +4,12 @@
 \alias{plotCrosswiseMatrix}
 \title{Plot Crosswise Matrix}
 \usage{
-plotCrosswiseMatrix(mPt,  lineColor = NA, interpolate = FALSE, colMatrix = "default",
-matrix_type = "crosswise", cor = "row", main = "")
+plotCrosswiseMatrix(mPt, lineColor = NA, interpolate = FALSE, colMatrix =
+"default", matrix_type = "crosswise", cor = "row",
+maxVal = NA, main = "", ord_mat = NULL)
 }
 \arguments{
-\item{mPt}{an object of class gMXR or a matrix}
+\item{mPT}{an object of class gMXR or a matrix}
 
 \item{lineColor}{logic if TRUE a grid matrix will be draw (default: FALSE)}
 

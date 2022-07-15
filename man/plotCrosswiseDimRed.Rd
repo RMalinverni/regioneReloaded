@@ -4,8 +4,11 @@
 \alias{plotCrosswiseDimRed}
 \title{plotCrosswiseDimRed}
 \usage{
-plotCrosswiseDimRed(mPT, type = "PCA", GM_clust = NA, nc = 5, listRS = NULL, main = "", labSize = 2, emphasize = FALSE,
-labAll = FALSE, labMaxOverlap = 100, ellipse = TRUE, perplexity = 10, theta = 0.1, return_table = FALSE)
+plotCrosswiseDimRed(mPT, type = "PCA", GM_clust = NA, nc = 5, listRS =
+NULL, main = "", labSize = 2, emphasize = FALSE,
+labAll = FALSE, labMaxOverlap = 100, ellipse = FALSE,
+perplexity = 10, theta = 0.1, return_table = FALSE,
+...)
 }
 \arguments{
 \item{mPT}{an object of class genoMatriXeR or a numeric matrix.}
