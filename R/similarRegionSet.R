@@ -3,11 +3,11 @@
 #'
 #' Create a list of class GenomicRanges similar to a reference RegionSet
 #'
-#' @usage similarRegionSet<-function(GR, name,genome,vectorPerc)
+#' @usage similarRegionSet(GR, name, genome, vectorPerc)
 #'
 #' @param GR an object of class GenomigRanges
-#' @param name character, name of the first element of gMXR object to test.
-#' @param genome character, name of the second element of gMXR object to test.
+#' @param name character, name of the first element of genoMatriXeR object to test.
+#' @param genome character, name of the second element of genoMatriXeR object to test.
 #' @param vectorPerc character, label for x axes. (default = NA)
 #'
 #' @return A list of class GenomicRanges

@@ -12,19 +12,31 @@
 #' (\code{\link{GenomicRanges}}, \code{\link{data.frame}} etc...)
 #' @param Blist list of Region Set of any accepted formats by \code{\link{regioneR}} package
 #' (\code{\link{GenomicRanges}}, \code{\link{data.frame}} etc...)
+#' @param ranFun Function, choose the randomization strategy used for the test (default = "randomizeRegions")
+#' for details see \code{\link{regioneR}}
+#' @param evFun Function, choose the evaluation strategy used for the test (default = "numOverlaps")
 #' @param sampling Boolean, if is true the function will use only a sample of
 #' each element of Alist to perform the test
+#' @param min_sampling Numeric, minimum number of regions in the region set that permit a sampling (default = 5000)
 #' @param fraction Numeric, if sampling==TRUE is the fraction of the region sets
-#' used to perform the test
-#' @param ranFun Function, choose the randomization strategy used for the test (default)
-#' for details see \code{\link{regioneR}}
+#' used to perform the test. (default = 0.15)
+#' @param fraction  Logic, if sampling==TRUE is the fraction of the region sets
+#' used to perform the test (default = 0.15)
 #' @param universe Region Set of any accepted formats by  \code{\link{regioneR}}, using only when resamplinRegions function is
 #' selected (default = NULL)
-#' @param ...  further arguments to be passed to other methods.
+#' @param windows windows (in number of base pairs) in which will be estimated the local Z-score
+#' @param step step (in number of base pairs) in which will be estimated the local Z-score
 #' @param adj_pv_method Charachter, the method used for the calculation of the adjusted p-value,
 #' to choose between the options of \code{\link{p.adjust}}. (default = "BH")
-#' @param  max_pv Numeric, the z-scores associate a p-values higher of this parameter will be transform in 0. (default =0.05)
-#' @param  verbose Boolean, if verbose
+#' @param min_regions minimun regions accepted after the sampling. (default = 1000)
+#' @param max_pv Numeric, the z-scores associate a p-values higher of this parameter will be transform in 0. (default =0.05)
+#' @param genome Charachter or GenomicRanges, (defalut = "hg19") genome used to compute the randomization. (default = "hg19")
+#' @param ...  further arguments to be passed to other methods.
+#'
+#'
+#'
+#'
+#'
 #' @details  the permutation test core used in this function permit to change
 #' \code{"randomize.function"} \code{\link{randomizeRegions}},
 #' \code{\link{circularRandomizeRegions}}, \code{\link{resampleRegions}} or a

@@ -13,7 +13,7 @@
 #'
 #' data("cw_Alien")
 #'
-#' universe <- createUniverse(AlienRSList)
+#' universe <- createUniverse(AlienRSList_narrow)
 #'
 #' @export
 #' @keywords internal

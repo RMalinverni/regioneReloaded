@@ -35,6 +35,7 @@
 #' @param perplexity numeric, if type = "tSNE" value of perplexity for the function \code{\link{Rtsne}}. (default = 10)
 #' @param theta numeric, if type = "tSNE" value of theta for the function \code{\link{Rtsne}}. (default = 0.1)
 #' @param return_table logical, if TRUE a table with the cluster assigned to each region is returned instead of the plot. (default = FALSE)
+#' @param ... further arguments to be passed to other methods.
 #'
 #' @return A ggplot object or a table with cluster assignments is returned.
 #'

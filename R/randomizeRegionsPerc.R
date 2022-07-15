@@ -3,7 +3,7 @@
 #'
 #' randomize regions at percentage
 #'
-#' @usage randomizeRegionsPerc<-function(GR, genome, frac)
+#' @usage randomizeRegionsPercf(GR, genome, frac)
 #'
 #' @param GR description
 #' @param genome description

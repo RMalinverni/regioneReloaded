@@ -2,7 +2,7 @@
 #'
 #' Perform a multiple permutation test
 #' @keywords internal function
-#' @usage multiPermTest A, Blist, ranFUN, evFUN, universe, genome, rFUN, verbose = FALSE, ntimes, adj_pv_method, ...)
+#' @usage multiPermTest (A, Blist, ranFUN, evFUN, universe, genome, rFUN, verbose = FALSE, ntimes, adj_pv_method, ...)
 #'
 #' @param A Genomic Ranges or any accepted formats by  \code{\link{regioneR}} package
 #' (\code{\link{GenomicRanges}}, \code{\link{data.frame}} etc...)

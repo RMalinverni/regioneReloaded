@@ -3,7 +3,7 @@
 #'
 #' create a local z-score matrix from an \code{\link{multiLocalZScore }} object and save it in the matrix slot
 #'
-#' @usage makeLZMatrix( mlZA, normalize = TRUE, clusterize = TRUE, hc.method = NULL, dist.method = "euclidean",
+#' @usage makeLZMatrix( mlZA, normalize = TRUE, clusterize = TRUE, centralize = NA, hc.method = NULL, dist.method = "euclidean",
 #'                            scale = FALSE, ...)
 #'
 #' @param mlZA an object of class \code{\link{multiLocalZScore }} or a matrix
@@ -14,6 +14,8 @@
 #' @param dist.method character, metric used to calculate the distance matrix see \code{hclust} (default = "euclidean")
 #' @param centralize numeric, number of "steps" around the center of the local association in which will be apply the clusterization algorithm, if NA all the values in the matrix will be utilize. (default = NA)
 #' @param scale logic, if TRUE the matrix will be scaled (default = FALSE)
+#' @param ...  further arguments to be passed to other methods.
+#'
 #'
 #' @return
 #'
