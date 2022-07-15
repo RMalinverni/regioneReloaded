@@ -4,7 +4,7 @@
 \alias{multiPermTest}
 \title{Multiple Permutation Test}
 \usage{
-multiPermTest A, Blist, ranFUN, evFUN, universe, genome, rFUN, verbose = FALSE, ntimes, adj_pv_method, ...)
+multiPermTest (A, Blist, ranFUN, evFUN, universe, genome, rFUN, verbose = FALSE, ntimes, adj_pv_method, ...)
 }
 \arguments{
 \item{A}{Genomic Ranges or any accepted formats by  \code{\link{regioneR}} package

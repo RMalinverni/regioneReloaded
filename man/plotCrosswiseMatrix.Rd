@@ -4,7 +4,7 @@
 \alias{plotCrosswiseMatrix}
 \title{Plot Crosswise Matrix}
 \usage{
-plotCrosswiseMatrix(mPt, lineColor = NA, interpolate = FALSE, colMatrix =
+plotCrosswiseMatrix(mPT, lineColor = NA, interpolate = FALSE, colMatrix =
 "default", matrix_type = "crosswise", cor = "row",
 maxVal = NA, main = "", ord_mat = NULL)
 }

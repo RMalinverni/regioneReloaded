@@ -21,7 +21,7 @@ create the universe parameter for \code{\link{resampleRegions}} function using a
 
 data("cw_Alien")
 
-universe <- createUniverse(AlienRSList)
+universe <- createUniverse(AlienRSList_narrow)
 
 }
 \keyword{internal}

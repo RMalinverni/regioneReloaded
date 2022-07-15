@@ -4,14 +4,14 @@
 \alias{similarRegionSet}
 \title{similar RegionSets}
 \usage{
-similarRegionSet<-function(GR, name,genome,vectorPerc)
+similarRegionSet(GR, name, genome, vectorPerc)
 }
 \arguments{
 \item{GR}{an object of class GenomigRanges}
 
-\item{name}{character, name of the first element of gMXR object to test.}
+\item{name}{character, name of the first element of genoMatriXeR object to test.}
 
-\item{genome}{character, name of the second element of gMXR object to test.}
+\item{genome}{character, name of the second element of genoMatriXeR object to test.}
 
 \item{vectorPerc}{character, label for x axes. (default = NA)}
 }

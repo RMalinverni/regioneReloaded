@@ -4,7 +4,7 @@
 \alias{makeLZMatrix}
 \title{Make Local Z-Score Matrix}
 \usage{
-makeLZMatrix( mlZA, normalize = TRUE, clusterize = TRUE, hc.method = NULL, dist.method = "euclidean",
+makeLZMatrix( mlZA, normalize = TRUE, clusterize = TRUE, centralize = NA, hc.method = NULL, dist.method = "euclidean",
                            scale = FALSE, ...)
 }
 \arguments{
@@ -22,6 +22,8 @@ if hc.method == NULL, the methods used for clusterize the matrix will be selecte
 \item{dist.method}{character, metric used to calculate the distance matrix see \code{hclust} (default = "euclidean")}
 
 \item{scale}{logic, if TRUE the matrix will be scaled (default = FALSE)}
+
+\item{...}{further arguments to be passed to other methods.}
 }
 \value{
 A object of class \code{multiLocalZScore} containing three slots

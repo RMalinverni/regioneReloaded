@@ -44,7 +44,7 @@ to choose between the options of \code{\link{p.adjust}}. (default = "BH")}
 
 \item{verbose}{Boolean, if verbose test}
 
-\item{...}{other eventual parameters}
+\item{...}{further arguments to be passed to other methods.}
 }
 \value{
 A object of class \code{genoMatriXeR} containing three slots

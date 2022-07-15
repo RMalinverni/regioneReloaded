@@ -4,7 +4,9 @@
 \alias{plotLocalZScoreMatrix}
 \title{Plot Local Z-Score Matrix}
 \usage{
-plotLocalZScoreMatrix <- function(mLZ, lineColor = NA, interpolate = FALSE, colMatrix = "default", matrix.type = "association" , maxVal = 2, main = "",  revert = FALSE)
+plotLocalZScoreMatrix (mLZ, lineColor = NA, interpolate = FALSE,
+colMatrix = "default", matrix.type = "association" , maxVal = 2, main = "",
+revert = FALSE, highlight = NULL, highlight_size = 2.5)
 }
 \arguments{
 \item{mLZ}{an object of class multiLocaZScore or a matrix}
