@@ -3,11 +3,10 @@
 #' Perform a multiple permutation test between each elements of two list of Region
 #' set the result will be store in a genoMatriXeR S4 class
 #'
-#' @usage crosswisePermTest(Alist, Blist, sampling=FALSE, fraction=0.15,
-#'                          ranFUN = "randomizeRegions",evFUN = "numOverlaps",
-#'                          universe = NULL, adj_pv_method = "BH", max_pv = 0.05,
-#'                          verbose = FALSE, subEx = 0, genome = "hg19",
-#'                          verbose = FALSE...)
+#' @usage crosswisePermTest(Alist, Blist = NULL, sampling = FALSE, fraction = 0.15,
+#'  min_sampling = 5000, ranFUN = "randomizeRegions", evFUN = "numOverlaps",
+#'  ntimes = 100, universe = NULL, adj_pv_method = "BH", max_pv = 0.05, subEx = 0,
+#'  genome = "hg19", verbose = FALSE, ...)
 #'
 #'
 #' @param Alist GRangesList or list of Region Set of any accepted formats by  \code{\link{regioneR}} package
