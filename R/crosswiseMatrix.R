@@ -13,7 +13,7 @@
 #'
 #' data("cw_Alien")
 #'
-#' matrix_CW_Alien <- crosswiseMatrix("cw_Alien_ReG")
+#' matrix_CW_Alien <- crosswiseMatrix(cw_Alien_ReG)
 #'
 #' @export
 #' @keywords  internal function
