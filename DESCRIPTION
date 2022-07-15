@@ -22,7 +22,8 @@ Imports:
     ggrepel,
     reshape2,
     stats,
-    knitr
+    knitr,
+    methods
 Suggests: 
     rmarkdown,
     knitr
