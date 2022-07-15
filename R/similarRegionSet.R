@@ -34,7 +34,7 @@
 #'  genome = AlienGenome
 #' )
 #'
-#' listRegA <- similarRegionList(GR = regA, gernome = AlienGenome)
+#' listRegA <- similarRegionSet(GR = regA, genome = AlienGenome)
 #' summary(listRegA)
 #'
 #' @export similarRegionSet
