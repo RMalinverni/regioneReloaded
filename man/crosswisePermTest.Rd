@@ -4,16 +4,10 @@
 \alias{crosswisePermTest}
 \title{Multiple Permutation test}
 \usage{
-<<<<<<< HEAD
-crosswisePermTest(Alist, Blist = NULL, sampling = FALSE, fraction = 0.15, min_sampling = 5000,
-ranFUN = "randomizeRegions", evFUN = "numOverlaps", ntimes = 100, universe = NULL,
-adj_pv_method = "BH", max_pv = 0.05, subEx = 0, genome = "hg19", verbose = FALSE, ... )
-=======
 crosswisePermTest(Alist, Blist = NULL, sampling = FALSE, fraction = 0.15,
  min_sampling = 5000, ranFUN = "randomizeRegions", evFUN = "numOverlaps",
  ntimes = 100, universe = NULL, adj_pv_method = "BH", max_pv = 0.05, subEx = 0,
  genome = "hg19", verbose = FALSE, ...)
->>>>>>> david_dev
 }
 \arguments{
 \item{Alist}{GRangesList or list of Region Set of any accepted formats by  \code{\link{regioneR}} package
