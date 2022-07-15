@@ -4,7 +4,7 @@
 \alias{randomizeRegionsPerc}
 \title{randomize Regions Perc}
 \usage{
-randomizeRegionsPerc(GR, genome, frac)
+randomizeRegionsPerc(GR, genome = "hg19", frac=0.2)
 }
 \arguments{
 \item{GR}{description}
@@ -15,4 +15,7 @@ randomizeRegionsPerc(GR, genome, frac)
 }
 \description{
 randomize regions at percentage
+}
+\seealso{
+similarRegionSet
 }
