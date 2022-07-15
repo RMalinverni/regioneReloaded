@@ -4,7 +4,7 @@
 #' Plot Local Z-Score Matrix of associations/correlations stored in a multiLocaZScore object.
 #'
 #' @usage plotLocalZScoreMatrix (mLZ, lineColor = NA, colMatrix = "default",
-#' matrix.type = "association" , maxVal = 2, main = "", revert = FALSE, labSize= 6,
+#' matrix.type = "association" , maxVal = 2, main = "", labSize= 6, revert = FALSE,
 #' highlight = NULL, highlight_size = 2.5)
 #'
 #' @param mLZ an object of class multiLocaZScore or a matrix
