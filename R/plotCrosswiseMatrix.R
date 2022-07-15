@@ -3,8 +3,10 @@
 #'
 #' Plot matrix of associations/correlations stored in a genoMatriXeR object.
 #'
-#' @usage plotCrosswiseMatrix(mPT,  lineColor = NA, interpolate = FALSE, colMatrix = "default",
-#' matrix_type = "crosswise", cor = "row", main = "")
+#' @usage plotCrosswiseMatrix(mPt, lineColor = NA, interpolate = FALSE, colMatrix =
+#' "default", matrix_type = "crosswise", cor = "row",
+#' maxVal = NA, main = "", ord_mat = NULL)
+
 #'
 #' @param mPT an object of class gMXR or a matrix
 #' @param lineColor logic if TRUE a grid matrix will be draw (default: FALSE)
