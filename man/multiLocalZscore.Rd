@@ -15,6 +15,11 @@ max_pv = 0.05, genome = "hg19", ...)
 \item{Blist}{list of Region Set of any accepted formats by \code{\link{regioneR}} package
 (\code{\link{GenomicRanges}}, \code{\link{data.frame}} etc...)}
 
+\item{ranFUN}{Function, choose the randomization strategy used for the test (default = "randomizeRegions")
+for details see \code{\link{regioneR}}}
+
+\item{evFUN}{Function, choose the evaluation strategy used for the test (default = "numOverlaps")}
+
 \item{sampling}{Boolean, if is true the function will use only a sample of
 each element of Alist to perform the test}
 
@@ -25,6 +30,8 @@ used to perform the test (default = 0.15)}
 
 \item{universe}{Region Set of any accepted formats by  \code{\link{regioneR}}, using only when resamplinRegions function is
 selected (default = NULL)}
+
+\item{window}{window (in number of base pairs) in which will be estimated the local Z-score}
 
 \item{step}{step (in number of base pairs) in which will be estimated the local Z-score}
 
@@ -38,13 +45,6 @@ to choose between the options of \code{\link{p.adjust}}. (default = "BH")}
 \item{genome}{Charachter or GenomicRanges, (defalut = "hg19") genome used to compute the randomization. (default = "hg19")}
 
 \item{...}{further arguments to be passed to other methods.}
-
-\item{ranFun}{Function, choose the randomization strategy used for the test (default = "randomizeRegions")
-for details see \code{\link{regioneR}}}
-
-\item{evFun}{Function, choose the evaluation strategy used for the test (default = "numOverlaps")}
-
-\item{windows}{windows (in number of base pairs) in which will be estimated the local Z-score}
 }
 \value{
 A object of class \code{multiLocalZScore} containing three slots

@@ -12,9 +12,9 @@
 #' (\code{\link{GenomicRanges}}, \code{\link{data.frame}} etc...)
 #' @param Blist list of Region Set of any accepted formats by \code{\link{regioneR}} package
 #' (\code{\link{GenomicRanges}}, \code{\link{data.frame}} etc...)
-#' @param ranFun Function, choose the randomization strategy used for the test (default = "randomizeRegions")
+#' @param ranFUN Function, choose the randomization strategy used for the test (default = "randomizeRegions")
 #' for details see \code{\link{regioneR}}
-#' @param evFun Function, choose the evaluation strategy used for the test (default = "numOverlaps")
+#' @param evFUN Function, choose the evaluation strategy used for the test (default = "numOverlaps")
 #' @param sampling Boolean, if is true the function will use only a sample of
 #' each element of Alist to perform the test
 #' @param min_sampling Numeric, minimum number of regions in the region set that permit a sampling (default = 5000)
@@ -24,7 +24,7 @@
 #' used to perform the test (default = 0.15)
 #' @param universe Region Set of any accepted formats by  \code{\link{regioneR}}, using only when resamplinRegions function is
 #' selected (default = NULL)
-#' @param windows windows (in number of base pairs) in which will be estimated the local Z-score
+#' @param window window (in number of base pairs) in which will be estimated the local Z-score
 #' @param step step (in number of base pairs) in which will be estimated the local Z-score
 #' @param adj_pv_method Charachter, the method used for the calculation of the adjusted p-value,
 #' to choose between the options of \code{\link{p.adjust}}. (default = "BH")

@@ -3,7 +3,7 @@
 #'
 #' randomize regions at percentage
 #'
-#' @usage randomizeRegionsPercf(GR, genome, frac)
+#' @usage randomizeRegionsPerc(GR, genome, frac)
 #'
 #' @param GR description
 #' @param genome description

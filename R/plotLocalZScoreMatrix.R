@@ -3,9 +3,9 @@
 #'
 #' Plot Local Z-Score Matrix of associations/correlations stored in a multiLocaZScore object.
 #'
-#' @usage plotLocalZScoreMatrix (mLZ, lineColor = NA, interpolate = FALSE,
-#' colMatrix = "default", matrix.type = "association" , maxVal = 2, main = "",
-#' revert = FALSE, highlight = NULL, highlight_size = 2.5)
+#' @usage plotLocalZScoreMatrix (mLZ, lineColor = NA, colMatrix = "default",
+#' matrix.type = "association" , maxVal = 2, main = "", revert = FALSE, labSize= 6,
+#' highlight = NULL, highlight_size = 2.5)
 #'
 #' @param mLZ an object of class multiLocaZScore or a matrix
 #' @param lineColor logic if TRUE a grid matrix will be draw (default: FALSE)
@@ -43,7 +43,6 @@ plotLocalZScoreMatrix <- function(mLZ,
                                   lineColor = NA,
                                   colMatrix = "default",
                                   matrix.type = "association",
-                                  cor = "row",
                                   maxVal = 2,
                                   main = "",
                                   labSize= 6,

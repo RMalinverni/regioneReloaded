@@ -52,7 +52,8 @@ makeLZMatrix <- function(mlZA,
                          centralize = NA,
                          hc.method = NULL,
                          dist.method = "euclidean",
-                         scale = FALSE) {
+                         scale = FALSE,
+                         ...) {
 
 
   if (class(mlZA) != "multiLocalZScore") {

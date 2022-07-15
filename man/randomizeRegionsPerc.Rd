@@ -4,7 +4,7 @@
 \alias{randomizeRegionsPerc}
 \title{randomize Regions Perc}
 \usage{
-randomizeRegionsPercf(GR, genome, frac)
+randomizeRegionsPerc(GR, genome, frac)
 }
 \arguments{
 \item{GR}{description}

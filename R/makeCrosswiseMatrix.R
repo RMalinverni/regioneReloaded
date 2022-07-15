@@ -36,7 +36,7 @@
 #'
 #' data(cw_Alien)
 #'
-#' cw_Alien_ReG <- makeCrossWiseMatrix(cw_Alien_ReG)
+#' cw_Alien_ReG <- makeCrosswiseMatrix(cw_Alien_ReG)
 #'
 #' summary(cw_Alien_ReG)
 #'
