@@ -21,7 +21,10 @@ Imports:
     ggplot2,
     ggrepel,
     reshape2,
-    stats
+    stats,
+    methods,
+    scales,
+    knitr
 Suggests: 
     rmarkdown,
     knitr
