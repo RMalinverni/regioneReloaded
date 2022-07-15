@@ -28,7 +28,7 @@
 #' @examples
 #'
 #' data("cw_Alien")
-#' plotSinglePT(cw_Alien_ReG, RS1 = "regA", RS2 = "regA05")
+#' plotSinglePT(cw_Alien_ReG, RS1 = "regA", RS2 = "regA_05")
 #' plotSinglePT(cw_Alien_ReG, RS1 = "regA", RS2 = "regC")
 #'
 #' @import ggplot2
