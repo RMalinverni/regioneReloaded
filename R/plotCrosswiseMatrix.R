@@ -104,10 +104,7 @@ plotCrosswiseMatrix <- function(mPt,
   DF <- reshape2::melt(GM, varnames = c("X", "Y"))
 
   if (interpolate == FALSE) {
-
     ggplot2::ggplot(DF, ggplot2::aes_string(x = "X", y = "Y")) +
-
-      #geom_raster(aes(fill = value), interpolate = FALSE, color  = "white") +
       ggplot2::geom_tile(ggplot2::aes_string(fill = "value"), color = lineColor) +
       ggplot2::scale_fill_gradientn(
         colours = rev(colMatrix),
@@ -125,13 +122,9 @@ plotCrosswiseMatrix <- function(mPt,
       ) +
       ggplot2::labs(subtitle = title, title=main, caption = mPt@parameters$ranFUN) +
       ggplot2::coord_equal()
-
   } else{
-
     ggplot2::ggplot(DF, ggplot2::aes_string(x = "X", y = "Y")) +
-
-      ggplot2::geom_raster(aes(fill = value), interpolate = TRUE) +
-      #geom_tile(aes(fill = value), color = "withe") +
+      ggplot2::geom_raster(ggplot2::aes_string(fill = "value"), interpolate = TRUE) +
       ggplot2::scale_fill_gradientn(
         colours = rev(colMatrix),
         limits = c(-maxVal, maxVal),
@@ -148,7 +141,6 @@ plotCrosswiseMatrix <- function(mPt,
       ) +
       ggplot2::labs(subtitle =  title, title=main,caption = mPt@parameters$ranFUN) +
        ggplot2::coord_equal()
-
   }
 }
 
