@@ -4,7 +4,7 @@
 \alias{createUniverse}
 \title{Create Universe}
 \usage{
-createUniverse(Alist)
+createUniverse(Alist, joinR = TRUE)
 }
 \arguments{
 \item{Alist}{list of regions set in format accepted from \code{\link{regioneR}}}
