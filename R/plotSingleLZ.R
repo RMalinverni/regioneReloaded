@@ -37,7 +37,7 @@
 #'
 #' data("cw_Alien")
 #'
-#' plotSingleLZ(mlz_Alien_Reg, RS = c("regAB")
+#' # plotSingleLZ(mlz_Alien_ReG, RS = c("regAB")
 #'
 #'
 #' @export plotSingleLZ
