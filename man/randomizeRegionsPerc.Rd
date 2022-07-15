@@ -12,6 +12,8 @@ randomizeRegionsPerc(GR, genome = "hg19", frac = 0.2, ...)
 \item{genome}{description}
 
 \item{frac}{description}
+
+\item{...}{further arguments to be passed to other methods.}
 }
 \description{
 randomize regions at percentage

@@ -26,7 +26,7 @@
 #'
 #' data("cw_Alien")
 #'
-#' plotLocalZscoreMatrix(mLZ_Alien_ReG)
+#' plotLocalZScoreMatrix(mLZ_Alien_ReG)
 #'
 #'
 #' @import reshape2

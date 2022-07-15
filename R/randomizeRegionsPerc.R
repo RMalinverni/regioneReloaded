@@ -8,6 +8,7 @@
 #' @param GR description
 #' @param genome description
 #' @param frac description
+#' @param ... further arguments to be passed to other methods.
 #'
 #' @examples
 #'
