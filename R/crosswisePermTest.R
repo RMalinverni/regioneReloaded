@@ -60,6 +60,7 @@
 #'
 #' @import regioneR
 #' @import knitr
+#' @importFrom methods hasArg
 #' @export crosswisePermTest
 
 
@@ -82,7 +83,7 @@ crosswisePermTest <-
 
 # control parameters
 
-    if (!hasArg(Alist))
+    if (!methods::hasArg(Alist))
       stop("Alist is missing")
     if (!is.logical(sampling))
       stop("sampling must be logical")
