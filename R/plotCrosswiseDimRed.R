@@ -55,7 +55,7 @@
 #' @import Rtsne
 #' @import umap
 #' @import ggrepel
-#' @importFrom methods hasArgs
+#' @importFrom methods hasArg
 #'
 
 plotCrosswiseDimRed <-
