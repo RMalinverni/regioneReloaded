@@ -4,7 +4,7 @@
 \alias{randomizeRegionsPerc}
 \title{randomize Regions Perc}
 \usage{
-randomizeRegionsPerc(GR, genome = "hg19", frac=0.2)
+randomizeRegionsPerc(GR, genome = "hg19", frac = 0.2, ...)
 }
 \arguments{
 \item{GR}{description}
@@ -15,6 +15,24 @@ randomizeRegionsPerc(GR, genome = "hg19", frac=0.2)
 }
 \description{
 randomize regions at percentage
+}
+\examples{
+
+data("cw_Alien")
+
+nreg <- 100
+
+regA <-
+  createRandomRegions(
+  nregions = nreg,
+  length.mean = 100,
+  length.sd = 10,
+  non.overlapping = TRUE,
+  genome = AlienGenome
+ )
+
+ regA_02 <- randomizeRegionsPerc(GR = regA, genome = AlienGenome, frac = 0.2)
+
 }
 \seealso{
 similarRegionSet

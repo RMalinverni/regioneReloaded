@@ -42,9 +42,9 @@ create a local z-score matrix from an \code{\link{multiLocalZScore }} object and
 
 data(cw_Alien)
 
-mlz_Alien_ReG <- makeLZMatrix(mlz_Alien_ReG)
+# mlz_Alien_ReG <- makeLZMatrix(mlz_Alien_ReG)
 
-summary(mlz_Alien_ReG)
+# summary(mlz_Alien_ReG)
 
 
 
