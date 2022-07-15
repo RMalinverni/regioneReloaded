@@ -3,12 +3,33 @@
 #'
 #' randomize regions at percentage
 #'
-#' @usage randomizeRegionsPerc(GR, genome, frac)
+#' @usage randomizeRegionsPerc(GR, genome = "hg19", frac=0.2)
 #'
 #' @param GR description
 #' @param genome description
 #' @param frac description
 #'
+#'
+#'
+#' @examples
+#'
+#' data("cw_Alien)
+#'
+#' nreg <- 100
+#'
+#' regA <-
+#'  createRandomRegions(
+#'   nregions = nreg,
+#'   length.mean = 100,
+#'    length.sd = 10,
+#'    non.overlapping = TRUE,
+#'   genome = AlienGenome
+#'  )
+#'
+#'  # create a region set copy of regA but with a 20% of random regions
+#'  regA_02 <- randomizeRegionsPerc(GR = regA ,genome = AlienGenome, frac = 0.2)
+#'
+#' @seealso similarRegionSet
 #' @export randomizeRegionsPerc
 #'
 #'
