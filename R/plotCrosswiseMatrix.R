@@ -3,10 +3,10 @@
 #'
 #' Plot matrix of associations/correlations stored in a genoMatriXeR object.
 #'
-#' @usage plotCrosswiseMatrix(mPt,  lineColor = NA, interpolate = FALSE, colMatrix = "default",
+#' @usage plotCrosswiseMatrix(mPT,  lineColor = NA, interpolate = FALSE, colMatrix = "default",
 #' matrix_type = "crosswise", cor = "row", main = "")
 #'
-#' @param mPt an object of class gMXR or a matrix
+#' @param mPT an object of class gMXR or a matrix
 #' @param lineColor logic if TRUE a grid matrix will be draw (default: FALSE)
 #' @param interpolate logic the image will be interpolate using the function (\code{\link{geom_raster}}
 #' @param colMatrix character or vector of colors, if "default" will be used a default selection see..
@@ -38,7 +38,7 @@
 #'
 #'
 
-plotCrosswiseMatrix <- function(mPt,
+plotCrosswiseMatrix <- function(mPT,
                        lineColor = NA,
                        interpolate = FALSE,
                        colMatrix = "default",
@@ -48,10 +48,10 @@ plotCrosswiseMatrix <- function(mPt,
                        main = "",
                        ord_mat=NULL) {
 
-  if (class(mPt) == "genoMatriXeR") {
+  if (class(mPT) == "genoMatriXeR") {
 
     if  (matrix_type == "crosswise") {
-      GM <- mPt@matrix$GMat
+      GM <- mPT@matrix$GMat
       title <- "Association Matrix"
 
       if (is.na(maxVal)){
@@ -66,10 +66,10 @@ plotCrosswiseMatrix <- function(mPt,
 
     if  (matrix_type == "correlation") {
       if (cor == "row") {
-        GM <- mPt@matrix$GMat_corX
+        GM <- mPT@matrix$GMat_corX
       }
       if (cor == "col") {
-        GM <- mPt@matrix$GMat_corY
+        GM <- mPT@matrix$GMat_corY
       }
       title <- "Correlation Matrix"
       maxVal<-1
@@ -78,8 +78,8 @@ plotCrosswiseMatrix <- function(mPt,
   }
 
 
-  if (is.matrix(mPt)){
-    GM <- mPt
+  if (is.matrix(mPT)){
+    GM <- mPT
     if (is.na(maxVal)){
       maxVal<-max(c(abs(max(GM)),abs(min(GM))))
     }
@@ -120,7 +120,7 @@ plotCrosswiseMatrix <- function(mPt,
         ),
         axis.text.y = ggplot2::element_text(size = 6)
       ) +
-      ggplot2::labs(subtitle = title, title=main, caption = mPt@parameters$ranFUN) +
+      ggplot2::labs(subtitle = title, title=main, caption = mPT@parameters$ranFUN) +
       ggplot2::coord_equal()
   } else{
     ggplot2::ggplot(DF, ggplot2::aes_string(x = "X", y = "Y")) +
@@ -139,7 +139,7 @@ plotCrosswiseMatrix <- function(mPt,
         ),
         axis.text.y = ggplot2::element_text(size = 6)
       ) +
-      ggplot2::labs(subtitle =  title, title=main,caption = mPt@parameters$ranFUN) +
+      ggplot2::labs(subtitle =  title, title=main,caption = mPT@parameters$ranFUN) +
        ggplot2::coord_equal()
   }
 }
