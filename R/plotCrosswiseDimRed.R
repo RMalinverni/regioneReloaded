@@ -57,7 +57,7 @@
 #' @importFrom cluster pam
 #'
 
-plotCrosswiseDimRed2 <-
+plotCrosswiseDimRed <-
   function(mPT,
            type = "PCA",
            GM_clust = NA,
