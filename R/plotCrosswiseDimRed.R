@@ -75,7 +75,7 @@ plotCrosswiseDimRed <-
            theta = 0.1,
            return_table = FALSE,
            ...) {
-           
+
     if (!methods::hasArg(mPT)){
       stop("mPT is missing")
     } else if (class(mPT)=="genoMatriXeR"){
@@ -183,11 +183,11 @@ plotCrosswiseDimRed <-
     }
 
     p <-
-      ggplot2::ggplot(pdr_df, aes(
-        x = x,
-        y = y,
-        label = Name,
-        color = clust
+      ggplot2::ggplot(pdr_df, ggplot2::aes_string(
+        x = "x",
+        y = "y",
+        label = "Name",
+        color = "clust"
       )) +
       ggplot2::geom_point()
 
@@ -205,13 +205,13 @@ plotCrosswiseDimRed <-
     if (emphasize & !labAll) { # label all clusters
       p <- p + ggrepel::geom_text_repel(data = pdr_df_emph,
                                size  = labSize,
-                               aes(label = Name),
+                               ggplot2::aes_string(label = "Name"),
                                max.overlaps=labMaxOverlap,
                                point.padding = 0.5,
                                segment.color = "grey")
     } else {
       p <- p + ggrepel::geom_text_repel(size  = labSize,
-                               aes(label = Name),
+                               ggplot2::aes_string(label = "Name"),
                                max.overlaps=labMaxOverlap,
                                point.padding = 0.5,
                                segment.color = "grey")
