@@ -63,6 +63,7 @@ makeLZMatrix <- function(mlZA,
   mat <- vector(length = length(mlZA@multiLocalZscores$shifts))
 
   if (normalize == TRUE) {
+
     for (i in 1:length(mlZA@multiLocalZscores$shifed_ZSs)) {
       mat <-
         rbind(
