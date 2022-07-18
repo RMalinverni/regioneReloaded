@@ -9,6 +9,7 @@
 #' @param simple logical, if is TRUE the randomization process will not take care about the singular whit for each regions in A. (defalut = FALSE)
 #' @param per.chromosome logical, if TRUE the randomization will be perform by chromosome. (default  = TRUE)
 #' @param genome character or GenomicRanges, genome using for the randomization
+#' @param ... further arguments to be passed to other methods.
 #'
 #' @return a permTest object
 #' @seealso regioneR::permTest

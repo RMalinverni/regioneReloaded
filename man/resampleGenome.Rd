@@ -14,6 +14,8 @@ exampleGenome(A, simple = FALSE, per.chromosome = TRUE, genome="hg19", ...)
 \item{per.chromosome}{logical, if TRUE the randomization will be perform by chromosome. (default  = TRUE)}
 
 \item{genome}{character or GenomicRanges, genome using for the randomization}
+
+\item{...}{further arguments to be passed to other methods.}
 }
 \value{
 a permTest object
