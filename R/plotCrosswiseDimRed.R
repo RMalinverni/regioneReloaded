@@ -14,8 +14,10 @@
 #' belong to. In addition to generating a plot, a table with the cluster
 #' assignments can be retrieved by setting return_table as TRUE.
 #'
-#' @usage plotCrosswiseDimRed(mPT, type = "PCA", GM_clust = NA, nc = 5, listRS = NULL, main = "", labSize = 2, emphasize = FALSE,
-#' labAll = FALSE, labMaxOverlap = 100, ellipse = TRUE, perplexity = 10, theta = 0.1, return_table = FALSE, ...)
+#' @usage plotCrosswiseDimRed(mPT, type = "PCA", GM_clust = NA, clust_met =
+#' "kmeans", nc = 5, listRS = NULL, main = "", labSize = 2, emphasize = FALSE,
+#' labAll = FALSE, labMaxOverlap = 100, ellipse = TRUE, perplexity = 10, theta = 0.1,
+#' return_table = FALSE, ...)
 #'
 #'
 #' @param mPT an object of class genoMatriXeR or a numeric matrix.
