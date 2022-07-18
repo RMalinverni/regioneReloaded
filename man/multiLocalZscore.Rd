@@ -61,7 +61,7 @@ Perform a multiple permutation test and local z-score calculation between a regi
 list of regions set (or GrangedList)
 }
 \details{
-the permutation test core used in this function permit to change
+the permutation test core used in this function allows to change
 \code{"randomize.function"} \code{\link{randomizeRegions}},
 \code{\link{circularRandomizeRegions}}, \code{\link{resampleRegions}} or a
 custom function), but use only an \code{"evaluation.function"}

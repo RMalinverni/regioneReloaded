@@ -14,11 +14,8 @@
 #' belong to. In addition to generating a plot, a table with the cluster
 #' assignments can be retrieved by setting return_table as TRUE.
 #'
-#' @usage plotCrosswiseDimRed(mPT, type = "PCA", GM_clust = NA, nc = 5, listRS =
-#' NULL, main = "", labSize = 2, emphasize = FALSE,
-#' labAll = FALSE, labMaxOverlap = 100, ellipse = FALSE,
-#' perplexity = 10, theta = 0.1, return_table = FALSE,
-#' ...)
+#' @usage plotCrosswiseDimRed(mPT, type = "PCA", GM_clust = NA, nc = 5, listRS = NULL, main = "", labSize = 2, emphasize = FALSE,
+#' labAll = FALSE, labMaxOverlap = 100, ellipse = TRUE, perplexity = 10, theta = 0.1, return_table = FALSE)
 #'
 #'
 #' @param mPT an object of class genoMatriXeR or a numeric matrix.
@@ -35,7 +32,6 @@
 #' @param perplexity numeric, if type = "tSNE" value of perplexity for the function \code{\link{Rtsne}}. (default = 10)
 #' @param theta numeric, if type = "tSNE" value of theta for the function \code{\link{Rtsne}}. (default = 0.1)
 #' @param return_table logical, if TRUE a table with the cluster assigned to each region is returned instead of the plot. (default = FALSE)
-#' @param ... further arguments to be passed to other methods.
 #'
 #' @return A ggplot object or a table with cluster assignments is returned.
 #'
@@ -48,7 +44,9 @@
 #'
 #' plotCrosswiseDimRed(cw_Alien_ReG, type = "PCA")
 #'
-#' plotCrosswiseDimRed(cw_Alien_ReG, type = "UMAP")
+#' CDR_clust <- plotCrosswiseDimRed(cw_Alien_ReG, type = "UMAP",return_table = TRUE)
+#'
+#' print(CDR_clust)
 #'
 
 #' @export plotCrosswiseDimRed
@@ -56,7 +54,6 @@
 #' @import Rtsne
 #' @import umap
 #' @import ggrepel
-#' @importFrom methods hasArg
 #'
 
 plotCrosswiseDimRed <-
@@ -75,7 +72,7 @@ plotCrosswiseDimRed <-
            theta = 0.1,
            return_table = FALSE,
            ...) {
-    if (!methods::hasArg(mPT)){
+    if (!hasArg(mPT)){
       stop("mPT is missing")
     } else if (class(mPT)=="genoMatriXeR"){
       GM <- mPT@matrix$GMat
@@ -89,6 +86,27 @@ plotCrosswiseDimRed <-
       GM_clust <- stats::kmeans(GM, centers = nc)
 
     }
+
+    df <- df1 <- data.frame()
+    vec <- vec2 <- vec3 <- vector()
+
+    for ( i in 1:nc){
+
+      nms <- names(GM_clust$cluster[GM_clust$cluster == i])
+      GMmn <- mean(GM[nms,nms])
+      GMsd <- sd(GM[nms,nms])
+      vec[i]<-GMmn
+      vec2[i]<-GMsd
+      df <- data.frame(Name=nms,
+                      Cluster = rep(paste0("clust_",i),length(nms)),
+                      Mean = GMmn,
+                      SD = GMsd,
+                      Perc = round(GMsd/GMmn, digits = 2)
+                      )
+
+      df1<-rbind(df1, df)
+    }
+
 
     if (type == "PCA") {
 
@@ -146,11 +164,11 @@ plotCrosswiseDimRed <-
     }
 
     p <-
-      ggplot2::ggplot(pdr_df, ggplot2::aes_string(
-        x = "x",
-        y = "y",
-        label = "Name",
-        color = "clust"
+      ggplot2::ggplot(pdr_df, aes(
+        x = x,
+        y = y,
+        label = Name,
+        color = clust
       )) +
       ggplot2::geom_point()
 
@@ -168,13 +186,13 @@ plotCrosswiseDimRed <-
     if (emphasize & !labAll) { # label all clusters
       p <- p + ggrepel::geom_text_repel(data = pdr_df_emph,
                                size  = labSize,
-                               ggplot2::aes_string(label = "Name"),
+                               aes(label = Name),
                                max.overlaps=labMaxOverlap,
                                point.padding = 0.5,
                                segment.color = "grey")
     } else {
       p <- p + ggrepel::geom_text_repel(size  = labSize,
-                               ggplot2::aes_string(label = "Name"),
+                               aes(label = Name),
                                max.overlaps=labMaxOverlap,
                                point.padding = 0.5,
                                segment.color = "grey")
@@ -197,8 +215,10 @@ plotCrosswiseDimRed <-
                     subtitle = main)
     }
     if (return_table) {
-      tab <- pdr_df[,3:4]
-      rownames(tab) <- NULL
+      #tab <- pdr_df[,3:4]
+      #rownames(tab) <- NULL
+      p
+      tab <- df1
       return(tab)
     } else {
       return(p)

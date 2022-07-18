@@ -89,11 +89,7 @@ plotLocalZScoreMatrix <- function(mLZ,
 
   DF <- reshape2::melt(GM, varnames = c("X", "Y"))
 
-  if (!is.null(highlight)) {
-    DF_label <- DF[DF$Y %in% highlight & DF$X == 0,]
-  }
-
-  ggplot2::ggplot(DF, ggplot2::aes_string(x = "X", y = "Y")) +
+  p <- ggplot2::ggplot(DF, ggplot2::aes_string(x = "X", y = "Y")) +
 
     #geom_raster(aes(fill = value), interpolate = FALSE, color  = "white") +
     ggplot2::geom_tile(ggplot2::aes_string(fill = "value"), color = lineColor) +
@@ -102,11 +98,6 @@ plotLocalZScoreMatrix <- function(mLZ,
       limits = c(-maxVal, maxVal),
       oob = scales::squish
     )  +
-    ggrepel::geom_label_repel(data = DF_label, ggplot2::aes_string(label = "Y"), max.overlaps = Inf, size = highlight_size,
-                     min.segment.length = 0, xlim = c(0.4 * max(DF$X), NA),
-                     segment.curvature = -0.1,
-                     segment.ncp = 3,
-                     segment.angle = 20) +
     ggplot2::theme(
       axis.text.x = ggplot2::element_text(
         angle = 90,
@@ -121,6 +112,16 @@ plotLocalZScoreMatrix <- function(mLZ,
       title = main,
       caption = mLZ@parameters$ranFUN
     )
+
+  if (!is.null(highlight)) {
+    DF_label <- DF[DF$Y %in% highlight & DF$X == 0,]
+    p <- p + ggrepel::geom_label_repel(data = DF_label, ggplot2::aes_string(label = "Y"), max.overlaps = Inf, size = highlight_size,
+                              min.segment.length = 0, xlim = c(0.4 * max(DF$X), NA),
+                              segment.curvature = -0.1,
+                              segment.ncp = 3,
+                              segment.angle = 20)
+  }
+  return(p)
 }
 
 

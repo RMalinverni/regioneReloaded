@@ -4,11 +4,8 @@
 \alias{plotCrosswiseDimRed}
 \title{plotCrosswiseDimRed}
 \usage{
-plotCrosswiseDimRed(mPT, type = "PCA", GM_clust = NA, nc = 5, listRS =
-NULL, main = "", labSize = 2, emphasize = FALSE,
-labAll = FALSE, labMaxOverlap = 100, ellipse = FALSE,
-perplexity = 10, theta = 0.1, return_table = FALSE,
-...)
+plotCrosswiseDimRed(mPT, type = "PCA", GM_clust = NA, nc = 5, listRS = NULL, main = "", labSize = 2, emphasize = FALSE,
+labAll = FALSE, labMaxOverlap = 100, ellipse = TRUE, perplexity = 10, theta = 0.1, return_table = FALSE)
 }
 \arguments{
 \item{mPT}{an object of class genoMatriXeR or a numeric matrix.}
@@ -38,8 +35,6 @@ perplexity = 10, theta = 0.1, return_table = FALSE,
 \item{theta}{numeric, if type = "tSNE" value of theta for the function \code{\link{Rtsne}}. (default = 0.1)}
 
 \item{return_table}{logical, if TRUE a table with the cluster assigned to each region is returned instead of the plot. (default = FALSE)}
-
-\item{...}{further arguments to be passed to other methods.}
 }
 \value{
 A ggplot object or a table with cluster assignments is returned.
@@ -63,7 +58,9 @@ cw_Alien_ReG <- makeCrosswiseMatrix(cw_Alien_ReG)
 
 plotCrosswiseDimRed(cw_Alien_ReG, type = "PCA")
 
-plotCrosswiseDimRed(cw_Alien_ReG, type = "UMAP")
+CDR_clust <- plotCrosswiseDimRed(cw_Alien_ReG, type = "UMAP",return_table = TRUE)
+
+print(CDR_clust)
 
 }
 \seealso{
