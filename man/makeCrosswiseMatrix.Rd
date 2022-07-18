@@ -6,7 +6,7 @@
 \usage{
 makeCrosswiseMatrix( mPT, clusterize = TRUE, hc.method = NULL, dist.method = "euclidean",
 transform = FALSE, scale = FALSE, zs.type = 'norm_zscore', symm_matrix = TRUE,
-selectVec = NULL, pvcut = 1, subEX=0, ...)
+selectVec = NULL, pvcut = 1, GM_diag, subEX=0, ...)
 }
 \arguments{
 \item{mPT}{an object of class gMXR or a matrix}
@@ -29,6 +29,8 @@ if hc.method == NA, the methods used for clusterize the matrix will be selected 
 \item{selectVec}{vector, teh matrix will be reduced using only the row/column content. (default = NULL)}
 
 \item{pvcut}{maximum adj.pvalue accepted, all the associations with a adj.pvalue (defined in \code{\link{crosswisePermTest}}) higher than pvcut were transformed in 0. (default = 0.05)}
+
+\item{GM_diag}{value if not NULL GE_diag value will replace the association value of a diagonal of the association matrix. (default = NULL)}
 
 \item{subEX}{value used to substitute the z-score when they don't pass the pvalue test}
 

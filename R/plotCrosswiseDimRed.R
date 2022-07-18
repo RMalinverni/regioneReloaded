@@ -58,7 +58,7 @@
 #' @import ggrepel
 #' @import stats
 #' @importFrom cluster pam
-#'
+#' @importFrom cluster silhouette
 
 plotCrosswiseDimRed <-
   function(mPT,
@@ -107,6 +107,11 @@ plotCrosswiseDimRed <-
 
     }
 
+    sil <- cluster::silhouette(clust_tab, dist(GM))
+    sumSil <- summary(sil)
+    vecSil <- sumSil$clus.avg.widths
+
+
     df <- df1 <- data.frame()
     vec <- vec2 <- vec3 <- vector()
 
@@ -121,7 +126,8 @@ plotCrosswiseDimRed <-
                       Cluster = rep(paste0("clust_",i),length(nms)),
                       Mean = GMmn,
                       SD = GMsd,
-                      Perc = round(GMsd/GMmn, digits = 2)
+                      CV = round(GMsd/GMmn, digits = 2),
+                      clus.avg.widths = rep(vecSil[i],length(nms))
                       )
 
       df1<-rbind(df1, df)

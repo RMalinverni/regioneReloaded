@@ -5,7 +5,7 @@
 #'
 #' @usage makeCrosswiseMatrix( mPT, clusterize = TRUE, hc.method = NULL, dist.method = "euclidean",
 #' transform = FALSE, scale = FALSE, zs.type = 'norm_zscore', symm_matrix = TRUE,
-#' selectVec = NULL, pvcut = 1, subEX=0, ...)
+#' selectVec = NULL, pvcut = 1, GM_diag, subEX=0, ...)
 #'
 #' @param mPT an object of class gMXR or a matrix
 #' @param clusterize logic, if TRUE the matrix will be clusterize using a method selected with the variable \code{hc.method} (default = TRUE)
@@ -19,6 +19,7 @@
 #' @param selectVec vector, teh matrix will be reduced using only the row/column content. (default = NULL)
 #' @param pvcut maximum adj.pvalue accepted, all the associations with a adj.pvalue (defined in \code{\link{crosswisePermTest}}) higher than pvcut were transformed in 0. (default = 0.05)
 #' @param subEX value used to substitute the z-score when they don't pass the pvalue test
+#' @param GM_diag value if not NULL GE_diag value will replace the association value of a diagonal of the association matrix. (default = NULL)
 #' @param ... further arguments to be passed to other methods.
 #'
 #' @return
@@ -56,6 +57,7 @@ makeCrosswiseMatrix <-
            symm_matrix = TRUE,
            selectVec = NULL,
            pvcut = 1,
+           GM_diag = NULL,
            subEX=0,
            ...) {
 
@@ -95,6 +97,13 @@ makeCrosswiseMatrix <-
     warning( "impossible to create symmetrical matrix, number of matrix columns is different from number of rows" )
 
   }
+
+  if (symm_matrix == TRUE & !is.null(GM_diag)){
+    diag(mat) <- GM_diag
+  }
+
+
+
 
   if ( clusterize == TRUE ){
 
