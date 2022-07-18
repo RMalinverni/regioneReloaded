@@ -69,6 +69,8 @@
 #'
 #' }
 #'
+#' @importFrom methods new
+#'
 #' @export multiLocalZscore
 
 
