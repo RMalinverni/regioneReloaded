@@ -27,6 +27,5 @@ Imports:
     scales,
     knitr
 Suggests: 
-    rmarkdown,
-    knitr
+    rmarkdown
 VignetteBuilder: knitr
