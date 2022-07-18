@@ -37,7 +37,7 @@
 #'
 #'
 #'
-#' @details  the permutation test core used in this function permit to change
+#' @details  the permutation test core used in this function allows to change
 #' \code{"randomize.function"} \code{\link{randomizeRegions}},
 #' \code{\link{circularRandomizeRegions}}, \code{\link{resampleRegions}} or a
 #' custom function), but use only an \code{"evaluation.function"}

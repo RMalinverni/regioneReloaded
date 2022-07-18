@@ -4,7 +4,7 @@ resampleGenome<- function (A ,
                            genome="hg19",
                            ...)
 {
-  if (!method::hasArg(A))
+  if (!methods::hasArg(A))
     stop("A is missing")
 
   if (!is.logical(per.chromosome))
