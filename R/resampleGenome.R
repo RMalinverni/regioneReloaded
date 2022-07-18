@@ -3,7 +3,7 @@
 #'
 #' function for use resample starting from a binning of genome
 #'
-#' @usage exampleGenome(A, simple = FALSE, per.chromosome = TRUE, genome="hg19", ...)
+#' @usage resampleGenome(A, simple = FALSE, per.chromosome = TRUE, genome="hg19", ...)
 #'
 #' @param A an object of class GenomigRanges
 #' @param simple logical, if is TRUE the randomization process will not take care about the singular whit for each regions in A. (defalut = FALSE)

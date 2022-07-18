@@ -67,7 +67,7 @@ plotCrosswiseDimRed <-
            emphasize = FALSE,
            labAll = FALSE,
            labMaxOverlap = 100,
-           ellipse = FALSE,
+           ellipse = TRUE,
            perplexity = 10,
            theta = 0.1,
            return_table = FALSE,
