@@ -1,3 +1,26 @@
+#' resampleGenome
+#'
+#'
+#' function for use resample starting from a binning of genome
+#'
+#' @usage exampleGenome(A, simple = FALSE, per.chromosome = TRUE, genome="hg19", ...)
+#'
+#' @param A an object of class GenomigRanges
+#' @param simple logical, if is TRUE the randomization process will not take care about the singular whit for each regions in A. (defalut = FALSE)
+#' @param per.chromosome logical, if TRUE the randomization will be perform by chromosome. (default  = TRUE)
+#' @param genome character or GenomicRanges, genome using for the randomization
+#'
+#' @return a permTest object
+#' @seealso regioneR::permTest
+#'
+#'
+#'
+#' @export resampleGenome
+#'
+
+
+
+
 resampleGenome<- function (A ,
                            simple=FALSE,
                            per.chromosome = FALSE,
