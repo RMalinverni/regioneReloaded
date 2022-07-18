@@ -25,7 +25,8 @@ Imports:
     stats,
     methods,
     scales,
-    knitr
+    knitr,
+    GenomeInfoDb
 Suggests: 
     rmarkdown
 VignetteBuilder: knitr

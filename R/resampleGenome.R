@@ -14,7 +14,7 @@
 #' @return a permTest object
 #' @seealso regioneR::permTest
 #'
-#'
+#' @import GenomeInfoDb
 #'
 #' @export resampleGenome
 #'
