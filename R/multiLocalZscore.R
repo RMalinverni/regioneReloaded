@@ -151,6 +151,7 @@ multiLocalZscore <- function(A,
     lapply(
       pt,
       regioneR::localZScore,
+      ... ,
       A = A ,
       count.once = TRUE,
       window = window,
