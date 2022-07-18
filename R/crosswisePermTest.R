@@ -58,12 +58,6 @@
 #'
 #'
 #' @import regioneR
-#'
-#'
-#'
-#'
-
-#' @import knitr
 #' @importFrom methods hasArg
 #' @importFrom methods new
 #' @export crosswisePermTest
