@@ -44,5 +44,5 @@ data("cw_Alien")
 
 }
 \seealso{
-\code{\link{multiLocalZScore}} \code{\link{makeLZMatrix}}
+\code{\link{multiLocalZscore}} \code{\link{makeLZMatrix}}
 }

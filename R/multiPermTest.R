@@ -4,12 +4,12 @@
 #' @keywords internal function
 #' @usage multiPermTest (A, Blist, ranFUN, evFUN, universe, genome, rFUN, verbose = FALSE, ntimes, adj_pv_method, ...)
 #'
-#' @param A Genomic Ranges or any accepted formats by  \code{\link{regioneR}} package
+#' @param A Genomic Ranges or any accepted formats by  [regioneR](https://bioconductor.org/packages/release/bioc/html/regioneR.html) package
 #' (\code{\link{GenomicRanges}}, \code{\link{data.frame}} etc...)
-#' @param Blist GRangesList or list of Region Set of any accepted formats by  \code{\link{regioneR}} package
+#' @param Blist GRangesList or list of Region Set of any accepted formats by  [regioneR](https://bioconductor.org/packages/release/bioc/html/regioneR.html) package
 #' (\code{\link{GenomicRanges}}, \code{\link{data.frame}} etc...)
-#' @param ranFUN (default = "randomizeRegions") choose the randomization strategy used for the test see  \code{\link{regioneR}}
-#' @param evFUN  (default = "numOverlaps) choose the evaluation strategy used for the test see  \code{\link{regioneR}}
+#' @param ranFUN (default = "randomizeRegions") choose the randomization strategy used for the test see  [regioneR](https://bioconductor.org/packages/release/bioc/html/regioneR.html)
+#' @param evFUN  (default = "numOverlaps) choose the evaluation strategy used for the test see  [regioneR](https://bioconductor.org/packages/release/bioc/html/regioneR.html)
 #' @param universe (default = NULL) used only when \code{\link{resampleRegions}} function is selected
 #' @param adj_pv_method Charachter, the method used for the calculation of the adjusted p-value,
 #' to choose between the options of \code{\link{p.adjust}}. (default = "BH")

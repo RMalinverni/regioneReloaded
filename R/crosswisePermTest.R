@@ -9,22 +9,20 @@
 #'  genome = "hg19", verbose = FALSE, ...)
 #'
 #'
-#' @param Alist GRangesList or list of Region Set of any accepted formats by  \code{\link{regioneR}} package
-#' (\code{\link{GenomicRanges}}, \code{\link{data.frame}} etc...)
-#' @param Blist GRangesList or list of Region Set of any accepted formats by  \code{\link{regioneR}} package
-#' (\code{\link{GenomicRanges}}, \code{\link{data.frame}} etc...)
+#' @param Alist,Blist GRangesList or list of Region Set of any accepted formats by  [regioneR](https://bioconductor.org/packages/release/bioc/html/regioneR.html) package
+#' ([GenomicRanges], [data.frame] etc...)
 #' @param sampling Boolean, if is true the function will use only a sample of
 #' each element of Alist to perform the test (default = FALSE)
 #' @param fraction Logic, if sampling==TRUE is the fraction of the region sets
 #' used to perform the test (default = 0.15)
 #' @param min_sampling numeric, minimum number of regions accepted after the sampling, if the number of the sampled
 #' regions is less than min_sampling will be used min_sampling value as number of regions
-#' @param ranFUN (default = "randomizeRegions") choose the randomization strategy used for the test see  \code{\link{regioneR}}
-#' @param evFUN  (default = "numOverlaps) choose the evaluation strategy used for the test see  \code{\link{regioneR}}
+#' @param ranFUN (default = "randomizeRegions") choose the randomization strategy used for the test see [regioneR](https://bioconductor.org/packages/release/bioc/html/regioneR.html)
+#' @param evFUN  (default = "numOverlaps) choose the evaluation strategy used for the test see  [regioneR](https://bioconductor.org/packages/release/bioc/html/regioneR.html)
 #' @param ntimes numeric. Number of permutation used in the test. (default = 100)
-#' @param universe (default = NULL) used only when \code{\link{resampleRegions}} function is selected
+#' @param universe (default = NULL) used only when [resampleRegions()] function is selected
 #' @param adj_pv_method Charachter, the method used for the calculation of the adjusted p-value,
-#' to choose between the options of \code{\link{p.adjust}}. (default = "BH")
+#' to choose between the options of [p.adjust()]. (default = "BH")
 #' @param max_pv Numeric, the z-scores associate a p-values higher of this parameter will be transform in subEx. (default =0.05)
 #' @param subEx Numeric, (default = 0) substitute this value to a z-score when the p-value is higher than max_pv
 #' @param genome Charachter or GenomicRanges, (defalut = "hg19") genome used to compute the randomization
@@ -34,7 +32,7 @@
 #' @details ...
 #' @return
 #'
-#' A object of class \code{genoMatriXeR} containing three slots
+#' A object of class [genoMatriXeR][genoMatriXeR-class] containing three slots
 #'
 #' \itemize{
 #' \item \bold{\code{@parameters}}
@@ -44,7 +42,7 @@
 #' }
 #'
 #'
-#' @seealso    \code{\link{genoMatriXeR_classes}} \code{\link{regioneR}} \code{\link{regioneR}}, \code{\link{permTest}}, \code{\link{overlapPermTest}} ,
+#' @seealso    [genoMatriXeR][genoMatriXeR-class], [regioneR](https://bioconductor.org/packages/release/bioc/html/regioneR.html), \code{\link{permTest}}, \code{\link{overlapPermTest}}
 #'
 #' @examples
 #'
