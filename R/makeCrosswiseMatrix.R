@@ -5,7 +5,7 @@
 #'
 #' @usage makeCrosswiseMatrix( mPT, clusterize = TRUE, hc.method = NULL, dist.method = "euclidean",
 #' transform = FALSE, scale = FALSE, zs.type = 'norm_zscore', symm_matrix = TRUE,
-#' selectVec = NULL, pvcut = 1, GM_diag, subEX=0, ...)
+#' selectVec = NULL, pvcut = 1, GM_diag = NULL, subEX=0, ...)
 #'
 #' @param mPT an object of class gMXR or a matrix
 #' @param clusterize logic, if TRUE the matrix will be clusterize using a method selected with the variable \code{hc.method} (default = TRUE)
@@ -98,11 +98,6 @@ makeCrosswiseMatrix <-
 
   }
 
-  if (symm_matrix == TRUE & !is.null(GM_diag)){
-    diag(mat) <- GM_diag
-  }
-
-
 
 
   if ( clusterize == TRUE ){
@@ -135,6 +130,11 @@ makeCrosswiseMatrix <-
   mat <- cleanCrosswiseMatrix(GM = mat,GM_pv = mat_pv ,
                               pvcut = pvcut,scale = scale,
                               subEX =subEX)
+
+  if (symm_matrix == TRUE & !is.null(GM_diag)){
+    diag(mat) <- GM_diag
+  }
+
   mat1 <- list( GMat = mat, GMat_pv = mat_pv, GMat_corX = mat_corX ,
                 GMat_corY = mat_corY, FitRow = fit, FitCol = fit2)
   mPT@matrix <- mat1

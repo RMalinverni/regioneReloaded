@@ -6,7 +6,7 @@
 \usage{
 makeCrosswiseMatrix( mPT, clusterize = TRUE, hc.method = NULL, dist.method = "euclidean",
 transform = FALSE, scale = FALSE, zs.type = 'norm_zscore', symm_matrix = TRUE,
-selectVec = NULL, pvcut = 1, GM_diag, subEX=0, ...)
+selectVec = NULL, pvcut = 1, GM_diag = NULL, subEX=0, ...)
 }
 \arguments{
 \item{mPT}{an object of class gMXR or a matrix}
