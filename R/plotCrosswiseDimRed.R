@@ -21,6 +21,7 @@
 #' @param mPT an object of class genoMatriXeR or a numeric matrix.
 #' @param type character, Dimensional Reduction algorithm to use ("PCA", "tSNE", "UMAP"). (default  = "PCA")
 #' @param GM_clust numeric, vector of clusters used to clusterize the matrix, if NA will the matrix will be clusterized using the \code{\link{kmeans}} function. (default = NA)
+#' @param clust_met string, unsupervised cluster strategy used. Option available are "kmeans" or "pam". (default = "kmeans")
 #' @param nc numeric, number of cluster to define if using the default kmeans method. (default = 5)
 #' @param listRS list of vector, a list of names of regionset of interest to be highlighted in the graph. (default = NULL)
 #' @param main character, title for the plot. (default = "")
@@ -47,19 +48,20 @@
 #' CDR_clust <- plotCrosswiseDimRed(cw_Alien_ReG, type = "UMAP",return_table = TRUE)
 #'
 #' print(CDR_clust)
-#'
-
 #' @export plotCrosswiseDimRed
 #' @import ggplot2
 #' @import Rtsne
 #' @import umap
 #' @import ggrepel
+#' @import stats
+#' @importFrom cluster pam
 #'
 
-plotCrosswiseDimRed <-
+plotCrosswiseDimRed2 <-
   function(mPT,
            type = "PCA",
            GM_clust = NA,
+           clust_met ="kmeans",
            nc = 5,
            listRS = NULL,
            main = "",
@@ -72,7 +74,8 @@ plotCrosswiseDimRed <-
            theta = 0.1,
            return_table = FALSE,
            ...) {
-    if (!hasArg(mPT)){
+           
+    if (!methods::hasArg(mPT)){
       stop("mPT is missing")
     } else if (class(mPT)=="genoMatriXeR"){
       GM <- mPT@matrix$GMat
@@ -83,7 +86,21 @@ plotCrosswiseDimRed <-
     }
 
     if (is.na(GM_clust)) {
-      GM_clust <- stats::kmeans(GM, centers = nc)
+
+      if (clust_met == "hclust"){
+        clust_tab <- stats::cutree(mPT@matrix$FitRow, k = nc)
+        clust_tab<-clust_tab[rownames(GM)]
+      }
+
+      if (clust_met == "kmeans"){
+        GM_clust <- stats::kmeans(GM, centers = nc)
+        clust_tab<-GM_clust$cluster
+      }
+
+      if (clust_met == "pam"){
+        GM_clust <- cluster::pam(GM, k = nc)
+        clust_tab<-GM_clust$cluster
+      }
 
     }
 
@@ -92,7 +109,7 @@ plotCrosswiseDimRed <-
 
     for ( i in 1:nc){
 
-      nms <- names(GM_clust$cluster[GM_clust$cluster == i])
+      nms <- names(clust_tab[clust_tab == i])
       GMmn <- mean(GM[nms,nms])
       GMsd <- sd(GM[nms,nms])
       vec[i]<-GMmn
@@ -107,6 +124,7 @@ plotCrosswiseDimRed <-
       df1<-rbind(df1, df)
     }
 
+    df1[is.na(df1)]<-0
 
     if (type == "PCA") {
 
@@ -141,7 +159,7 @@ plotCrosswiseDimRed <-
 
 
     pdr_df$clust <-
-      paste0("clust_", as.factor(GM_clust$cluster))
+      paste0("clust_", as.factor(clust_tab)) # attenzione ###########################
 
     pdr_df$clust1 <- rep("none", nrow(pdr_df))
 
@@ -217,7 +235,7 @@ plotCrosswiseDimRed <-
     if (return_table) {
       #tab <- pdr_df[,3:4]
       #rownames(tab) <- NULL
-      p
+      plot(p)
       tab <- df1
       return(tab)
     } else {
