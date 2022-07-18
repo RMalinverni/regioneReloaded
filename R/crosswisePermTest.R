@@ -144,6 +144,7 @@ crosswisePermTest <-
      warning(
        "resampleRegions function need that 'universe' is not NULL, universe was created using all the regions present in Alist"
      )
+       universe <- createUniverse(Alist)
      }
 
 # create @multiOverlaps slot
