@@ -1,12 +1,12 @@
-#' Make Local Z-Score Matrix
+  #' Make Local Z-Score Matrix
 #'
 #'
-#' create a local z-score matrix from an \code{\link{multiLocalZScore }} object and save it in the matrix slot
+#' create a local z-score matrix from an [multiLocalZScore][multiLocalZScore-class] object and save it in the matrix slot
 #'
 #' @usage makeLZMatrix( mlZA, normalize = TRUE, clusterize = TRUE, centralize = NA, hc.method = NULL, dist.method = "euclidean",
 #'                            scale = FALSE, ...)
 #'
-#' @param mlZA an object of class \code{\link{multiLocalZScore }} or a matrix
+#' @param mlZA an object of class [multiLocalZScore][multiLocalZScore-class] or a matrix
 #' @param normalize logic, if TRUE the matrix will be normalize. (default = FALSE)
 #' @param clusterize logic, if TRUE the matrix will be clusterize using a method selected with the variable \code{hc.method} (default = TRUE)
 #' @param hc.method character/vector, select the \code{hclust} method to use for clusterize the matrix,
@@ -19,7 +19,7 @@
 #'
 #' @return
 #'
-#' A object of class \code{multiLocalZScore} containing three slots
+#' A object of class [mLZS][multiLocalZScore-class] containing three slots
 #'
 #' \itemize{
 #' \item \bold{\code{@parameters}}
@@ -29,7 +29,7 @@
 #' }
 #'
 #'
-#' @seealso  \code{\link{localZscore}}
+#' @seealso  \code{\link{localZScore}}
 #'
 #' @examples
 #'

@@ -8,7 +8,7 @@ makeLZMatrix( mlZA, normalize = TRUE, clusterize = TRUE, centralize = NA, hc.met
                            scale = FALSE, ...)
 }
 \arguments{
-\item{mlZA}{an object of class \code{\link{multiLocalZScore }} or a matrix}
+\item{mlZA}{an object of class \link[=multiLocalZScore-class]{multiLocalZScore} or a matrix}
 
 \item{normalize}{logic, if TRUE the matrix will be normalize. (default = FALSE)}
 
@@ -26,7 +26,7 @@ if hc.method == NULL, the methods used for clusterize the matrix will be selecte
 \item{...}{further arguments to be passed to other methods.}
 }
 \value{
-A object of class \code{multiLocalZScore} containing three slots
+A object of class \link[=multiLocalZScore-class]{mLZS} containing three slots
 
 \itemize{
 \item \bold{\code{@parameters}}
@@ -36,7 +36,7 @@ A object of class \code{multiLocalZScore} containing three slots
 }
 }
 \description{
-create a local z-score matrix from an \code{\link{multiLocalZScore }} object and save it in the matrix slot
+create a local z-score matrix from an \link[=multiLocalZScore-class]{multiLocalZScore} object and save it in the matrix slot
 }
 \examples{
 
@@ -50,5 +50,5 @@ data(cw_Alien)
 
 }
 \seealso{
-\code{\link{localZscore}}
+\code{\link{localZScore}}
 }

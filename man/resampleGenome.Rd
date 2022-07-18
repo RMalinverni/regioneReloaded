@@ -4,7 +4,7 @@
 \alias{resampleGenome}
 \title{resampleGenome}
 \usage{
-exampleGenome(A, simple = FALSE, per.chromosome = TRUE, genome="hg19", ...)
+resampleGenome(A, simple = FALSE, per.chromosome = FALSE, genome="hg19", ...)
 }
 \arguments{
 \item{A}{an object of class GenomigRanges}

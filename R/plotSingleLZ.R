@@ -31,7 +31,7 @@
 #' @param colPal character vector of custom colors to use as palette source for the plot. If NULL, predetermined colors from \code{\link{RColorBrewer}}) Set2 palette are used.
 #' @return A plot is created on the current graphics device.
 #'
-#' @seealso \code{\link{multiLocalZScore}} \code{\link{makeLZMatrix}}
+#' @seealso \code{\link{multiLocalZscore}} \code{\link{makeLZMatrix}}
 #'
 #' @examples
 #'

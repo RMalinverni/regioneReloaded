@@ -3,7 +3,7 @@
 \docType{data}
 \name{cw_Real}
 \alias{cw_Real}
-\title{HepG2 TF crosswise matrix using \code{\link{resampleGenome}}   functions as permutation strategies}
+\title{cw_Real}
 \format{
 Two objects of class \code{"genoMatriXeR"} and \code{"multiLocalZscore"}; see \code{\link{makeCrosswiseMatrix}}.
 }
@@ -11,6 +11,9 @@ Two objects of class \code{"genoMatriXeR"} and \code{"multiLocalZscore"}; see \c
 data(cw_Real)
 }
 \description{
+HepG2 TF crosswise matrix using \code{\link{resampleGenome}} functions as permutation strategies
+}
+\details{
 CrossWise matrix calculated using 261 different regionset vs itself
 (description of Region set can be find here:"")
 }

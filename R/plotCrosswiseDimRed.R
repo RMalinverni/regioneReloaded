@@ -14,8 +14,10 @@
 #' belong to. In addition to generating a plot, a table with the cluster
 #' assignments can be retrieved by setting return_table as TRUE.
 #'
-#' @usage plotCrosswiseDimRed(mPT, type = "PCA", GM_clust = NA, nc = 5, listRS = NULL, main = "", labSize = 2, emphasize = FALSE,
-#' labAll = FALSE, labMaxOverlap = 100, ellipse = TRUE, perplexity = 10, theta = 0.1, return_table = FALSE)
+#' @usage plotCrosswiseDimRed(mPT, type = "PCA", GM_clust = NA, clust_met =
+#' "kmeans", nc = 5, listRS = NULL, main = "", labSize = 2, emphasize = FALSE,
+#' labAll = FALSE, labMaxOverlap = 100, ellipse = TRUE, perplexity = 10, theta = 0.1,
+#' return_table = FALSE, ...)
 #'
 #'
 #' @param mPT an object of class genoMatriXeR or a numeric matrix.
@@ -33,6 +35,7 @@
 #' @param perplexity numeric, if type = "tSNE" value of perplexity for the function \code{\link{Rtsne}}. (default = 10)
 #' @param theta numeric, if type = "tSNE" value of theta for the function \code{\link{Rtsne}}. (default = 0.1)
 #' @param return_table logical, if TRUE a table with the cluster assigned to each region is returned instead of the plot. (default = FALSE)
+#' @param ... further arguments to be passed on to other functions.
 #'
 #' @return A ggplot object or a table with cluster assignments is returned.
 #'
@@ -69,7 +72,7 @@ plotCrosswiseDimRed <-
            emphasize = FALSE,
            labAll = FALSE,
            labMaxOverlap = 100,
-           ellipse = FALSE,
+           ellipse = TRUE,
            perplexity = 10,
            theta = 0.1,
            return_table = FALSE,
@@ -188,11 +191,11 @@ plotCrosswiseDimRed <-
     }
 
     p <-
-      ggplot2::ggplot(pdr_df, aes(
-        x = x,
-        y = y,
-        label = Name,
-        color = clust
+      ggplot2::ggplot(pdr_df, ggplot2::aes_string(
+        x = "x",
+        y = "y",
+        label = "Name",
+        color = "clust"
       )) +
       ggplot2::geom_point()
 
@@ -210,13 +213,13 @@ plotCrosswiseDimRed <-
     if (emphasize & !labAll) { # label all clusters
       p <- p + ggrepel::geom_text_repel(data = pdr_df_emph,
                                size  = labSize,
-                               aes(label = Name),
+                               ggplot2::aes_string(label = "Name"),
                                max.overlaps=labMaxOverlap,
                                point.padding = 0.5,
                                segment.color = "grey")
     } else {
       p <- p + ggrepel::geom_text_repel(size  = labSize,
-                               aes(label = Name),
+                               ggplot2::aes_string(label = "Name"),
                                max.overlaps=labMaxOverlap,
                                point.padding = 0.5,
                                segment.color = "grey")

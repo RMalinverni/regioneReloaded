@@ -8,12 +8,12 @@
 #' min_sampling = 5000, fraction = 0.15, universe = NULL, window = 2000, step = 100, adj_pv_method = "BH", min_regions = 1000,
 #' max_pv = 0.05, genome = "hg19", ...)
 #'
-#' @param A Region Set of any accepted formats by  \code{\link{regioneR}} package
+#' @param A Region Set of any accepted formats by  c package
 #' (\code{\link{GenomicRanges}}, \code{\link{data.frame}} etc...)
-#' @param Blist list of Region Set of any accepted formats by \code{\link{regioneR}} package
+#' @param Blist list of Region Set of any accepted formats by [regioneR](https://bioconductor.org/packages/release/bioc/html/regioneR.html) package
 #' (\code{\link{GenomicRanges}}, \code{\link{data.frame}} etc...)
 #' @param ranFUN Function, choose the randomization strategy used for the test (default = "randomizeRegions")
-#' for details see \code{\link{regioneR}}
+#' for details see [regioneR](https://bioconductor.org/packages/release/bioc/html/regioneR.html)
 #' @param evFUN Function, choose the evaluation strategy used for the test (default = "numOverlaps")
 #' @param sampling Boolean, if is true the function will use only a sample of
 #' each element of Alist to perform the test
@@ -22,7 +22,7 @@
 #' used to perform the test. (default = 0.15)
 #' @param fraction  Logic, if sampling==TRUE is the fraction of the region sets
 #' used to perform the test (default = 0.15)
-#' @param universe Region Set of any accepted formats by  \code{\link{regioneR}}, using only when resamplinRegions function is
+#' @param universe Region Set of any accepted formats by  [regioneR](https://bioconductor.org/packages/release/bioc/html/regioneR.html), using only when resamplinRegions function is
 #' selected (default = NULL)
 #' @param window window (in number of base pairs) in which will be estimated the local Z-score
 #' @param step step (in number of base pairs) in which will be estimated the local Z-score
@@ -45,7 +45,7 @@
 #'
 #' @return
 #'
-#' A object of class \code{multiLocalZScore} containing three slots
+#' A object of class [multiLocalZScore][multiLocalZScore-class] containing three slots
 #'
 #' \itemize{
 #' \item \bold{\code{@parameters}}
@@ -55,7 +55,7 @@
 #' }
 #'
 #'
-#' @seealso  \code{\link{localZscore}}
+#' @seealso  \code{\link{localZScore}}
 #'
 #' @examples
 #'

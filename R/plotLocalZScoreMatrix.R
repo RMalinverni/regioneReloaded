@@ -20,7 +20,7 @@
 #'
 #' @return A plot is created on the current graphics device.
 #'
-#' @seealso \code{\link{multiLocalZScore}} \code{\link{makeLZMatrix}}
+#' @seealso \code{\link{multiLocalZscore}} \code{\link{makeLZMatrix}}
 #'
 #' @examples
 #'

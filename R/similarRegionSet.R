@@ -20,7 +20,7 @@
 #' similAList <- similarRegionSet(GR = A, genome = AlienGenome,vectorPerc = seq(0.1,0.9,0.2), name = "test")
 #' summary (similAList)
 #'
-#' @seealso \code{\link{GenomiCRanges}}
+#' @seealso \code{\link{GenomicRanges}}
 #'
 #' @import GenomicRanges
 #'

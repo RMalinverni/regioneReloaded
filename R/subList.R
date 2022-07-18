@@ -4,7 +4,7 @@
 #'
 #' @usage subList(Alist, min_sampling, fraction)
 #'
-#' @param Alist,  GRangesList or list of Region Set of any accepted formats by  \code{\link{regioneR}} package
+#' @param Alist,  GRangesList or list of Region Set of any accepted formats by  [regioneR](https://bioconductor.org/packages/release/bioc/html/regioneR.html) package
 #' @param min_sampling numeric, minimum number of regions for each element of the list,
 #' if the number of regions is less than min_samplnig as subsempilng will be take the entire regionset
 #' @param fraction numeric, percentage of regions selected for the subsampling

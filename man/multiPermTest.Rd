@@ -7,15 +7,15 @@
 multiPermTest (A, Blist, ranFUN, evFUN, universe, genome, rFUN, verbose = FALSE, ntimes, adj_pv_method, ...)
 }
 \arguments{
-\item{A}{Genomic Ranges or any accepted formats by  \code{\link{regioneR}} package
+\item{A}{Genomic Ranges or any accepted formats by  \href{https://bioconductor.org/packages/release/bioc/html/regioneR.html}{regioneR} package
 (\code{\link{GenomicRanges}}, \code{\link{data.frame}} etc...)}
 
-\item{Blist}{GRangesList or list of Region Set of any accepted formats by  \code{\link{regioneR}} package
+\item{Blist}{GRangesList or list of Region Set of any accepted formats by  \href{https://bioconductor.org/packages/release/bioc/html/regioneR.html}{regioneR} package
 (\code{\link{GenomicRanges}}, \code{\link{data.frame}} etc...)}
 
-\item{ranFUN}{(default = "randomizeRegions") choose the randomization strategy used for the test see  \code{\link{regioneR}}}
+\item{ranFUN}{(default = "randomizeRegions") choose the randomization strategy used for the test see  \href{https://bioconductor.org/packages/release/bioc/html/regioneR.html}{regioneR}}
 
-\item{evFUN}{(default = "numOverlaps) choose the evaluation strategy used for the test see  \code{\link{regioneR}}}
+\item{evFUN}{(default = "numOverlaps) choose the evaluation strategy used for the test see  \href{https://bioconductor.org/packages/release/bioc/html/regioneR.html}{regioneR}}
 
 \item{universe}{(default = NULL) used only when \code{\link{resampleRegions}} function is selected}
 

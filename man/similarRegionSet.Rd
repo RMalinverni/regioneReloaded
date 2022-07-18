@@ -43,5 +43,5 @@ summary(listRegA)
 
 }
 \seealso{
-\code{\link{GenomiCRanges}}
+\code{\link{GenomicRanges}}
 }
