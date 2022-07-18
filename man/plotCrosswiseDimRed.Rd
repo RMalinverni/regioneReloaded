@@ -14,6 +14,8 @@ labAll = FALSE, labMaxOverlap = 100, ellipse = TRUE, perplexity = 10, theta = 0.
 
 \item{GM_clust}{numeric, vector of clusters used to clusterize the matrix, if NA will the matrix will be clusterized using the \code{\link{kmeans}} function. (default = NA)}
 
+\item{clust_met}{string, unsupervised cluster strategy used. Option available are "kmeans" or "pam". (default = "kmeans")}
+
 \item{nc}{numeric, number of cluster to define if using the default kmeans method. (default = 5)}
 
 \item{listRS}{list of vector, a list of names of regionset of interest to be highlighted in the graph. (default = NULL)}
@@ -61,7 +63,6 @@ plotCrosswiseDimRed(cw_Alien_ReG, type = "PCA")
 CDR_clust <- plotCrosswiseDimRed(cw_Alien_ReG, type = "UMAP",return_table = TRUE)
 
 print(CDR_clust)
-
 }
 \seealso{
 \code{\link{crosswisePermTest}}
