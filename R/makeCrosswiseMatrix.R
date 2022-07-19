@@ -16,7 +16,7 @@
 #' transform = FALSE, scale = FALSE, zs.type = 'norm_zscore', symm_matrix = TRUE,
 #' selectRow = NULL, selectCol = NULL, pvcut = 1, GM_diag = NULL, subEX=0, ...)
 #'
-#' @param mPT an object of class [genoMatriXeR][genoMatriXeR-class] or a matrix.
+#' @param mPT an object of class [genoMatriXeR][genoMatriXeR-class].
 #' @param clusterize logical, if TRUE the matrix will be clustered using the method specified by \code{hc.method} (default = TRUE)
 #' @param hc.method character, select the \code{hclust} method to use for clustering the matrix, if NULL, the clustering method will be automatically selected by the function [chooseHclustMet()]. (default = NULL)
 #' @param dist.method character, the distance measure to be used from those available in [dist()] . (default = "euclidean")
