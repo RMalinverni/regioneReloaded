@@ -121,17 +121,17 @@ plotCrosswiseDimRed <-
     for ( i in 1:nc){
 
       nms <- names(clust_tab[clust_tab == i])
-      nmsCol <- colnames(GM)
-      GMmn <- mean(GM[nms,nmsCol])
-      GMsd <- sd(GM[nms,nmsCol])
-      vec[i]<-GMmn
-      vec2[i]<-GMsd
+      # nmsCol <- colnames(GM)
+      # GMmn <- mean(GM[nms,nmsCol])
+      # GMsd <- sd(GM[nms,nmsCol])
+      # vec[i]<-GMmn
+      # vec2[i]<-GMsd
       df <- data.frame(Name=nms,
                       Cluster = rep(paste0("clust_",i),length(nms)),
-                      Mean = GMmn,
-                      SD = GMsd,
-                      CV = round(GMsd/GMmn, digits = 2),
-                      clus.avg.widths = rep(vecSil[i],length(nms))
+                      #Mean = GMmn,
+                      #SD = GMsd,
+                      #CV = round(GMsd/GMmn, digits = 2),
+                      ASW = rep(vecSil[i],length(nms))
                       )
 
       df1<-rbind(df1, df)
