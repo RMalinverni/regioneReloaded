@@ -6,7 +6,7 @@
 \usage{
 makeCrosswiseMatrix( mPT, clusterize = TRUE, hc.method = NULL, dist.method = "euclidean",
 transform = FALSE, scale = FALSE, zs.type = 'norm_zscore', symm_matrix = TRUE,
-selectVec = NULL, pvcut = 1, GM_diag = NULL, subEX=0, ...)
+selectRow = NULL, selectCol = NULL, pvcut = 1, GM_diag = NULL, subEX=0, ...)
 }
 \arguments{
 \item{mPT}{an object of class gMXR or a matrix}
@@ -26,7 +26,9 @@ if hc.method == NA, the methods used for clusterize the matrix will be selected 
 
 \item{symm_matrix}{logic, if TRUE the matrix will be treated as symmetrical (same clusterization for row and column). (default = TRUE)}
 
-\item{selectVec}{vector, teh matrix will be reduced using only the row/column content. (default = NULL)}
+\item{selectRow}{vector, the matrix will be reduced selecting the rows in this vector. (default = NULL)}
+
+\item{selectCol}{vector, the matrix will be reduced selecting the columns in this vector. (default = NULL)}
 
 \item{pvcut}{maximum adj.pvalue accepted, all the associations with a adj.pvalue (defined in \code{\link{crosswisePermTest}}) higher than pvcut were transformed in 0. (default = 0.05)}
 
