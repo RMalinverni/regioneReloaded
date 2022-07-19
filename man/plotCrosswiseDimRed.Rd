@@ -7,7 +7,7 @@
 plotCrosswiseDimRed(mPT, type = "PCA", GM_clust = NA, clust_met =
 "kmeans", nc = 5, listRS = NULL, main = "", labSize = 2, emphasize = FALSE,
 labAll = FALSE, labMaxOverlap = 100, ellipse = TRUE, perplexity = 10, theta = 0.1,
-return_table = FALSE, ...)
+return_table = FALSE, return_plot = TRUE, ...)
 }
 \arguments{
 \item{mPT}{an object of class genoMatriXeR or a numeric matrix.}
@@ -38,7 +38,9 @@ return_table = FALSE, ...)
 
 \item{theta}{numeric, if type = "tSNE" value of theta for the function \code{\link{Rtsne}}. (default = 0.1)}
 
-\item{return_table}{logical, if TRUE a table with the cluster assigned to each region is returned instead of the plot. (default = FALSE)}
+\item{return_table}{logical, if TRUE a table with the cluster assigned to each region is returned. (default = FALSE)}
+
+\item{return_plot}{logical, if TRUE a plot is returned. (default = TRUE)}
 
 \item{...}{further arguments to be passed on to other functions.}
 }

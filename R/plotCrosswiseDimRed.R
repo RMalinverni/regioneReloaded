@@ -17,7 +17,7 @@
 #' @usage plotCrosswiseDimRed(mPT, type = "PCA", GM_clust = NA, clust_met =
 #' "kmeans", nc = 5, listRS = NULL, main = "", labSize = 2, emphasize = FALSE,
 #' labAll = FALSE, labMaxOverlap = 100, ellipse = TRUE, perplexity = 10, theta = 0.1,
-#' return_table = FALSE, ...)
+#' return_table = FALSE, return_plot = TRUE, ...)
 #'
 #'
 #' @param mPT an object of class genoMatriXeR or a numeric matrix.
@@ -34,8 +34,10 @@
 #' @param ellipse logical, if TRUE ellipses will be drawn around the clusters. (default = FALSE)
 #' @param perplexity numeric, if type = "tSNE" value of perplexity for the function \code{\link{Rtsne}}. (default = 10)
 #' @param theta numeric, if type = "tSNE" value of theta for the function \code{\link{Rtsne}}. (default = 0.1)
-#' @param return_table logical, if TRUE a table with the cluster assigned to each region is returned instead of the plot. (default = FALSE)
+#' @param return_table logical, if TRUE a table with the cluster assigned to each region is returned. (default = FALSE)
+#' @param return_plot logical, if TRUE a plot is returned. (default = TRUE)
 #' @param ... further arguments to be passed on to other functions.
+
 #'
 #' @return A ggplot object or a table with cluster assignments is returned.
 #'
@@ -76,6 +78,7 @@ plotCrosswiseDimRed <-
            perplexity = 10,
            theta = 0.1,
            return_table = FALSE,
+           return_plot = TRUE,
            ...) {
 
     if (!methods::hasArg(mPT)){
@@ -118,8 +121,9 @@ plotCrosswiseDimRed <-
     for ( i in 1:nc){
 
       nms <- names(clust_tab[clust_tab == i])
-      GMmn <- mean(GM[nms,nms])
-      GMsd <- sd(GM[nms,nms])
+      nmsCol <- colnames(GM)
+      GMmn <- mean(GM[nms,nmsCol])
+      GMsd <- sd(GM[nms,nmsCol])
       vec[i]<-GMmn
       vec2[i]<-GMsd
       df <- data.frame(Name=nms,
@@ -244,13 +248,19 @@ plotCrosswiseDimRed <-
                     subtitle = main,
                     caption = paste0("clusterization method: ",clust_met))
     }
-    if (return_table) {
-      #tab <- pdr_df[,3:4]
-      #rownames(tab) <- NULL
+
+    if (return_plot == TRUE){
+
       plot(p)
-      tab <- df1
-      return(tab)
+
+    }
+
+    if (return_table) {
+
+      return(df1)
+
     } else {
+
       return(p)
     }
 

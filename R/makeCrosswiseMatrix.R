@@ -62,6 +62,7 @@ makeCrosswiseMatrix <-
            GM_diag = NULL,
            subEX = 0,
            ...) {
+
     if (class(mPT) == "genoMatriXeR") {
       mat <- crosswiseMatrix(mPT, zs.type = zs.type)
       mat_pv <- crosswiseMatrix(mPT, zs.type = "adj.p_value")
@@ -79,7 +80,7 @@ makeCrosswiseMatrix <-
     }
 
     if (!is.null(selectCol)) {
-      indCol <- grep(paste(selectCol, collapse = "|"), rownames(mat))
+      indCol <- grep(paste(selectCol, collapse = "|"), colnames(mat))
       mat <- mat[, indCol]
       mat_pv <- mat_pv[, indCol]
     }
