@@ -6,6 +6,12 @@
 #'
 #' @details
 #'
+#' This function performs multiple permutation test for all pairwise combinations
+#' of the elements in two lists of region sets. Essentially, it uses the [regioneR::permTest()]
+#' function and its associated randomization and evaluation functions. It creates and returns a
+#' [genoMatriXeR-class] object with the result of the permutation tests stored in the `multiOverlaps` slot.
+#' In addition, all the paramteres used for the test are stored in the `parameters` slot.
+#'
 #' @usage crosswisePermTest(Alist, Blist = NULL, sampling = FALSE, fraction = 0.15,
 #'  min_sampling = 5000, ranFUN = "randomizeRegions", evFUN = "numOverlaps",
 #'  ntimes = 100, universe = NULL, adj_pv_method = "BH",
