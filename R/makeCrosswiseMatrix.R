@@ -73,12 +73,26 @@ makeCrosswiseMatrix <-
 
     if (is.vector(selectVec)){
 
-      indCol<-grep(paste(selectVec,collapse = "|"), colnames(mat))
-      indRow<-grep(paste(selectVec,collapse = "|"), rownames(mat))
+      if (length(selectVec) <= 2){
+
+        if (length(selectVec) == 1){
+          sVrow <- selectVec
+          sVcol <- selectVec
+        }
+
+        if (length(selectVec) == 2){
+          sVrow <- selectVec[1]
+          sVcol <- selectVec[2]
+        }
+
+      indCol<-grep(paste(sVcol, collapse = "|"), colnames(mat))
+      indRow<-grep(paste(sVrow, collapse = "|"), rownames(mat))
       mat <- mat[indRow,indCol]
       mat_pv<- mat_pv[indRow,indCol]
 
-      }else{ stop(' selectVec need to be a vectors of column and/or row names')}
+      }else{ warning( "selectVec need to be a vector of 1 or 2 elements, selectVec will not be use for this analysis")}
+
+    }else{ warning( "selectVec need to be a vector of 1 or 2 elements, selectVec will not be use for this analysis")}
   }
 
   #mat <-  normGenMat(mat)
