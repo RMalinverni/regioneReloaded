@@ -1,31 +1,30 @@
-#' Multiple Permutation test
+#' crosswisePermTest
 #'
-#' Perform a multiple permutation test between each elements of two list of Region
-#' set the result will be store in a genoMatriXeR S4 class
+#' @description
+#'
+#' Perform multiple permutation tests between each element in two lists of region sets.
+#'
+#' @details
 #'
 #' @usage crosswisePermTest(Alist, Blist = NULL, sampling = FALSE, fraction = 0.15,
 #'  min_sampling = 5000, ranFUN = "randomizeRegions", evFUN = "numOverlaps",
-#'  ntimes = 100, universe = NULL, adj_pv_method = "BH", max_pv = 0.05, subEx = 0,
+#'  ntimes = 100, universe = NULL, adj_pv_method = "BH",
 #'  genome = "hg19", verbose = FALSE, ...)
 #'
 #'
-#' @param Alist,Blist GRangesList or list of Region Set of any accepted formats by  [regioneR](https://bioconductor.org/packages/release/bioc/html/regioneR.html) package
-#' ([GenomicRanges], [data.frame] etc...)
-#' @param sampling Boolean, if is true the function will use only a sample of
-#' each element of Alist to perform the test (default = FALSE)
-#' @param fraction Logic, if sampling==TRUE is the fraction of the region sets
-#' used to perform the test (default = 0.15)
-#' @param min_sampling numeric, minimum number of regions accepted after the sampling, if the number of the sampled
-#' regions is less than min_sampling will be used min_sampling value as number of regions
-#' @param ranFUN (default = "randomizeRegions") choose the randomization strategy used for the test see [regioneR](https://bioconductor.org/packages/release/bioc/html/regioneR.html)
-#' @param evFUN  (default = "numOverlaps) choose the evaluation strategy used for the test see  [regioneR](https://bioconductor.org/packages/release/bioc/html/regioneR.html)
-#' @param ntimes numeric. Number of permutation used in the test. (default = 100)
-#' @param universe (default = NULL) used only when [resampleRegions()] function is selected
-#' @param adj_pv_method Charachter, the method used for the calculation of the adjusted p-value,
+#' @param Alist,Blist [GRangesList] or list of region sets in any accepted formats by [regioneR](https://bioconductor.org/packages/release/bioc/html/regioneR.html) package
+#' ([GenomicRanges], [data.frame] etc...).
+#' @param sampling logical, if TRUE the function will use only a sample of each element of Alist to perform the test as specified in `fraction.` (default = FALSE)
+#' @param fraction logical, if `sampling=TRUE`, defines the fraction of the region sets used to perform the test. (default = 0.15)
+#' @param min_sampling numeric, minimum number of regions accepted after sampling is performed with the specified `fraction`. If the number of sampled
+#' regions is less than `min_sampling`, the number specified by `min_sampling` will be used as number of regions sampled instead.
+#' @param ranFUN (default = "randomizeRegions"), choose the randomization strategy used for the test, see [regioneR](https://bioconductor.org/packages/release/bioc/html/regioneR.html)
+#' @param evFUN  (default = "numOverlaps), choose the evaluation strategy used for the test, see  [regioneR](https://bioconductor.org/packages/release/bioc/html/regioneR.html)
+#' @param ntimes numeric, number of permutations used in the test. (default = 100)
+#' @param universe (default = NULL) used only when [regioneR::resampleRegions()] function is selected.
+#' @param adj_pv_method character, the method used for the calculation of the adjusted p-value,
 #' to choose between the options of [p.adjust()]. (default = "BH")
-#' @param max_pv Numeric, the z-scores associate a p-values higher of this parameter will be transform in subEx. (default =0.05)
-#' @param subEx Numeric, (default = 0) substitute this value to a z-score when the p-value is higher than max_pv
-#' @param genome Charachter or GenomicRanges, (defalut = "hg19") genome used to compute the randomization
+#' @param genome character or GenomicRanges, (defalut = "hg19") genome used to compute the randomization
 #' @param verbose Boolean, if verbose test
 #' @param ... further arguments to be passed to other methods.
 #'
@@ -74,8 +73,6 @@ crosswisePermTest <-
            ntimes = 100,
            universe = NULL,
            adj_pv_method = "BH",
-           max_pv = 0.05,
-           subEx = 0,
            genome = "hg19",
            verbose = FALSE,
            ...){
@@ -113,7 +110,6 @@ crosswisePermTest <-
       ntimes = ntimes,
       universe = deparse(substitute(universe)),
       adj_pv_method = adj_pv_method,
-      max_pv = deparse(substitute(max_pv)),
       nc = NULL,
       matOrder = NULL
     )
