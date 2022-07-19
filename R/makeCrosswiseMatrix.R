@@ -1,31 +1,35 @@
-#' Make Crosswise Matrix
+#' makeCrosswiseMatrix
 #'
+#' @description
 #'
-#' Accept as input a gMXR object an create in the slot Matrix all the fields.
+#' Create the matrix slot in a [genoMatriXeR][genoMatriXeR-class] object.
 #'
-#' @usage makeCrosswiseMatrix( mPT, clusterize = TRUE, hc.method = NULL, dist.method = "euclidean",
+#' @details
+#'
+#' This function will create a matrix of z-scores from all the pairwise permutation tests stored
+#' in the `multiOverlaps` slot of a [genoMatriXeR][genoMatriXeR-class] as calculated with [multiPermTest()].
+#'
+#' @usage makeCrosswiseMatrix(mPT, clusterize = TRUE, hc.method = NULL, dist.method = "euclidean",
 #' transform = FALSE, scale = FALSE, zs.type = 'norm_zscore', symm_matrix = TRUE,
 #' selectRow = NULL, selectCol = NULL, pvcut = 1, GM_diag = NULL, subEX=0, ...)
 #'
-#' @param mPT an object of class gMXR or a matrix
-#' @param clusterize logic, if TRUE the matrix will be clusterize using a method selected with the variable \code{hc.method} (default = TRUE)
-#' @param hc.method character, select the \code{hclust} method to use for clusterize the matrix,
-#' if hc.method == NA, the methods used for clusterize the matrix will be selected using the function \code{\link{chooseHclustMet}} (default = "NA")
-#' @param dist.method character, metric used to calculate the distance matrix see \code{hclust} (default = "euclidean")
-#' @param transform logic, if TRUE the matrix will be transform using the function \code{("t")} (default = FALSE)
-#' @param scale logic, if TRUE the matrix will be scaled (default = FALSE)
-#' @param zs.type character, choose if create the matrix using every column from MultiOverlap slot of gMXR object default: 'norm_zscore'
-#' @param symm_matrix logic, if TRUE the matrix will be treated as symmetrical (same clusterization for row and column). (default = TRUE)
-#' @param selectRow vector, the matrix will be reduced selecting the rows in this vector. (default = NULL)
-#' @param selectCol vector, the matrix will be reduced selecting the columns in this vector. (default = NULL)
-#' @param pvcut maximum adj.pvalue accepted, all the associations with a adj.pvalue (defined in \code{\link{crosswisePermTest}}) higher than pvcut were transformed in 0. (default = 0.05)
-#' @param subEX value used to substitute the z-score when they don't pass the pvalue test
-#' @param GM_diag value if not NULL GE_diag value will replace the association value of a diagonal of the association matrix. (default = NULL)
+#' @param mPT an object of class [genoMatriXeR][genoMatriXeR-class] or a matrix.
+#' @param clusterize logical, if TRUE the matrix will be clustered using the method specified by \code{hc.method} (default = TRUE)
+#' @param hc.method character, select the \code{hclust} method to use for clustering the matrix, if NULL, the clustering method will be automatically selected by the function [chooseHclustMet()]. (default = NULL)
+#' @param dist.method character, the distance measure to be used from those available in [dist()] . (default = "euclidean")
+#' @param transform logical, if TRUE the matrix will be transformed using the function [t()]. (default = FALSE)
+#' @param scale logical, if TRUE the matrix will be scaled. (default = FALSE)
+#' @param zs.type character, z-score type to use to generate the matrix, either raw z-score ("zscore") or normalized z-score ("norm_zscore"). (default = "norm_zscore")
+#' @param symm_matrix logical, if TRUE the matrix will be treated as symmetrical (same clustering for rows and columns). (default = TRUE)
+#' @param selectRow,selectCol vector, the matrix will be reduced selecting the rows and/or columns in this vector. (default = NULL)
+#' @param pvcut numeric, the z-score value is substituted by `subEX` (0 by default) for all the associations with an adj.pvalue (as calculated in [crosswisePermTest()]) higher than `pvcut`. (default = 0.05)
+#' @param subEX numeric, value used to substitute the z-score values when the associated pvalue is higher than `pvcut`. (default = 0)
+#' @param GM_diag numeric, if not NULL the values of the diagonal of the association matrix will be substituted by this value. (default = NULL)
 #' @param ... further arguments to be passed to other methods.
 #'
 #' @return
 #'
-#' A object of class \code{genoMatriXeR} containing three slots
+#' An object of class [genoMatriXeR][genoMatriXeR-class] containing three slots, with a populated `matrix` slot.
 #'
 #' \itemize{
 #' \item \bold{\code{@parameters}}
@@ -33,6 +37,8 @@
 #' \item \bold{\code{@matrix}}
 #'
 #' }
+#'
+#' @seealso [crosswisePermTest()], [chooseHclustMet()], [plotCrosswiseMatrix()]
 #'
 #' @examples
 #'
