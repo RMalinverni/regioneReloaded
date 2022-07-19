@@ -227,19 +227,22 @@ plotCrosswiseDimRed <-
 
     if(type=="PCA"){
       p <- p + ggplot2::labs(title = "PCA plot" ,
-                    subtitle = main
+                    subtitle = main,
+                    caption = paste0("clusterization method: ",clust_met)
                    )
     }
 
     if(type=="tSNE"){
       p <- p + ggplot2::labs(title = "tSNE plot" ,
         subtitle = main,
-        caption = paste0("perplexity: ", perplexity, " theta: ", theta))
+        caption = paste0("perplexity: ", perplexity, " theta: ", theta, "\n",
+                         caption = paste0("clusterization method: ",clust_met)))
     }
 
     if(type=="UMAP"){
       p <- p + ggplot2::labs(title = "UMAP plot" ,
-                    subtitle = main)
+                    subtitle = main,
+                    caption = paste0("clusterization method: ",clust_met))
     }
     if (return_table) {
       #tab <- pdr_df[,3:4]
