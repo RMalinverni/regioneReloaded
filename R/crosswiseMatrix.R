@@ -6,8 +6,7 @@
 #'
 #' @usage crosswiseMatrix(mPT, zs.type='norm_zscore',...)
 #'
-#' @inheritParams
-#' @inheritDotParams
+#' @inheritParams makeCrosswiseMatrix
 #'
 #' @return a numeric matrix
 #'
