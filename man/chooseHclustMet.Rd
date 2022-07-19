@@ -2,22 +2,20 @@
 % Please edit documentation in R/chooseHclustMet.R
 \name{chooseHclustMet}
 \alias{chooseHclustMet}
-\title{Choose HClust Method}
+\title{chooseHclustMet}
 \usage{
 chooseHclustMet(GM, scale = FALSE, vecMet = NULL ,distHC = "euclidean")
 }
 \arguments{
 \item{GM}{matrix,  numerical matrix.}
 
-\item{scale}{logic, if TRUE, the clusterization will be perform using the scale version of the matrix. (default = FALSE)}
+\item{scale}{logical, if TRUE, the clusterization will be performed using the scaled matrix. (default = FALSE)}
 
-\item{vecMet}{vector, vector of method that will be tested from the function
-if NULL the follow methods will be tested "complete","average","single","ward.D2","median","centroid" and "mcquitty. (default = NULL)}
+\item{vecMet}{vector, vector of methods that will be tested in the function.
+If NULL, the following methods will be tested: "complete","average","single","ward.D2","median","centroid" and "mcquitty. (default = NULL)}
 
-\item{distHC}{character, algorithm use for calculate distance. (default = "euclidean")}
+\item{distHC}{character, the distance measure to be used from those available in \code{\link[=dist]{dist()}} . (default = "euclidean")}
 }
 \description{
-evaluate and choose the better method for clusterize a matrix using hclust function
+Evaluate and choose the best method for clusterizing a matrix using the \code{\link[=hclust]{hclust()}} function
 }
-\keyword{function}
-\keyword{internal}
