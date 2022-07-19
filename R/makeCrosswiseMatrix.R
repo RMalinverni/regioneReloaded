@@ -2,12 +2,15 @@
 #'
 #' @description
 #'
-#' Create the matrix slot in a [genoMatriXeR][genoMatriXeR-class] object.
+#' Populate the matrix slot in a [genoMatriXeR][genoMatriXeR-class] object.
 #'
 #' @details
 #'
-#' This function will create a matrix of z-scores from all the pairwise permutation tests stored
-#' in the `multiOverlaps` slot of a [genoMatriXeR][genoMatriXeR-class] as calculated with [multiPermTest()].
+#' This function will create a series of matrices of z-scores, adj.pvalues and
+#' pearson correlation values from all the pairwise permutation tests stored in
+#' the `multiOverlaps` slot of a [genoMatriXeR][genoMatriXeR-class] as
+#' calculated with [multiPermTest()]. This matrices will then be stored in the
+#' `matrix` slot of the [genoMatriXeR][genoMatriXeR-class] object.
 #'
 #' @usage makeCrosswiseMatrix(mPT, clusterize = TRUE, hc.method = NULL, dist.method = "euclidean",
 #' transform = FALSE, scale = FALSE, zs.type = 'norm_zscore', symm_matrix = TRUE,
