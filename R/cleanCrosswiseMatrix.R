@@ -1,13 +1,14 @@
-#' Clean Crosswise Matrix
+#' cleanCrosswiseMatrix
 #'
-#' clean and scale a matrix from a gMXR object
+#' @description
+#'
+#' Clean and scale a matrix from a genoMatriXeR object
 #'
 #' @usage cleanCrosswiseMatrix(GM, GM_pv, pvcut, scale, subEX)
 #'
-#' @param GM matrix,  numerical matrix from gMXR object.
-#' @param GM_pv matrix, numerical matrix that represent p-value from gMXR object.
-#' @param pvcut maximum pvalue accepted, (all the z-score vales with pvalue higher than "pvcut" will be transform in 0)
-#' @param logic, if the matrix GM will be scaled using the function \code{link{scale}}. (default = FALSE)
+#' @inheritParams makeCrosswiseMatrix
+#' @param GM matrix,  numerical matrix of z-scores from a genoMatriXeR object.
+#' @param GM_pv matrix, numerical matrix of pvalues from genoMatriXeR object.
 #'
 #' @keywords internal
 
