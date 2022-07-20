@@ -38,7 +38,7 @@ NULL #"cw_Alien"
 #' Alien Genome crosswise matrix using [regioneR::randomizeRegions()]
 #' function a permutation strategy.
 #'
-#' @name cw_Alien_cRaR
+#' @name cw_Alien_RaR
 #' @docType data
 #' @usage data(cw_Alien)
 #' @format An objects of class [genoMatriXeR][genoMatriXeR-class]; see [makeCrosswiseMatrix()].
