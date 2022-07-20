@@ -31,7 +31,7 @@ NULL #"cw_Alien"
 #'
 NULL #"cw_Alien"
 
-#' @title cw_Alien_cRaR
+#' @title cw_Alien_RaR
 #'
 #' @description
 #'
@@ -123,7 +123,7 @@ NULL #"cw_Alien"
 #' sets. To see a full description of this sample data and the code used to
 #' generate it, see the regioneRld vignette.
 #'
-#' @name AlienRSList
+#' @name AlienRSList_narrow
 #' @docType data
 #' @usage data(cw_Alien)
 #' @format A list of [GRanges] objects.
