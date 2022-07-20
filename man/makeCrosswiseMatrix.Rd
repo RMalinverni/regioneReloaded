@@ -2,44 +2,41 @@
 % Please edit documentation in R/makeCrosswiseMatrix.R
 \name{makeCrosswiseMatrix}
 \alias{makeCrosswiseMatrix}
-\title{Make Crosswise Matrix}
+\title{makeCrosswiseMatrix}
 \usage{
-makeCrosswiseMatrix( mPT, clusterize = TRUE, hc.method = NULL, dist.method = "euclidean",
+makeCrosswiseMatrix(mPT, clusterize = TRUE, hc.method = NULL, dist.method = "euclidean",
 transform = FALSE, scale = FALSE, zs.type = 'norm_zscore', symm_matrix = TRUE,
 selectRow = NULL, selectCol = NULL, pvcut = 1, GM_diag = NULL, subEX=0, ...)
 }
 \arguments{
-\item{mPT}{an object of class gMXR or a matrix}
+\item{mPT}{an object of class \link[=genoMatriXeR-class]{genoMatriXeR}.}
 
-\item{clusterize}{logic, if TRUE the matrix will be clusterize using a method selected with the variable \code{hc.method} (default = TRUE)}
+\item{clusterize}{logical, if TRUE the matrix will be clustered using the method specified by \code{hc.method} (default = TRUE)}
 
-\item{hc.method}{character, select the \code{hclust} method to use for clusterize the matrix,
-if hc.method == NA, the methods used for clusterize the matrix will be selected using the function \code{\link{chooseHclustMet}} (default = "NA")}
+\item{hc.method}{character, select the \code{hclust} method to use for clustering the matrix, if NULL, the clustering method will be automatically selected by the function \code{\link[=chooseHclustMet]{chooseHclustMet()}}. (default = NULL)}
 
-\item{dist.method}{character, metric used to calculate the distance matrix see \code{hclust} (default = "euclidean")}
+\item{dist.method}{character, the distance measure to be used from those available in \code{\link[=dist]{dist()}} . (default = "euclidean")}
 
-\item{transform}{logic, if TRUE the matrix will be transform using the function \code{("t")} (default = FALSE)}
+\item{transform}{logical, if TRUE the matrix will be transformed using the function \code{\link[=t]{t()}}. (default = FALSE)}
 
-\item{scale}{logic, if TRUE the matrix will be scaled (default = FALSE)}
+\item{scale}{logical, if TRUE the matrix will be scaled. (default = FALSE)}
 
-\item{zs.type}{character, choose if create the matrix using every column from MultiOverlap slot of gMXR object default: 'norm_zscore'}
+\item{zs.type}{character, z-score type to use to generate the matrix, either raw z-score ("zscore") or normalized z-score ("norm_zscore"). (default = "norm_zscore")}
 
-\item{symm_matrix}{logic, if TRUE the matrix will be treated as symmetrical (same clusterization for row and column). (default = TRUE)}
+\item{symm_matrix}{logical, if TRUE the matrix will be treated as symmetrical (same clustering for rows and columns). (default = TRUE)}
 
-\item{selectRow}{vector, the matrix will be reduced selecting the rows in this vector. (default = NULL)}
+\item{selectRow, selectCol}{vector, the matrix will be reduced selecting the rows and/or columns in this vector. (default = NULL)}
 
-\item{selectCol}{vector, the matrix will be reduced selecting the columns in this vector. (default = NULL)}
+\item{pvcut}{numeric, the z-score value is substituted by \code{subEX} (0 by default) for all the associations with an adj.pvalue (as calculated in \code{\link[=crosswisePermTest]{crosswisePermTest()}}) higher than \code{pvcut}. (default = 0.05)}
 
-\item{pvcut}{maximum adj.pvalue accepted, all the associations with a adj.pvalue (defined in \code{\link{crosswisePermTest}}) higher than pvcut were transformed in 0. (default = 0.05)}
+\item{GM_diag}{numeric, if not NULL the values of the diagonal of the association matrix will be substituted by this value. (default = NULL)}
 
-\item{GM_diag}{value if not NULL GE_diag value will replace the association value of a diagonal of the association matrix. (default = NULL)}
-
-\item{subEX}{value used to substitute the z-score when they don't pass the pvalue test}
+\item{subEX}{numeric, value used to substitute the z-score values when the associated pvalue is higher than \code{pvcut}. (default = 0)}
 
 \item{...}{further arguments to be passed to other methods.}
 }
 \value{
-A object of class \code{genoMatriXeR} containing three slots
+An object of class \link[=genoMatriXeR-class]{genoMatriXeR} containing three slots, with a populated \code{matrix} slot.
 
 \itemize{
 \item \bold{\code{@parameters}}
@@ -49,7 +46,14 @@ A object of class \code{genoMatriXeR} containing three slots
 }
 }
 \description{
-Accept as input a gMXR object an create in the slot Matrix all the fields.
+Populate the matrix slot in a \link[=genoMatriXeR-class]{genoMatriXeR} object.
+}
+\details{
+This function will create a series of matrices of z-scores, adj.pvalues and
+pearson correlation values from all the pairwise permutation tests stored in
+the \code{multiOverlaps} slot of a \link[=genoMatriXeR-class]{genoMatriXeR} as
+calculated with \code{\link[=multiPermTest]{multiPermTest()}}. This matrices will then be stored in the
+\code{matrix} slot of the \link[=genoMatriXeR-class]{genoMatriXeR} object.
 }
 \examples{
 
@@ -59,4 +63,7 @@ cw_Alien_ReG <- makeCrosswiseMatrix(cw_Alien_ReG)
 
 summary(cw_Alien_ReG)
 
+}
+\seealso{
+\code{\link[=crosswisePermTest]{crosswisePermTest()}}, \code{\link[=chooseHclustMet]{chooseHclustMet()}}, \code{\link[=plotCrosswiseMatrix]{plotCrosswiseMatrix()}}
 }

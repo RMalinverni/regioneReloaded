@@ -2,20 +2,22 @@
 % Please edit documentation in R/crosswiseMatrix.R
 \name{crosswiseMatrix}
 \alias{crosswiseMatrix}
-\title{Matrix from crosswisePermTest Object}
+\title{crosswiseMatrix}
 \usage{
 crosswiseMatrix(mPT, zs.type='norm_zscore',...)
 }
 \arguments{
-\item{zs.type}{Character, choose if create the matrix using every column from MultiOverlap slot of genoMatriXeR object default: 'norm_zscore'}
+\item{mPT}{an object of class \link[=genoMatriXeR-class]{genoMatriXeR}.}
 
-\item{mPt, }{object of class = "genoMatriXeR"}
+\item{zs.type}{character, z-score type to use to generate the matrix, either raw z-score ("zscore") or normalized z-score ("norm_zscore"). (default = "norm_zscore")}
+
+\item{...}{further arguments to be passed to other methods.}
 }
 \value{
 a numeric matrix
 }
 \description{
-create a matrix from a genoMatriXeR object
+Create a matrix from a genoMatriXeR object.
 }
 \examples{
 
@@ -24,5 +26,3 @@ data("cw_Alien")
 matrix_CW_Alien <- crosswiseMatrix(cw_Alien_ReG)
 
 }
-\keyword{function}
-\keyword{internal}

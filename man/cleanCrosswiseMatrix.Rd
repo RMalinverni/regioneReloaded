@@ -2,20 +2,22 @@
 % Please edit documentation in R/cleanCrosswiseMatrix.R
 \name{cleanCrosswiseMatrix}
 \alias{cleanCrosswiseMatrix}
-\title{Clean Crosswise Matrix}
+\title{cleanCrosswiseMatrix}
 \usage{
 cleanCrosswiseMatrix(GM, GM_pv, pvcut, scale, subEX)
 }
 \arguments{
-\item{GM}{matrix,  numerical matrix from gMXR object.}
+\item{GM}{matrix,  numerical matrix of z-scores from a genoMatriXeR object.}
 
-\item{GM_pv}{matrix, numerical matrix that represent p-value from gMXR object.}
+\item{GM_pv}{matrix, numerical matrix of pvalues from genoMatriXeR object.}
 
-\item{pvcut}{maximum pvalue accepted, (all the z-score vales with pvalue higher than "pvcut" will be transform in 0)}
+\item{pvcut}{numeric, the z-score value is substituted by \code{subEX} (0 by default) for all the associations with an adj.pvalue (as calculated in \code{\link[=crosswisePermTest]{crosswisePermTest()}}) higher than \code{pvcut}. (default = 0.05)}
 
-\item{logic, }{if the matrix GM will be scaled using the function \code{link{scale}}. (default = FALSE)}
+\item{scale}{logical, if TRUE the matrix will be scaled. (default = FALSE)}
+
+\item{subEX}{numeric, value used to substitute the z-score values when the associated pvalue is higher than \code{pvcut}. (default = 0)}
 }
 \description{
-clean and scale a matrix from a gMXR object
+Clean and scale a matrix from a genoMatriXeR object
 }
 \keyword{internal}

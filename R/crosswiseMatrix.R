@@ -1,11 +1,12 @@
-#' Matrix from crosswisePermTest Object
+#' crosswiseMatrix
 #'
-#' create a matrix from a genoMatriXeR object
+#' @description
+#'
+#' Create a matrix from a genoMatriXeR object.
 #'
 #' @usage crosswiseMatrix(mPT, zs.type='norm_zscore',...)
 #'
-#' @param mPt,  object of class = "genoMatriXeR"
-#' @param zs.type Character, choose if create the matrix using every column from MultiOverlap slot of genoMatriXeR object default: 'norm_zscore'
+#' @inheritParams makeCrosswiseMatrix
 #'
 #' @return a numeric matrix
 #'
@@ -16,7 +17,6 @@
 #' matrix_CW_Alien <- crosswiseMatrix(cw_Alien_ReG)
 #'
 #' @export
-#' @keywords  internal function
 
 crosswiseMatrix <- function(mPT,
                             zs.type = 'norm_zscore',

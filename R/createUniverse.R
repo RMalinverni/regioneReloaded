@@ -1,13 +1,15 @@
-#' Create Universe
+#' createUniverse
 #'
-#' create the universe parameter for \code{\link{resampleRegions}} function using all unique region present in Alist
+#' @description
+#'
+#' Create the universe parameter for [regioneR::resampleRegions()] using all unique regions present in Alist.
 #'
 #' @usage createUniverse(Alist, joinR = TRUE)
 #'
-#' @param Alist list of regions set in format accepted from [regioneR](https://bioconductor.org/packages/release/bioc/html/regioneR.html)
-#' @param joinR logical, if TRUE all the regions will be joiner using the function [regioneR::joinRegions()].(default == TRUE)
+#' @param Alist list of regions set in a format accepted for [regioneR](https://bioconductor.org/packages/release/bioc/html/regioneR.html)
+#' @param joinR logical, if TRUE all the regions will be joined using the function [regioneR::joinRegions()].(default == TRUE)
 #'
-#' @return A list of Genomic Ranges objects
+#' @return A list of [GenomicRanges][GenomicRanges-class] objects
 #'
 #' @examples
 #'
@@ -17,7 +19,6 @@
 #'
 #'
 #' @export
-#' @keywords internal
 
 createUniverse<-function(Alist, joinR=TRUE){
 

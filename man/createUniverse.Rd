@@ -2,20 +2,20 @@
 % Please edit documentation in R/createUniverse.R
 \name{createUniverse}
 \alias{createUniverse}
-\title{Create Universe}
+\title{createUniverse}
 \usage{
 createUniverse(Alist, joinR = TRUE)
 }
 \arguments{
-\item{Alist}{list of regions set in format accepted from \href{https://bioconductor.org/packages/release/bioc/html/regioneR.html}{regioneR}}
+\item{Alist}{list of regions set in a format accepted for \href{https://bioconductor.org/packages/release/bioc/html/regioneR.html}{regioneR}}
 
-\item{joinR}{logical, if TRUE all the regions will be joiner using the function \code{\link[regioneR:joinRegions]{regioneR::joinRegions()}}.(default == TRUE)}
+\item{joinR}{logical, if TRUE all the regions will be joined using the function \code{\link[regioneR:joinRegions]{regioneR::joinRegions()}}.(default == TRUE)}
 }
 \value{
-A list of Genomic Ranges objects
+A list of \link[=GenomicRanges-class]{GenomicRanges} objects
 }
 \description{
-create the universe parameter for \code{\link{resampleRegions}} function using all unique region present in Alist
+Create the universe parameter for \code{\link[regioneR:resampleRegions]{regioneR::resampleRegions()}} using all unique regions present in Alist.
 }
 \examples{
 
@@ -25,4 +25,3 @@ universe <- createUniverse(AlienRSList_narrow)
 
 
 }
-\keyword{internal}

@@ -2,42 +2,36 @@
 % Please edit documentation in R/crosswisePermTest.R
 \name{crosswisePermTest}
 \alias{crosswisePermTest}
-\title{Multiple Permutation test}
+\title{crosswisePermTest}
 \usage{
 crosswisePermTest(Alist, Blist = NULL, sampling = FALSE, fraction = 0.15,
  min_sampling = 5000, ranFUN = "randomizeRegions", evFUN = "numOverlaps",
- ntimes = 100, universe = NULL, adj_pv_method = "BH", max_pv = 0.05, subEx = 0,
+ ntimes = 100, universe = NULL, adj_pv_method = "BH",
  genome = "hg19", verbose = FALSE, ...)
 }
 \arguments{
-\item{Alist, Blist}{GRangesList or list of Region Set of any accepted formats by  \href{https://bioconductor.org/packages/release/bioc/html/regioneR.html}{regioneR} package
-(\link{GenomicRanges}, \link{data.frame} etc...)}
+\item{Alist, Blist}{\link{GRangesList} or list of region sets in any accepted formats by \href{https://bioconductor.org/packages/release/bioc/html/regioneR.html}{regioneR} package
+(\link{GenomicRanges}, \link{data.frame} etc...).}
 
-\item{sampling}{Boolean, if is true the function will use only a sample of
-each element of Alist to perform the test (default = FALSE)}
+\item{sampling}{logical, if TRUE the function will use only a sample of each element of Alist to perform the test as specified in \code{fraction.} (default = FALSE)}
 
-\item{fraction}{Logic, if sampling==TRUE is the fraction of the region sets
-used to perform the test (default = 0.15)}
+\item{fraction}{logical, if \code{sampling=TRUE}, defines the fraction of the region sets used to perform the test. (default = 0.15)}
 
-\item{min_sampling}{numeric, minimum number of regions accepted after the sampling, if the number of the sampled
-regions is less than min_sampling will be used min_sampling value as number of regions}
+\item{min_sampling}{numeric, minimum number of regions accepted after sampling is performed with the specified \code{fraction}. If the number of sampled
+regions is less than \code{min_sampling}, the number specified by \code{min_sampling} will be used as number of regions sampled instead.}
 
-\item{ranFUN}{(default = "randomizeRegions") choose the randomization strategy used for the test see \href{https://bioconductor.org/packages/release/bioc/html/regioneR.html}{regioneR}}
+\item{ranFUN}{(default = "randomizeRegions"), choose the randomization strategy used for the test, see \href{https://bioconductor.org/packages/release/bioc/html/regioneR.html}{regioneR}}
 
-\item{evFUN}{(default = "numOverlaps) choose the evaluation strategy used for the test see  \href{https://bioconductor.org/packages/release/bioc/html/regioneR.html}{regioneR}}
+\item{evFUN}{(default = "numOverlaps), choose the evaluation strategy used for the test, see  \href{https://bioconductor.org/packages/release/bioc/html/regioneR.html}{regioneR}}
 
-\item{ntimes}{numeric. Number of permutation used in the test. (default = 100)}
+\item{ntimes}{numeric, number of permutations used in the test. (default = 100)}
 
-\item{universe}{(default = NULL) used only when \code{\link[=resampleRegions]{resampleRegions()}} function is selected}
+\item{universe}{(default = NULL) used only when \code{\link[regioneR:resampleRegions]{regioneR::resampleRegions()}} function is selected.}
 
-\item{adj_pv_method}{Charachter, the method used for the calculation of the adjusted p-value,
+\item{adj_pv_method}{character, the method used for the calculation of the adjusted p-value,
 to choose between the options of \code{\link[=p.adjust]{p.adjust()}}. (default = "BH")}
 
-\item{max_pv}{Numeric, the z-scores associate a p-values higher of this parameter will be transform in subEx. (default =0.05)}
-
-\item{subEx}{Numeric, (default = 0) substitute this value to a z-score when the p-value is higher than max_pv}
-
-\item{genome}{Charachter or GenomicRanges, (defalut = "hg19") genome used to compute the randomization}
+\item{genome}{character or GenomicRanges, (defalut = "hg19") genome used to compute the randomization}
 
 \item{verbose}{Boolean, if verbose test}
 
@@ -54,10 +48,15 @@ A object of class \link[=genoMatriXeR-class]{genoMatriXeR} containing three slot
 }
 }
 \description{
-Perform a multiple permutation test between each elements of two list of Region
-set the result will be store in a genoMatriXeR S4 class
+Perform multiple permutation tests between each element in two lists of region sets.
 }
 \details{
+This function performs multiple permutation test for all pairwise combinations
+of the elements in two lists of region sets. Essentially, it uses the \code{\link[regioneR:permTest]{regioneR::permTest()}}
+function and its associated randomization and evaluation functions. It creates and returns a
+\linkS4class{genoMatriXeR} object with the result of the permutation tests stored in the \code{multiOverlaps} slot.
+In addition, all the paramteres used for the test are stored in the \code{parameters} slot.
+
 ...
 }
 \examples{

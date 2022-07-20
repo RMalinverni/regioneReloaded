@@ -5,7 +5,7 @@
 \alias{cw_Alien}
 \title{cw_Alien}
 \format{
-Four objects of class \code{"genoMatriXeR"}; see \code{\link{makeCrosswiseMatrix}}.
+An objects of class \link[=genoMatriXeR-class]{genoMatriXeR}; see \code{\link[=makeCrosswiseMatrix]{makeCrosswiseMatrix()}}.
 }
 \usage{
 data(cw_Alien)
@@ -13,8 +13,7 @@ data(cw_Alien)
 \description{
 Alien Genome crosswise matrix using \code{\link{randomizeRegions}} , \code{\link{circularRandomizeRegions}},
 \code{\link{resampleRegions}}, \code{\link{resampleGenome}}    functions as permutation strategies
-}
-\details{
+
 CrossWise matrix calculated using 39 different regionset vs itself
 (description of Region set can be find here:"")
 }

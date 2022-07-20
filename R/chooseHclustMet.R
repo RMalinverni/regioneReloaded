@@ -1,19 +1,21 @@
-#' Choose HClust Method
+#' chooseHclustMet
 #'
-#' evaluate and choose the better method for clusterize a matrix using hclust function
+#' @description
+#'
+#' Evaluate and choose the best method for clusterizing a matrix using the [hclust()] function
 #'
 #' @usage chooseHclustMet(GM, scale = FALSE, vecMet = NULL ,distHC = "euclidean")
 #'
 #' @param GM matrix,  numerical matrix.
-#' @param scale logic, if TRUE, the clusterization will be perform using the scale version of the matrix. (default = FALSE)
-#' @param vecMet vector, vector of method that will be tested from the function
-#' if NULL the follow methods will be tested "complete","average","single","ward.D2","median","centroid" and "mcquitty. (default = NULL)
-#' @param distHC character, algorithm use for calculate distance. (default = "euclidean")
+#' @param scale logical, if TRUE, the clusterization will be performed using the scaled matrix. (default = FALSE)
+#' @param vecMet vector, vector of methods that will be tested in the function.
+#' If NULL, the following methods will be tested: "complete","average","single","ward.D2","median","centroid" and "mcquitty. (default = NULL)
+#' @param distHC character, the distance measure to be used from those available in [dist()] . (default = "euclidean")
 #'
 #' @export
 #' @import stats
-#' @keywords internal function
-
+#'
+#' @example
 
 chooseHclustMet <-
   function(GM,
