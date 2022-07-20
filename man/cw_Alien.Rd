@@ -13,8 +13,5 @@ data(cw_Alien)
 \description{
 Alien Genome crosswise matrix using \code{\link{randomizeRegions}} , \code{\link{circularRandomizeRegions}},
 \code{\link{resampleRegions}}, \code{\link{resampleGenome}}    functions as permutation strategies
-
-CrossWise matrix calculated using 39 different regionset vs itself
-(description of Region set can be find here:"")
 }
 \keyword{datasets}
