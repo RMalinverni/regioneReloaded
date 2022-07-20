@@ -5,7 +5,7 @@
 #'
 #'
 #' @usage multiLocalZscore( A, Blist, ranFUN = "randomizeRegions", evFUN = "numOverlaps", sampling = FALSE,
-#' min_sampling = 5000, fraction = 0.15, universe = NULL, window = 2000, step = 100, adj_pv_method = "BH", min_regions = 1000,
+#' min_sampling = 5000, fraction = 0.15, universe = NULL, window = 1000, step = 100, adj_pv_method = "BH", min_regions = 1000,
 #' max_pv = 0.05, genome = "hg19", ...)
 #'
 #' @param A Region Set of any accepted formats by  c package
@@ -15,24 +15,19 @@
 #' @param ranFUN Function, choose the randomization strategy used for the test (default = "randomizeRegions")
 #' for details see [regioneR](https://bioconductor.org/packages/release/bioc/html/regioneR.html)
 #' @param evFUN Function, choose the evaluation strategy used for the test (default = "numOverlaps")
-#' @param sampling Boolean, if is true the function will use only a sample of
-#' each element of Alist to perform the test
-#' @param min_sampling Numeric, minimum number of regions in the region set that permit a sampling (default = 5000)
-#' @param fraction Numeric, if sampling==TRUE is the fraction of the region sets
-#' used to perform the test. (default = 0.15)
-#' @param fraction  Logic, if sampling==TRUE is the fraction of the region sets
-#' used to perform the test (default = 0.15)
+#' @param sampling Boolean, if is true the function will use only a sample of each element of Alist to perform the test.(default = FALSE)
+#' @param min_sampling Numeric, minimum number of regions in the region set that permit a sampling. (default = 5000)
+#' @param fraction Numeric, if sampling == TRUE is the fraction of the region sets used to perform the test. (default = 0.15)
 #' @param universe Region Set of any accepted formats by  [regioneR](https://bioconductor.org/packages/release/bioc/html/regioneR.html), using only when resamplinRegions function is
 #' selected (default = NULL)
-#' @param window window (in number of base pairs) in which will be estimated the local Z-score
-#' @param step step (in number of base pairs) in which will be estimated the local Z-score
+#' @param window window (number of base pairs) in which will be estimated the local Z-score. (default = 1000)
+#' @param step step (number of base pairs) in which will be estimated the local Z-score. (default = 100)
 #' @param adj_pv_method Charachter, the method used for the calculation of the adjusted p-value,
 #' to choose between the options of \code{\link{p.adjust}}. (default = "BH")
 #' @param min_regions minimun regions accepted after the sampling. (default = 1000)
 #' @param max_pv Numeric, the z-scores associate a p-values higher of this parameter will be transform in 0. (default =0.05)
-#' @param genome Charachter or GenomicRanges, (defalut = "hg19") genome used to compute the randomization. (default = "hg19")
+#' @param genome Charachter or GenomicRanges, genome used to compute the randomization. (default = "hg19")
 #' @param ...  further arguments to be passed to other methods.
-#'
 #'
 #'
 #'
@@ -83,7 +78,7 @@ multiLocalZscore <- function(A,
                              min_sampling = 5000,
                              fraction = 0.15,
                              universe = NULL,
-                             window = 2000,
+                             window = 1000,
                              step = 100,
                              adj_pv_method = "BH",
                              min_regions = 1000,
@@ -111,7 +106,6 @@ multiLocalZscore <- function(A,
 
   A <- toGRanges(A)
 
-  # here we made the sampling if is necessary
   if (sampling == TRUE) {
     if (length(A) >= min_regions) {
       if (length(A) * fraction > min_regions) {

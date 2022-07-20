@@ -583,8 +583,11 @@ CW <-  crosswisePermTest(Alist = lGR,    # change name
                         )
 ```
 
-```{r, eval=FALSE }
-data("cw_Real")
+```{r}
+urlData<-url("https://github.com/RMalinverni/RegioneReloaded_data/blob/main/cw_Real.RData?raw=true")
+load(urlData)
+
+
 CW <- makeCrosswiseMatrix(CW)
 ```
 
@@ -597,7 +600,7 @@ plotCrosswiseMatrix(CW, matrix.type = "correlation")
 
 ```
 
-```{r}
+```{r, eval=FALSE}
 set.seed(42)
 plotCrosswiseDimRed(CW,nc = 15,ellipse = TRUE,type = "UMAP")
 ```
