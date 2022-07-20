@@ -12,10 +12,21 @@
 #' If NULL, the following methods will be tested: "complete","average","single","ward.D2","median","centroid" and "mcquitty. (default = NULL)
 #' @param distHC character, the distance measure to be used from those available in [dist()] . (default = "euclidean")
 #'
-#' @export
+#'
+#' @examples
+#'
+#' M1<-matrix(1:18, nrow = 6, ncol = 3)
+#' set.seed(42)
+#' M2<-matrix(sample(100,18), nrow = 6, ncol = 3)
+#' GM<-cbind(M1,M2)
+#'
+#' chooseHclustMet(GM)
+#'
+#'
+#' @export chooseHclustMet
 #' @import stats
 #'
-#' @example
+#'
 
 chooseHclustMet <-
   function(GM,

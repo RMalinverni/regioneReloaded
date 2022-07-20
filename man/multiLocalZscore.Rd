@@ -5,7 +5,7 @@
 \title{Multiple Local Z-Score test}
 \usage{
 multiLocalZscore( A, Blist, ranFUN = "randomizeRegions", evFUN = "numOverlaps", sampling = FALSE,
-min_sampling = 5000, fraction = 0.15, universe = NULL, window = 2000, step = 100, adj_pv_method = "BH", min_regions = 1000,
+min_sampling = 5000, fraction = 0.15, universe = NULL, window = 1000, step = 100, adj_pv_method = "BH", min_regions = 1000,
 max_pv = 0.05, genome = "hg19", ...)
 }
 \arguments{
@@ -20,20 +20,18 @@ for details see \href{https://bioconductor.org/packages/release/bioc/html/region
 
 \item{evFUN}{Function, choose the evaluation strategy used for the test (default = "numOverlaps")}
 
-\item{sampling}{Boolean, if is true the function will use only a sample of
-each element of Alist to perform the test}
+\item{sampling}{Boolean, if is true the function will use only a sample of each element of Alist to perform the test.(default = FALSE)}
 
-\item{min_sampling}{Numeric, minimum number of regions in the region set that permit a sampling (default = 5000)}
+\item{min_sampling}{Numeric, minimum number of regions in the region set that permit a sampling. (default = 5000)}
 
-\item{fraction}{Logic, if sampling==TRUE is the fraction of the region sets
-used to perform the test (default = 0.15)}
+\item{fraction}{Numeric, if sampling == TRUE is the fraction of the region sets used to perform the test. (default = 0.15)}
 
 \item{universe}{Region Set of any accepted formats by  \href{https://bioconductor.org/packages/release/bioc/html/regioneR.html}{regioneR}, using only when resamplinRegions function is
 selected (default = NULL)}
 
-\item{window}{window (in number of base pairs) in which will be estimated the local Z-score}
+\item{window}{window (number of base pairs) in which will be estimated the local Z-score. (default = 1000)}
 
-\item{step}{step (in number of base pairs) in which will be estimated the local Z-score}
+\item{step}{step (number of base pairs) in which will be estimated the local Z-score. (default = 100)}
 
 \item{adj_pv_method}{Charachter, the method used for the calculation of the adjusted p-value,
 to choose between the options of \code{\link{p.adjust}}. (default = "BH")}
@@ -42,7 +40,7 @@ to choose between the options of \code{\link{p.adjust}}. (default = "BH")}
 
 \item{max_pv}{Numeric, the z-scores associate a p-values higher of this parameter will be transform in 0. (default =0.05)}
 
-\item{genome}{Charachter or GenomicRanges, (defalut = "hg19") genome used to compute the randomization. (default = "hg19")}
+\item{genome}{Charachter or GenomicRanges, genome used to compute the randomization. (default = "hg19")}
 
 \item{...}{further arguments to be passed to other methods.}
 }
