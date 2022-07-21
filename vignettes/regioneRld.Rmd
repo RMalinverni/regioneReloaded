@@ -31,10 +31,10 @@ chromatin regulators is a major challenge in epigenomics. To address this,
 in 2015 we published `r BiocStyle::Biocpkg("regioneR")`, an R package that we developed for the statistical
 assessment of the association between genomic regions sets. One limitation of regioneR is that it can only
 perform association analyisis between two region sets at a time. Here, we now present 
-**regioneReload**, an R package that is the natural evolution of `r BiocStyle::Biocpkg("regioneR")` and allows to 
-calculate the statistical association between multiple regions sets at the same 
-time. To compare z-scores coming from multiple analysis, different strategies have been introduced to normalize the z-score and to improve the 
-p-value calculations. Taken together, regioneReload aims to be a novel and precious addition to NGS tools and for whole genome analysis.
+**regioneReload**, an R package that is the natural evolution of `r BiocStyle::Biocpkg("regioneR")` and allows to  calculate the statistical association between multiple regions sets at the same time. To compare z-scores coming from multiple analysis, different strategies have been introduced to normalize the z-score and to improve the 
+p-value calculations. regioneReload also improves regioneR by adding new randomization methods and different functions for obtaining publication-ready graphs. Taken together, regioneReload aims to be a novel and precious addition to NGS tools and for whole genome analysis.
+
+
 
 ## regioneR limitations
 
@@ -517,10 +517,10 @@ The data is clustered using a clustering algorithm that can be selected from ("h
 
 ```{r}
 set.seed(42)
-p_cdr_hc <- plotCrosswiseDimRed(cw_Alien_ReG, nc = 5, type="PCA")
+p_cdr_hc <- plotCrosswiseDimRed(cw_Alien_ReG, nc = 5, type="PCA", clust_met = "hclust")
 
 set.seed(42)
-p_cdr_pam <- plotCrosswiseDimRed(cw_Alien_ReG, nc = 5, type="PCA")
+p_cdr_pam <- plotCrosswiseDimRed(cw_Alien_ReG, nc = 5, type="PCA", clust_met = "pam")
 
 ggpubr::ggarrange(p_cdr_hc, p_cdr_pam,
           ncol = 2, nrow = 1)
