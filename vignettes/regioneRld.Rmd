@@ -324,7 +324,7 @@ pairs in a list of region sets. The result of this function is an S4 object of c
 
 #### Parameters
 
-The slot "parameters" stores all the parameters used to obtain  the gMXR object.
+The slot "parameters" stores all the parameters used to obtain the genomicMatriXer object.
 
 ```{r }
 data("cw_Alien")
@@ -358,7 +358,7 @@ print(cw_Alien_ReG)
 
 #### matrix
 
-When the gMXR object is first created, the "matrix" slot will have a NULL value.
+When the genoMatriXeR object is created, the "matrix" slot will have a NULL value.
 <!-- Explain here how to create the matrix, what is its purpose or where is this explained? -->
 
 ```{r}
@@ -460,15 +460,23 @@ X<-rownames(cw_Alien_ReG@matrix$GMat)
 Y<-colnames(cw_Alien_ReG@matrix$GMat)
 ord<-list(X=X,Y=Y)
 
-plotCrosswiseMatrix(cw_Alien_RaR,matrix_type = "crosswise",ord_mat = ord)
-plotCrosswiseMatrix(cw_Alien_ReG,matrix_type = "crosswise" ,ord_mat = ord)
-plotCrosswiseMatrix(cw_Alien_cRaR,matrix_type = "crosswise",ord_mat = ord)
-plotCrosswiseMatrix(cw_Alien_ReR,matrix_type = "crosswise",ord_mat = ord)
+p_RaR <- plotCrosswiseMatrix(cw_Alien_RaR,matrix_type = "crosswise",ord_mat = ord)
+p_ReG <- plotCrosswiseMatrix(cw_Alien_ReG,matrix_type = "crosswise" ,ord_mat = ord)
+p_cRaR <- plotCrosswiseMatrix(cw_Alien_cRaR,matrix_type = "crosswise",ord_mat = ord)
+p_ReR <- plotCrosswiseMatrix(cw_Alien_ReR,matrix_type = "crosswise",ord_mat = ord)
 
-plotCrosswiseMatrix(cw_Alien_RaR,matrix_type = "correlation",ord_mat = ord)
-plotCrosswiseMatrix(cw_Alien_ReG,matrix_type =  "correlation" ,ord_mat = ord)
-plotCrosswiseMatrix(cw_Alien_cRaR,matrix_type =  "correlation",ord_mat = ord)
-plotCrosswiseMatrix(cw_Alien_ReR,matrix_type =  "correlation",ord_mat = ord)
+ggpubr::ggarrange(p_RaR, p_ReG, p_cRaR, p_ReR, 
+          labels = c("RaR", "ReG", "cRaR","ReR"),
+          ncol = 2, nrow = 2)
+
+p_RaR <- plotCrosswiseMatrix(cw_Alien_RaR,matrix_type = "correlation",ord_mat = ord)
+p_ReG <- plotCrosswiseMatrix(cw_Alien_ReG,matrix_type = "correlation" ,ord_mat = ord)
+p_cRaR <- plotCrosswiseMatrix(cw_Alien_cRaR,matrix_type = "correlation",ord_mat = ord)
+p_ReR <- plotCrosswiseMatrix(cw_Alien_ReR,matrix_type = "correlation",ord_mat = ord)
+
+ggpubr::ggarrange(p_RaR, p_ReG, p_cRaR, p_ReR, 
+          labels = c("RaR", "ReG", "cRaR","ReR"),
+          ncol = 2, nrow = 2)
 
 ```
 
@@ -480,10 +488,15 @@ With the function `plotSinglePT()`, it is possible to plot the association betwe
 ```{r}
 
 plotSinglePT(cw_Alien_ReG, RS1 = "regA", RS2 = "regA_05")
+```
 
-plotSinglePT(cw_Alien_ReG, RS1 = "regA", RS2 = "regC")
+```{r}
+p_sPT1 <- plotSinglePT(cw_Alien_ReG, RS1 = "regA", RS2 = "regC")
 
-plotSinglePT(cw_Alien_ReG, RS1 = "regA", RS2 = "reg_no_A")
+p_sPT2 <- plotSinglePT(cw_Alien_ReG, RS1 = "regA", RS2 = "reg_no_A")
+
+ggpubr::ggarrange(p_sPT1, p_sPT2,
+          ncol = 2, nrow = 1)
  
 ```
 
@@ -495,8 +508,8 @@ plotSinglePT(cw_Alien_ReG, RS1 = "regA", RS2 = "reg_no_A")
 
 cw_Alien_ReG_s <- makeCrosswiseMatrix(cw_Alien_ReG, scale = TRUE)
 
-set.seed(67)
-plotCrosswiseDimRed(cw_Alien_ReG_s, nc = 5, type="PCA")
+set.seed(42)
+plotCrosswiseDimRed(cw_Alien_ReG, nc = 5, type="PCA")
 
 ```
 
@@ -583,7 +596,7 @@ CW <-  crosswisePermTest(Alist = lGR,    # change name
                         )
 ```
 
-```{r}
+```{r, eval = FALSE}
 urlData<-url("https://github.com/RMalinverni/RegioneReloaded_data/blob/main/cw_Real.RData?raw=true")
 load(urlData)
 
