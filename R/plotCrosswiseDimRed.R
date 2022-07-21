@@ -249,19 +249,20 @@ plotCrosswiseDimRed <-
                     caption = paste0("clusterization method: ",clust_met))
     }
 
-    if (return_plot == TRUE){
 
+    if (return_table == TRUE) {
+
+      if (return_plot == TRUE){
       plot(p)
-
-    }
-
-    if (return_table) {
+      }
 
       return(df1)
 
     } else {
 
+      if (return_plot == TRUE) {
       return(p)
+      }
     }
 
   }
