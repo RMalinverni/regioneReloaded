@@ -174,7 +174,7 @@ multiLocalZscore <- function(A,
 
 
   if (is.null(names(Blist))) {
-    names(Blist) <- 1:length(Blist)
+    names(Blist) <- seq_along(Blist)
   }
 
   tab <- data.frame(

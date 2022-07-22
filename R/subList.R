@@ -19,7 +19,7 @@ subList <- function(Alist,
                     fraction) {
   subAlist <- list()
 
-  for (i in 1:length(Alist)) {
+  for (i in seq_along(Alist)) {
     A <- Alist[[i]]
     if (min_sampling < length(A)) {
       subN <- round(length(A) * fraction)

@@ -26,7 +26,7 @@ crosswiseMatrix <- function(mPT,
   A.obj <- mPT@multiOverlaps
 
   mat <- vector()
-  for (i in 1:length(A.obj)) {
+  for (i in seq_along(A.obj)) {
 
     mat <- cbind(mat, as.numeric(A.obj[[i]][, zs.type]))
 
