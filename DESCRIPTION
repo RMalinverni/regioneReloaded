@@ -6,7 +6,7 @@ Authors@R: c(
     person(given = "Roberto",
            family = "Malinverni",
            role = c("aut", "cre"),
-           email = "rmalinverni@carrerasresearch.org",
+           email = "roberto.malinverni@gmail.com",
            comment = c(ORCID ="0000-0002-0113-3417")),
     person(given = "David",
            family = "Corujo",
@@ -42,4 +42,5 @@ Imports:
 Suggests: 
     rmarkdown,
     knitr
+biocViews: Genetics, ChIPSeq, DNASeq, MethylSeq, CopyNumberVariation
 VignetteBuilder: knitr

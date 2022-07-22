@@ -96,7 +96,7 @@ makeLZMatrix <- function(mlZA,
       en <- (center + centralize)
     }
     fit <-
-      chooseHclustMet(mat[, st:en],
+      chooseHclustMet(mat[, seq(st,en)],
                       scale = scale,
                       vecMet = hc.method,
                       distHC = dist.method)
