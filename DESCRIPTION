@@ -1,11 +1,23 @@
 Package: regioneRld
 Type: Package
-Title: What the Package Does (Title Case)
+Title: RegioneReload: Multiple Association for Genomic Region Sets
 Version: 0.1.0
-Author: Roberto Malinverni <rmalinverni@carrerasresearch.org>
-Maintainer: Roberto Malinverni <rmalinverni@carrerasresearch.org>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
+Authors@R: c(
+    person(given = "Roberto",
+           family = "Malinverni",
+           role = c("aut", "cre"),
+           email = "roberto.malinverni@gmail.com",
+           comment = c(ORCID ="0000-0002-0113-3417")),
+    person(given = "David",
+           family = "Corujo",
+           role = c("aut"),
+           email = "dcorujo@carrerasresearch.org"),
+    person(given = "Bernat",
+           family = "Gel",
+           role = c("aut"),
+           email = "bgel@igtp.org"))
+URL: https://github.com/RMalinverni/regioneReload           
+Description: RegioneReload is a package that allows simultaneous analysis of associations between genomic region sets, enabling clustering of data and the creation of ready-to-publish graphs. It takes over and expands on all the features of its predecessor regioneR.
 License: Artistic-2.0
 Encoding: UTF-8
 LazyData: true
@@ -30,4 +42,5 @@ Imports:
 Suggests: 
     rmarkdown,
     knitr
+biocViews: Genetics, ChIPSeq, DNASeq, MethylSeq, CopyNumberVariation
 VignetteBuilder: knitr

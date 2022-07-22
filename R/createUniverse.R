@@ -29,7 +29,7 @@ createUniverse<-function(Alist, joinR=TRUE){
 
   uniList<-GenomicRanges::GRanges()
 
-  for(u in 1:length(Alist)){
+  for(u in seq_along(Alist)){
     uniList<-c(uniList,Alist[[u]])
   }
 

@@ -46,7 +46,7 @@ multiPermTest <-
     #   if (is.null(universe)) {
     #
     #     uniList <- data.frame()
-    #     for (u in 1:length(Alist)) {
+    #     for (u in seq_along(Alist)) {
     #       df <- regioneR::toDataframe(Alist[[u]])[, 1:3]
     #       uniList <- rbind(uniList, df)
     #     }
@@ -72,9 +72,10 @@ multiPermTest <-
     if (verbose == TRUE) {
       print(paste0(" run in ", time, "  minute"))
     }
+
     tab <- data.frame()
 
-    for (j in 1:length(pt)) {
+    for (j in seq_along(pt)) {
       if (pt[[j]]$zscore == 0 |
           is.na(pt[[j]]$zscore) |
           is.nan((pt[[j]]$zscore))) {

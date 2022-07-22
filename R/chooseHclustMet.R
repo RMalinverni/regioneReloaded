@@ -54,7 +54,7 @@ chooseHclustMet <-
     resMetList <- list()
     resMetVec <- vector()
 
-    for (i in 1:length(vecMet)) {
+    for (i in seq_along(vecMet)) {
 
       resMetList[[i]] <- stats::hclust(d = mat_dist, method = vecMet[[i]])
       resMetVec[i] <- stats::cor(x = mat_dist, cophenetic(resMetList[[i]]))
@@ -72,8 +72,8 @@ chooseHclustMet <-
 
     model <- resMetList[[name_model]]
 
-    print(paste0("method selected for hclustering: ", name_model))
-    print(resMetVec)
+    show(paste0("method selected for hclustering: ", name_model))
+    show(resMetVec)
 
     return(model)
   }

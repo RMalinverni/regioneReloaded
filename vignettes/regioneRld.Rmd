@@ -31,21 +31,12 @@ chromatin regulators is a major challenge in epigenomics. To address this,
 in 2015 we published `r BiocStyle::Biocpkg("regioneR")`, an R package that we developed for the statistical
 assessment of the association between genomic regions sets. One limitation of regioneR is that it can only
 perform association analyisis between two region sets at a time. Here, we now present 
-**regioneReload**, an R package that is the natural evolution of `r BiocStyle::Biocpkg("regioneR")` and allows to 
-calculate the statistical association between multiple regions sets at the same 
-time. To compare z-scores coming from multiple analysis, different strategies have been introduced to normalize the z-score and to improve the 
-p-value calculations. Taken together, regioneReload aims to be a novel and precious addition to NGS tools and for whole genome analysis.
+**regioneReload**, an R package that is the natural evolution of `r BiocStyle::Biocpkg("regioneR")` and allows to  calculate the statistical association between multiple regions sets at the same time. To compare z-scores coming from multiple analysis, different strategies have been introduced to normalize the z-score and to improve the 
+p-value calculations. regioneReload also improves `r BiocStyle::Biocpkg("regioneR")` by adding new randomization methods and different functions for obtaining publication-ready graphs. Taken together, regioneReload aims to be a novel and precious addition to NGS tools and for whole genome analysis.
 
 ## regioneR limitations
 
-`r BiocStyle::Biocpkg("regioneR")` is an R package created to test the associations between genomic region 
-sets. The core of `r BiocStyle::Biocpkg("regioneR")` is a permutation test framework specifically designed 
-to work in a genomic environment. The two main results that can be obtained with this method can be summarized in two 
-graphs. Figure 1A shows the association observed between the two region sets under study, 
-highlighting the distance calculated in standard deviations from the random 
-distribution. Figure 1B shows the local z-score: a narrow peak, as the one shown, indicates that the 
-association is highly dependent on the exact location of the region. One the contrary, a flat profile would suggest a 
-regional association.
+`r BiocStyle::Biocpkg("regioneR")` is an R package created to test the associations between genomic region sets. The core of `r BiocStyle::Biocpkg("regioneR")` is a permutation test framework specifically designed to work in a genomic environment. The two main results that can be obtained with this method can be summarized in two graphs. Figure 1A shows the association observed between the two region sets under study, highlighting the distance calculated in standard deviations from the random distribution. Figure 1B shows the local z-score: a narrow peak, as the one shown, indicates that the association is highly dependent on the exact location of the region. One the contrary, a flat profile would suggest a regional association.
 
 <!-- This section is titled regioneR limitations but it does not address this point directly. 
 Either highlight the limitation of pairwise comparisons or change the title? -->
@@ -324,7 +315,7 @@ pairs in a list of region sets. The result of this function is an S4 object of c
 
 #### Parameters
 
-The slot "parameters" stores all the parameters used to obtain  the gMXR object.
+The slot "parameters" stores all the parameters used to obtain the genomicMatriXer object.
 
 ```{r }
 data("cw_Alien")
@@ -358,7 +349,7 @@ print(cw_Alien_ReG)
 
 #### matrix
 
-When the gMXR object is first created, the "matrix" slot will have a NULL value.
+When the genoMatriXeR object is created, the "matrix" slot will have a NULL value.
 <!-- Explain here how to create the matrix, what is its purpose or where is this explained? -->
 
 ```{r}
@@ -460,15 +451,23 @@ X<-rownames(cw_Alien_ReG@matrix$GMat)
 Y<-colnames(cw_Alien_ReG@matrix$GMat)
 ord<-list(X=X,Y=Y)
 
-plotCrosswiseMatrix(cw_Alien_RaR,matrix_type = "crosswise",ord_mat = ord)
-plotCrosswiseMatrix(cw_Alien_ReG,matrix_type = "crosswise" ,ord_mat = ord)
-plotCrosswiseMatrix(cw_Alien_cRaR,matrix_type = "crosswise",ord_mat = ord)
-plotCrosswiseMatrix(cw_Alien_ReR,matrix_type = "crosswise",ord_mat = ord)
+p_RaR <- plotCrosswiseMatrix(cw_Alien_RaR,matrix_type = "crosswise",ord_mat = ord)
+p_ReG <- plotCrosswiseMatrix(cw_Alien_ReG,matrix_type = "crosswise" ,ord_mat = ord)
+p_cRaR <- plotCrosswiseMatrix(cw_Alien_cRaR,matrix_type = "crosswise",ord_mat = ord)
+p_ReR <- plotCrosswiseMatrix(cw_Alien_ReR,matrix_type = "crosswise",ord_mat = ord)
 
-plotCrosswiseMatrix(cw_Alien_RaR,matrix_type = "correlation",ord_mat = ord)
-plotCrosswiseMatrix(cw_Alien_ReG,matrix_type =  "correlation" ,ord_mat = ord)
-plotCrosswiseMatrix(cw_Alien_cRaR,matrix_type =  "correlation",ord_mat = ord)
-plotCrosswiseMatrix(cw_Alien_ReR,matrix_type =  "correlation",ord_mat = ord)
+ggpubr::ggarrange(p_RaR, p_ReG, p_cRaR, p_ReR, 
+          labels = c("RaR", "ReG", "cRaR","ReR"),
+          ncol = 2, nrow = 2)
+
+p_RaR <- plotCrosswiseMatrix(cw_Alien_RaR,matrix_type = "correlation",ord_mat = ord)
+p_ReG <- plotCrosswiseMatrix(cw_Alien_ReG,matrix_type = "correlation" ,ord_mat = ord)
+p_cRaR <- plotCrosswiseMatrix(cw_Alien_cRaR,matrix_type = "correlation",ord_mat = ord)
+p_ReR <- plotCrosswiseMatrix(cw_Alien_ReR,matrix_type = "correlation",ord_mat = ord)
+
+ggpubr::ggarrange(p_RaR, p_ReG, p_cRaR, p_ReR, 
+          labels = c("RaR", "ReG", "cRaR","ReR"),
+          ncol = 2, nrow = 2)
 
 ```
 
@@ -480,53 +479,66 @@ With the function `plotSinglePT()`, it is possible to plot the association betwe
 ```{r}
 
 plotSinglePT(cw_Alien_ReG, RS1 = "regA", RS2 = "regA_05")
+```
 
-plotSinglePT(cw_Alien_ReG, RS1 = "regA", RS2 = "regC")
+```{r}
+p_sPT1 <- plotSinglePT(cw_Alien_ReG, RS1 = "regA", RS2 = "regC")
 
-plotSinglePT(cw_Alien_ReG, RS1 = "regA", RS2 = "reg_no_A")
+p_sPT2 <- plotSinglePT(cw_Alien_ReG, RS1 = "regA", RS2 = "reg_no_A")
+
+ggpubr::ggarrange(p_sPT1, p_sPT2,
+          ncol = 2, nrow = 1)
  
 ```
 
 ## Plot Dimensionally Reduction
 
-<!-- Missing description -->
+Dimensionality reduction refers to a strategy capable of representing complex (high-density) data in a low-density space while retaining some meaningful properties of the original data. The plotCrosswiseDimRes function allows three of the most widely used algorithms (PCA, tRSNE, UMAP) to be applied to represent genoMatriXeR objects.
+
+The data is clustered using a clustering algorithm that can be selected from ("hclust", "kmeans" or "pam" ), giving the possibility of importing an external clustering method.
 
 ```{r}
 
-cw_Alien_ReG_s <- makeCrosswiseMatrix(cw_Alien_ReG, scale = TRUE)
-
-set.seed(67)
-plotCrosswiseDimRed(cw_Alien_ReG_s, nc = 5, type="PCA")
+set.seed(42)
+plotCrosswiseDimRed(cw_Alien_ReG, nc = 5, type="PCA")
 
 ```
+
+The data is clustered using a clustering algorithm that can be selected from ("hclust", "kmeans" or "pam" ), giving the possibility of importing an external clustering method.
 
 ```{r}
+set.seed(42)
+p_cdr_hc <- plotCrosswiseDimRed(cw_Alien_ReG, nc = 5, type="PCA", clust_met = "hclust")
 
-set.seed(67)
-plotCrosswiseDimRed(cw_Alien_ReG_s, nc = 5, type="PCA",ellipse = TRUE)
+set.seed(42)
+p_cdr_pam <- plotCrosswiseDimRed(cw_Alien_ReG, nc = 5, type="PCA", clust_met = "pam")
 
+ggpubr::ggarrange(p_cdr_hc, p_cdr_pam,
+          ncol = 2, nrow = 1)
 ```
+
+
 
 ```{r}
 
 lsRegSet<-list(regA="regA",regB="regB",regC="regC")
 
-set.seed(67)
-plotCrosswiseDimRed(cw_Alien_ReG_s, nc = 5, type="PCA",listRS = lsRegSet)
+set.seed(42)
+plotCrosswiseDimRed(cw_Alien_ReG, nc = 5, type="PCA",listRS = lsRegSet)
 
-set.seed(67)
-plotCrosswiseDimRed(cw_Alien_ReG_s, nc = 5, type="PCA",listRS = lsRegSet,ellipse = TRUE, emphasize =TRUE)
+set.seed(42)
+plotCrosswiseDimRed(cw_Alien_ReG, nc = 5, type="PCA",listRS = lsRegSet,ellipse = TRUE, emphasize =TRUE)
 ```
 
 ```{r}
 
 set.seed(67)
-plotCrosswiseDimRed(cw_Alien_ReG_s, nc = 5, type="tSNE",listRS = lsRegSet,ellipse = TRUE, emphasize =TRUE)
+plotCrosswiseDimRed(cw_Alien_ReG, nc = 5, type="tSNE",listRS = lsRegSet,ellipse = TRUE, emphasize =TRUE)
 ```
 
 ```{r}
 set.seed(67)
-plotCrosswiseDimRed(cw_Alien_ReG_s, nc = 5, type="UMAP",listRS = lsRegSet,ellipse = TRUE, emphasize =TRUE)
+plotCrosswiseDimRed(cw_Alien_ReG, nc = 5, type="UMAP",listRS = lsRegSet,ellipse = TRUE, emphasize =TRUE)
 
 ```
 
@@ -583,7 +595,7 @@ CW <-  crosswisePermTest(Alist = lGR,    # change name
                         )
 ```
 
-```{r}
+```{r, eval = FALSE}
 urlData<-url("https://github.com/RMalinverni/RegioneReloaded_data/blob/main/cw_Real.RData?raw=true")
 load(urlData)
 

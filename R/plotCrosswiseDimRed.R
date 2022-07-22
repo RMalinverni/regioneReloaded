@@ -118,7 +118,7 @@ plotCrosswiseDimRed <-
     df <- df1 <- data.frame()
     vec <- vec2 <- vec3 <- vector()
 
-    for ( i in 1:nc){
+    for ( i in seq_len(nc)){
 
       nms <- names(clust_tab[clust_tab == i])
       # nmsCol <- colnames(GM)
@@ -176,8 +176,8 @@ plotCrosswiseDimRed <-
 
     pdr_df$clust1 <- rep("none", nrow(pdr_df))
 
-    for (i in 1:length(listRS)) {
-      for (x in 1:length(listRS[[i]])){
+    for (i in seq_along(listRS)) {
+      for (x in seq_along(listRS[[i]])){
         pdr_df$clust1[pdr_df$Name==listRS[[i]][x]]<-names(listRS)[i]
       }
     }
@@ -185,7 +185,7 @@ plotCrosswiseDimRed <-
     pdr_df$clust2 <- rep("none", nrow(pdr_df))
     sel_clust<-pdr_df$clust[pdr_df$clust1 != "none"]
 
-    for (i in 1:length(sel_clust)){
+    for (i in seq_along(sel_clust)){
       pdr_df$clust2[pdr_df$clust == sel_clust[i]] <- sel_clust[i]
     }
 
@@ -249,19 +249,20 @@ plotCrosswiseDimRed <-
                     caption = paste0("clusterization method: ",clust_met))
     }
 
-    if (return_plot == TRUE){
 
+    if (return_table == TRUE) {
+
+      if (return_plot == TRUE){
       plot(p)
-
-    }
-
-    if (return_table) {
+      }
 
       return(df1)
 
     } else {
 
+      if (return_plot == TRUE) {
       return(p)
+      }
     }
 
   }

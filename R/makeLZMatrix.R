@@ -64,7 +64,7 @@ makeLZMatrix <- function(mlZA,
 
   if (normalize == TRUE) {
 
-    for (i in 1:length(mlZA@multiLocalZscores$shifed_ZSs)) {
+    for (i in seq_along(mlZA@multiLocalZscores$shifed_ZSs)) {
       mat <-
         rbind(
           mat,
@@ -72,7 +72,7 @@ makeLZMatrix <- function(mlZA,
         )
     }
   } else{
-    for (i in 1:length(mlZA@multiLocalZscores$shifed_ZSs)) {
+    for (i in seq_along(mlZA@multiLocalZscores$shifed_ZSs)) {
       mat <- rbind(mat, mlZA@multiLocalZscores$shifed_ZSs[[i]])
     }
   }
@@ -96,7 +96,7 @@ makeLZMatrix <- function(mlZA,
       en <- (center + centralize)
     }
     fit <-
-      chooseHclustMet(mat[, st:en],
+      chooseHclustMet(mat[, seq(st,en)],
                       scale = scale,
                       vecMet = hc.method,
                       distHC = dist.method)

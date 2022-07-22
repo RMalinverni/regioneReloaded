@@ -67,7 +67,7 @@ plotSinglePT <-
     mean.1 <- tab$mean_perm_test[n]
     sd.1 <- tab$sd_perm_test[n]
     max_curve <-
-      max(stats::density(stats::rnorm(1:1000, mean = mean.1, sd = sd.1))$y)
+      max(stats::density(stats::rnorm(seq_len(1000), mean = mean.1, sd = sd.1))$y)
     zstart <- mean.1 - 4 * sd.1
     zend   <-   mean.1  + 4 * sd.1
     zs1 <- mean.1 + 1 * sd.1

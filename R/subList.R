@@ -17,10 +17,9 @@
 subList <- function(Alist,
                     min_sampling,
                     fraction) {
-  subAlist <- list()
 
-  for (i in 1:length(Alist)) {
-    A <- Alist[[i]]
+  subFUN<-function(A,min_sampling, fraction){
+
     if (min_sampling < length(A)) {
       subN <- round(length(A) * fraction)
       if (subN < min_sampling) {
@@ -33,7 +32,10 @@ subList <- function(Alist,
     }
   }
 
-  names(subAlist) <- names(Alist)
+  subAlist <- lapply(Alist, subFUN, min_sampling, fraction)
+
+
+
 
   return(subAlist)
 }

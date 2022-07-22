@@ -50,7 +50,7 @@ resampleGenome<- function (A ,
     chrResample <- function(chr) {
       Achr <- A[seqnames(A) == chr]
       universe.chr <- universe[seqnames(universe) == chr]
-      resample.chr <- universe.chr[sample(1:length(universe.chr),
+      resample.chr <- universe.chr[sample(seq_along(universe.chr),
                                           length(Achr))]
       return(resample.chr)
     }
@@ -59,7 +59,7 @@ resampleGenome<- function (A ,
     resampled <- do.call(c, chr.resampled)
   } else {
 
-    resampled <- universe[sample(1:length(universe), length(A))]
+    resampled <- universe[sample(seq_along(universe), length(A))]
   }
   #####added
   if (univOpt & simple==FALSE){

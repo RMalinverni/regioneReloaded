@@ -48,7 +48,7 @@ similarRegionSet <- function(GR,
   vectorNames <- vector()
   GRL <- list()
 
-  for (i in 1:length(vectorPerc)) {
+  for (i in seq_along(vectorPerc)) {
     RGperc <-
       randomizeRegionsPerc(GR, genome = genome, frac = vectorPerc[i])
     GRL[[i]] <- RGperc
