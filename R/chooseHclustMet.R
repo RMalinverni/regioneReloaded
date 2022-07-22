@@ -72,8 +72,8 @@ chooseHclustMet <-
 
     model <- resMetList[[name_model]]
 
-    print(paste0("method selected for hclustering: ", name_model))
-    print(resMetVec)
+    show(paste0("method selected for hclustering: ", name_model))
+    show(resMetVec)
 
     return(model)
   }

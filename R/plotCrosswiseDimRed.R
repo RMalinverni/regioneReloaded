@@ -118,7 +118,7 @@ plotCrosswiseDimRed <-
     df <- df1 <- data.frame()
     vec <- vec2 <- vec3 <- vector()
 
-    for ( i in 1:nc){
+    for ( i in seq_len(nc)){
 
       nms <- names(clust_tab[clust_tab == i])
       # nmsCol <- colnames(GM)
