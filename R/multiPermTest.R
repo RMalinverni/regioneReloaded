@@ -72,6 +72,7 @@ multiPermTest <-
     if (verbose == TRUE) {
       print(paste0(" run in ", time, "  minute"))
     }
+
     tab <- data.frame()
 
     for (j in seq_along(pt)) {
