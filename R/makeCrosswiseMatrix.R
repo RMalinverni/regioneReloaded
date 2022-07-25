@@ -45,7 +45,7 @@
 #'
 #' @examples
 #'
-#' data(cw_Alien)
+#' data("cw_Alien")
 #'
 #' cw_Alien_ReG <- makeCrosswiseMatrix(cw_Alien_ReG)
 #'

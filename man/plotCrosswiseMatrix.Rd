@@ -35,6 +35,7 @@ A plot is created on the current graphics device.
 Plot matrix of associations/correlations stored in a genoMatriXeR object.
 }
 \examples{
+
 data("cw_Alien")
 
 cw_Alien_ReG <- makeCrosswiseMatrix( cw_Alien_ReG)

@@ -30,21 +30,14 @@
 #'
 #'
 #' @seealso  \code{\link{localZScore}}
-#' @importFrom methods is
 #' @examples
 #'
-#' data(cw_Alien)
-#'
-#' # mlz_Alien_ReG <- makeLZMatrix(mlz_Alien_ReG)
-#'
-#' # summary(mlz_Alien_ReG)
+#' data("cw_Alien")
 #'
 #'
 #'
+#' @importFrom methods is
 #' @export makeLZMatrix
-#'
-#'
-#'
 #'
 makeLZMatrix <- function(mlZA,
                          normalize = TRUE,

@@ -33,7 +33,7 @@ regA <-
   genome = AlienGenome
  )
 
- regA_02 <- randomizeRegionsPerc(GR = regA, genome = AlienGenome, frac = 0.2)
+regA_02 <- randomizeRegionsPerc(GR = regA, genome = AlienGenome, frac = 0.2)
 
 }
 \seealso{

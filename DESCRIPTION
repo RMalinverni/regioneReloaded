@@ -38,7 +38,8 @@ Imports:
     methods,
     scales,
     GenomeInfoDb,
-    cluster
+    cluster,
+    grid
 Suggests: 
     rmarkdown,
     knitr

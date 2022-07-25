@@ -44,6 +44,7 @@
 #' @seealso \code{\link{crosswisePermTest}}
 #'
 #' @examples
+#'
 #' data("cw_Alien")
 #'
 #' cw_Alien_ReG <- makeCrosswiseMatrix(cw_Alien_ReG)
@@ -53,6 +54,7 @@
 #' CDR_clust <- plotCrosswiseDimRed(cw_Alien_ReG, type = "UMAP",return_table = TRUE)
 #'
 #' print(CDR_clust)
+#'
 #' @export plotCrosswiseDimRed
 #' @import ggplot2
 #' @import Rtsne

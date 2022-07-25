@@ -40,11 +40,7 @@ create a local z-score matrix from an \link[=multiLocalZScore-class]{multiLocalZ
 }
 \examples{
 
-data(cw_Alien)
-
-# mlz_Alien_ReG <- makeLZMatrix(mlz_Alien_ReG)
-
-# summary(mlz_Alien_ReG)
+data("cw_Alien")
 
 
 

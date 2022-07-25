@@ -25,6 +25,7 @@
 #' @import GenomicRanges
 #'
 #' @examples
+#'
 #' data("cw_Alien")
 #'
 #' regA <- createRandomRegions(

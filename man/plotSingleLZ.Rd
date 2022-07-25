@@ -48,7 +48,6 @@ is usually a better visualization option.
 
 data("cw_Alien")
 
-# plotSingleLZ(mlz_Alien_ReG, RS = c("regAB")
 
 
 }

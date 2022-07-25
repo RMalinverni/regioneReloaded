@@ -54,15 +54,16 @@
 #'
 #' @examples
 #'
-#' \dontrun{
+#' fakeGenome<- regioneR::toGRanges("chrF",1,1000)
+#' regA <- regioneR::createRandomRegions(nregions = 10, length.mean = 10,length.sd = 2,genome = fakeGenome)
+#' regB <- regioneR::createRandomRegions(nregions = 10,length.mean = 10,length.sd = 2,genome = fakeGenome)
+#' regAs <-similarRegionSet(GR = regA,genome = fakeGenome, name = "A",vectorPerc = seq(0.1,0.3,by =0.1))
+#' regBs <-similarRegionSet(GR = regB,genome = fakeGenome, name = "B", vectorPerc = seq(0.1,0.3,by =0.1))
+#' ABList <- c(regAs,regBs)
 #'
-#' data(cw_Alien)
+#' mlz_ptAB <- multiLocalZscore(A = regA, Blist = ABList, genome = fakeGenome, ntimes = 10)
+#' summary(mlz_ptAB)
 #'
-#' mlz_Alien_regB <- multiLocalZscore(A = AlienRSList$regB, Blist = AlienRSList)
-#'
-#' summary(mlz_Alien_regB)
-#'
-#' }
 #'
 #' @importFrom methods new
 #'

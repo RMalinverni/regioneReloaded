@@ -24,6 +24,7 @@
 #' @seealso \code{\link{crosswisePermTest}} \code{\link{makeCrosswiseMatrix}}
 #'
 #' @examples
+#'
 #' data("cw_Alien")
 #'
 #' cw_Alien_ReG <- makeCrosswiseMatrix( cw_Alien_ReG)
