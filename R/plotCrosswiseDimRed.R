@@ -83,7 +83,7 @@ plotCrosswiseDimRed <-
 
     if (!methods::hasArg(mPT)){
       stop("mPT is missing")
-    } else if (class(mPT)=="genoMatriXeR"){
+    } else if (is(mPT,"genoMatriXeR")){
       GM <- mPT@matrix$GMat
     } else if (is.matrix(mPT)){
       GM <- mPT
@@ -141,8 +141,8 @@ plotCrosswiseDimRed <-
 
     if (type == "PCA") {
 
-      pdr_out = stats::princomp(GM, scores = TRUE)
-      pdr_df = data.frame(pdr_out$scores)
+      pdr_out <- stats::princomp(GM, scores = TRUE)
+      pdr_df <- data.frame(pdr_out$scores)
       pdr_df <- pdr_df[, c("Comp.1", "Comp.2")]
       colnames(pdr_df) <- c("x", "y")
       pdr_df$Name <- rownames(GM)

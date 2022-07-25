@@ -50,7 +50,7 @@ plotCrosswiseMatrix <- function(mPT,
                        main = "",
                        ord_mat=NULL) {
 
-  if (class(mPT) == "genoMatriXeR") {
+  if (is(mPT,"genoMatriXeR")) {
 
     if  (matrix_type == "crosswise") {
       GM <- mPT@matrix$GMat

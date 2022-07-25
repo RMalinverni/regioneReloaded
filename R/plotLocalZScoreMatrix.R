@@ -52,7 +52,7 @@ plotLocalZScoreMatrix <- function(mLZ,
 
   if (!methods::hasArg(mLZ)) {
     stop("mLZ is missing")
-  } else if (class(mLZ) != "multiLocalZScore") {
+  } else if (!is(mLZ, "multiLocalZScore")) {
     stop("the object mLZA needs to be an multiLocalZScore object")
   }
 

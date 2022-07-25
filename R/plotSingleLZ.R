@@ -45,6 +45,8 @@
 #' @import ggrepel
 #' @importFrom methods hasArg
 #' @importFrom RColorBrewer brewer.pal
+#' @importFrom methods is
+
 
 plotSingleLZ <-
   function(mLZ,
@@ -59,7 +61,7 @@ plotSingleLZ <-
 
     if(!methods::hasArg(mLZ)) {
       stop("mLZ is missing")
-    } else if (class(mLZ) != "multiLocalZScore") {
+    } else if (!is(mLZ,"multiLocalZScore")) {
       stop("mLZ needs to be a multiLocalZScore object")
     } else if (!methods::hasArg(RS)) {
       stop("RS is missing")

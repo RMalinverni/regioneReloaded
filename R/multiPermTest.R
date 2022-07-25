@@ -33,7 +33,7 @@ multiPermTest <-
            ...) {
 
     #print(deparse(substitute(A)))
-    print(paste0("number of regions: ", length(A)))
+    show(paste0("number of regions: ", length(A)))
 
     new.names <- names(Blist)
     func.list <-
@@ -70,7 +70,7 @@ multiPermTest <-
     time <- proc.time() - ptm
     time <- time[3] / 60
     if (verbose == TRUE) {
-      print(paste0(" run in ", time, "  minute"))
+      show(paste0(" run in ", time, "  minute"))
     }
 
     tab <- data.frame()
@@ -107,7 +107,7 @@ multiPermTest <-
       round(p.adjust(tab$p_value, method = adj_pv_method), digits = 4)
 
     if (verbose == TRUE) {
-      print(tab)
+      show(tab)
     }
 
 
