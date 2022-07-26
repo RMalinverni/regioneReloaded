@@ -6,12 +6,21 @@
 #'
 #' @usage chooseHclustMet(GM, scale = FALSE, vecMet = NULL ,distHC = "euclidean")
 #'
+#'
+#'
 #' @param GM matrix,  numerical matrix.
 #' @param scale logical, if TRUE, the clusterization will be performed using the scaled matrix. (default = FALSE)
 #' @param vecMet vector, vector of methods that will be tested in the function.
 #' If NULL, the following methods will be tested: "complete","average","single","ward.D2","median","centroid" and "mcquitty. (default = NULL)
 #' @param distHC character, the distance measure to be used from those available in [dist()] . (default = "euclidean")
 #'
+#' @return
+#'
+#' an object of class "hclust" \code{\link[stats]{"hclust"}}
+#'
+#' @seealso
+#'
+#' \code{\link[stats]{"hclust"}}
 #'
 #' @examples
 #'
@@ -26,7 +35,7 @@
 #' @export chooseHclustMet
 #' @import stats
 #'
-#'
+
 
 chooseHclustMet <-
   function(GM,

@@ -9,6 +9,9 @@
 \arguments{
 \item{x}{A gMXR object}
 }
+\value{
+a printing for genoMatriXeR objects
+}
 \description{
 Prints gMXR object
 }

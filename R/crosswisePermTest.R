@@ -37,7 +37,7 @@
 #' @details ...
 #' @return
 #'
-#' A object of class [genoMatriXeR][genoMatriXeR-class] containing three slots
+#' A object of class [regioneRld][genoMatriXeR-class] containing three slots
 #'
 #' \itemize{
 #' \item \bold{\code{@parameters}}
@@ -47,7 +47,7 @@
 #' }
 #'
 #'
-#' @seealso    [genoMatriXeR][genoMatriXeR-class], [regioneR](https://bioconductor.org/packages/release/bioc/html/regioneR.html), \code{\link{permTest}}, \code{\link{overlapPermTest}}
+#' @seealso    [regioneRld][genoMatriXeR-class], [regioneR](https://bioconductor.org/packages/release/bioc/html/regioneR.html), \code{\link{permTest}}, \code{\link{overlapPermTest}}
 #'
 #' @examples
 #'

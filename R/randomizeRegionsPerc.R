@@ -5,6 +5,8 @@
 #'
 #' @usage randomizeRegionsPerc(GR, genome = "hg19", frac = 0.2, ...)
 #'
+#' @return a GenomicRanges object similar to GR with a fracion "frac" randomized
+#'
 #' @param GR description
 #' @param genome description
 #' @param frac description

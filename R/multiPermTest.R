@@ -4,6 +4,9 @@
 #' @keywords internal function
 #' @usage multiPermTest (A, Blist, ranFUN, evFUN, universe, genome, rFUN, verbose = FALSE, ntimes, adj_pv_method, ...)
 #'
+#' @return a table obteined from parsing of \code{\link{[regioneR][permTest]}} object
+#'
+#'
 #' @param A Genomic Ranges or any accepted formats by  [regioneR](https://bioconductor.org/packages/release/bioc/html/regioneR.html) package
 #' (\code{\link{GenomicRanges}}, \code{\link{data.frame}} etc...)
 #' @param Blist GRangesList or list of Region Set of any accepted formats by  [regioneR](https://bioconductor.org/packages/release/bioc/html/regioneR.html) package

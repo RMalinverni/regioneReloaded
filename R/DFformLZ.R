@@ -1,6 +1,6 @@
 #' Dataframe from MultiLocalZScore object
 #'
-#'
+#' @return a data.frame from \code{\link{mLZS_class}}
 #'
 #' @usage DFfromLZ( mLZ, RS )
 #' @param mLZ object class MultilocalZScore

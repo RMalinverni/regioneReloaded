@@ -16,6 +16,9 @@ If NULL, the following methods will be tested: "complete","average","single","wa
 
 \item{distHC}{character, the distance measure to be used from those available in \code{\link[=dist]{dist()}} . (default = "euclidean")}
 }
+\value{
+an object of class "hclust" \code{\link[stats]{"hclust"}}
+}
 \description{
 Evaluate and choose the best method for clusterizing a matrix using the \code{\link[=hclust]{hclust()}} function
 }
@@ -29,4 +32,7 @@ GM<-cbind(M1,M2)
 chooseHclustMet(GM)
 
 
+}
+\seealso{
+\code{\link[stats]{"hclust"}}
 }

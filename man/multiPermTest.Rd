@@ -26,6 +26,9 @@ multiPermTest (A, Blist, ranFUN, evFUN, universe, genome, rFUN, verbose = FALSE,
 \item{adj_pv_method}{Charachter, the method used for the calculation of the adjusted p-value,
 to choose between the options of \code{\link{p.adjust}}. (default = "BH")}
 }
+\value{
+a table obteined from parsing of \code{\link{[regioneR][permTest]}} object
+}
 \description{
 Perform a multiple permutation test
 }

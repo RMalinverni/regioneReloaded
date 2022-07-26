@@ -7,9 +7,9 @@
 cleanCrosswiseMatrix(GM, GM_pv, pvcut, scale, subEX)
 }
 \arguments{
-\item{GM}{matrix,  numerical matrix of z-scores from a genoMatriXeR object.}
+\item{GM}{matrix,  numerical matrix of z-scores.}
 
-\item{GM_pv}{matrix, numerical matrix of pvalues from genoMatriXeR object.}
+\item{GM_pv}{matrix, numerical matrix of pvalues.}
 
 \item{pvcut}{numeric, the z-score value is substituted by \code{subEX} (0 by default) for all the associations with an adj.pvalue (as calculated in \code{\link[=crosswisePermTest]{crosswisePermTest()}}) higher than \code{pvcut}. (default = 0.05)}
 
@@ -17,7 +17,13 @@ cleanCrosswiseMatrix(GM, GM_pv, pvcut, scale, subEX)
 
 \item{subEX}{numeric, value used to substitute the z-score values when the associated pvalue is higher than \code{pvcut}. (default = 0)}
 }
+\value{
+a matrix filtered for a matrix of pvalue
+}
 \description{
 Clean and scale a matrix from a genoMatriXeR object
+}
+\seealso{
+\code{\link{makeCrosswiseMatrix}}
 }
 \keyword{internal}

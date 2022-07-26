@@ -6,9 +6,14 @@
 #'
 #' @usage cleanCrosswiseMatrix(GM, GM_pv, pvcut, scale, subEX)
 #'
+#' @return a matrix filtered for a matrix of pvalue
+#'
+#' @seealso \code{\link{makeCrosswiseMatrix}}
+#'
 #' @inheritParams makeCrosswiseMatrix
-#' @param GM matrix,  numerical matrix of z-scores from a genoMatriXeR object.
-#' @param GM_pv matrix, numerical matrix of pvalues from genoMatriXeR object.
+#'
+#' @param GM matrix,  numerical matrix of z-scores.
+#' @param GM_pv matrix, numerical matrix of pvalues.
 #'
 #' @keywords internal
 
