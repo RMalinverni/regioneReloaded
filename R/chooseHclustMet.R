@@ -41,26 +41,25 @@
 
 
 chooseHclustMet <-
-  function(GM,
-           scale = FALSE,
-           vecMet = NULL,
-           distHC = "euclidean") {
-    if (scale == TRUE) {
-      GM <- scale(GM)
-    }
+    function(GM,
+        scale = FALSE,
+        vecMet = NULL,
+        distHC = "euclidean") {
+        if (scale == TRUE) {
+            GM <- scale(GM)
+        }
 
-    if (is.null(vecMet)) {
-      vecMet <-
-        c(
-          "complete",
-          "average",
-          "single",
-          "ward.D2",
-          "median",
-          "centroid",
-          "mcquitty"
-        )
-    }
+        if (is.null(vecMet)) {
+            vecMet <-
+            c("complete",
+            "average",
+            "single",
+            "ward.D2",
+            "median",
+            "centroid",
+            "mcquitty"
+            )
+       }
 
     mat_dist <- stats::dist(x = GM, method = distHC)
 
