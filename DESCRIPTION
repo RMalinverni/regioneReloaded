@@ -43,5 +43,5 @@ Imports:
 Suggests: 
     rmarkdown,
     knitr
-biocViews: Genetics, ChIPSeq, DNASeq, MethylSeq, CopyNumberVariation
+biocViews: Genetics, ChIPSeq, DNASeq, MethylSeq, CopyNumberVariation, Clustering
 VignetteBuilder: knitr
