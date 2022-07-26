@@ -58,9 +58,9 @@
 #' @export plotCrosswiseDimRed
 #'
 #' @import ggplot2
-#' @import Rtsne
-#' @import umap
-#' @import ggrepel
+#' @importFrom Rtsne Rtsne
+#' @importFrom umap umap
+#' @importFrom ggrepel geom_text_repel
 #' @importFrom stats cutree
 #' @importFrom stats kmeans
 #' @importFrom stats princomp
