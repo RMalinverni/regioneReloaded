@@ -33,9 +33,9 @@
 #'
 #' plotCrosswiseMatrix(cw_Alien_ReG, matrix_type = "correlation")
 #'
-#' @import reshape2
+#'
 #' @import ggplot2
-#' @import RColorBrewer
+#' @importFrom  reshape2 melt
 #' @export plotCrosswiseMatrix
 #'
 #'

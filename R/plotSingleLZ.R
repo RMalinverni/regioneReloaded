@@ -41,7 +41,7 @@
 #'
 #' @export plotSingleLZ
 #' @import ggplot2
-#' @import ggrepel
+#' @importFrom ggrepel geom_label_repel
 #' @importFrom methods hasArg
 #' @importFrom RColorBrewer brewer.pal
 #' @importFrom methods is

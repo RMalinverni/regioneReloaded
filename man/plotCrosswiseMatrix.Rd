@@ -44,6 +44,7 @@ plotCrosswiseMatrix(cw_Alien_ReG, matrix_type = "crosswise")
 
 plotCrosswiseMatrix(cw_Alien_ReG, matrix_type = "correlation")
 
+
 }
 \seealso{
 \code{\link{crosswisePermTest}} \code{\link{makeCrosswiseMatrix}}

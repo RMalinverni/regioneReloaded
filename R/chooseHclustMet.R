@@ -33,7 +33,9 @@
 #'
 #'
 #' @export chooseHclustMet
-#' @import stats
+#' @importFrom stats dist
+#' @importFrom stats hclust
+#' @importFrom stats cor
 #'
 
 

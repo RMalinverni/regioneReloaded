@@ -28,12 +28,14 @@
 #'
 #'
 #'
-#' @import reshape2
+
 #' @import ggplot2
-#' @import ggrepel
-#' @import stats
+#' @importFrom ggrepel geom_label_repel
+#' @importFrom reshape2 melt
+#' @importFrom stats quantile
 #' @importFrom RColorBrewer brewer.pal
 #' @importFrom methods hasArg
+#'
 #' @export plotLocalZScoreMatrix
 #'
 

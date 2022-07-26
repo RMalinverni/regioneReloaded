@@ -56,11 +56,14 @@
 #' print(CDR_clust)
 #'
 #' @export plotCrosswiseDimRed
+#'
 #' @import ggplot2
 #' @import Rtsne
 #' @import umap
 #' @import ggrepel
-#' @import stats
+#' @importFrom stats cutree
+#' @importFrom stats kmeans
+#' @importFrom stats princomp
 #' @importFrom cluster pam
 #' @importFrom cluster silhouette
 

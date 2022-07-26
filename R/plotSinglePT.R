@@ -37,6 +37,7 @@
 #' @importFrom methods hasArg
 #' @importFrom scales alpha
 #' @importFrom methods is
+#'
 #' @export plotSinglePT
 
 
