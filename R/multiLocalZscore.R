@@ -66,6 +66,7 @@
 #'
 #'
 #' @importFrom methods new
+#' @importFrom methods show
 #'
 #' @export multiLocalZscore
 
@@ -121,7 +122,7 @@ multiLocalZscore <- function(A,
 
   if (paramList$ranFUN == "resampleRegions" & is.null(universe)) {
     if (is.null(universe)) {
-      show(
+      methods::show(
         "resampleRegions function need that universe parameters in not NULL universe will created using all the regions present in Blist"
       )
       universe <- createUniverse(Blist) # check well this option

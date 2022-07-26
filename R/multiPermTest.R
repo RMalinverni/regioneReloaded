@@ -20,6 +20,7 @@
 #' @param verbose Boolean, if verbose test
 #'
 #'
+#' @importFrom methods show
 #' @keywords internal function
 
 multiPermTest <-
@@ -36,7 +37,7 @@ multiPermTest <-
            ...) {
 
     #print(deparse(substitute(A)))
-    show(paste0("number of regions: ", length(A)))
+    methods::show(paste0("number of regions: ", length(A)))
 
     new.names <- names(Blist)
     func.list <-
@@ -73,7 +74,7 @@ multiPermTest <-
     time <- proc.time() - ptm
     time <- time[3] / 60
     if (verbose == TRUE) {
-      show(paste0(" run in ", time, "  minute"))
+      methods::show(paste0(" run in ", time, "  minute"))
     }
 
     tab <- data.frame()
@@ -110,7 +111,7 @@ multiPermTest <-
       round(p.adjust(tab$p_value, method = adj_pv_method), digits = 4)
 
     if (verbose == TRUE) {
-      show(tab)
+      methods::show(tab)
     }
 
 

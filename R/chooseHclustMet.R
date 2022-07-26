@@ -36,6 +36,7 @@
 #' @importFrom stats dist
 #' @importFrom stats hclust
 #' @importFrom stats cor
+#' @importFrom methods show
 #'
 
 
@@ -83,8 +84,8 @@ chooseHclustMet <-
 
     model <- resMetList[[name_model]]
 
-    show(paste0("method selected for hclustering: ", name_model))
-    show(resMetVec)
+    methods::show(paste0("method selected for hclustering: ", name_model))
+    methods::show(resMetVec)
 
     return(model)
   }

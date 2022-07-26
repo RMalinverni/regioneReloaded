@@ -15,6 +15,10 @@
 #' @seealso regioneR::permTest
 #'
 #' @importFrom GenomeInfoDb seqlevels
+#' @importFrom GenomeInfoDb seqnames
+#' @importFrom GenomicRanges width
+#' @importFrom GenomicRanges tile
+#' @importFrom GenomicRanges resize
 #'
 #' @export resampleGenome
 #'
@@ -38,9 +42,9 @@ resampleGenome<- function (A ,
   #####added
   #if (universe=="genome"){
     univOpt<-TRUE
-    mwidth<-round(mean(width(A)))
-    universe<-unlist(tile(getGenome(genome),width = mwidth))
-    universe<-resize(universe,width=1,fix="center",use.names = FALSE)
+    mwidth<-round(mean(GenomicRanges::width(A)))
+    universe<-unlist(GenomicRanges::tile(getGenome(genome),width = mwidth))
+    universe<-GenomicRanges::resize(universe,width=1,fix="center",use.names = FALSE)
   #}
   #######
   #universe <- toGRanges(universe)
@@ -48,8 +52,8 @@ resampleGenome<- function (A ,
   if (per.chromosome==TRUE) {
 
     chrResample <- function(chr) {
-      Achr <- A[seqnames(A) == chr]
-      universe.chr <- universe[seqnames(universe) == chr]
+      Achr <- A[GenomeInfoDb::seqnames(A) == chr]
+      universe.chr <- universe[GenomeInfoDb::seqnames(universe) == chr]
       resample.chr <- universe.chr[sample(seq_along(universe.chr),
                                           length(Achr))]
       return(resample.chr)
@@ -64,7 +68,8 @@ resampleGenome<- function (A ,
   #####added
   if (univOpt & simple==FALSE){
 
-    resampled <- resize(resampled,width=width(A),fix="center",use.names = FALSE)
+    resampled <- GenomicRanges::resize(resampled,width=GenomicRanges::width(A),
+                                       fix="center",use.names = FALSE)
 
   }
   ############
