@@ -17,20 +17,17 @@
 #'
 #' universe <- createUniverse(AlienRSList_narrow)
 #'
-#'
 #' @export
 
-createUniverse<-function(Alist, joinR=TRUE){
-
-  is.integer0 <- function(x)
-  {
+createUniverse <- function(Alist, joinR = TRUE) {
+  is.integer0 <- function(x) {
     is.integer(x) && length(x) == 0L
   }
 
-  uniList<-GenomicRanges::GRanges()
+  uniList <- GenomicRanges::GRanges()
 
-  for(u in seq_along(Alist)){
-    uniList<-c(uniList,Alist[[u]])
+  for (u in seq_along(Alist)) {
+    uniList <- c(uniList, Alist[[u]])
   }
 
   if (joinR == TRUE) {
@@ -39,5 +36,3 @@ createUniverse<-function(Alist, joinR=TRUE){
 
   return(uniList)
 }
-
-

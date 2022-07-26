@@ -23,7 +23,6 @@ cleanCrosswiseMatrix <-
            pvcut,
            scale,
            subEX) {
-
     GM[GM_pv > pvcut] <- subEX
 
     if (scale == TRUE) {

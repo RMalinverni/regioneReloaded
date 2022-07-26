@@ -24,13 +24,12 @@
 #'
 #' @examples
 #'
-#' M1<-matrix(1:18, nrow = 6, ncol = 3)
+#' M1 <- matrix(1:18, nrow = 6, ncol = 3)
 #' set.seed(42)
-#' M2<-matrix(sample(100,18), nrow = 6, ncol = 3)
-#' GM<-cbind(M1,M2)
+#' M2 <- matrix(sample(100, 18), nrow = 6, ncol = 3)
+#' GM <- cbind(M1, M2)
 #'
 #' chooseHclustMet(GM)
-#'
 #'
 #' @export chooseHclustMet
 #' @importFrom stats dist
@@ -40,25 +39,27 @@
 #'
 
 
+
 chooseHclustMet <-
   function(GM,
            scale = FALSE,
            vecMet = NULL,
            distHC = "euclidean") {
-
     if (scale == TRUE) {
       GM <- scale(GM)
     }
 
     if (is.null(vecMet)) {
       vecMet <-
-        c("complete",
+        c(
+          "complete",
           "average",
           "single",
           "ward.D2",
           "median",
           "centroid",
-          "mcquitty")
+          "mcquitty"
+        )
     }
 
     mat_dist <- stats::dist(x = GM, method = distHC)
@@ -67,10 +68,9 @@ chooseHclustMet <-
     resMetVec <- vector()
 
     for (i in seq_along(vecMet)) {
-
       resMetList[[i]] <- stats::hclust(d = mat_dist, method = vecMet[[i]])
-      resMetVec[i] <- stats::cor(x = mat_dist, cophenetic(resMetList[[i]]))
-
+      resMetVec[i] <-
+        stats::cor(x = mat_dist, cophenetic(resMetList[[i]]))
     }
 
     names(resMetList) <- vecMet
@@ -89,5 +89,3 @@ chooseHclustMet <-
 
     return(model)
   }
-
-

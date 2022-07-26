@@ -24,13 +24,12 @@ Evaluate and choose the best method for clusterizing a matrix using the \code{\l
 }
 \examples{
 
-M1<-matrix(1:18, nrow = 6, ncol = 3)
+M1 <- matrix(1:18, nrow = 6, ncol = 3)
 set.seed(42)
-M2<-matrix(sample(100,18), nrow = 6, ncol = 3)
-GM<-cbind(M1,M2)
+M2 <- matrix(sample(100, 18), nrow = 6, ncol = 3)
+GM <- cbind(M1, M2)
 
 chooseHclustMet(GM)
-
 
 }
 \seealso{
