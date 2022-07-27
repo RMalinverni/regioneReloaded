@@ -49,7 +49,7 @@ makeLZMatrix <- function(mlZA,
                          ...) {
 
 
-  if (!is(x,"multiLocalZScore")) {
+  if (!is(mlZA,"multiLocalZScore")) {
     stop("the object mlZA need to be an multiLocalZScore object")
   }
 
