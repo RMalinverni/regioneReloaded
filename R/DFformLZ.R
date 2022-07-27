@@ -10,7 +10,7 @@
 
 DFfromLZ <- function(mLZ, RS) {
 
-  nelem <- grep(RS, names(mLZ@multiLocalZscores$shifed_ZSs))
+  nelem <- grep(paste0("\\b",RS,"\\b"), names(mLZ@multiLocalZscores$shifed_ZSs))
 
   lineLZ <- mLZ@multiLocalZscores$shifed_ZSs[[nelem]]
   nreg <- mLZ@parameters$Nregions

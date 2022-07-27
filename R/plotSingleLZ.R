@@ -60,7 +60,7 @@ plotSingleLZ <-
 
     if(!methods::hasArg(mLZ)) {
       stop("mLZ is missing")
-    } else if (!is(mLZ,"multiLocalZScore")) {
+    } else if (!methods::is(mLZ,"multiLocalZScore")) {
       stop("mLZ needs to be a multiLocalZScore object")
     } else if (!methods::hasArg(RS)) {
       stop("RS is missing")
