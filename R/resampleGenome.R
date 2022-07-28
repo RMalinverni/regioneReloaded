@@ -11,6 +11,8 @@
 #' @param genome character or GenomicRanges, genome using for the randomization
 #' @param ... further arguments to be passed to other methods.
 #'
+#'
+#'
 #' @return a permTest object
 #' @seealso regioneR::permTest
 #'
@@ -26,51 +28,52 @@
 
 
 
-resampleGenome<- function (A ,
-                           simple=FALSE,
+resampleGenome <- function(A,
+                           simple = FALSE,
                            per.chromosome = FALSE,
-                           genome="hg19",
-                           ...)
-{
-  if (!methods::hasArg(A))
+                           genome = "hg19",
+                           ...) {
+  if (!methods::hasArg(A)) {
     stop("A is missing")
+  }
 
-  if (!is.logical(per.chromosome))
+  if (!is.logical(per.chromosome)) {
     stop("per.chromosome must be logical")
+  }
   A <- toGRanges(A)
 
-  #####added
-  #if (universe=="genome"){
-    univOpt<-TRUE
-    mwidth<-round(mean(GenomicRanges::width(A)))
-    universe<-unlist(GenomicRanges::tile(getGenome(genome),width = mwidth))
-    universe<-GenomicRanges::resize(universe,width=1,fix="center",use.names = FALSE)
-  #}
+  ##### added
+  # if (universe=="genome"){
+  univOpt <- TRUE
+  mwidth <- round(mean(GenomicRanges::width(A)))
+  universe <- unlist(GenomicRanges::tile(getGenome(genome), width = mwidth))
+  universe <- GenomicRanges::resize(universe, width = 1, fix = "center", use.names = FALSE)
+  # }
   #######
-  #universe <- toGRanges(universe)
+  # universe <- toGRanges(universe)
 
-  if (per.chromosome==TRUE) {
-
+  if (per.chromosome == TRUE) {
     chrResample <- function(chr) {
       Achr <- A[GenomeInfoDb::seqnames(A) == chr]
       universe.chr <- universe[GenomeInfoDb::seqnames(universe) == chr]
-      resample.chr <- universe.chr[sample(seq_along(universe.chr),
-                                          length(Achr))]
+      resample.chr <- universe.chr[sample(
+        seq_along(universe.chr),
+        length(Achr)
+      )]
       return(resample.chr)
     }
 
     chr.resampled <- lapply(as.list(GenomeInfoDb::seqlevels(A)), chrResample)
     resampled <- do.call(c, chr.resampled)
   } else {
-
     resampled <- universe[sample(seq_along(universe), length(A))]
   }
-  #####added
-  if (univOpt & simple==FALSE){
-
-    resampled <- GenomicRanges::resize(resampled,width=GenomicRanges::width(A),
-                                       fix="center",use.names = FALSE)
-
+  ##### added
+  if (univOpt & simple == FALSE) {
+    resampled <- GenomicRanges::resize(resampled,
+      width = GenomicRanges::width(A),
+      fix = "center", use.names = FALSE
+    )
   }
   ############
   return(resampled)
