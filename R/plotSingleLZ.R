@@ -34,7 +34,7 @@
 #' @param smoothing logical, if TRUE \code{\link{stas::smooth.spline}} function will be apply to a localZ-score profile. (default = FALSE)
 #' @param ...  further arguments to be passed to other methods.
 #'
-#' @return A plot is created on the current graphics device.
+#' @return Returns a ggplot object.
 #'
 #' @seealso \code{\link{multiLocalZscore}} \code{\link{makeLZMatrix}}
 #'
