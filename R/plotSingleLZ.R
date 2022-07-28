@@ -18,7 +18,7 @@
 #' is usually a better visualization option.
 #'
 #' @usage plotSingleLZ(mLZ, RS, xlab = "", normZS = TRUE, ylim = NULL,
-#' main = NA, colPal = NULL, labValues = TRUE, labSize = 2.5)
+#' main = NA, colPal = NULL, labValues = TRUE, labSize = 2.5, smoothing = FALSE, ...)
 #'
 #' @param mLZ an object of class multiLocalZscore.
 #' @param RS character, vector of region set names for which to plot the local Z-score results.

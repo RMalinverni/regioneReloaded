@@ -5,7 +5,7 @@
 \title{plotSingleLZ}
 \usage{
 plotSingleLZ(mLZ, RS, xlab = "", normZS = TRUE, ylim = NULL,
-main = NA, colPal = NULL, labValues = TRUE, labSize = 2.5)
+main = NA, colPal = NULL, labValues = TRUE, labSize = 2.5, smoothing = FALSE, ...)
 }
 \arguments{
 \item{mLZ}{an object of class multiLocalZscore.}
