@@ -12,9 +12,17 @@
 #' @param ... further arguments to be passed to other methods.
 #'
 #'
+#' @return  a \code{\link{GenomicRanges}} object. A sample from the \code{universe} with the same length as A.
 #'
-#' @return a permTest object
-#' @seealso regioneR::permTest
+#' @seealso  \code{\link{toDataframe}}, \code{\link{toGRanges}}, \code{\link{randomizeRegions}}, \code{\link{createRandomRegions}}
+#'
+#'
+#' @examples
+#'
+#' A <- data.frame(chr=1, start=c(2,12,28,35), end=c(5,25,33,43))
+#'
+#' resampleGenome(A,per.chromosome=TRUE)
+#'
 #'
 #' @importFrom GenomeInfoDb seqlevels
 #' @importFrom GenomeInfoDb seqnames
