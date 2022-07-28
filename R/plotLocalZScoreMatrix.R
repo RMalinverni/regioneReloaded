@@ -17,6 +17,7 @@
 #' @param revert logic, revert the order of the plotted elements
 #' @param highlight character vector indicating the regionset names to highlight by adding labels pointing to the 0 position (default = NULL)
 #' @param highlight_size numeric, size of the highlight labels
+#' @param highlight_max logical, if TRUE the highlight labels are placed at the maximum local z-score value instead of the 0 shift position. (default = FALSE)
 #' @param smoothing logical, if TRUE \code{\link{stas::smooth.spline}} function will be apply to a localZ-score profile. (default = FALSE)
 #' @param ...  further arguments to be passed to other methods.
 #'
@@ -38,6 +39,7 @@
 #' @importFrom RColorBrewer brewer.pal
 #' @importFrom methods hasArg
 #' @importFrom stats smooth.spline
+#' @importFrom stats aggregate
 #'
 #' @export plotLocalZScoreMatrix
 #'
@@ -49,10 +51,11 @@ plotLocalZScoreMatrix <- function(mLZ,
                                   matrix.type = "association",
                                   maxVal = "max",
                                   main = "",
-                                  labSize= 6,
+                                  labSize = 6,
                                   revert = FALSE,
                                   highlight = NULL,
                                   highlight_size = 2.5,
+                                  highlight_max = FALSE,
                                   smoothing = FALSE,
                                   ...) {
 
@@ -126,13 +129,21 @@ plotLocalZScoreMatrix <- function(mLZ,
     )
 
   if (!is.null(highlight)) {
-    DF_label <- DF[DF$Y %in% highlight & DF$X == 0,]
+    if (highlight_max) {
+      DF_label <- DF[DF$Y %in% highlight,]
+      DF_label <- merge(stats::aggregate(value ~ Y, data = DF_label, FUN = max), DF_label)
+      DF_label <- DF_label[order(DF_label$Y),]
+      DF_label <- DF_label[!duplicated(DF_label$Y),]
+    } else {
+      DF_label <- DF[DF$Y %in% highlight & DF$X == 0,]
+    }
     p <- p + ggrepel::geom_label_repel(data = DF_label, ggplot2::aes_string(label = "Y"), max.overlaps = Inf, size = highlight_size,
                               min.segment.length = 0, xlim = c(0.4 * max(DF$X), NA),
                               segment.curvature = -0.1,
                               segment.ncp = 3,
                               segment.angle = 20)
   }
+  p <- p + ggplot2::geom_vline(xintercept = 0, linetype = "dotted", color = "black", alpha = 0.5)
   return(p)
 }
 
