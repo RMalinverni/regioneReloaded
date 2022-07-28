@@ -127,7 +127,6 @@ plotSingleLZ <-
         df_label <- merge(stats::aggregate(score ~ name, data = df, FUN = max), df)
         df_label <- df_label[order(df_label$shift),]
         df_label <- df_label[!duplicated(df_label$name),]
-        print(df_label)
       } else {
         df_label <- df[df$shift == 0, ]
       }
