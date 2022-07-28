@@ -1,6 +1,6 @@
 #' Dataframe from MultiLocalZScore object
 #'
-#'
+#' @return a data.frame from \code{\link{mLZS_class}}
 #'
 #' @usage DFfromLZ( mLZ, RS )
 #' @param mLZ object class MultilocalZScore
@@ -10,7 +10,7 @@
 
 DFfromLZ <- function(mLZ, RS) {
 
-  nelem <- grep(RS, names(mLZ@multiLocalZscores$shifed_ZSs))
+  nelem <- grep(paste0("\\b",RS,"\\b"), names(mLZ@multiLocalZscores$shifed_ZSs))
 
   lineLZ <- mLZ@multiLocalZscores$shifed_ZSs[[nelem]]
   nreg <- mLZ@parameters$Nregions

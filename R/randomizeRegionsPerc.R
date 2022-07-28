@@ -5,6 +5,8 @@
 #'
 #' @usage randomizeRegionsPerc(GR, genome = "hg19", frac = 0.2, ...)
 #'
+#' @return a GenomicRanges object similar to GR with a fracion "frac" randomized
+#'
 #' @param GR description
 #' @param genome description
 #' @param frac description
@@ -25,7 +27,7 @@
 #'   genome = AlienGenome
 #'  )
 #'
-#'  regA_02 <- randomizeRegionsPerc(GR = regA, genome = AlienGenome, frac = 0.2)
+#' regA_02 <- randomizeRegionsPerc(GR = regA, genome = AlienGenome, frac = 0.2)
 #'
 #' @seealso similarRegionSet
 #'

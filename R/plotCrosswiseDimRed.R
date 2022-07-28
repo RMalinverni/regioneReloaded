@@ -44,21 +44,26 @@
 #' @seealso \code{\link{crosswisePermTest}}
 #'
 #' @examples
+#'
 #' data("cw_Alien")
 #'
 #' cw_Alien_ReG <- makeCrosswiseMatrix(cw_Alien_ReG)
 #'
 #' plotCrosswiseDimRed(cw_Alien_ReG, type = "PCA")
 #'
-#' CDR_clust <- plotCrosswiseDimRed(cw_Alien_ReG, type = "UMAP",return_table = TRUE)
+#' CDR_clust <- plotCrosswiseDimRed(cw_Alien_ReG, type = "UMAP", return_table = TRUE)
 #'
 #' print(CDR_clust)
+#'
 #' @export plotCrosswiseDimRed
+#'
 #' @import ggplot2
-#' @import Rtsne
-#' @import umap
-#' @import ggrepel
-#' @import stats
+#' @importFrom Rtsne Rtsne
+#' @importFrom umap umap
+#' @importFrom ggrepel geom_text_repel
+#' @importFrom stats cutree
+#' @importFrom stats kmeans
+#' @importFrom stats princomp
 #' @importFrom cluster pam
 #' @importFrom cluster silhouette
 
@@ -66,7 +71,7 @@ plotCrosswiseDimRed <-
   function(mPT,
            type = "PCA",
            GM_clust = NA,
-           clust_met ="kmeans",
+           clust_met = "kmeans",
            nc = 5,
            listRS = NULL,
            main = "",
@@ -80,34 +85,31 @@ plotCrosswiseDimRed <-
            return_table = FALSE,
            return_plot = TRUE,
            ...) {
-
-    if (!methods::hasArg(mPT)){
+    if (!methods::hasArg(mPT)) {
       stop("mPT is missing")
-    } else if (class(mPT)=="genoMatriXeR"){
+    } else if (is(mPT, "genoMatriXeR")) {
       GM <- mPT@matrix$GMat
-    } else if (is.matrix(mPT)){
+    } else if (is.matrix(mPT)) {
       GM <- mPT
     } else {
       stop("mPT needs to be a genoMatriXeR object or a numeric matrix")
     }
 
     if (is.na(GM_clust)) {
-
-      if (clust_met == "hclust"){
+      if (clust_met == "hclust") {
         clust_tab <- stats::cutree(mPT@matrix$FitRow, k = nc)
-        clust_tab<-clust_tab[rownames(GM)]
+        clust_tab <- clust_tab[rownames(GM)]
       }
 
-      if (clust_met == "kmeans"){
+      if (clust_met == "kmeans") {
         GM_clust <- stats::kmeans(GM, centers = nc)
-        clust_tab<-GM_clust$cluster
+        clust_tab <- GM_clust$cluster
       }
 
-      if (clust_met == "pam"){
+      if (clust_met == "pam") {
         GM_clust <- cluster::pam(GM, k = nc)
-        clust_tab<-GM_clust$cluster
+        clust_tab <- GM_clust$cluster
       }
-
     }
 
     sil <- cluster::silhouette(clust_tab, dist(GM))
@@ -118,55 +120,55 @@ plotCrosswiseDimRed <-
     df <- df1 <- data.frame()
     vec <- vec2 <- vec3 <- vector()
 
-    for ( i in seq_len(nc)){
-
+    for (i in seq_len(nc)) {
       nms <- names(clust_tab[clust_tab == i])
       # nmsCol <- colnames(GM)
       # GMmn <- mean(GM[nms,nmsCol])
       # GMsd <- sd(GM[nms,nmsCol])
       # vec[i]<-GMmn
       # vec2[i]<-GMsd
-      df <- data.frame(Name=nms,
-                      Cluster = rep(paste0("clust_",i),length(nms)),
-                      #Mean = GMmn,
-                      #SD = GMsd,
-                      #CV = round(GMsd/GMmn, digits = 2),
-                      ASW = rep(vecSil[i],length(nms))
-                      )
+      df <- data.frame(
+        Name = nms,
+        Cluster = rep(paste0("clust_", i), length(nms)),
+        # Mean = GMmn,
+        # SD = GMsd,
+        # CV = round(GMsd/GMmn, digits = 2),
+        ASW = rep(vecSil[i], length(nms))
+      )
 
-      df1<-rbind(df1, df)
+      df1 <- rbind(df1, df)
     }
 
-    df1[is.na(df1)]<-0
+    df1[is.na(df1)] <- 0
 
     if (type == "PCA") {
-
-      pdr_out = stats::princomp(GM, scores = TRUE)
-      pdr_df = data.frame(pdr_out$scores)
+      pdr_out <- stats::princomp(GM, scores = TRUE)
+      pdr_df <- data.frame(pdr_out$scores)
       pdr_df <- pdr_df[, c("Comp.1", "Comp.2")]
       colnames(pdr_df) <- c("x", "y")
       pdr_df$Name <- rownames(GM)
-
     }
 
     if (type == "tSNE") {
-
       pdr_out <- Rtsne::Rtsne(GM, perplexity = perplexity, theta = theta, check_duplicates = FALSE)
-      pdr_df <- data.frame(x = pdr_out$Y[, 1],
-                   y = pdr_out$Y[, 2],
-                   Name = rownames(GM))
-
+      pdr_df <- data.frame(
+        x = pdr_out$Y[, 1],
+        y = pdr_out$Y[, 2],
+        Name = rownames(GM)
+      )
     }
 
-    if (type == "UMAP"){
+    if (type == "UMAP") {
       pdr_out <- umap::umap(GM)
       pdr_df <-
-        data.frame(x = pdr_out$layout[,1],
-                   y = pdr_out$layout[,2],
-                   Name = rownames(GM))
+        data.frame(
+          x = pdr_out$layout[, 1],
+          y = pdr_out$layout[, 2],
+          Name = rownames(GM)
+        )
     }
 
-    if (main=="") {
+    if (main == "") {
       main <- deparse(substitute(mPt))
     }
 
@@ -177,21 +179,21 @@ plotCrosswiseDimRed <-
     pdr_df$clust1 <- rep("none", nrow(pdr_df))
 
     for (i in seq_along(listRS)) {
-      for (x in seq_along(listRS[[i]])){
-        pdr_df$clust1[pdr_df$Name==listRS[[i]][x]]<-names(listRS)[i]
+      for (x in seq_along(listRS[[i]])) {
+        pdr_df$clust1[pdr_df$Name == listRS[[i]][x]] <- names(listRS)[i]
       }
     }
 
     pdr_df$clust2 <- rep("none", nrow(pdr_df))
-    sel_clust<-pdr_df$clust[pdr_df$clust1 != "none"]
+    sel_clust <- pdr_df$clust[pdr_df$clust1 != "none"]
 
-    for (i in seq_along(sel_clust)){
+    for (i in seq_along(sel_clust)) {
       pdr_df$clust2[pdr_df$clust == sel_clust[i]] <- sel_clust[i]
     }
 
-    if (!is.null(listRS) & emphasize){
-      pdr_df$clust<-pdr_df$clust2
-      pdr_df_emph <- pdr_df[pdr_df$clust != "none",]
+    if (!is.null(listRS) & emphasize) {
+      pdr_df$clust <- pdr_df$clust2
+      pdr_df_emph <- pdr_df[pdr_df$clust != "none", ]
     }
 
     p <-
@@ -203,67 +205,76 @@ plotCrosswiseDimRed <-
       )) +
       ggplot2::geom_point()
 
-    if(emphasize & ellipse){ # ellipse only for emphasized clusters
-      p <- p + ggplot2::stat_ellipse(data = pdr_df_emph,
-                            type = "t",
-                            geom = "polygon",
-                            alpha = 0.15)
+    if (emphasize & ellipse) { # ellipse only for emphasized clusters
+      p <- p + ggplot2::stat_ellipse(
+        data = pdr_df_emph,
+        type = "t",
+        geom = "polygon",
+        alpha = 0.15
+      )
     } else if (ellipse) { # ellipse for all clusters
-      p <- p + ggplot2::stat_ellipse(type = "t",
-                            geom = "polygon",
-                            alpha = 0.15)
+      p <- p + ggplot2::stat_ellipse(
+        type = "t",
+        geom = "polygon",
+        alpha = 0.15
+      )
     }
 
     if (emphasize & !labAll) { # label all clusters
-      p <- p + ggrepel::geom_text_repel(data = pdr_df_emph,
-                               size  = labSize,
-                               ggplot2::aes_string(label = "Name"),
-                               max.overlaps=labMaxOverlap,
-                               point.padding = 0.5,
-                               segment.color = "grey")
+      p <- p + ggrepel::geom_text_repel(
+        data = pdr_df_emph,
+        size = labSize,
+        ggplot2::aes_string(label = "Name"),
+        max.overlaps = labMaxOverlap,
+        point.padding = 0.5,
+        segment.color = "grey"
+      )
     } else {
-      p <- p + ggrepel::geom_text_repel(size  = labSize,
-                               ggplot2::aes_string(label = "Name"),
-                               max.overlaps=labMaxOverlap,
-                               point.padding = 0.5,
-                               segment.color = "grey")
+      p <- p + ggrepel::geom_text_repel(
+        size = labSize,
+        ggplot2::aes_string(label = "Name"),
+        max.overlaps = labMaxOverlap,
+        point.padding = 0.5,
+        segment.color = "grey"
+      )
     }
 
-    if(type=="PCA"){
-      p <- p + ggplot2::labs(title = "PCA plot" ,
-                    subtitle = main,
-                    caption = paste0("clusterization method: ",clust_met)
-                   )
+    if (type == "PCA") {
+      p <- p + ggplot2::labs(
+        title = "PCA plot",
+        subtitle = main,
+        caption = paste0("clusterization method: ", clust_met)
+      )
     }
 
-    if(type=="tSNE"){
-      p <- p + ggplot2::labs(title = "tSNE plot" ,
+    if (type == "tSNE") {
+      p <- p + ggplot2::labs(
+        title = "tSNE plot",
         subtitle = main,
         caption = paste0("perplexity: ", perplexity, " theta: ", theta, "\n",
-                         caption = paste0("clusterization method: ",clust_met)))
+          caption = paste0("clusterization method: ", clust_met)
+        )
+      )
     }
 
-    if(type=="UMAP"){
-      p <- p + ggplot2::labs(title = "UMAP plot" ,
-                    subtitle = main,
-                    caption = paste0("clusterization method: ",clust_met))
+    if (type == "UMAP") {
+      p <- p + ggplot2::labs(
+        title = "UMAP plot",
+        subtitle = main,
+        caption = paste0("clusterization method: ", clust_met)
+      )
     }
 
 
     if (return_table == TRUE) {
-
-      if (return_plot == TRUE){
-      plot(p)
+      if (return_plot == TRUE) {
+        plot(p)
       }
 
       return(df1)
-
     } else {
-
       if (return_plot == TRUE) {
-      return(p)
+        return(p)
       }
     }
-
   }
-

@@ -2,13 +2,16 @@
 % Please edit documentation in R/genoMatriXeR_methods.R
 \name{print,genoMatriXeR-method}
 \alias{print,genoMatriXeR-method}
-\title{Prints gMXR object}
+\title{Prints genomicMatriXeR object}
 \usage{
 \S4method{print}{genoMatriXeR}(x)
 }
 \arguments{
-\item{x}{A gMXR object}
+\item{x}{A genomicMatriXeR object}
+}
+\value{
+a printing for genoMatriXeR objects
 }
 \description{
-Prints gMXR object
+Prints genomicMatriXeR object
 }

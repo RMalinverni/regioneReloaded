@@ -36,7 +36,11 @@
 #' @importFrom grid arrow
 #' @importFrom methods hasArg
 #' @importFrom scales alpha
+#' @importFrom methods is
+#'
 #' @export plotSinglePT
+
+
 
 plotSinglePT <-
   function(mPT,
@@ -46,7 +50,7 @@ plotSinglePT <-
            main = NA) {
     if (!methods::hasArg(mPT)) {
       stop("mPT is missing")
-    } else if (class(mPT) != "genoMatriXeR") {
+    } else if (!is(mPT,"genoMatriXeR")) {
       stop('mPT needs to be a "genoMatriXeR" class object')
     }
 
@@ -57,7 +61,7 @@ plotSinglePT <-
     }
 
     if (is.na(xlab) & mPT@parameters$evFUN == "numOverlaps") {
-      xlab = "N of overlaps"
+      xlab <- "N of overlaps"
     }
 
     colvec <- c("#57837B", "#F1ECC3", "#C9D8B6", "#515E63", "#C05555")

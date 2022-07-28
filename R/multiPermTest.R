@@ -4,6 +4,9 @@
 #' @keywords internal function
 #' @usage multiPermTest (A, Blist, ranFUN, evFUN, universe, genome, rFUN, verbose = FALSE, ntimes, adj_pv_method, ...)
 #'
+#' @return a table obteined from parsing of \code{\link{[regioneR][permTest]}} object
+#'
+#'
 #' @param A Genomic Ranges or any accepted formats by  [regioneR](https://bioconductor.org/packages/release/bioc/html/regioneR.html) package
 #' (\code{\link{GenomicRanges}}, \code{\link{data.frame}} etc...)
 #' @param Blist GRangesList or list of Region Set of any accepted formats by  [regioneR](https://bioconductor.org/packages/release/bioc/html/regioneR.html) package
@@ -17,6 +20,7 @@
 #' @param verbose Boolean, if verbose test
 #'
 #'
+#' @importFrom methods show
 #' @keywords internal function
 
 multiPermTest <-
@@ -33,7 +37,7 @@ multiPermTest <-
            ...) {
 
     #print(deparse(substitute(A)))
-    print(paste0("number of regions: ", length(A)))
+    methods::show(paste0("number of regions: ", length(A)))
 
     new.names <- names(Blist)
     func.list <-
@@ -70,7 +74,7 @@ multiPermTest <-
     time <- proc.time() - ptm
     time <- time[3] / 60
     if (verbose == TRUE) {
-      print(paste0(" run in ", time, "  minute"))
+      methods::show(paste0(" run in ", time, "  minute"))
     }
 
     tab <- data.frame()
@@ -107,7 +111,7 @@ multiPermTest <-
       round(p.adjust(tab$p_value, method = adj_pv_method), digits = 4)
 
     if (verbose == TRUE) {
-      print(tab)
+      methods::show(tab)
     }
 
 

@@ -3,6 +3,7 @@
 #' create a samples sublist starting from a list of Region Set
 #'
 #' @usage subList(Alist, min_sampling, fraction)
+#' @return a sublist of GenomicRanges from an original GenomicRanges list
 #'
 #' @param Alist,  GRangesList or list of Region Set of any accepted formats by  [regioneR](https://bioconductor.org/packages/release/bioc/html/regioneR.html) package
 #' @param min_sampling numeric, minimum number of regions for each element of the list,

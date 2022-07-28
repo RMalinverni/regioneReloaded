@@ -28,6 +28,10 @@ highlight = NULL, highlight_size = 2.5)
 \item{highlight}{character vector indicating the regionset names to highlight by adding labels pointing to the 0 position (default = NULL)}
 
 \item{highlight_size}{numeric, size of the highlight labels}
+
+\item{smoothing}{logical, if TRUE \code{\link{stas::smooth.spline}} function will be apply to a localZ-score profile. (default = FALSE)}
+
+\item{...}{further arguments to be passed to other methods.}
 }
 \value{
 A plot is created on the current graphics device.
@@ -39,7 +43,6 @@ Plot Local Z-Score Matrix of associations/correlations stored in a multiLocaZSco
 
 data("cw_Alien")
 
-# plotLocalZScoreMatrix(mLZ_Alien_ReG)
 
 
 }

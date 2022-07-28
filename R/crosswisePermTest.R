@@ -37,7 +37,7 @@
 #' @details ...
 #' @return
 #'
-#' A object of class [genoMatriXeR][genoMatriXeR-class] containing three slots
+#' A object of class [regioneRld][genoMatriXeR-class] containing three slots
 #'
 #' \itemize{
 #' \item \bold{\code{@parameters}}
@@ -47,20 +47,18 @@
 #' }
 #'
 #'
-#' @seealso    [genoMatriXeR][genoMatriXeR-class], [regioneR](https://bioconductor.org/packages/release/bioc/html/regioneR.html), \code{\link{permTest}}, \code{\link{overlapPermTest}}
+#' @seealso    [regioneRld][genoMatriXeR-class], [regioneR](https://bioconductor.org/packages/release/bioc/html/regioneR.html), \code{\link{permTest}}, \code{\link{overlapPermTest}}
 #'
 #' @examples
 #'
-#' \dontrun{
-#'
-#' data(cw_Alien)
-#'
-#' CW_Alien <- crosswisePermTest(Alist = AlienRSList, Blist = AlienRSList)
-#'
-#' summary(CW_Alien)
-#'
-#' }
-#'
+#' fakeGenome <- regioneR::toGRanges("chrF", 1, 1000)
+#' regA <- regioneR::createRandomRegions(nregions = 10, length.mean = 10, length.sd = 2, genome = fakeGenome)
+#' regB <- regioneR::createRandomRegions(nregions = 10, length.mean = 10, length.sd = 2, genome = fakeGenome)
+#' regAs <- similarRegionSet(GR = regA, genome = fakeGenome, name = "A", vectorPerc = seq(0.1, 0.3, by = 0.1))
+#' regBs <- similarRegionSet(GR = regB, genome = fakeGenome, name = "B", vectorPerc = seq(0.1, 0.3, by = 0.1))
+#' ABList <- c(regAs, regBs)
+#' cw_ptAB <- crosswisePermTest(ABList, genome = fakeGenome, ntimes = 10)
+#' print(cw_ptAB)
 #'
 #' @import regioneR
 #' @importFrom methods hasArg
@@ -81,29 +79,37 @@ crosswisePermTest <-
            adj_pv_method = "BH",
            genome = "hg19",
            verbose = FALSE,
-           ...){
+           ...) {
 
-# control parameters
+    # control parameters
 
-    if (!methods::hasArg(Alist))
+    if (!methods::hasArg(Alist)) {
       stop("Alist is missing")
-    if (!is.logical(sampling))
+    }
+    if (!is.logical(sampling)) {
       stop("sampling must be logical")
-    if (!is.numeric(fraction))
+    }
+    if (!is.numeric(fraction)) {
       stop("fraction must be numeric")
-    if (!is.numeric(min_sampling))
+    }
+    if (!is.numeric(min_sampling)) {
       stop("min_sampling must be numeric")
-    if(!is.character(ranFUN))
+    }
+    if (!is.character(ranFUN)) {
       stop("runFun must be charachter")
-    if(!is.character(evFUN))
+    }
+    if (!is.character(evFUN)) {
       stop("evFun must be charachter")
-    if (!is.numeric(ntimes))
+    }
+    if (!is.numeric(ntimes)) {
       stop("ntimes must be numeric")
-    if (!is.numeric(min_sampling))
+    }
+    if (!is.numeric(min_sampling)) {
       stop("min_sampling must be numeric")
+    }
 
 
-# create @parameters slot
+    # create @parameters slot
 
     paramList <- list(
       Alist = deparse(substitute(Alist)),
@@ -112,7 +118,7 @@ crosswisePermTest <-
       fraction = deparse(substitute(fraction)),
       min_sampling = deparse(substitute(fraction)),
       ranFUN = ranFUN,
-      evFUN= evFUN,
+      evFUN = evFUN,
       ntimes = ntimes,
       universe = deparse(substitute(universe)),
       adj_pv_method = adj_pv_method,
@@ -136,26 +142,28 @@ crosswisePermTest <-
         subList(Alist, min_sampling = min_sampling, fraction = fraction)
     }
 
-     if ((ranFUN == "resampleRegions") & (is.null(universe))) {
-     warning(
-       "resampleRegions function need that 'universe' is not NULL, universe was created using all the regions present in Alist"
-     )
-       universe <- createUniverse(Alist)
-     }
+    if ((ranFUN == "resampleRegions") & (is.null(universe))) {
+      warning(
+        "resampleRegions function need that 'universe' is not NULL, universe was created using all the regions present in Alist"
+      )
+      universe <- createUniverse(Alist)
+    }
 
-# create @multiOverlaps slot
+    # create @multiOverlaps slot
 
-    list.tabs<-lapply(Alist, FUN=multiPermTest, ... ,Blist=Blist,
-                      ranFUN=ranFUN, evFUN=evFUN,universe=universe,
-                      genome=genome,rFUN=rFUN,ntimes=ntimes,adj_pv_method=adj_pv_method)
+    list.tabs <- lapply(Alist,
+      FUN = multiPermTest, ..., Blist = Blist,
+      ranFUN = ranFUN, evFUN = evFUN, universe = universe,
+      genome = genome, rFUN = rFUN, ntimes = ntimes, adj_pv_method = adj_pv_method
+    )
 
     names(list.tabs) <- names(Alist)
 
-# create S4 object (matrix slot is = NULL)
+    # create S4 object (matrix slot is = NULL)
 
     GMXRobj <- gMXR(
-      parameters = paramList ,
-      multiOverlaps = list.tabs ,
+      parameters = paramList,
+      multiOverlaps = list.tabs,
       matrix = list(NULL)
     )
 

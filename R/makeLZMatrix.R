@@ -30,21 +30,14 @@
 #'
 #'
 #' @seealso  \code{\link{localZScore}}
-#'
 #' @examples
 #'
-#' data(cw_Alien)
-#'
-#' # mlz_Alien_ReG <- makeLZMatrix(mlz_Alien_ReG)
-#'
-#' # summary(mlz_Alien_ReG)
+#' data("cw_Alien")
 #'
 #'
 #'
+#' @importFrom methods is
 #' @export makeLZMatrix
-#'
-#'
-#'
 #'
 makeLZMatrix <- function(mlZA,
                          normalize = TRUE,
@@ -56,7 +49,7 @@ makeLZMatrix <- function(mlZA,
                          ...) {
 
 
-  if (class(mlZA) != "multiLocalZScore") {
+  if (!methods::is(mlZA,"multiLocalZScore")) {
     stop("the object mlZA need to be an multiLocalZScore object")
   }
 

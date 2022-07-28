@@ -24,6 +24,7 @@
 #' @seealso \code{\link{crosswisePermTest}} \code{\link{makeCrosswiseMatrix}}
 #'
 #' @examples
+#'
 #' data("cw_Alien")
 #'
 #' cw_Alien_ReG <- makeCrosswiseMatrix( cw_Alien_ReG)
@@ -32,9 +33,9 @@
 #'
 #' plotCrosswiseMatrix(cw_Alien_ReG, matrix_type = "correlation")
 #'
-#' @import reshape2
+#'
 #' @import ggplot2
-#' @import RColorBrewer
+#' @importFrom  reshape2 melt
 #' @export plotCrosswiseMatrix
 #'
 #'
@@ -50,7 +51,7 @@ plotCrosswiseMatrix <- function(mPT,
                        main = "",
                        ord_mat=NULL) {
 
-  if (class(mPT) == "genoMatriXeR") {
+  if (is(mPT,"genoMatriXeR")) {
 
     if  (matrix_type == "crosswise") {
       GM <- mPT@matrix$GMat

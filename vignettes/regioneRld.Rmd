@@ -658,3 +658,10 @@ plotLocalZScoreMatrix(mlZ_CTCF,
                       size_lab = 5,
                       main="CTCF_ENCFF237OKO")
 ```
+
+
+# Session Info
+```{r, sessionInfo}
+sessionInfo()
+```
+

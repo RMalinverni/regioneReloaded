@@ -1,7 +1,6 @@
-#' Prints gMXR object
-
-#' @param x A gMXR object
-
+#' Prints genomicMatriXeR object
+#' @param x A genomicMatriXeR object
+#' @return a printing for genoMatriXeR objects
 #' @export
 
 setMethod("print", "genoMatriXeR", function(x)

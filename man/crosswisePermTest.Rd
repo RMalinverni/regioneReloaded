@@ -38,7 +38,7 @@ to choose between the options of \code{\link[=p.adjust]{p.adjust()}}. (default =
 \item{...}{further arguments to be passed to other methods.}
 }
 \value{
-A object of class \link[=genoMatriXeR-class]{genoMatriXeR} containing three slots
+A object of class \link[=genoMatriXeR-class]{regioneRld} containing three slots
 
 \itemize{
 \item \bold{\code{@parameters}}
@@ -61,18 +61,16 @@ In addition, all the paramteres used for the test are stored in the \code{parame
 }
 \examples{
 
-\dontrun{
-
-data(cw_Alien)
-
-CW_Alien <- crosswisePermTest(Alist = AlienRSList, Blist = AlienRSList)
-
-summary(CW_Alien)
-
-}
-
+fakeGenome <- regioneR::toGRanges("chrF", 1, 1000)
+regA <- regioneR::createRandomRegions(nregions = 10, length.mean = 10, length.sd = 2, genome = fakeGenome)
+regB <- regioneR::createRandomRegions(nregions = 10, length.mean = 10, length.sd = 2, genome = fakeGenome)
+regAs <- similarRegionSet(GR = regA, genome = fakeGenome, name = "A", vectorPerc = seq(0.1, 0.3, by = 0.1))
+regBs <- similarRegionSet(GR = regB, genome = fakeGenome, name = "B", vectorPerc = seq(0.1, 0.3, by = 0.1))
+ABList <- c(regAs, regBs)
+cw_ptAB <- crosswisePermTest(ABList, genome = fakeGenome, ntimes = 10)
+print(cw_ptAB)
 
 }
 \seealso{
-\link[=genoMatriXeR-class]{genoMatriXeR}, \href{https://bioconductor.org/packages/release/bioc/html/regioneR.html}{regioneR}, \code{\link{permTest}}, \code{\link{overlapPermTest}}
+\link[=genoMatriXeR-class]{regioneRld}, \href{https://bioconductor.org/packages/release/bioc/html/regioneR.html}{regioneR}, \code{\link{permTest}}, \code{\link{overlapPermTest}}
 }

@@ -17,6 +17,8 @@
 #' @param revert logic, revert the order of the plotted elements
 #' @param highlight character vector indicating the regionset names to highlight by adding labels pointing to the 0 position (default = NULL)
 #' @param highlight_size numeric, size of the highlight labels
+#' @param smoothing logical, if TRUE \code{\link{stas::smooth.spline}} function will be apply to a localZ-score profile. (default = FALSE)
+#' @param ...  further arguments to be passed to other methods.
 #'
 #' @return A plot is created on the current graphics device.
 #'
@@ -26,15 +28,17 @@
 #'
 #' data("cw_Alien")
 #'
-#' # plotLocalZScoreMatrix(mLZ_Alien_ReG)
 #'
 #'
-#' @import reshape2
+
 #' @import ggplot2
-#' @import ggrepel
-#' @import stats
+#' @importFrom ggrepel geom_label_repel
+#' @importFrom reshape2 melt
+#' @importFrom stats quantile
 #' @importFrom RColorBrewer brewer.pal
 #' @importFrom methods hasArg
+#' @importFrom stats smooth.spline
+#'
 #' @export plotLocalZScoreMatrix
 #'
 
@@ -43,16 +47,18 @@ plotLocalZScoreMatrix <- function(mLZ,
                                   lineColor = NA,
                                   colMatrix = "default",
                                   matrix.type = "association",
-                                  maxVal = 2,
+                                  maxVal = "max",
                                   main = "",
                                   labSize= 6,
                                   revert = FALSE,
                                   highlight = NULL,
-                                  highlight_size = 2.5) {
+                                  highlight_size = 2.5,
+                                  smoothing = FALSE,
+                                  ...) {
 
   if (!methods::hasArg(mLZ)) {
     stop("mLZ is missing")
-  } else if (class(mLZ) != "multiLocalZScore") {
+  } else if (!is(mLZ, "multiLocalZScore")) {
     stop("the object mLZA needs to be an multiLocalZScore object")
   }
 
@@ -88,6 +94,12 @@ plotLocalZScoreMatrix <- function(mLZ,
   }
 
   DF <- reshape2::melt(GM, varnames = c("X", "Y"))
+
+  if (smoothing == TRUE){
+    smth <- stats::smooth.spline(DF$value)
+    DF$value <- smth$y
+  }
+
 
   p <- ggplot2::ggplot(DF, ggplot2::aes_string(x = "X", y = "Y")) +
 

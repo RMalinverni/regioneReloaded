@@ -25,6 +25,10 @@ main = NA, colPal = NULL, labValues = TRUE, labSize = 2.5)
 \item{labValues}{logical, if TRUE each local Z-score profile is labelled at position 0 with the name of the region set and its Z-score value at the central position. (default = TRUE)}
 
 \item{labSize}{numerical, size of the labels from labValues in the plot. (default = 2.5)}
+
+\item{smoothing}{logical, if TRUE \code{\link{stas::smooth.spline}} function will be apply to a localZ-score profile. (default = FALSE)}
+
+\item{...}{further arguments to be passed to other methods.}
 }
 \value{
 A plot is created on the current graphics device.
@@ -47,9 +51,6 @@ is usually a better visualization option.
 \examples{
 
 data("cw_Alien")
-
-# plotSingleLZ(mlz_Alien_ReG, RS = c("regAB")
-
 
 }
 \seealso{

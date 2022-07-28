@@ -22,9 +22,8 @@
 #'
 #' @seealso \code{\link{GenomicRanges}}
 #'
-#' @import GenomicRanges
-#'
 #' @examples
+#'
 #' data("cw_Alien")
 #'
 #' regA <- createRandomRegions(

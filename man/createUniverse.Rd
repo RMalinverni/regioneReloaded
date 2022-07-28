@@ -23,5 +23,4 @@ data("cw_Alien")
 
 universe <- createUniverse(AlienRSList_narrow)
 
-
 }

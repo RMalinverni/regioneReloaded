@@ -60,15 +60,17 @@ belong to. In addition to generating a plot, a table with the cluster
 assignments can be retrieved by setting return_table as TRUE.
 }
 \examples{
+
 data("cw_Alien")
 
 cw_Alien_ReG <- makeCrosswiseMatrix(cw_Alien_ReG)
 
 plotCrosswiseDimRed(cw_Alien_ReG, type = "PCA")
 
-CDR_clust <- plotCrosswiseDimRed(cw_Alien_ReG, type = "UMAP",return_table = TRUE)
+CDR_clust <- plotCrosswiseDimRed(cw_Alien_ReG, type = "UMAP", return_table = TRUE)
 
 print(CDR_clust)
+
 }
 \seealso{
 \code{\link{crosswisePermTest}}

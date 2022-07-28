@@ -15,6 +15,9 @@ randomizeRegionsPerc(GR, genome = "hg19", frac = 0.2, ...)
 
 \item{...}{further arguments to be passed to other methods.}
 }
+\value{
+a GenomicRanges object similar to GR with a fracion "frac" randomized
+}
 \description{
 randomize regions at percentage
 }
@@ -33,7 +36,7 @@ regA <-
   genome = AlienGenome
  )
 
- regA_02 <- randomizeRegionsPerc(GR = regA, genome = AlienGenome, frac = 0.2)
+regA_02 <- randomizeRegionsPerc(GR = regA, genome = AlienGenome, frac = 0.2)
 
 }
 \seealso{

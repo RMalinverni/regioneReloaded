@@ -19,17 +19,13 @@
 #' @export
 
 crosswiseMatrix <- function(mPT,
-                            zs.type = 'norm_zscore',
-                            ...)
-  {
-
+                            zs.type = "norm_zscore",
+                            ...) {
   A.obj <- mPT@multiOverlaps
 
   mat <- vector()
   for (i in seq_along(A.obj)) {
-
     mat <- cbind(mat, as.numeric(A.obj[[i]][, zs.type]))
-
   }
 
   colnames(mat) <- names(A.obj)
@@ -37,5 +33,4 @@ crosswiseMatrix <- function(mPT,
   mat <- as.matrix(mat)
 
   return(mat)
-
 }
