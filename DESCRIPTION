@@ -1,6 +1,6 @@
-Package: regioneRld
+Package: regioneReloaded
 Type: Package
-Title: RegioneReload: Multiple Association for Genomic Region Sets
+Title: RegioneReloaded: Multiple Association for Genomic Region Sets
 Version: 0.1.0
 Authors@R: c(
     person(given = "Roberto",
@@ -17,7 +17,7 @@ Authors@R: c(
            role = c("aut"),
            email = "bgel@igtp.org"))
 URL: https://github.com/RMalinverni/regioneReload           
-Description: RegioneReload is a package that allows simultaneous analysis of associations between genomic region sets, enabling clustering of data and the creation of ready-to-publish graphs. It takes over and expands on all the features of its predecessor regioneR.
+Description: RegioneReloaded is a package that allows simultaneous analysis of associations between genomic region sets, enabling clustering of data and the creation of ready-to-publish graphs. It takes over and expands on all the features of its predecessor regioneR.
 License: Artistic-2.0
 Encoding: UTF-8
 LazyData: false
