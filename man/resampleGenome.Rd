@@ -18,11 +18,19 @@ resampleGenome(A, simple = FALSE, per.chromosome = FALSE, genome="hg19", ...)
 \item{...}{further arguments to be passed to other methods.}
 }
 \value{
-a permTest object
+a \code{\link{GenomicRanges}} object. A sample from the \code{universe} with the same length as A.
 }
 \description{
 function for use resample starting from a binning of genome
 }
+\examples{
+
+A <- data.frame(chr=1, start=c(2,12,28,35), end=c(5,25,33,43))
+
+resampleGenome(A,per.chromosome=TRUE)
+
+
+}
 \seealso{
-regioneR::permTest
+\code{\link{toDataframe}}, \code{\link{toGRanges}}, \code{\link{randomizeRegions}}, \code{\link{createRandomRegions}}
 }
