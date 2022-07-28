@@ -29,6 +29,9 @@
 #' @param labValues logical, if TRUE each local Z-score profile is labelled at position 0 with the name of the region set and its Z-score value at the central position. (default = TRUE)
 #' @param labSize numerical, size of the labels from labValues in the plot. (default = 2.5)
 #' @param colPal character vector of custom colors to use as palette source for the plot. If NULL, predetermined colors from \code{\link{RColorBrewer}}) Set2 palette are used.
+#' @param smoothing logical, if TRUE \code{\link{stas::smooth.spline}} function will be apply to a localZ-score profile. (default = FALSE)
+#' @param ...  further arguments to be passed to other methods.
+#'
 #' @return A plot is created on the current graphics device.
 #'
 #' @seealso \code{\link{multiLocalZscore}} \code{\link{makeLZMatrix}}
@@ -37,14 +40,13 @@
 #'
 #' data("cw_Alien")
 #'
-#'
-#'
 #' @export plotSingleLZ
 #' @import ggplot2
 #' @importFrom ggrepel geom_label_repel
 #' @importFrom methods hasArg
 #' @importFrom RColorBrewer brewer.pal
 #' @importFrom methods is
+#' @importFrom stats smooth.spline
 
 
 plotSingleLZ <-
@@ -56,11 +58,12 @@ plotSingleLZ <-
            main = NA,
            colPal = NULL,
            labValues = TRUE,
-           labSize = 2.5) {
-
-    if(!methods::hasArg(mLZ)) {
+           labSize = 2.5,
+           smoothing = FALSE,
+           ...) {
+    if (!methods::hasArg(mLZ)) {
       stop("mLZ is missing")
-    } else if (!methods::is(mLZ,"multiLocalZScore")) {
+    } else if (!methods::is(mLZ, "multiLocalZScore")) {
       stop("mLZ needs to be a multiLocalZScore object")
     } else if (!methods::hasArg(RS)) {
       stop("RS is missing")
@@ -69,7 +72,7 @@ plotSingleLZ <-
     }
 
     RS <- as.list(RS)
-    df<-do.call("rbind", lapply(X=RS, FUN = DFfromLZ, mLZ=mLZ))
+    df <- do.call("rbind", lapply(X = RS, FUN = DFfromLZ, mLZ = mLZ))
 
     ref <- mLZ@parameters$A
     evfun <- mLZ@parameters$evFUN
@@ -94,30 +97,39 @@ plotSingleLZ <-
       ylabel <- "Z-score"
     }
 
+    if (smoothing == TRUE){
+      smth <- stats::smooth.spline(df$score)
+      df$score <- smth$y
+    }
+
     # Plot
     p <- ggplot2::ggplot(df, ggplot2::aes_string(x = "shift", y = "score", group = "name", fill = "name", color = "name")) +
-      ggplot2::geom_hline(yintercept=0,  color ="#515E63", size=0.6) +
-      ggplot2::geom_vline(xintercept = 0, color ="#515E63", size = 0.4, linetype = "dotted") +
+      ggplot2::geom_hline(yintercept = 0, color = "#515E63", size = 0.6) +
+      ggplot2::geom_vline(xintercept = 0, color = "#515E63", size = 0.4, linetype = "dotted") +
       ggplot2::geom_density(alpha = 0.2, stat = "identity") +
       ggplot2::scale_color_manual(values = pal(length(RS))) +
       ggplot2::scale_fill_manual(values = pal(length(RS))) +
-      ggplot2::labs(title = ref,
-           subtitle = paste("ranFUN: ", ranfun, "\nevFUN: ", evfun),
-           y = ylabel,
-           x = "bp") +
+      ggplot2::labs(
+        title = ref,
+        subtitle = paste("ranFUN: ", ranfun, "\nevFUN: ", evfun),
+        y = ylabel,
+        x = "bp"
+      ) +
       ggplot2::theme(legend.title = ggplot2::element_blank())
 
     # Labels
-    if(labValues) {
-      df_label <- df[df$shift == 0,]
+    if (labValues) {
+      df_label <- df[df$shift == 0, ]
       df_label$text <- paste(df_label$name, "\nZS: ", round(df_label$score, digits = 2), sep = "")
       p <- p +
         ggplot2::coord_cartesian(clip = "off") +
-        ggrepel::geom_label_repel(data = df_label, inherit.aes = FALSE,
-                         ggplot2::aes_string(label = "text", x = "shift", y = "score", color = "name"),
-                         fill = "#FDFAF6", size = labSize,
-                         xlim = c(0.2 * max(df$shift), NA),
-                         show.legend = FALSE)
+        ggrepel::geom_label_repel(
+          data = df_label, inherit.aes = FALSE,
+          ggplot2::aes_string(label = "text", x = "shift", y = "score", color = "name"),
+          fill = "#FDFAF6", size = labSize,
+          xlim = c(0.2 * max(df$shift), NA),
+          show.legend = FALSE
+        )
     }
 
     # Ylims
