@@ -51,7 +51,7 @@
 #'
 #' summary(cw_Alien_ReG)
 #'
-#' @import stats
+#' @importFrom stats cor
 #' @importFrom methods is
 #' @export makeCrosswiseMatrix
 
@@ -73,7 +73,7 @@ makeCrosswiseMatrix <-
            subEX = 0,
            ...) {
 
-    if (is(mPT,"genoMatriXeR")) {
+    if (methods::is(mPT,"genoMatriXeR")) {
       mat <- crosswiseMatrix(mPT, zs.type = zs.type)
       mat_pv <- crosswiseMatrix(mPT, zs.type = "adj.p_value")
 
@@ -143,8 +143,8 @@ makeCrosswiseMatrix <-
       fit2 <- NULL
     }
 
-    mat_corX <- cor(x = mat, method = "pearson")
-    mat_corY <- cor(x = t(mat), method = "pearson")
+    mat_corX <- stats::cor(x = mat, method = "pearson")
+    mat_corY <- stats::cor(x = t(mat), method = "pearson")
     mat <- cleanCrosswiseMatrix(
       GM = mat,
       GM_pv = mat_pv ,
