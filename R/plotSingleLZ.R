@@ -49,6 +49,7 @@
 #' @importFrom RColorBrewer brewer.pal
 #' @importFrom methods is
 #' @importFrom stats smooth.spline
+#' @importFrom stats aggregate
 
 
 plotSingleLZ <-
