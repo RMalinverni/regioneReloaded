@@ -67,6 +67,8 @@
 #'
 #' @importFrom methods new
 #' @importFrom methods show
+#' @importFrom stats sd
+#' @importFrom stats p.adjust
 #'
 #' @export multiLocalZscore
 
@@ -166,7 +168,7 @@ multiLocalZscore <- function(A,
     lapply(p_values[grep(".permuted", names(p_values))], mean)
 
   sd_pemuted <-
-    lapply(p_values[grep(".permuted", names(p_values))], sd)
+    lapply(p_values[grep(".permuted", names(p_values))], stats::sd)
 
   z_score <- p_values[grep(".zscore", names(p_values))]
   observed <- p_values[grep(".observed", names(p_values))]
@@ -192,7 +194,7 @@ multiLocalZscore <- function(A,
   maxzscores <- (Nreg - tab$mean_perm_test) / tab$sd_perm_test
   tab$ranged_zscore <- tab$z_score / maxzscores
   tab$adj.p_value <-
-  round(p.adjust(tab$p_value, method = adj_pv_method), digits = 4)
+  round(stats::p.adjust(tab$p_value, method = adj_pv_method), digits = 4)
 
   names(shiftedZs) <- names(Blist)
 

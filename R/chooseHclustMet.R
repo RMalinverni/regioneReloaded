@@ -35,6 +35,7 @@
 #' @importFrom stats dist
 #' @importFrom stats hclust
 #' @importFrom stats cor
+#' @importFrom stats cophenetic
 #' @importFrom methods show
 #'
 
@@ -69,7 +70,7 @@ chooseHclustMet <-
     for (i in seq_along(vecMet)) {
       resMetList[[i]] <- stats::hclust(d = mat_dist, method = vecMet[[i]])
       resMetVec[i] <-
-        stats::cor(x = mat_dist, cophenetic(resMetList[[i]]))
+        stats::cor(x = mat_dist, stats::cophenetic(resMetList[[i]]))
     }
 
     names(resMetList) <- vecMet
