@@ -4,7 +4,7 @@
 #'
 #' Return matrix from an genoMatriXeR or multiLocalZScore object
 #'
-#' @usage getMatrix(rR, vebose = TRUE)
+#' @usage getMatrix(rR)
 #'
 #' @param rR genoMatriXeR or multiLocalZScore object
 #' @return a numeric Matrix
