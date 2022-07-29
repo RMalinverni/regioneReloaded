@@ -87,7 +87,7 @@ plotCrosswiseDimRed <-
            ...) {
     if (!methods::hasArg(mPT)) {
       stop("mPT is missing")
-    } else if (is(mPT, "genoMatriXeR")) {
+    } else if (methods::is(mPT, "genoMatriXeR")) {
       GM <- mPT@matrix$GMat
     } else if (is.matrix(mPT)) {
       GM <- mPT
