@@ -138,7 +138,8 @@ plotSingleLZ <-
           ggplot2::aes_string(label = "text", x = "shift", y = "score", color = "name"),
           fill = "#FDFAF6", size = labSize,
           xlim = c(0.2 * max(df$shift), NA),
-          show.legend = FALSE
+          show.legend = FALSE,
+          min.segment.length = 0
         )
     }
 
