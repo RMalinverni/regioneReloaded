@@ -29,12 +29,14 @@ highlight = NULL, highlight_size = 2.5)
 
 \item{highlight_size}{numeric, size of the highlight labels}
 
+\item{highlight_max}{logical, if TRUE the highlight labels are placed at the maximum local z-score value instead of the 0 shift position. (default = FALSE)}
+
 \item{smoothing}{logical, if TRUE \code{\link{stas::smooth.spline}} function will be apply to a localZ-score profile. (default = FALSE)}
 
 \item{...}{further arguments to be passed to other methods.}
 }
 \value{
-A plot is created on the current graphics device.
+Returns a ggplot object.
 }
 \description{
 Plot Local Z-Score Matrix of associations/correlations stored in a multiLocaZScore object.

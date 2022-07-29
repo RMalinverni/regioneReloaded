@@ -29,7 +29,7 @@ maxVal = NA, main = "", ord_mat = NULL)
 represent the order of rows and column of the matrix (default = NULL)}
 }
 \value{
-A plot is created on the current graphics device.
+Returns a ggplot object.
 }
 \description{
 Plot matrix of associations/correlations stored in a genoMatriXeR object.

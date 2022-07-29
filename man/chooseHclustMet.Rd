@@ -4,23 +4,23 @@
 \alias{chooseHclustMet}
 \title{chooseHclustMet}
 \usage{
-chooseHclustMet(GM, scale = FALSE, vecMet = NULL ,distHC = "euclidean")
+chooseHclustMet(GM, scale = FALSE, vecMet = NULL, distHC = "euclidean")
 }
 \arguments{
 \item{GM}{matrix,  numerical matrix.}
 
-\item{scale}{logical, if TRUE, the clusterization will be performed using the scaled matrix. (default = FALSE)}
+\item{scale}{logical, if TRUE, the clustering will be performed using the scaled matrix. (default = FALSE)}
 
-\item{vecMet}{vector, vector of methods that will be tested in the function.
-If NULL, the following methods will be tested: "complete","average","single","ward.D2","median","centroid" and "mcquitty. (default = NULL)}
+\item{vecMet}{character, vector of methods that will be tested in the function.
+If NULL, the following methods will be tested: "complete", "average", "single", "ward.D2", "median", "centroid" and "mcquitty. (default = NULL)}
 
 \item{distHC}{character, the distance measure to be used from those available in \code{\link[=dist]{dist()}} . (default = "euclidean")}
 }
 \value{
-an object of class "hclust" \code{\link[stats]{"hclust"}}
+An object of class \link{hclust}
 }
 \description{
-Evaluate and choose the best method for clusterizing a matrix using the \code{\link[=hclust]{hclust()}} function
+Evaluate and choose the best method for clustering a matrix using the \code{\link[=hclust]{hclust()}} function
 }
 \examples{
 
@@ -33,5 +33,5 @@ chooseHclustMet(GM)
 
 }
 \seealso{
-\code{\link[stats]{"hclust"}}
+\code{\link[=hclust]{hclust()}}
 }

@@ -7,7 +7,7 @@
 createUniverse(Alist, joinR = TRUE)
 }
 \arguments{
-\item{Alist}{list of regions set in a format accepted for \href{https://bioconductor.org/packages/release/bioc/html/regioneR.html}{regioneR}}
+\item{Alist}{list of regions set in a format accepted for \link[regioneR:reginoeR]{regioneR::reginoeR}}
 
 \item{joinR}{logical, if TRUE all the regions will be joined using the function \code{\link[regioneR:joinRegions]{regioneR::joinRegions()}}.(default == TRUE)}
 }
