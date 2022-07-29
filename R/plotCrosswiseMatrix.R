@@ -19,7 +19,7 @@
 #' @param ord_mat numeric list, list with two vectors X and Y as element, that
 #' represent the order of rows and column of the matrix (default = NULL)
 #'
-#' @return A plot is created on the current graphics device.
+#' @return Returns a ggplot object.
 #'
 #' @seealso \code{\link{crosswisePermTest}} \code{\link{makeCrosswiseMatrix}}
 #'

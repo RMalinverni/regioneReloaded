@@ -18,7 +18,8 @@
 #' is usually a better visualization option.
 #'
 #' @usage plotSingleLZ(mLZ, RS, xlab = "", normZS = TRUE, ylim = NULL,
-#' main = NA, colPal = NULL, labValues = TRUE, labSize = 2.5, smoothing = FALSE, ...)
+#' main = NA, colPal = NULL, labValues = TRUE, labSize = 2.5, labMax = FALSE,
+#' smoothing = FALSE)
 #'
 #' @param mLZ an object of class multiLocalZscore.
 #' @param RS character, vector of region set names for which to plot the local Z-score results.
@@ -28,11 +29,12 @@
 #' @param ylim numeric, vector with minimum and maximum Y values of the plot. If NULL, the plot limits are set by default so all data points can be plotted. (default = NULL)
 #' @param labValues logical, if TRUE each local Z-score profile is labelled at position 0 with the name of the region set and its Z-score value at the central position. (default = TRUE)
 #' @param labSize numerical, size of the labels from labValues in the plot. (default = 2.5)
+#' @param labMax logical, if TRUE the labels are placed at the maximum value of each local Z-score profile instead of shift 0bp. (default = FALSE)
 #' @param colPal character vector of custom colors to use as palette source for the plot. If NULL, predetermined colors from \code{\link{RColorBrewer}}) Set2 palette are used.
 #' @param smoothing logical, if TRUE \code{\link{stas::smooth.spline}} function will be apply to a localZ-score profile. (default = FALSE)
 #' @param ...  further arguments to be passed to other methods.
 #'
-#' @return A plot is created on the current graphics device.
+#' @return Returns a ggplot object.
 #'
 #' @seealso \code{\link{multiLocalZscore}} \code{\link{makeLZMatrix}}
 #'
@@ -47,6 +49,7 @@
 #' @importFrom RColorBrewer brewer.pal
 #' @importFrom methods is
 #' @importFrom stats smooth.spline
+#' @importFrom stats aggregate
 
 
 plotSingleLZ <-
@@ -59,6 +62,7 @@ plotSingleLZ <-
            colPal = NULL,
            labValues = TRUE,
            labSize = 2.5,
+           labMax = FALSE,
            smoothing = FALSE,
            ...) {
     if (!methods::hasArg(mLZ)) {
@@ -119,7 +123,13 @@ plotSingleLZ <-
 
     # Labels
     if (labValues) {
-      df_label <- df[df$shift == 0, ]
+      if (labMax) {
+        df_label <- merge(stats::aggregate(score ~ name, data = df, FUN = max), df)
+        df_label <- df_label[order(df_label$shift),]
+        df_label <- df_label[!duplicated(df_label$name),]
+      } else {
+        df_label <- df[df$shift == 0, ]
+      }
       df_label$text <- paste(df_label$name, "\nZS: ", round(df_label$score, digits = 2), sep = "")
       p <- p +
         ggplot2::coord_cartesian(clip = "off") +
@@ -128,7 +138,8 @@ plotSingleLZ <-
           ggplot2::aes_string(label = "text", x = "shift", y = "score", color = "name"),
           fill = "#FDFAF6", size = labSize,
           xlim = c(0.2 * max(df$shift), NA),
-          show.legend = FALSE
+          show.legend = FALSE,
+          min.segment.length = 0
         )
     }
 

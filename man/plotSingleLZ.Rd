@@ -5,7 +5,8 @@
 \title{plotSingleLZ}
 \usage{
 plotSingleLZ(mLZ, RS, xlab = "", normZS = TRUE, ylim = NULL,
-main = NA, colPal = NULL, labValues = TRUE, labSize = 2.5, smoothing = FALSE, ...)
+main = NA, colPal = NULL, labValues = TRUE, labSize = 2.5, labMax = FALSE,
+smoothing = FALSE)
 }
 \arguments{
 \item{mLZ}{an object of class multiLocalZscore.}
@@ -26,12 +27,14 @@ main = NA, colPal = NULL, labValues = TRUE, labSize = 2.5, smoothing = FALSE, ..
 
 \item{labSize}{numerical, size of the labels from labValues in the plot. (default = 2.5)}
 
+\item{labMax}{logical, if TRUE the labels are placed at the maximum value of each local Z-score profile instead of shift 0bp. (default = FALSE)}
+
 \item{smoothing}{logical, if TRUE \code{\link{stas::smooth.spline}} function will be apply to a localZ-score profile. (default = FALSE)}
 
 \item{...}{further arguments to be passed to other methods.}
 }
 \value{
-A plot is created on the current graphics device.
+Returns a ggplot object.
 }
 \description{
 Plot the result of specific local Z-Score tests from an mLZ object in the
