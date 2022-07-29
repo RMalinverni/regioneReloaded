@@ -25,9 +25,9 @@ function for use resample starting from a binning of genome
 }
 \examples{
 
-A <- data.frame(chr=1, start=c(2,12,28,35), end=c(5,25,33,43))
-
-resampleGenome(A,per.chromosome=TRUE)
+fakeGenome <- regioneR::toGRanges("chrF", 1, 1000)
+A <- data.frame(chr="chrF", start=c(2,12,28,35), end=c(5,25,33,43))
+resampleGenome(A,per.chromosome=TRUE,genome = fakeGenome)
 
 
 }

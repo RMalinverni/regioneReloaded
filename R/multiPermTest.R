@@ -4,8 +4,7 @@
 #' @keywords internal function
 #' @usage multiPermTest (A, Blist, ranFUN, evFUN, universe, genome, rFUN, verbose = FALSE, ntimes, adj_pv_method, ...)
 #'
-#' @return a table obteined from parsing of \code{\link{[regioneR][permTest]}} object
-#'
+#' @return a table obtained from parsing of \code{\link{[regioneR][permTest]}} object
 #'
 #' @param A Genomic Ranges or any accepted formats by  [regioneR](https://bioconductor.org/packages/release/bioc/html/regioneR.html) package
 #' (\code{\link{GenomicRanges}}, \code{\link{data.frame}} etc...)
@@ -21,6 +20,9 @@
 #'
 #'
 #' @importFrom methods show
+#' @importFrom stats sd
+#' @importFrom stats p.adjust
+#'
 #' @keywords internal function
 
 multiPermTest <-
@@ -98,7 +100,7 @@ multiPermTest <-
         p_value = pt[[j]]$pval,
         n_overlaps = pt[[j]]$observed,
         mean_perm_test = mean(pt[[j]]$permuted),
-        sd_perm_test = sd(pt[[j]]$permuted)
+        sd_perm_test = stats::sd(pt[[j]]$permuted)
       )
       tab <- rbind(vec, tab)
     }
@@ -108,7 +110,7 @@ multiPermTest <-
       (tab$n_regionA - tab$mean_perm_test) / tab$sd_perm_test
     tab$std_zscore <- tab$z_score / max_zscore
     tab$adj.p_value <-
-      round(p.adjust(tab$p_value, method = adj_pv_method), digits = 4)
+      round(stats::p.adjust(tab$p_value, method = adj_pv_method), digits = 4)
 
     if (verbose == TRUE) {
       methods::show(tab)

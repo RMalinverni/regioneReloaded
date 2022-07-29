@@ -36,6 +36,7 @@
 #' @importFrom grid arrow
 #' @importFrom methods hasArg
 #' @importFrom scales alpha
+#' @importFrom stats dnorm
 #' @importFrom methods is
 #'
 #' @export plotSinglePT
@@ -103,48 +104,48 @@ plotSinglePT <-
       ggplot2::xlab(paste0(xlab, " on ", tab$n_regionA[n], " regions")) +
       ggplot2::ylab("Freq") +
       ggplot2::stat_function(
-        fun = dnorm,
+        fun = stats::dnorm,
         geom = "area",
         fill = scales::alpha(colvec[1], alpha = 0.5),
         args = list(mean = mean.1, sd = sd.1)
       ) +
       ggplot2::stat_function(
-        fun = dnorm,
+        fun = stats::dnorm,
         geom = "area",
         xlim = c(vec_slices[1], zend),
         fill = scales::alpha(colvec[1], alpha = 0.5),
         args = list(mean = mean.1, sd = sd.1)
       ) +
       ggplot2::stat_function(
-        fun = dnorm,
+        fun = stats::dnorm,
         geom = "area",
         xlim = c(vec_slices[3], zend),
         fill = scales::alpha(colvec[1], alpha = 0.5),
         args = list(mean = mean.1, sd = sd.1)
       ) +
       ggplot2::stat_function(
-        fun = dnorm,
+        fun = stats::dnorm,
         geom = "area",
         xlim = c(vec_slices[5], zend),
         fill = scales::alpha(colvec[1], alpha = 0.5),
         args = list(mean = mean.1, sd = sd.1)
       ) +
       ggplot2::stat_function(
-        fun = dnorm,
+        fun = stats::dnorm,
         geom = "area",
         xlim = c(zstart, vec_slices[2]),
         fill = scales::alpha(colvec[1], alpha = 0.5),
         args = list(mean = mean.1, sd = sd.1)
       ) +
       ggplot2::stat_function(
-        fun = dnorm,
+        fun = stats::dnorm,
         geom = "area",
         xlim = c(zstart, vec_slices[4]),
         fill = scales::alpha(colvec[1], alpha = 0.5),
         args = list(mean = mean.1, sd = sd.1)
       ) +
       ggplot2::stat_function(
-        fun = dnorm,
+        fun = stats::dnorm,
         geom = "area",
         xlim = c(zstart, vec_slices[6]),
         fill = scales::alpha(colvec[1], alpha = 0.5),
