@@ -4,8 +4,9 @@
 #' Plot Local Z-Score Matrix of associations/correlations stored in a multiLocaZScore object.
 #'
 #' @usage plotLocalZScoreMatrix (mLZ, lineColor = NA, colMatrix = "default",
-#' matrix.type = "association" , maxVal = "max", main = "", labSize= 6, revert = FALSE,
-#' highlight = NULL, highlight_size = 2.5, smoothing = FALSE, ...)
+#' matrix.type = "association", maxVal = "max", main = "", labSize = 6,
+#' revert = FALSE, highlight = NULL, highlight_size = 2.5, highlight_max = FALSE,
+#' smoothing = FALSE, ...)
 #'
 #' @param mLZ an object of class multiLocaZScore or a matrix
 #' @param lineColor logic if TRUE a grid matrix will be draw (default: FALSE)
@@ -18,7 +19,7 @@
 #' @param highlight character vector indicating the regionset names to highlight by adding labels pointing to the 0 position (default = NULL)
 #' @param highlight_size numeric, size of the highlight labels
 #' @param highlight_max logical, if TRUE the highlight labels are placed at the maximum local z-score value instead of the 0 shift position. (default = FALSE)
-#' @param smoothing logical, if TRUE \code{\link{stas::smooth.spline}} function will be apply to a localZ-score profile. (default = FALSE)
+#' @param smoothing logical, if TRUE \code{\link{stats::smooth.spline}} function will be apply to a localZ-score profile. (default = FALSE)
 #' @param ...  further arguments to be passed to other methods.
 #'
 #' @return Returns a ggplot object.
