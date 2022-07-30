@@ -27,7 +27,7 @@ multiPermTest (A, Blist, ranFUN, evFUN, universe, genome, rFUN, verbose = FALSE,
 to choose between the options of \code{\link{p.adjust}}. (default = "BH")}
 }
 \value{
-a table obtained from parsing of \code{\link{[regioneR][permTest]}} object
+a table obtained from parsing of \link[=permTest]{regioneR} object
 }
 \description{
 Perform a multiple permutation test

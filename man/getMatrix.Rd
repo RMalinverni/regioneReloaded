@@ -4,7 +4,7 @@
 \alias{getMatrix}
 \title{Get Matrix}
 \usage{
-getMatrix(rR, vebose = TRUE)
+getMatrix(rR)
 }
 \arguments{
 \item{rR}{genoMatriXeR or multiLocalZScore object}

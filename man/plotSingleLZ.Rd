@@ -4,9 +4,8 @@
 \alias{plotSingleLZ}
 \title{plotSingleLZ}
 \usage{
-plotSingleLZ(mLZ, RS, xlab = "", normZS = TRUE, ylim = NULL,
-main = NA, colPal = NULL, labValues = TRUE, labSize = 2.5, labMax = FALSE,
-smoothing = FALSE)
+plotSingleLZ(mLZ, RS, xlab = "", normZS = TRUE, ylim = NULL, main = NA,
+ colPal = NULL, labValues = TRUE, labSize = 2.5, labMax = FALSE, smoothing = FALSE, ...)
 }
 \arguments{
 \item{mLZ}{an object of class multiLocalZscore.}
@@ -29,7 +28,7 @@ smoothing = FALSE)
 
 \item{labMax}{logical, if TRUE the labels are placed at the maximum value of each local Z-score profile instead of shift 0bp. (default = FALSE)}
 
-\item{smoothing}{logical, if TRUE \code{\link{stas::smooth.spline}} function will be apply to a localZ-score profile. (default = FALSE)}
+\item{smoothing}{logical, if TRUE \code{\link{stats::smooth.spline}} function will be apply to a localZ-score profile. (default = FALSE)}
 
 \item{...}{further arguments to be passed to other methods.}
 }
