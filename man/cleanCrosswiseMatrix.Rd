@@ -24,6 +24,6 @@ a matrix filtered for a matrix of pvalue
 Clean and scale a matrix from a genoMatriXeR object
 }
 \seealso{
-\code{\link{makeCrosswiseMatrix}}
+\code{\link[=makeCrosswiseMatrix]{makeCrosswiseMatrix()}}
 }
 \keyword{internal}

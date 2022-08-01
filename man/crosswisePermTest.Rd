@@ -7,7 +7,7 @@
 crosswisePermTest(Alist, Blist = NULL, sampling = FALSE, fraction = 0.15,
  min_sampling = 5000, ranFUN = "randomizeRegions", evFUN = "numOverlaps",
  ntimes = 100, universe = NULL, adj_pv_method = "BH",
- genome = "hg19", verbose = FALSE, ...)
+ genome = "hg19", ...)
 }
 \arguments{
 \item{Alist, Blist}{\link{GRangesList} or list of region sets in any accepted formats by \href{https://bioconductor.org/packages/release/bioc/html/regioneR.html}{regioneR} package
@@ -18,22 +18,19 @@ crosswisePermTest(Alist, Blist = NULL, sampling = FALSE, fraction = 0.15,
 \item{fraction}{logical, if \code{sampling=TRUE}, defines the fraction of the region sets used to perform the test. (default = 0.15)}
 
 \item{min_sampling}{numeric, minimum number of regions accepted after sampling is performed with the specified \code{fraction}. If the number of sampled
-regions is less than \code{min_sampling}, the number specified by \code{min_sampling} will be used as number of regions sampled instead.}
+regions is less than \code{min_sampling}, the number specified by \code{min_sampling} will be used as number of regions sampled instead. (default = 5000)}
 
-\item{ranFUN}{(default = "randomizeRegions"), choose the randomization strategy used for the test, see \href{https://bioconductor.org/packages/release/bioc/html/regioneR.html}{regioneR}}
+\item{ranFUN}{character, the randomization strategy used for the test, see \href{https://bioconductor.org/packages/release/bioc/html/regioneR.html}{regioneR}. (default = "randomizeRegions")}
 
-\item{evFUN}{(default = "numOverlaps), choose the evaluation strategy used for the test, see  \href{https://bioconductor.org/packages/release/bioc/html/regioneR.html}{regioneR}}
+\item{evFUN}{character, the evaluation strategy used for the test, see  \href{https://bioconductor.org/packages/release/bioc/html/regioneR.html}{regioneR}. (default = "numOverlaps)}
 
 \item{ntimes}{numeric, number of permutations used in the test. (default = 100)}
 
-\item{universe}{(default = NULL) used only when \code{\link[regioneR:resampleRegions]{regioneR::resampleRegions()}} function is selected.}
+\item{universe}{region set to use as universe, used only when \code{\link[regioneR:resampleRegions]{regioneR::resampleRegions()}} function is selected. (default = NULL)}
 
-\item{adj_pv_method}{character, the method used for the calculation of the adjusted p-value,
-to choose between the options of \code{\link[=p.adjust]{p.adjust()}}. (default = "BH")}
+\item{adj_pv_method}{character, the method used for the calculation of the adjusted p-value, to choose between the options of \code{\link[=p.adjust]{p.adjust()}}. (default = "BH")}
 
-\item{genome}{character or GenomicRanges, (defalut = "hg19") genome used to compute the randomization}
-
-\item{verbose}{Boolean, if verbose test}
+\item{genome}{character or \linkS4class{GRanges}, genome used to compute the randomization. (default = "hg19")}
 
 \item{...}{further arguments to be passed to other methods.}
 }
@@ -51,13 +48,11 @@ A object of class \link[=genoMatriXeR-class]{genoMatriXeR} containing three slot
 Perform multiple permutation tests between each element in two lists of region sets.
 }
 \details{
-This function performs multiple permutation test for all pairwise combinations
+This function performs multiple permutation tests for all pairwise combinations
 of the elements in two lists of region sets. Essentially, it uses the \code{\link[regioneR:permTest]{regioneR::permTest()}}
 function and its associated randomization and evaluation functions. It creates and returns a
 \linkS4class{genoMatriXeR} object with the result of the permutation tests stored in the \code{multiOverlaps} slot.
-In addition, all the paramteres used for the test are stored in the \code{parameters} slot.
-
-...
+In addition, all the parameters used for the test are stored in the \code{parameters} slot.
 }
 \examples{
 
@@ -72,5 +67,5 @@ print(cw_ptAB)
 
 }
 \seealso{
-\link[=genoMatriXeR-class]{genoMatriXeR}, \href{https://bioconductor.org/packages/release/bioc/html/regioneR.html}{regioneR}, \code{\link{permTest}}, \code{\link{overlapPermTest}}
+\link[=genoMatriXeR-class]{regioneRld}, \href{https://bioconductor.org/packages/release/bioc/html/regioneR.html}{\code{regioneR}}, \code{\link[regioneR:permTest]{regioneR::permTest()}}, \code{\link[regioneR:overlapPermTest]{regioneR::overlapPermTest()}}
 }
