@@ -5,8 +5,9 @@
 \title{Plot Local Z-Score Matrix}
 \usage{
 plotLocalZScoreMatrix (mLZ, lineColor = NA, colMatrix = "default",
-matrix.type = "association" , maxVal = "max", main = "", labSize= 6, revert = FALSE,
-highlight = NULL, highlight_size = 2.5, smoothing = FALSE, ...)
+matrix.type = "association", maxVal = "max", main = "", labSize = 6,
+revert = FALSE, highlight = NULL, highlight_size = 2.5, highlight_max = FALSE,
+smoothing = FALSE, ...)
 }
 \arguments{
 \item{mLZ}{an object of class multiLocaZScore or a matrix}
@@ -31,7 +32,7 @@ highlight = NULL, highlight_size = 2.5, smoothing = FALSE, ...)
 
 \item{highlight_max}{logical, if TRUE the highlight labels are placed at the maximum local z-score value instead of the 0 shift position. (default = FALSE)}
 
-\item{smoothing}{logical, if TRUE \code{\link{stas::smooth.spline}} function will be apply to a localZ-score profile. (default = FALSE)}
+\item{smoothing}{logical, if TRUE \code{\link{stats::smooth.spline}} function will be apply to a localZ-score profile. (default = FALSE)}
 
 \item{...}{further arguments to be passed to other methods.}
 }
