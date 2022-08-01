@@ -24,7 +24,7 @@
 #'
 #' @inheritParams crosswisePermTest
 #'
-#' @param A
+#' @param A query region set for which to estimate local z-score values.
 #' @param Blist [GRangesList] or list of region sets in any accepted formats by [regioneR](https://bioconductor.org/packages/release/bioc/html/regioneR.html) package
 #' ([GenomicRanges], [data.frame] etc...).
 #' @param window numeric, window (number of base pairs) in which the local z-score will be calculated. (default = 1000)

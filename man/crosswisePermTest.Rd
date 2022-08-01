@@ -67,5 +67,5 @@ print(cw_ptAB)
 
 }
 \seealso{
-\link[=genoMatriXeR-class]{regioneRld}, \href{https://bioconductor.org/packages/release/bioc/html/regioneR.html}{\code{regioneR}}, \code{\link[regioneR:permTest]{regioneR::permTest()}}, \code{\link[regioneR:overlapPermTest]{regioneR::overlapPermTest()}}
+\link[=genoMatriXeR-class]{genoMatriXeR}, \href{https://bioconductor.org/packages/release/bioc/html/regioneR.html}{\code{regioneR}}, \code{\link[regioneR:permTest]{regioneR::permTest()}}, \code{\link[regioneR:overlapPermTest]{regioneR::overlapPermTest()}}
 }

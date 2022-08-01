@@ -1,15 +1,21 @@
-#' randomize Regions Perc
+#' randomizeRegionsPerc
 #'
+#' @description
 #'
-#' randomize regions at percentage
+#' Create a random region set similar to a reference region set.
+#'
+#' @details
+#'
+#' This function takes an input region set and generates a region set where a
+#' fraction of the regions has been randomized.
 #'
 #' @usage randomizeRegionsPerc(GR, genome = "hg19", frac = 0.2, ...)
 #'
-#' @return a GenomicRanges object similar to GR with a fracion "frac" randomized
+#' @return a [GRanges-class] object
 #'
-#' @param GR description
-#' @param genome description
-#' @param frac description
+#' @inheritParams similarRegionSet
+#'
+#' @param frac fraction of the original region set to randomize. (default = 0.2)
 #' @param ... further arguments to be passed to other methods.
 #'
 #' @examples
@@ -29,7 +35,7 @@
 #'
 #' regA_02 <- randomizeRegionsPerc(GR = regA, genome = AlienGenome, frac = 0.2)
 #'
-#' @seealso similarRegionSet
+#' @seealso [similarRegionSet()]
 #'
 #' @export randomizeRegionsPerc
 #'
@@ -37,7 +43,7 @@
 
 randomizeRegionsPerc<-function(GR,
                                genome = "hg19",
-                               frac=0.2,
+                               frac = 0.2,
                                ...)
   {
 

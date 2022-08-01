@@ -2,37 +2,37 @@
 % Please edit documentation in R/plotCrosswiseMatrix.R
 \name{plotCrosswiseMatrix}
 \alias{plotCrosswiseMatrix}
-\title{Plot Crosswise Matrix}
+\title{plotCrosswiseMatrix}
 \usage{
 plotCrosswiseMatrix(mPT, lineColor = NA, interpolate = FALSE, colMatrix =
 "default", matrix_type = "crosswise", cor = "row",
 maxVal = NA, main = "", ord_mat = NULL)
 }
 \arguments{
-\item{mPT}{an object of class gMXR or a matrix}
+\item{mPT}{an object of class \link[=genomeMatriXeR-class]{genoMatriXeR} or a numerical matrix.}
 
-\item{lineColor}{logic if TRUE a grid matrix will be draw (default: FALSE)}
+\item{lineColor}{logical, color for the line grid delineating the tiles of the matrix plot. If NA, no line will be drawn. (default = NA)}
 
-\item{interpolate}{logic the image will be interpolate using the function (\code{\link{geom_raster}}}
+\item{interpolate}{logical, if TRUE the image will be interpolated using the function \code{\link[=geom_raster]{geom_raster()}}. (default = FALSE)}
 
 \item{colMatrix}{character or vector of colors, if "default" will be used a default selection see..}
 
-\item{matrix_type}{character ("crosswise" or "correlation") is the kind of matrix that will be plotted.}
+\item{matrix_type}{character, type of matrix to be plotted, either "crosswise" or "correlation". (default = "crosswise)}
 
-\item{cor}{character ("row" or "col"). If matrix variable is "correlation", defined if the function \code{"cor"} will be executed on rows or columns of the matrix}
+\item{cor}{character, if \code{matrix_type} is "correlation", choose if the function \code{\link[=cor]{cor()}} will be executed on each "row" or "column" of the matrix. (default = "row")}
 
-\item{maxVal}{numeric, maximun abs(value) reached by the plot. (default = 2)}
+\item{maxVal}{numeric, maximum absolute value displayed by the plot. If NA, the 0.95 quantile of all absolute values is used. (default = NA)}
 
-\item{main}{charachter, graph title}
+\item{main}{character, title of the plot. (default = "")}
 
-\item{ord_mat}{numeric list, list with two vectors X and Y as element, that
-represent the order of rows and column of the matrix (default = NULL)}
+\item{ord_mat}{numeric, list with two numeric vectors that represent the ordering of rows and column of the matrix to be used in the plot.
+If NULL, the order of the matrix is preserved as is. (default = NULL)}
 }
 \value{
 Returns a ggplot object.
 }
 \description{
-Plot matrix of associations/correlations stored in a genoMatriXeR object.
+Plot matrix of associations/correlations stored in a \link[=genomeMatriXeR-class]{genoMatriXeR} object.
 }
 \examples{
 

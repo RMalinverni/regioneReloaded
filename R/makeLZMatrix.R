@@ -1,25 +1,23 @@
-  #' Make Local Z-Score Matrix
+#' Make Local Z-Score Matrix
 #'
+#' @description
 #'
-#' create a local z-score matrix from an [multiLocalZScore][multiLocalZScore-class] object and save it in the matrix slot
+#' Create a local z-score matrix from a [multiLocalZScore][multiLocalZScore-class]
+#' object and save it in its `matrix` slot.
 #'
-#' @usage makeLZMatrix( mlZA, normalize = TRUE, clusterize = TRUE, centralize = NA, hc.method = NULL, dist.method = "euclidean",
+#' @usage makeLZMatrix(mlZA, normalize = TRUE, clusterize = TRUE, centralize = NA, hc.method = NULL, dist.method = "euclidean",
 #'                            scale = FALSE, ...)
 #'
-#' @param mlZA an object of class [multiLocalZScore][multiLocalZScore-class] or a matrix
-#' @param normalize logic, if TRUE the matrix will be normalize. (default = FALSE)
-#' @param clusterize logic, if TRUE the matrix will be clusterize using a method selected with the variable \code{hc.method} (default = TRUE)
-#' @param hc.method character/vector, select the \code{hclust} method to use for clusterize the matrix,
-#' if hc.method == NULL, the methods used for clusterize the matrix will be selected using the function \code{\link{chooseHclustMet}} (default = "NA")
-#' @param dist.method character, metric used to calculate the distance matrix see \code{hclust} (default = "euclidean")
-#' @param centralize numeric, number of "steps" around the center of the local association in which will be apply the clusterization algorithm, if NA all the values in the matrix will be utilize. (default = NA)
-#' @param scale logic, if TRUE the matrix will be scaled (default = FALSE)
-#' @param ...  further arguments to be passed to other methods.
+#' @inheritParams makeCrosswiseMatrix
 #'
+#' @param mlZA an object of class [multiLocalZScore][multiLocalZScore-class] or a numerical matrix.
+#' @param normalize logical, if TRUE the z-score values in the matrix will be normalized. (default = FALSE)
+#' @param centralize numeric, only z-score values in a number of steps (defined by `centralize`) around the center of the local association will be used for clustering. If NA, all the values in the matrix will be used for clustering. (default = NA)
+#' @param ...  further arguments to be passed to other methods.
 #'
 #' @return
 #'
-#' A object of class [mLZS][multiLocalZScore-class] containing three slots
+#' A object of class [mLZS][multiLocalZScore-class] containing three slots, with a populated `matrix` slot.
 #'
 #' \itemize{
 #' \item \bold{\code{@parameters}}
@@ -50,7 +48,7 @@ makeLZMatrix <- function(mlZA,
 
 
   if (!methods::is(mlZA,"multiLocalZScore")) {
-    stop("the object mlZA need to be an multiLocalZScore object")
+    stop("the object mlZA must be a multiLocalZScore object")
   }
 
   mat <- vector(length = length(mlZA@multiLocalZscores$shifts))

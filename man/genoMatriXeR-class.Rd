@@ -11,10 +11,10 @@ An S4 class for "genoMatriXeR" object.
 \section{Slots}{
 
 \describe{
-\item{\code{parameters}}{List of parameters used to create the object}
+\item{\code{parameters}}{List of parameters used to create the object.}
 
-\item{\code{multiOverlaps}}{...}
+\item{\code{multiOverlaps}}{Results of multiple pairwise permutation tests generated with \code{\link[=crosswisePermtest]{crosswisePermtest()}}.}
 
-\item{\code{matrix}}{...}
+\item{\code{matrix}}{List of numerical matrices containing z-score, pvalues and correlation values generated with \code{\link[=makeCrosswiseMatrix]{makeCrosswiseMatrix()}}}
 }}
 

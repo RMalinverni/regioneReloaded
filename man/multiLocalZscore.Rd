@@ -2,45 +2,36 @@
 % Please edit documentation in R/multiLocalZscore.R
 \name{multiLocalZscore}
 \alias{multiLocalZscore}
-\title{Multiple Local Z-Score test}
+\title{multiLocalZscore}
 \usage{
 multiLocalZscore( A, Blist, ranFUN = "randomizeRegions", evFUN = "numOverlaps", sampling = FALSE,
-min_sampling = 5000, fraction = 0.15, universe = NULL, window = 1000, step = 100, adj_pv_method = "BH", min_regions = 1000,
+min_sampling = 5000, fraction = 0.15, universe = NULL, window = 1000, step = 100, adj_pv_method = "BH",
 max_pv = 0.05, genome = "hg19", ...)
 }
 \arguments{
-\item{A}{Region Set of any accepted formats by  c package
-(\code{\link{GenomicRanges}}, \code{\link{data.frame}} etc...)}
+\item{Blist}{\link{GRangesList} or list of region sets in any accepted formats by \href{https://bioconductor.org/packages/release/bioc/html/regioneR.html}{regioneR} package
+(\link{GenomicRanges}, \link{data.frame} etc...).}
 
-\item{Blist}{list of Region Set of any accepted formats by \href{https://bioconductor.org/packages/release/bioc/html/regioneR.html}{regioneR} package
-(\code{\link{GenomicRanges}}, \code{\link{data.frame}} etc...)}
+\item{ranFUN}{character, the randomization strategy used for the test, see \href{https://bioconductor.org/packages/release/bioc/html/regioneR.html}{regioneR}. (default = "randomizeRegions")}
 
-\item{ranFUN}{Function, choose the randomization strategy used for the test (default = "randomizeRegions")
-for details see \href{https://bioconductor.org/packages/release/bioc/html/regioneR.html}{regioneR}}
+\item{evFUN}{character, the evaluation strategy used for the test, see  \href{https://bioconductor.org/packages/release/bioc/html/regioneR.html}{regioneR}. (default = "numOverlaps)}
 
-\item{evFUN}{Function, choose the evaluation strategy used for the test (default = "numOverlaps")}
+\item{sampling}{logical, if TRUE the function will use only a sample of each element of Alist to perform the test as specified in \code{fraction.} (default = FALSE)}
 
-\item{sampling}{Boolean, if is true the function will use only a sample of each element of Alist to perform the test.(default = FALSE)}
+\item{min_sampling}{numeric, minimum number of regions accepted after sampling is performed with the specified \code{fraction}. If the number of sampled
+regions is less than \code{min_sampling}, the number specified by \code{min_sampling} will be used as number of regions sampled instead. (default = 5000)}
 
-\item{min_sampling}{Numeric, minimum number of regions in the region set that permit a sampling. (default = 5000)}
+\item{fraction}{logical, if \code{sampling=TRUE}, defines the fraction of the region sets used to perform the test. (default = 0.15)}
 
-\item{fraction}{Numeric, if sampling == TRUE is the fraction of the region sets used to perform the test. (default = 0.15)}
+\item{universe}{region set to use as universe, used only when \code{\link[regioneR:resampleRegions]{regioneR::resampleRegions()}} function is selected. (default = NULL)}
 
-\item{universe}{Region Set of any accepted formats by  \href{https://bioconductor.org/packages/release/bioc/html/regioneR.html}{regioneR}, using only when resamplinRegions function is
-selected (default = NULL)}
+\item{window}{numeric, window (number of base pairs) in which the local z-score will be calculated. (default = 1000)}
 
-\item{window}{window (number of base pairs) in which will be estimated the local Z-score. (default = 1000)}
+\item{step}{numeric, step (number of base pairs) by which will be estimated the local Z-score. (default = 100)}
 
-\item{step}{step (number of base pairs) in which will be estimated the local Z-score. (default = 100)}
+\item{adj_pv_method}{character, the method used for the calculation of the adjusted p-value, to choose between the options of \code{\link[=p.adjust]{p.adjust()}}. (default = "BH")}
 
-\item{adj_pv_method}{Charachter, the method used for the calculation of the adjusted p-value,
-to choose between the options of \code{\link{p.adjust}}. (default = "BH")}
-
-\item{min_regions}{minimun regions accepted after the sampling. (default = 1000)}
-
-\item{max_pv}{Numeric, the z-scores associate a p-values higher of this parameter will be transform in 0. (default =0.05)}
-
-\item{genome}{Charachter or GenomicRanges, genome used to compute the randomization. (default = "hg19")}
+\item{genome}{character or \linkS4class{GRanges}, genome used to compute the randomization. (default = "hg19")}
 
 \item{...}{further arguments to be passed to other methods.}
 }
@@ -55,15 +46,20 @@ A object of class \link[=multiLocalZScore-class]{multiLocalZScore} containing th
 }
 }
 \description{
-Perform a multiple permutation test and local z-score calculation between a region set and
-list of regions set (or GrangedList)
+Perform multiple permutation tests between a region set and each element in
+a list of region sets using shifted positions to calculate a local z-score.
 }
 \details{
-the permutation test core used in this function allows to change
-\code{"randomize.function"} \code{\link{randomizeRegions}},
-\code{\link{circularRandomizeRegions}}, \code{\link{resampleRegions}} or a
-custom function), but use only an \code{"evaluation.function"}
-\code{\link{numOverlaps}}
+This function performs multiple permutation tests between a single region set
+and each element in a list of region sets. For every pairwise combination, the
+evaluation step is repeated each time shifting the position of all the regions in the query region set
+by a fixed step inside a defined window (using \code{\link[regioneR:localZScore]{regioneR::localZScore()}}.
+This produces a "local z-score" profile that can be indicative of the nature
+of the association between region sets. For example, an association can occur
+"centrally" if the z-score value drops sharply when sifting the region set.
+On the other hand, two region sets may have a peak of local z-score away from
+the central position if they happen to occur often at a regular distance,
+showing a "lateral" association.
 }
 \examples{
 
@@ -80,5 +76,5 @@ summary(mlz_ptAB)
 
 }
 \seealso{
-\code{\link{localZScore}}
+\code{\link[regioneR:localZScore]{regioneR::localZScore()}}
 }

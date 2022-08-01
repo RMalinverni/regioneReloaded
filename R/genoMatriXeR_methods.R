@@ -1,7 +1,13 @@
-#' Prints genomicMatriXeR object
-#' @param x A genomicMatriXeR object
-#' @return a printing for genoMatriXeR objects
+#' Print method for genoMatriXeR class
+#'
+#' @param x A genoMatriXeR object.
+#'
+#' @return A printed output for genoMatriXeR objects.
+#'
+#' @seealso [genoMatriXeR][genoMatriXeR-class]
+#'
 #' @export
+
 
 setMethod("print", "genoMatriXeR", function(x)
   list(

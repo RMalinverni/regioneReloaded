@@ -13,8 +13,8 @@ An S4 class for "multiLocalZScore" object.
 \describe{
 \item{\code{parameters}}{List of parameters used to create the object}
 
-\item{\code{multiLocalZscores}}{...}
+\item{\code{multiLocalZscores}}{Results of multiple pairwise permutation tests on shifted region sets generated with \code{\link[=multiLocalZscore]{multiLocalZscore()}}.}
 
-\item{\code{matrix}}{...}
+\item{\code{matrix}}{List of numerical matrices containing local z-scores and correlation values generated with \code{\link[=makeLZMatrix]{makeLZMatrix()}}.}
 }}
 

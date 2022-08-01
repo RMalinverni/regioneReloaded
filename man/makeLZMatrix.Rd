@@ -4,29 +4,28 @@
 \alias{makeLZMatrix}
 \title{Make Local Z-Score Matrix}
 \usage{
-makeLZMatrix( mlZA, normalize = TRUE, clusterize = TRUE, centralize = NA, hc.method = NULL, dist.method = "euclidean",
+makeLZMatrix(mlZA, normalize = TRUE, clusterize = TRUE, centralize = NA, hc.method = NULL, dist.method = "euclidean",
                            scale = FALSE, ...)
 }
 \arguments{
-\item{mlZA}{an object of class \link[=multiLocalZScore-class]{multiLocalZScore} or a matrix}
+\item{mlZA}{an object of class \link[=multiLocalZScore-class]{multiLocalZScore} or a numerical matrix.}
 
-\item{normalize}{logic, if TRUE the matrix will be normalize. (default = FALSE)}
+\item{normalize}{logical, if TRUE the z-score values in the matrix will be normalized. (default = FALSE)}
 
-\item{clusterize}{logic, if TRUE the matrix will be clusterize using a method selected with the variable \code{hc.method} (default = TRUE)}
+\item{clusterize}{logical, if TRUE the matrix will be clustered using the method specified by \code{hc.method} (default = TRUE)}
 
-\item{centralize}{numeric, number of "steps" around the center of the local association in which will be apply the clusterization algorithm, if NA all the values in the matrix will be utilize. (default = NA)}
+\item{centralize}{numeric, only z-score values in a number of steps (defined by \code{centralize}) around the center of the local association will be used for clustering. If NA, all the values in the matrix will be used for clustering. (default = NA)}
 
-\item{hc.method}{character/vector, select the \code{hclust} method to use for clusterize the matrix,
-if hc.method == NULL, the methods used for clusterize the matrix will be selected using the function \code{\link{chooseHclustMet}} (default = "NA")}
+\item{hc.method}{character, select the \code{\link[=hclust]{hclust()}} method to use for clustering the matrix. If NULL, the clustering method will be automatically selected by the function \code{\link[=chooseHclustMet]{chooseHclustMet()}}. (default = NULL)}
 
-\item{dist.method}{character, metric used to calculate the distance matrix see \code{hclust} (default = "euclidean")}
+\item{dist.method}{character, the distance measure to be used from those available in \code{\link[=dist]{dist()}} . (default = "euclidean")}
 
-\item{scale}{logic, if TRUE the matrix will be scaled (default = FALSE)}
+\item{scale}{logical, if TRUE the matrix will be scaled. (default = FALSE)}
 
 \item{...}{further arguments to be passed to other methods.}
 }
 \value{
-A object of class \link[=multiLocalZScore-class]{mLZS} containing three slots
+A object of class \link[=multiLocalZScore-class]{mLZS} containing three slots, with a populated \code{matrix} slot.
 
 \itemize{
 \item \bold{\code{@parameters}}
@@ -36,7 +35,8 @@ A object of class \link[=multiLocalZScore-class]{mLZS} containing three slots
 }
 }
 \description{
-create a local z-score matrix from an \link[=multiLocalZScore-class]{multiLocalZScore} object and save it in the matrix slot
+Create a local z-score matrix from a \link[=multiLocalZScore-class]{multiLocalZScore}
+object and save it in its \code{matrix} slot.
 }
 \examples{
 

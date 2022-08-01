@@ -10,54 +10,52 @@ labAll = FALSE, labMaxOverlap = 100, ellipse = TRUE, perplexity = 10, theta = 0.
 return_table = FALSE, return_plot = TRUE, ...)
 }
 \arguments{
-\item{mPT}{an object of class genoMatriXeR or a numeric matrix.}
+\item{mPT}{an object of class genoMatriXeR or a numerical matrix.}
 
-\item{type}{character, Dimensional Reduction algorithm to use ("PCA", "tSNE", "UMAP"). (default  = "PCA")}
+\item{type}{character, dimensional reduction algorithm to use ("PCA", "tSNE", "UMAP"). (default  = "PCA")}
 
-\item{GM_clust}{numeric, vector of clusters used to clusterize the matrix, if NA will the matrix will be clusterized using the \code{\link{kmeans}} function. (default = NA)}
+\item{GM_clust}{numeric, vector of assigned clusters used to cluster the matrix. If NA, the matrix will be clustered using the method defined by \code{clust_met}. (default = NA)}
 
-\item{clust_met}{string, unsupervised cluster strategy used. Option available are "kmeans" or "pam". (default = "kmeans")}
+\item{clust_met}{character, unsupervised cluster strategy used ("\link{kmeans}" or "\link{pam}"). (default = "kmeans")}
 
-\item{nc}{numeric, number of cluster to define if using the default kmeans method. (default = 5)}
+\item{nc}{numeric, number of clusters to define if using the default "kmeans" method. (default = 5)}
 
-\item{listRS}{list of vector, a list of names of regionset of interest to be highlighted in the graph. (default = NULL)}
+\item{listRS}{list, a list of names of region sets of interest to be highlighted in the graph. (default = NULL)}
 
 \item{main}{character, title for the plot. (default = "")}
 
-\item{labSize}{numeric, size for point labels in the plot, if 0 no labels will be plotted (default = 2)}
+\item{labSize}{numeric, size for point labels in the plot. If 0, no labels will be plotted. (default = 2)}
 
-\item{emphasize}{logical, if listRS is not NULL and emphasize is TRUE only the cluster in which the elements of listRS are present will be highlighted. (default = FALSE)}
+\item{emphasize}{logical, if TRUE, only the cluster in which the elements of \code{listRS} are present will be highlighted. (default = FALSE)}
 
-\item{labAll}{logical, if TRUE data points which are not in listRS when emphasize = TRUE are labelled. (default = FALSE)}
+\item{labAll}{logical, if TRUE all data points are labelled, even if not in \code{listRS} when \code{emphasize} = TRUE. (default = FALSE)}
 
 \item{labMaxOverlap}{numeric, max.overlaps for \code{\link{geom_text_repel}}. (default = 100)}
 
 \item{ellipse}{logical, if TRUE ellipses will be drawn around the clusters. (default = FALSE)}
 
-\item{perplexity}{numeric, if type = "tSNE" value of perplexity for the function \code{\link{Rtsne}}. (default = 10)}
-
-\item{theta}{numeric, if type = "tSNE" value of theta for the function \code{\link{Rtsne}}. (default = 0.1)}
+\item{perplexity, theta}{numeric, if \code{type} = "tSNE" values of perplexity and theta for the function \code{\link[=Rtsne]{Rtsne()}}. (default = 10)}
 
 \item{return_table}{logical, if TRUE a table with the cluster assigned to each region is returned. (default = FALSE)}
 
 \item{return_plot}{logical, if TRUE a plot is returned. (default = TRUE)}
 
-\item{...}{further arguments to be passed on to other functions.}
+\item{...}{further arguments to be passed on to other methods}
 }
 \value{
 A ggplot object or a table with cluster assignments is returned.
 }
 \description{
-Plot a visualization of a genomeMatriXeR object (or matrix) using different
+Plot a visualization of a \link[=genomeMatriXeR-class]{genoMatriXeR} object (or matrix) using different
 dimensional reduction algorithms (PCA, tSNE and UMAP).
 }
 \details{
 This function generates a plot with a two-dimensional representation of the
-association data stored in a genomeMatriXeR by using either PCA, tSNE or UMAP
-transformations of the data. This function incorporates a clustering step and
-allows to highlight specific region sets of interest and the clusters they
-belong to. In addition to generating a plot, a table with the cluster
-assignments can be retrieved by setting return_table as TRUE.
+association data stored in a \link[=genomeMatriXeR-class]{genoMatriXeR} object by
+using either PCA, tSNE or UMAP transformations of the data. This function
+incorporates a clustering step and allows to highlight specific region sets
+of interest and the clusters they belong to. In addition to generating a plot,
+a table with the cluster assignments can be retrieved.
 }
 \examples{
 
@@ -73,5 +71,5 @@ print(CDR_clust)
 
 }
 \seealso{
-\code{\link{crosswisePermTest}}
+\code{\link[=crosswisePermTest]{crosswisePermTest()}}
 }

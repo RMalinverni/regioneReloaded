@@ -2,34 +2,35 @@
 % Please edit documentation in R/multiPermTest.R
 \name{multiPermTest}
 \alias{multiPermTest}
-\title{Multiple Permutation Test}
+\title{multiPermTest}
 \usage{
-multiPermTest (A, Blist, ranFUN, evFUN, universe, genome, rFUN, verbose = FALSE, ntimes, adj_pv_method, ...)
+multiPermTest (A, Blist, ranFUN, evFUN, universe, genome, rFUN, ntimes, adj_pv_method, ...)
 }
 \arguments{
 \item{A}{Genomic Ranges or any accepted formats by  \href{https://bioconductor.org/packages/release/bioc/html/regioneR.html}{regioneR} package
 (\code{\link{GenomicRanges}}, \code{\link{data.frame}} etc...)}
 
-\item{Blist}{GRangesList or list of Region Set of any accepted formats by  \href{https://bioconductor.org/packages/release/bioc/html/regioneR.html}{regioneR} package
-(\code{\link{GenomicRanges}}, \code{\link{data.frame}} etc...)}
+\item{ranFUN}{character, the randomization strategy used for the test, see \href{https://bioconductor.org/packages/release/bioc/html/regioneR.html}{regioneR}. (default = "randomizeRegions")}
 
-\item{ranFUN}{(default = "randomizeRegions") choose the randomization strategy used for the test see  \href{https://bioconductor.org/packages/release/bioc/html/regioneR.html}{regioneR}}
+\item{evFUN}{character, the evaluation strategy used for the test, see  \href{https://bioconductor.org/packages/release/bioc/html/regioneR.html}{regioneR}. (default = "numOverlaps)}
 
-\item{evFUN}{(default = "numOverlaps) choose the evaluation strategy used for the test see  \href{https://bioconductor.org/packages/release/bioc/html/regioneR.html}{regioneR}}
+\item{universe}{region set to use as universe, used only when \code{\link[regioneR:resampleRegions]{regioneR::resampleRegions()}} function is selected. (default = NULL)}
 
-\item{universe}{(default = NULL) used only when \code{\link{resampleRegions}} function is selected}
+\item{genome}{character or \linkS4class{GRanges}, genome used to compute the randomization. (default = "hg19")}
 
-\item{genome}{Charachter or GenomicRanges, (defalut = "hg19") genome used to compute the randomization}
+\item{ntimes}{numeric, number of permutations used in the test. (default = 100)}
 
-\item{verbose}{Boolean, if verbose test}
+\item{adj_pv_method}{character, the method used for the calculation of the adjusted p-value, to choose between the options of \code{\link[=p.adjust]{p.adjust()}}. (default = "BH")}
 
-\item{adj_pv_method}{Charachter, the method used for the calculation of the adjusted p-value,
-to choose between the options of \code{\link{p.adjust}}. (default = "BH")}
+\item{...}{further arguments to be passed to other methods.}
 }
 \value{
 a table obtained from parsing of \link[=permTest]{regioneR} object
 }
 \description{
+multiPermTest
+}
+\details{
 Perform a multiple permutation test
 }
 \keyword{function}

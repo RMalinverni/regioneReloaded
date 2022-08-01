@@ -2,24 +2,28 @@
 % Please edit documentation in R/randomizeRegionsPerc.R
 \name{randomizeRegionsPerc}
 \alias{randomizeRegionsPerc}
-\title{randomize Regions Perc}
+\title{randomizeRegionsPerc}
 \usage{
 randomizeRegionsPerc(GR, genome = "hg19", frac = 0.2, ...)
 }
 \arguments{
-\item{GR}{description}
+\item{GR}{a \linkS4class{GRanges} object with the input region set.}
 
-\item{genome}{description}
+\item{genome}{genome of reference to generate the similar region sets. (default = "hg19)}
 
-\item{frac}{description}
+\item{frac}{fraction of the original region set to randomize. (default = 0.2)}
 
 \item{...}{further arguments to be passed to other methods.}
 }
 \value{
-a GenomicRanges object similar to GR with a fracion "frac" randomized
+a \linkS4class{GRanges} object
 }
 \description{
-randomize regions at percentage
+Create a random region set similar to a reference region set.
+}
+\details{
+This function takes an input region set and generates a region set where a
+fraction of the regions has been randomized.
 }
 \examples{
 
@@ -40,5 +44,5 @@ regA_02 <- randomizeRegionsPerc(GR = regA, genome = AlienGenome, frac = 0.2)
 
 }
 \seealso{
-similarRegionSet
+\code{\link[=similarRegionSet]{similarRegionSet()}}
 }

@@ -7,11 +7,11 @@
 plotSinglePT(mPT, RS1, RS2, xlab = NA, main = NA)
 }
 \arguments{
-\item{mPT}{an object of class genoMatriXeR}
+\item{mPT}{an object of class \link[=genoMatriXeR-class]{genoMatriXeR}.}
 
-\item{RS1, RS2}{character, names of region sets in genoMatriXeR object for which to represent the pairwise permutation test results.}
+\item{RS1, RS2}{character, names of region sets in a genoMatriXeR object for which to represent the pairwise permutation test results.}
 
-\item{xlab}{character, label for x axis (default = NA)}
+\item{xlab}{character, label for x axis. (default = NA)}
 
 \item{main}{title for the plot, if NA the name of the genoMatriXeR object is used (default = NA)}
 }
@@ -23,7 +23,7 @@ Plot the result of a single pairwise permutation test from a genoMatriXeR object
 }
 \details{
 This function generates a plot representing the result of a single
-permutation test stored in a genoMatriXeR object. This includes a plot of the
+permutation test stored in a \link[=genoMatriXeR-class]{genoMatriXeR} object. This includes a plot of the
 density distribution of the randomized evaluations and a vertical line
 showing the observed evaluation in the original region set. The values of the
 mean randomized evaluations and the value of the observed evaluation are
@@ -38,5 +38,5 @@ plotSinglePT(cw_Alien_ReG, RS1 = "regA", RS2 = "regC")
 
 }
 \seealso{
-\code{\link{crosswisePermTest}} \code{\link{makeCrosswiseMatrix}}
+\link{crosswisePermTest} \link{makeCrosswiseMatrix}
 }

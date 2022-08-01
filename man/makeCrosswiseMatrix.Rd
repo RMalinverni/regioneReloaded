@@ -13,7 +13,7 @@ selectRow = NULL, selectCol = NULL, pvcut = 1, GM_diag = NULL, subEX=0, ...)
 
 \item{clusterize}{logical, if TRUE the matrix will be clustered using the method specified by \code{hc.method} (default = TRUE)}
 
-\item{hc.method}{character, select the \code{hclust} method to use for clustering the matrix, if NULL, the clustering method will be automatically selected by the function \code{\link[=chooseHclustMet]{chooseHclustMet()}}. (default = NULL)}
+\item{hc.method}{character, select the \code{\link[=hclust]{hclust()}} method to use for clustering the matrix. If NULL, the clustering method will be automatically selected by the function \code{\link[=chooseHclustMet]{chooseHclustMet()}}. (default = NULL)}
 
 \item{dist.method}{character, the distance measure to be used from those available in \code{\link[=dist]{dist()}} . (default = "euclidean")}
 
@@ -46,14 +46,15 @@ An object of class \link[=genoMatriXeR-class]{genoMatriXeR} containing three slo
 }
 }
 \description{
-Populate the matrix slot in a \link[=genoMatriXeR-class]{genoMatriXeR} object.
+Populate the \code{matrix} slot in a \link[=genoMatriXeR-class]{genoMatriXeR} object.
 }
 \details{
 This function will create a series of matrices of z-scores, adj.pvalues and
 pearson correlation values from all the pairwise permutation tests stored in
 the \code{multiOverlaps} slot of a \link[=genoMatriXeR-class]{genoMatriXeR} as
-calculated with \code{\link[=multiPermTest]{multiPermTest()}}. This matrices will then be stored in the
-\code{matrix} slot of the \link[=genoMatriXeR-class]{genoMatriXeR} object.
+calculated with \code{\link[=multiPermTest]{multiPermTest()}}. These matrices will then be stored in the
+\code{matrix} slot of the \link[=genoMatriXeR-class]{genoMatriXeR} object. In addition,
+clustering will be performed on the association matrices using \link{hclust}.
 }
 \examples{
 

@@ -1,23 +1,28 @@
-#' Plot Crosswise Matrix
+#' plotCrosswiseMatrix
 #'
+#' @description
 #'
-#' Plot matrix of associations/correlations stored in a genoMatriXeR object.
+#' Plot matrix of associations/correlations stored in a [genoMatriXeR][genomeMatriXeR-class] object.
+#'
+#' @details
+#'
+#' Missing details.
 #'
 #' @usage plotCrosswiseMatrix(mPT, lineColor = NA, interpolate = FALSE, colMatrix =
 #' "default", matrix_type = "crosswise", cor = "row",
 #' maxVal = NA, main = "", ord_mat = NULL)
 
 #'
-#' @param mPT an object of class gMXR or a matrix
-#' @param lineColor logic if TRUE a grid matrix will be draw (default: FALSE)
-#' @param interpolate logic the image will be interpolate using the function (\code{\link{geom_raster}}
+#' @param mPT an object of class [genoMatriXeR][genomeMatriXeR-class] or a numerical matrix.
+#' @param lineColor logical, color for the line grid delineating the tiles of the matrix plot. If NA, no line will be drawn. (default = NA)
+#' @param interpolate logical, if TRUE the image will be interpolated using the function [geom_raster()]. (default = FALSE)
 #' @param colMatrix character or vector of colors, if "default" will be used a default selection see..
-#' @param matrix_type character ("crosswise" or "correlation") is the kind of matrix that will be plotted.
-#' @param cor character ("row" or "col"). If matrix variable is "correlation", defined if the function \code{"cor"} will be executed on rows or columns of the matrix
-#' @param maxVal numeric, maximun abs(value) reached by the plot. (default = 2)
-#' @param main charachter, graph title
-#' @param ord_mat numeric list, list with two vectors X and Y as element, that
-#' represent the order of rows and column of the matrix (default = NULL)
+#' @param matrix_type character, type of matrix to be plotted, either "crosswise" or "correlation". (default = "crosswise)
+#' @param cor character, if `matrix_type` is "correlation", choose if the function [cor()] will be executed on each "row" or "column" of the matrix. (default = "row")
+#' @param maxVal numeric, maximum absolute value displayed by the plot. If NA, the 0.95 quantile of all absolute values is used. (default = NA)
+#' @param main character, title of the plot. (default = "")
+#' @param ord_mat numeric, list with two numeric vectors that represent the ordering of rows and column of the matrix to be used in the plot.
+#' If NULL, the order of the matrix is preserved as is. (default = NULL)
 #'
 #' @return Returns a ggplot object.
 #'
@@ -37,8 +42,6 @@
 #' @import ggplot2
 #' @importFrom  reshape2 melt
 #' @export plotCrosswiseMatrix
-#'
-#'
 #'
 
 plotCrosswiseMatrix <- function(mPT,

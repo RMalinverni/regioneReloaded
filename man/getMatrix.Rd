@@ -10,10 +10,10 @@ getMatrix(rR)
 \item{rR}{genoMatriXeR or multiLocalZScore object}
 }
 \value{
-a numeric Matrix
+a numerical matrix from a
 }
 \description{
-Return matrix from an genoMatriXeR or multiLocalZScore object
+Returns the matrix from an \link[=genoMatriXeR-class]{genoMatriXeR} or \link[=multiLocalZScore-class]{multiLocalZScore} object.
 }
 \examples{
 
@@ -22,4 +22,7 @@ data("cw_Alien")
 cw_Alien_RaR <- makeCrosswiseMatrix(cw_Alien_RaR)
 GM <- getMatrix(cw_Alien_RaR)
 
+}
+\seealso{
+\link[=genoMatriXeR-class]{genoMatriXeR}, \link[=multiLocalZScore-class]{multiLocalZScore}, \link{makeCrosswiseMatrix}
 }
