@@ -38,7 +38,7 @@ to choose between the options of \code{\link[=p.adjust]{p.adjust()}}. (default =
 \item{...}{further arguments to be passed to other methods.}
 }
 \value{
-A object of class \link[=genoMatriXeR-class]{regioneRld} containing three slots
+A object of class \link[=genoMatriXeR-class]{genoMatriXeR} containing three slots
 
 \itemize{
 \item \bold{\code{@parameters}}
@@ -72,5 +72,5 @@ print(cw_ptAB)
 
 }
 \seealso{
-\link[=genoMatriXeR-class]{regioneRld}, \href{https://bioconductor.org/packages/release/bioc/html/regioneR.html}{regioneR}, \code{\link{permTest}}, \code{\link{overlapPermTest}}
+\link[=genoMatriXeR-class]{genoMatriXeR}, \href{https://bioconductor.org/packages/release/bioc/html/regioneR.html}{regioneR}, \code{\link{permTest}}, \code{\link{overlapPermTest}}
 }

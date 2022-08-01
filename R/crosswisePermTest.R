@@ -37,7 +37,7 @@
 #' @details ...
 #' @return
 #'
-#' A object of class [regioneRld][genoMatriXeR-class] containing three slots
+#' A object of class [genoMatriXeR][genoMatriXeR-class] containing three slots
 #'
 #' \itemize{
 #' \item \bold{\code{@parameters}}
@@ -47,7 +47,7 @@
 #' }
 #'
 #'
-#' @seealso    [regioneRld][genoMatriXeR-class], [regioneR](https://bioconductor.org/packages/release/bioc/html/regioneR.html), \code{\link{permTest}}, \code{\link{overlapPermTest}}
+#' @seealso    [genoMatriXeR][genoMatriXeR-class], [regioneR](https://bioconductor.org/packages/release/bioc/html/regioneR.html), \code{\link{permTest}}, \code{\link{overlapPermTest}}
 #'
 #' @examples
 #'
@@ -96,7 +96,7 @@ crosswisePermTest <-
       stop("min_sampling must be numeric")
     }
     if (!is.character(ranFUN)) {
-      stop("runFun must be charachter")
+      stop("ranFun must be charachter")
     }
     if (!is.character(evFUN)) {
       stop("evFun must be charachter")
