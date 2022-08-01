@@ -1,11 +1,11 @@
 ---
-title: "regioneReload"
+title: "regioneReloaded"
 author: "Roberto Malinverni"
 output: BiocStyle::html_document   #rmarkdown::html_vignette
 fig_width: 10
 fig_height: 10 
 vignette: >
-  %\VignetteIndexEntry{regioneReload}
+  %\VignetteIndexEntry{regioneReloaded}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -436,7 +436,7 @@ cw_Alien_RaR <- makeCrosswiseMatrix(cw_Alien_RaR)
 
 cw_Alien_ReG <- makeCrosswiseMatrix(cw_Alien_ReG)
 
-cw_Alien_cRaR <- makeCrosswiseMatrix(cw_Alien_cRaR)
+#cw_Alien_cRaR <- makeCrosswiseMatrix(cw_Alien_cRaR)
 
 cw_Alien_ReR <- makeCrosswiseMatrix(cw_Alien_ReR)
 
@@ -453,20 +453,20 @@ ord<-list(X=X,Y=Y)
 
 p_RaR <- plotCrosswiseMatrix(cw_Alien_RaR,matrix_type = "crosswise",ord_mat = ord)
 p_ReG <- plotCrosswiseMatrix(cw_Alien_ReG,matrix_type = "crosswise" ,ord_mat = ord)
-p_cRaR <- plotCrosswiseMatrix(cw_Alien_cRaR,matrix_type = "crosswise",ord_mat = ord)
+#p_cRaR <- plotCrosswiseMatrix(cw_Alien_cRaR,matrix_type = "crosswise",ord_mat = ord)
 p_ReR <- plotCrosswiseMatrix(cw_Alien_ReR,matrix_type = "crosswise",ord_mat = ord)
 
-ggpubr::ggarrange(p_RaR, p_ReG, p_cRaR, p_ReR, 
-          labels = c("RaR", "ReG", "cRaR","ReR"),
+ggpubr::ggarrange(p_RaR, p_ReG, p_ReR, 
+          labels = c("RaR", "ReG", "ReR"),
           ncol = 2, nrow = 2)
 
 p_RaR <- plotCrosswiseMatrix(cw_Alien_RaR,matrix_type = "correlation",ord_mat = ord)
 p_ReG <- plotCrosswiseMatrix(cw_Alien_ReG,matrix_type = "correlation" ,ord_mat = ord)
-p_cRaR <- plotCrosswiseMatrix(cw_Alien_cRaR,matrix_type = "correlation",ord_mat = ord)
+#p_cRaR <- plotCrosswiseMatrix(cw_Alien_cRaR,matrix_type = "correlation",ord_mat = ord)
 p_ReR <- plotCrosswiseMatrix(cw_Alien_ReR,matrix_type = "correlation",ord_mat = ord)
 
-ggpubr::ggarrange(p_RaR, p_ReG, p_cRaR, p_ReR, 
-          labels = c("RaR", "ReG", "cRaR","ReR"),
+ggpubr::ggarrange(p_RaR, p_ReG,  p_ReR, 
+          labels = c("RaR", "ReG","ReR"),
           ncol = 2, nrow = 2)
 
 ```
