@@ -91,10 +91,13 @@ plotLocalZScoreMatrix <- function(mLZ,
     maxVal <- 1
   }
 
-  if (colMatrix == "default") {
-    colMatrix <-
-      rev(c(rev(RColorBrewer::brewer.pal(9, "PuBuGn")), RColorBrewer::brewer.pal(9, "YlOrRd")))
+  if (length(colMatrix)== 1){
+    if (colMatrix == "default") {
+      colMatrix <-
+        rev(c(rev(RColorBrewer::brewer.pal(9, "PuBuGn")),
+              RColorBrewer::brewer.pal(9, "YlOrRd")))
 
+    }
   }
 
   DF <- reshape2::melt(GM, varnames = c("X", "Y"))

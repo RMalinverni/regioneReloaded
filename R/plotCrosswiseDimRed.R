@@ -15,7 +15,7 @@
 #' assignments can be retrieved by setting return_table as TRUE.
 #'
 #' @usage plotCrosswiseDimRed(mPT, type = "PCA", GM_clust = NA, clust_met =
-#' "kmeans", nc = 5, listRS = NULL, main = "", labSize = 2, emphasize = FALSE,
+#' "hclust", nc = 5, listRS = NULL, main = "", labSize = 2, emphasize = FALSE,
 #' labAll = FALSE, labMaxOverlap = 100, ellipse = TRUE, perplexity = 10, theta = 0.1,
 #' return_table = FALSE, return_plot = TRUE, ...)
 #'
@@ -23,7 +23,7 @@
 #' @param mPT an object of class genoMatriXeR or a numeric matrix.
 #' @param type character, Dimensional Reduction algorithm to use ("PCA", "tSNE", "UMAP"). (default  = "PCA")
 #' @param GM_clust numeric, vector of clusters used to clusterize the matrix, if NA will the matrix will be clusterized using the \code{\link{kmeans}} function. (default = NA)
-#' @param clust_met string, unsupervised cluster strategy used. Option available are "kmeans" or "pam". (default = "kmeans")
+#' @param clust_met string, unsupervised cluster strategy used. Option available are "kmeans" or "pam". (default = "hclust")
 #' @param nc numeric, number of cluster to define if using the default kmeans method. (default = 5)
 #' @param listRS list of vector, a list of names of regionset of interest to be highlighted in the graph. (default = NULL)
 #' @param main character, title for the plot. (default = "")
@@ -71,7 +71,7 @@ plotCrosswiseDimRed <-
   function(mPT,
            type = "PCA",
            GM_clust = NA,
-           clust_met = "kmeans",
+           clust_met = "hclust",
            nc = 5,
            listRS = NULL,
            main = "",

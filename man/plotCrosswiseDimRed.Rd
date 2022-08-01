@@ -5,7 +5,7 @@
 \title{plotCrosswiseDimRed}
 \usage{
 plotCrosswiseDimRed(mPT, type = "PCA", GM_clust = NA, clust_met =
-"kmeans", nc = 5, listRS = NULL, main = "", labSize = 2, emphasize = FALSE,
+"hclust", nc = 5, listRS = NULL, main = "", labSize = 2, emphasize = FALSE,
 labAll = FALSE, labMaxOverlap = 100, ellipse = TRUE, perplexity = 10, theta = 0.1,
 return_table = FALSE, return_plot = TRUE, ...)
 }
@@ -16,7 +16,7 @@ return_table = FALSE, return_plot = TRUE, ...)
 
 \item{GM_clust}{numeric, vector of clusters used to clusterize the matrix, if NA will the matrix will be clusterized using the \code{\link{kmeans}} function. (default = NA)}
 
-\item{clust_met}{string, unsupervised cluster strategy used. Option available are "kmeans" or "pam". (default = "kmeans")}
+\item{clust_met}{string, unsupervised cluster strategy used. Option available are "kmeans" or "pam". (default = "hclust")}
 
 \item{nc}{numeric, number of cluster to define if using the default kmeans method. (default = 5)}
 

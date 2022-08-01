@@ -85,8 +85,9 @@ which can be loaded into the environment by running the command `data("cw_Alien_
 
 ```{r load _data, eval=FALSE}
 #NOT RUN
+  
   set.seed(42)
-  cw_Alien_ReG<-crosswisePermTest(Alist = AlienRSList,
+  cw_Alien_ReG<-crosswisePermTest(Alist = AlienRSList_narrow,
                             sampling = FALSE,
                             mc.cores= 25,
                             ranFUN = "resampleGenome",
@@ -436,8 +437,6 @@ cw_Alien_RaR <- makeCrosswiseMatrix(cw_Alien_RaR)
 
 cw_Alien_ReG <- makeCrosswiseMatrix(cw_Alien_ReG)
 
-#cw_Alien_cRaR <- makeCrosswiseMatrix(cw_Alien_cRaR)
-
 cw_Alien_ReR <- makeCrosswiseMatrix(cw_Alien_ReR)
 
 ```
@@ -453,7 +452,6 @@ ord<-list(X=X,Y=Y)
 
 p_RaR <- plotCrosswiseMatrix(cw_Alien_RaR,matrix_type = "crosswise",ord_mat = ord)
 p_ReG <- plotCrosswiseMatrix(cw_Alien_ReG,matrix_type = "crosswise" ,ord_mat = ord)
-#p_cRaR <- plotCrosswiseMatrix(cw_Alien_cRaR,matrix_type = "crosswise",ord_mat = ord)
 p_ReR <- plotCrosswiseMatrix(cw_Alien_ReR,matrix_type = "crosswise",ord_mat = ord)
 
 ggpubr::ggarrange(p_RaR, p_ReG, p_ReR, 
@@ -462,7 +460,6 @@ ggpubr::ggarrange(p_RaR, p_ReG, p_ReR,
 
 p_RaR <- plotCrosswiseMatrix(cw_Alien_RaR,matrix_type = "correlation",ord_mat = ord)
 p_ReG <- plotCrosswiseMatrix(cw_Alien_ReG,matrix_type = "correlation" ,ord_mat = ord)
-#p_cRaR <- plotCrosswiseMatrix(cw_Alien_cRaR,matrix_type = "correlation",ord_mat = ord)
 p_ReR <- plotCrosswiseMatrix(cw_Alien_ReR,matrix_type = "correlation",ord_mat = ord)
 
 ggpubr::ggarrange(p_RaR, p_ReG,  p_ReR, 

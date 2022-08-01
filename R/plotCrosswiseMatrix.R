@@ -9,7 +9,7 @@
 
 #'
 #' @param mPT an object of class gMXR or a matrix
-#' @param lineColor logic if TRUE a grid matrix will be draw (default: FALSE)
+#' @param lineColor logic if TRUE a grid matrix will be draw (default = FALSE)
 #' @param interpolate logic the image will be interpolate using the function (\code{\link{geom_raster}}
 #' @param colMatrix character or vector of colors, if "default" will be used a default selection see..
 #' @param matrix_type character ("crosswise" or "correlation") is the kind of matrix that will be plotted.
@@ -88,13 +88,16 @@ plotCrosswiseMatrix <- function(mPT,
     }
   }
 
-  if (!is.vector(colMatrix)) {
+  if (length(colMatrix) == 1) {
     if (colMatrix == "default") {
       colMatrix <-
         rev(c(rev(brewer.pal(9, "PuBuGn")), brewer.pal(9, "YlOrRd")))
 
     }
   }
+
+
+
 
   if (!is.null(ord_mat)){
     if (is.list(ord_mat)){

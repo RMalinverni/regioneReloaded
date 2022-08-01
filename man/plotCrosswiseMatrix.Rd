@@ -11,7 +11,7 @@ maxVal = NA, main = "", ord_mat = NULL)
 \arguments{
 \item{mPT}{an object of class gMXR or a matrix}
 
-\item{lineColor}{logic if TRUE a grid matrix will be draw (default: FALSE)}
+\item{lineColor}{logic if TRUE a grid matrix will be draw (default = FALSE)}
 
 \item{interpolate}{logic the image will be interpolate using the function (\code{\link{geom_raster}}}
 
