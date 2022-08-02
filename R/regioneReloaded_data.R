@@ -163,7 +163,7 @@ NULL #"cw_Alien"
 NULL
 
 
-#' @title mLZ_regA_ReG
+#' @title mLZ_regD_ReG
 #'
 #' @description
 #'
