@@ -43,6 +43,7 @@
 #' @importFrom reshape2 melt
 #' @importFrom methods hasArg
 #' @importFrom methods is
+#' @importFrom RColorBrewer brewer.pal
 #'
 #' @export plotCrosswiseMatrix
 #'
@@ -105,7 +106,7 @@ plotCrosswiseMatrix <- function(mPT,
   if (length(colMatrix) == 1) {
     if (colMatrix == "default") {
       colMatrix <-
-        rev(c(rev(brewer.pal(9, "PuBuGn")), brewer.pal(9, "YlOrRd")))
+        rev(c(rev(RColorBrewer::brewer.pal(9, "PuBuGn")), RColorBrewer::brewer.pal(9, "YlOrRd")))
 
     }
   }
