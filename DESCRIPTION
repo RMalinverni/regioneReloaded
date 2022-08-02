@@ -39,7 +39,8 @@ Imports:
     scales,
     GenomeInfoDb,
     cluster,
-    grid
+    grid,
+    grDevices
 Suggests: 
     rmarkdown,
     knitr
