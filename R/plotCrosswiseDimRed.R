@@ -23,7 +23,7 @@
 #' @param mPT an object of class genoMatriXeR or a numerical matrix.
 #' @param type character, dimensional reduction algorithm to use ("PCA", "tSNE", "UMAP"). (default  = "PCA")
 #' @param GM_clust numeric, vector of assigned clusters used to cluster the matrix. If NA, the matrix will be clustered using the method defined by `clust_met`. (default = NA)
-#' @param clust_met character, unsupervised cluster strategy used ("[kmeans]" or "[pam]"). (default = "kmeans")
+#' @param clust_met character, unsupervised cluster strategy used ([hclust], [kmeans] or [pam]). (default = "hclust")
 #' @param nc numeric, number of clusters to define if using the default "kmeans" method. (default = 5)
 #' @param listRS list, a list of names of region sets of interest to be highlighted in the graph. (default = NULL)
 #' @param main character, title for the plot. (default = "")
