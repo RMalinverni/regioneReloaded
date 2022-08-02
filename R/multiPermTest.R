@@ -41,21 +41,6 @@ multiPermTest <-
                           values = Blist)
     ptm <- proc.time()
 
-<<<<<<< HEAD
-=======
-    # if (ranFUN == "resampleRegions") {
-    #   if (is.null(universe)) {
-    #
-    #     uniList <- data.frame()
-    #     for (u in seq_along(Alist)) {
-    #       df <- regioneR::toDataframe(Alist[[u]])[, 1:3]
-    #       uniList <- rbind(uniList, df)
-    #     }
-    #     universe <- uniList
-    #   }
-    # }
-
->>>>>>> david_dev
     pt <- regioneR::permTest(
       A = A,
       evaluate.function = func.list,
