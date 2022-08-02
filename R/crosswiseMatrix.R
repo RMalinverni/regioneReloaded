@@ -10,13 +10,7 @@
 #'
 #' @return a numeric matrix
 #'
-#' @examples
-#'
-#' data("cw_Alien")
-#'
-#' matrix_CW_Alien <- crosswiseMatrix(cw_Alien_ReG)
-#'
-#' @export
+#' @keywords internal functions
 
 crosswiseMatrix <- function(mPT,
                             zs.type = "norm_zscore",

@@ -2,13 +2,13 @@
 #'
 #' @description
 #'
-#' Plot a visualization of a [genoMatriXeR][genomeMatriXeR-class] object (or matrix) using different
+#' Plot a visualization of a [genoMatriXeR][genoMatriXeR-class] object (or matrix) using different
 #' dimensional reduction algorithms (PCA, tSNE and UMAP).
 #'
 #' @details
 #'
 #' This function generates a plot with a two-dimensional representation of the
-#' association data stored in a [genoMatriXeR][genomeMatriXeR-class] object by
+#' association data stored in a [genoMatriXeR][genoMatriXeR-class] object by
 #' using either PCA, tSNE or UMAP transformations of the data. This function
 #' incorporates a clustering step and allows to highlight specific region sets
 #' of interest and the clusters they belong to. In addition to generating a plot,

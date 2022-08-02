@@ -17,7 +17,7 @@
 #'
 #' @return
 #'
-#' A object of class [mLZS][multiLocalZScore-class] containing three slots, with a populated `matrix` slot.
+#' A object of class [multiLocalZScore][multiLocalZScore-class] containing three slots, with a populated `matrix` slot.
 #'
 #' \itemize{
 #' \item \bold{\code{@parameters}}

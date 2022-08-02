@@ -18,15 +18,15 @@
 #' the central position if they happen to occur often at a regular distance,
 #' showing a "lateral" association.
 #'
-#' @usage multiLocalZscore( A, Blist, ranFUN = "randomizeRegions", evFUN = "numOverlaps", sampling = FALSE,
+#' @usage multiLocalZscore( A, Blist = NULL, ranFUN = "randomizeRegions", evFUN = "numOverlaps", sampling = FALSE,
 #' min_sampling = 5000, fraction = 0.15, universe = NULL, window = 1000, step = 100, adj_pv_method = "BH",
-#' max_pv = 0.05, genome = "hg19", ...)
+#' genome = "hg19", ...)
 #'
 #' @inheritParams crosswisePermTest
 #'
 #' @param A query region set for which to estimate local z-score values.
 #' @param Blist [GRangesList] or list of region sets in any accepted formats by [regioneR](https://bioconductor.org/packages/release/bioc/html/regioneR.html) package
-#' ([GenomicRanges], [data.frame] etc...).
+#' ([GenomicRanges], [data.frame] etc...). (default = NULL)
 #' @param window numeric, window (number of base pairs) in which the local z-score will be calculated. (default = 1000)
 #' @param step numeric, step (number of base pairs) by which will be estimated the local Z-score. (default = 100)
 #' @param ...  further arguments to be passed to other methods.
@@ -78,7 +78,6 @@ multiLocalZscore <- function(A,
                              window = 1000,
                              step = 100,
                              adj_pv_method = "BH",
-                             max_pv = 0.05,
                              genome = "hg19",
                              ...) {
 
@@ -93,8 +92,7 @@ multiLocalZscore <- function(A,
     universe = deparse(substitute(universe)),
     window = window,
     step = step,
-    adj_pv_method = adj_pv_method,
-    max_pv = deparse(substitute(max_pv))
+    adj_pv_method = adj_pv_method
   )
 
   ranFUN <- eval(parse(text = ranFUN))

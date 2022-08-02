@@ -15,7 +15,7 @@
 #'
 #' @usage makeCrosswiseMatrix(mPT, clusterize = TRUE, hc.method = NULL, dist.method = "euclidean",
 #' transform = FALSE, scale = FALSE, zs.type = 'norm_zscore', symm_matrix = TRUE,
-#' selectRow = NULL, selectCol = NULL, pvcut = 1, subEX = 0, GM_diag = NULL, ...)
+#' selectRow = NULL, selectCol = NULL, pvcut = 1, subEX = 0, GM_diag = TRUE, ...)
 #'
 #' @param mPT an object of class [genoMatriXeR][genoMatriXeR-class].
 #' @param clusterize logical, if TRUE the matrix will be clustered using the method specified by \code{hc.method} (default = TRUE)
@@ -28,7 +28,7 @@
 #' @param selectRow,selectCol vector, the matrix will be reduced selecting the rows and/or columns in this vector. (default = NULL)
 #' @param pvcut numeric, the z-score value is substituted by `subEX` (0 by default) for all the associations with an adj.pvalue (as calculated in [crosswisePermTest()]) higher than `pvcut`. (default = 0.05)
 #' @param subEX numeric, value used to substitute the z-score values when the associated pvalue is higher than `pvcut`. (default = 0)
-#' @param GM_diag logic, if FALSE the values of the diagonal will be set as 0. (default = TRUE)
+#' @param GM_diag logic, if FALSE the values of the diagonal will be set to 0. (default = TRUE)
 #' @param ... further arguments to be passed to other methods.
 #'
 #' @return
