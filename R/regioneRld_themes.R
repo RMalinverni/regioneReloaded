@@ -22,8 +22,8 @@
 mendel_theme <- function(base_size = 11, base_family = ""){
   ggplot2::theme(
     panel.background = ggplot2::element_rect(
-      fill = "#F9F7E7",
-      colour = "#F9F7E7",
+      fill = "#F7F4DB",
+      colour = "#F7F4DB",
       size = 0.5,
       linetype = "solid"
     ),
