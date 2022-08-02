@@ -6,7 +6,10 @@
 #'
 #' @details
 #'
-#' Missing details.
+#' This functions creates a graphical representation of the matrix of associations
+#' stored in a [genoMatriXeR][genomeMatriXeR-class] object. The values plotted and
+#' clustering options can be controlled when creating the matrix with the function
+#' [makeCrosswiseMatrix].
 #'
 #' @usage plotCrosswiseMatrix(mPT, lineColor = NA, interpolate = FALSE, colMatrix =
 #' "default", matrix_type = "crosswise", cor = "row",
@@ -26,7 +29,7 @@
 #'
 #' @return Returns a ggplot object.
 #'
-#' @seealso \code{\link{crosswisePermTest}} \code{\link{makeCrosswiseMatrix}}
+#' @seealso [crosswisePermTest] [makeCrosswiseMatrix]
 #'
 #' @examples
 #'
