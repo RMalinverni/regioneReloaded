@@ -25,13 +25,16 @@ multiPermTest (A, Blist, ranFUN, evFUN, universe, genome, rFUN, ntimes, adj_pv_m
 \item{...}{further arguments to be passed to other methods.}
 }
 \value{
-a table obtained from parsing of \link[=permTest]{regioneR} object
+a data frame object computed starting from results of \code{\link[regioneR:permTest]{regioneR::permTest()}} function
 }
 \description{
 multiPermTest
 }
 \details{
 Perform a multiple permutation test
+}
+\seealso{
+\code{\link[regioneR:permTest]{regioneR::permTest()}}
 }
 \keyword{function}
 \keyword{internal}

@@ -7,11 +7,13 @@
 #' @keywords internal function
 #' @usage multiPermTest (A, Blist, ranFUN, evFUN, universe, genome, rFUN, ntimes, adj_pv_method, ...)
 #'
-#' @return a table obtained from parsing of [regioneR][permTest()] object
+#' @return a data frame object computed starting from results of [regioneR::permTest()] function
 #'
 #' @inheritParams crosswisePermTest
 #' @param A Genomic Ranges or any accepted formats by  [regioneR](https://bioconductor.org/packages/release/bioc/html/regioneR.html) package
 #' (\code{\link{GenomicRanges}}, \code{\link{data.frame}} etc...)
+#'
+#' @seealso [regioneR::permTest()]
 #'
 #' @importFrom methods show
 #' @importFrom stats sd

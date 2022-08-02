@@ -325,20 +325,19 @@ print(cw_Alien_ReG@parameters)
 
 #### multiOverlaps
 <!-- The concept of Alist and Blist have not been introduced before this point, explain in the intro to the crosswiseAnalysis or in the example function call. -->
-The "multiOverlaps" slot contains a list of data frames. For each element of the list of region sets "Alist", a data frame is stored with 12 columns and a number of rows equal to the elements in "Blist". The columns of the data frame contain the following information:
+The "multiOverlaps" slot contains a list of data frames. For each element of the list of region sets "Alist", a data frame is stored with 11 columns and a number of rows equal to the elements in "Blist". The columns of the data frame contain the following information:
 
 + **order.id:**       order of comparison
 + **name:**           name of Blist elements 
-+ **n_regionA:**       number of regions in Alist using in the permutation test
-+ **n_regionB:**       number of regions in Blist using in the permutation test
-+ **z_score:**         calculated z-score of permutation test
-+ **p_value:**         p.value of permutation test
-+ **n_overlaps:**      number of overlaps between Alist element and Belement (change name) 
-+ **mean_perm_test:**  mean of overlaps of the permutated region set
-+ **sd_perm_test:**    standard deviation of hits in permutated region set
-+ **norm_zscore:**     z-scores normalized
-+ **std_zscore:**      z-score standardized* (maybe is better to eliminate)
-+ **adj_p_value:**     p.value adjusted 
++ **n_regionA:**       number of permuted Alist regions.
++ **n_regionB:**       number of regions in each regions set of Blist 
++ **z_score:**         z-score calculated by [regioneR::permTest()]
++ **p_value:**         p.value calculated by [regioneR::permTest()]
++ **n_hits:**          number of hits computed using the evaluation function on a regions set of Alist versus each regions set of Blists
++ **mean_perm_test:**  mean of hits computed using the evaluation function on the permutated region set
++ **sd_perm_test:**    standard deviation of hits computed using the evaluation function on the permutated region set
++ **norm_zscore:**     normalized z-scores 
++ **adj_p_value:**     adjusted p.value 
 
 
 ```{r}
