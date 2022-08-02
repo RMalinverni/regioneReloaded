@@ -34,6 +34,9 @@ Returns a ggplot object.
 \description{
 Plot matrix of associations/correlations stored in a \link[=genomeMatriXeR-class]{genoMatriXeR} object.
 }
+\details{
+Missing details.
+}
 \examples{
 
 data("cw_Alien")

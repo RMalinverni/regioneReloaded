@@ -29,7 +29,7 @@ where that fraction of the original regions in the input region set has been ran
 In effect, this creates region sets that are "similar" to a controlled degree
 to the original region set. This tool can be useful for validation purposes
 and its use in the demonstration of the usage of this package can be
-seen in the \code{RegioneReload} vignette.
+seen in the \code{RegioneReloaded} vignette.
 }
 \examples{
 
