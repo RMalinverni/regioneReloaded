@@ -328,7 +328,7 @@ print(cw_Alien_ReG@parameters)
 The "multiOverlaps" slot contains a list of data frames. For each element of the list of region sets "Alist", a data frame is stored with 12 columns and a number of rows equal to the elements in "Blist". The columns of the data frame contain the following information:
 
 + **order.id:**       order of comparison
-+ **name:**           name of Blist element 
++ **name:**           name of Blist elements 
 + **n_regionA:**       number of regions in Alist using in the permutation test
 + **n_regionB:**       number of regions in Blist using in the permutation test
 + **z_score:**         calculated z-score of permutation test
