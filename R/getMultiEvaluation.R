@@ -1,5 +1,9 @@
+#' getMultiEvaluation
+#'
+#' @description
 #' get multiEvaluation Object from genoMatriXeR or multiLocalZScore class
 #'
+#' @usage getMultiEvaluation( rR, namesRS = NA)
 #' @param rR A genoMatriXeR or multiLocalZScore object.
 #' @param namesRS a vector of names. (default = NA)
 #'

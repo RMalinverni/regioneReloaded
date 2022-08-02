@@ -2,9 +2,9 @@
 % Please edit documentation in R/getMultiEvaluation.R
 \name{getMultiEvaluation}
 \alias{getMultiEvaluation}
-\title{get multiEvaluation Object from genoMatriXeR or multiLocalZScore class}
+\title{getMultiEvaluation}
 \usage{
-getMultiEvaluation(rR, namesRS)
+getMultiEvaluation( rR, namesRS = NA)
 }
 \arguments{
 \item{rR}{A genoMatriXeR or multiLocalZScore object.}
