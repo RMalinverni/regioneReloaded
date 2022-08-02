@@ -30,7 +30,7 @@
 #' @param labValues logical, if TRUE each local Z-score profile is labelled at position 0 with the name of the region set and its Z-score value at the central position. (default = TRUE)
 #' @param labSize numerical, size of the labels from labValues in the plot. (default = 2.5)
 #' @param labMax logical, if TRUE the labels are placed at the maximum value of each local Z-score profile instead of the center. (default = FALSE)
-#' @param colPal character vector of custom colors to use as palette source for the plot. If NULL, predetermined colors from [RColorBrewer] "Set2" palette are used.
+#' @param colPal character, colors to use as palette for the plot. If NULL, default colors will be used. (default = NULL)
 #' @param smoothing logical, if TRUE the [smooth.spline()] function will be applied to the localZ-score profile. (default = FALSE)
 #' @param ...  further arguments to be passed to other methods.
 #'
@@ -87,12 +87,7 @@ plotSingleLZ <-
     evfun <- mLZ@parameters$evFUN
     ranfun <- mLZ@parameters$ranFUN
 
-    if (is.null(colPal)) { # Palette
-      colPal <- RColorBrewer::brewer.pal(n = 5, "Set2")
-      pal <- grDevices::colorRampPalette(colPal)
-    } else {
-      pal <- grDevices::colorRampPalette(colPal)
-    }
+    pal <- plotPal(colPal) #palette
 
     if (mLZ@parameters$evFUN == "numOverlaps") {
       mLZ@parameters$evFUN <- "N. of overlaps"
@@ -115,7 +110,7 @@ plotSingleLZ <-
     p <- ggplot2::ggplot(df, ggplot2::aes_string(x = "shift", y = "score", group = "name", fill = "name", color = "name")) +
       ggplot2::geom_hline(yintercept = 0, color = "#515E63", size = 0.6) +
       ggplot2::geom_vline(xintercept = 0, color = "#515E63", size = 0.4, linetype = "dotted") +
-      ggplot2::geom_density(alpha = 0.2, stat = "identity") +
+      ggplot2::geom_density(alpha = 0.3, stat = "identity") +
       ggplot2::scale_color_manual(values = pal(length(RS))) +
       ggplot2::scale_fill_manual(values = pal(length(RS))) +
       ggplot2::labs(

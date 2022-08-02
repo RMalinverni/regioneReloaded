@@ -16,7 +16,7 @@
 #'
 #' @usage plotCrosswiseDimRed(mPT, type = "PCA", GM_clust = NA, clust_met =
 #' "hclust", nc = 5, listRS = NULL, main = "", labSize = 2, emphasize = FALSE,
-#' labAll = FALSE, labMaxOverlap = 100, ellipse = TRUE, perplexity = 10, theta = 0.1,
+#' labAll = FALSE, labMaxOverlap = 100, ellipse = TRUE, colPal = NULL, perplexity = 10, theta = 0.1,
 #' return_table = FALSE, return_plot = TRUE, ...)
 #'
 #'
@@ -32,6 +32,7 @@
 #' @param labAll logical, if TRUE all data points are labelled, even if not in `listRS` when `emphasize` = TRUE. (default = FALSE)
 #' @param labMaxOverlap numeric, max.overlaps for \code{\link{geom_text_repel}}. (default = 100)
 #' @param ellipse logical, if TRUE ellipses will be drawn around the clusters. (default = FALSE)
+#' @param colPal character, colors to use as palette for the plot. If NULL, default colors will be used. (default = NULL)
 #' @param perplexity,theta numeric, if `type` = "tSNE" values of perplexity and theta for the function [Rtsne()]. (default = 10)
 #' @param return_table logical, if TRUE a table with the cluster assigned to each region is returned. (default = FALSE)
 #' @param return_plot logical, if TRUE a plot is returned. (default = TRUE)
@@ -79,6 +80,7 @@ plotCrosswiseDimRed <-
            labAll = FALSE,
            labMaxOverlap = 100,
            ellipse = TRUE,
+           colPal = NULL,
            perplexity = 10,
            theta = 0.1,
            return_table = FALSE,
@@ -266,6 +268,12 @@ plotCrosswiseDimRed <-
       )
     }
 
+    # Palette and theme
+    pal <- plotPal(colPal)
+    p <- p +
+      ggplot2::scale_color_manual(values = pal(nc)) +
+      ggplot2::scale_fill_manual(values = pal(nc)) +
+      mendel_theme()
 
     if (return_table == TRUE) {
       if (return_plot == TRUE) {
