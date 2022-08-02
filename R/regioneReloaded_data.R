@@ -67,8 +67,8 @@ NULL #"cw_Alien"
 #'
 #' @description
 #'
-#' Alien Genome crosswise matrix using [regioneR::resampleRegions()] function a permutation s
-#' trategy.
+#' Alien Genome crosswise matrix using [regioneR::resampleRegions()] function a permutation
+#' strategy.
 #'
 #' @name cw_Alien_ReR
 #' @docType data
@@ -149,3 +149,27 @@ NULL #"cw_Alien"
 #' @keywords datasets
 #'
 NULL #"cw_Alien"
+
+#' @title mLZ_regA_ReG
+#'
+#' @description
+#'
+#' Placeholder
+#'
+#' @name mLZ_regA_ReG
+#' @docType data
+#' @usage data(cw_Alien)
+#' @format An object of class [multiLocalZScore][multiLocalZScore-class]
+NULL
+
+
+#' @title mLZ_regA_ReG
+#'
+#' @description
+#'
+#' Placeholder
+#'
+#' @name mLZ_regD_ReG
+#' @docType data
+#' @usage data(cw_Alien)
+#' @format An object of class [multiLocalZScore][multiLocalZScore-class]
