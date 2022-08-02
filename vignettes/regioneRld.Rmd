@@ -454,9 +454,12 @@ p_RaR <- plotCrosswiseMatrix(cw_Alien_RaR,matrix_type = "crosswise",ord_mat = or
 p_ReG <- plotCrosswiseMatrix(cw_Alien_ReG,matrix_type = "crosswise" ,ord_mat = ord)
 p_ReR <- plotCrosswiseMatrix(cw_Alien_ReR,matrix_type = "crosswise",ord_mat = ord)
 
-ggpubr::ggarrange(p_RaR, p_ReG, p_ReR, 
-          labels = c("RaR", "ReG", "ReR"),
-          ncol = 2, nrow = 2)
+
+plot(p_RaR)
+
+ggpubr::ggarrange(p_ReG, p_ReR, 
+          labels = c("ReG", "ReR"),
+          ncol = 2, nrow = 1)
 
 p_RaR <- plotCrosswiseMatrix(cw_Alien_RaR,matrix_type = "correlation",ord_mat = ord)
 p_ReG <- plotCrosswiseMatrix(cw_Alien_ReG,matrix_type = "correlation" ,ord_mat = ord)
@@ -497,7 +500,7 @@ The data is clustered using a clustering algorithm that can be selected from ("h
 ```{r}
 
 set.seed(42)
-plotCrosswiseDimRed(cw_Alien_ReG, nc = 5, type="PCA")
+plotCrosswiseDimRed(cw_Alien_ReG, nc = 6, type="PCA")
 
 ```
 
@@ -505,10 +508,10 @@ The data is clustered using a clustering algorithm that can be selected from ("h
 
 ```{r}
 set.seed(42)
-p_cdr_hc <- plotCrosswiseDimRed(cw_Alien_ReG, nc = 5, type="PCA", clust_met = "hclust")
+p_cdr_hc <- plotCrosswiseDimRed(cw_Alien_ReG, nc = 6, type="PCA", clust_met = "hclust")
 
 set.seed(42)
-p_cdr_pam <- plotCrosswiseDimRed(cw_Alien_ReG, nc = 5, type="PCA", clust_met = "pam")
+p_cdr_pam <- plotCrosswiseDimRed(cw_Alien_ReG, nc = 6, type="PCA", clust_met = "pam")
 
 ggpubr::ggarrange(p_cdr_hc, p_cdr_pam,
           ncol = 2, nrow = 1)
@@ -521,21 +524,21 @@ ggpubr::ggarrange(p_cdr_hc, p_cdr_pam,
 lsRegSet<-list(regA="regA",regB="regB",regC="regC")
 
 set.seed(42)
-plotCrosswiseDimRed(cw_Alien_ReG, nc = 5, type="PCA",listRS = lsRegSet)
+plotCrosswiseDimRed(cw_Alien_ReG, nc = 6, type="PCA",listRS = lsRegSet)
 
 set.seed(42)
-plotCrosswiseDimRed(cw_Alien_ReG, nc = 5, type="PCA",listRS = lsRegSet,ellipse = TRUE, emphasize =TRUE)
+plotCrosswiseDimRed(cw_Alien_ReG, nc = 6, type="PCA",listRS = lsRegSet,ellipse = TRUE, emphasize =TRUE)
 ```
 
 ```{r}
 
 set.seed(67)
-plotCrosswiseDimRed(cw_Alien_ReG, nc = 5, type="tSNE",listRS = lsRegSet,ellipse = TRUE, emphasize =TRUE)
+plotCrosswiseDimRed(cw_Alien_ReG, nc = 6, type="tSNE",listRS = lsRegSet,ellipse = TRUE, emphasize =TRUE)
 ```
 
 ```{r}
 set.seed(67)
-plotCrosswiseDimRed(cw_Alien_ReG, nc = 5, type="UMAP",listRS = lsRegSet,ellipse = TRUE, emphasize =TRUE)
+plotCrosswiseDimRed(cw_Alien_ReG, nc = 6, type="UMAP",listRS = lsRegSet,ellipse = TRUE, emphasize =TRUE)
 
 ```
 
