@@ -190,6 +190,7 @@ multiLocalZscore <- function(A,
 
   paramList$Nregions <- Nreg
 
+  #rownames(tab) <- NULL
 
   mLZSobj <- mLZS(
     parameters = paramList ,
