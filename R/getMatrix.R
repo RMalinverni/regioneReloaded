@@ -2,12 +2,16 @@
 #'
 #' @description
 #'
-#' Return matrix from an genoMatriXeR or multiLocalZScore object
+#' Returns the matrix from an [genoMatriXeR][genoMatriXeR-class] or [multiLocalZScore][multiLocalZScore-class] object.
 #'
 #' @usage getMatrix(rR)
 #'
 #' @param rR genoMatriXeR or multiLocalZScore object
-#' @return a numeric Matrix
+#'
+#' @return a numerical matrix from a
+#'
+#' @seealso [genoMatriXeR][genoMatriXeR-class], [multiLocalZScore][multiLocalZScore-class], [makeCrosswiseMatrix]
+#'
 #' @examples
 #'
 #' data("cw_Alien")
@@ -16,6 +20,7 @@
 #' GM <- getMatrix(cw_Alien_RaR)
 #'
 #' @importFrom methods is
+#'
 #' @export getMatrix
 #'
 

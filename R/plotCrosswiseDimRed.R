@@ -2,46 +2,45 @@
 #'
 #' @description
 #'
-#' Plot a visualization of a genomeMatriXeR object (or matrix) using different
+#' Plot a visualization of a [genoMatriXeR][genomeMatriXeR-class] object (or matrix) using different
 #' dimensional reduction algorithms (PCA, tSNE and UMAP).
 #'
 #' @details
 #'
 #' This function generates a plot with a two-dimensional representation of the
-#' association data stored in a genomeMatriXeR by using either PCA, tSNE or UMAP
-#' transformations of the data. This function incorporates a clustering step and
-#' allows to highlight specific region sets of interest and the clusters they
-#' belong to. In addition to generating a plot, a table with the cluster
-#' assignments can be retrieved by setting return_table as TRUE.
+#' association data stored in a [genoMatriXeR][genomeMatriXeR-class] object by
+#' using either PCA, tSNE or UMAP transformations of the data. This function
+#' incorporates a clustering step and allows to highlight specific region sets
+#' of interest and the clusters they belong to. In addition to generating a plot,
+#' a table with the cluster assignments can be retrieved.
 #'
 #' @usage plotCrosswiseDimRed(mPT, type = "PCA", GM_clust = NA, clust_met =
 #' "hclust", nc = 5, listRS = NULL, main = "", labSize = 2, emphasize = FALSE,
-#' labAll = FALSE, labMaxOverlap = 100, ellipse = TRUE, perplexity = 10, theta = 0.1,
+#' labAll = FALSE, labMaxOverlap = 100, ellipse = TRUE, colPal = NULL, perplexity = 10, theta = 0.1,
 #' return_table = FALSE, return_plot = TRUE, ...)
 #'
 #'
-#' @param mPT an object of class genoMatriXeR or a numeric matrix.
-#' @param type character, Dimensional Reduction algorithm to use ("PCA", "tSNE", "UMAP"). (default  = "PCA")
-#' @param GM_clust numeric, vector of clusters used to clusterize the matrix, if NA will the matrix will be clusterized using the \code{\link{kmeans}} function. (default = NA)
-#' @param clust_met string, unsupervised cluster strategy used. Option available are "kmeans" or "pam". (default = "hclust")
-#' @param nc numeric, number of cluster to define if using the default kmeans method. (default = 5)
-#' @param listRS list of vector, a list of names of regionset of interest to be highlighted in the graph. (default = NULL)
+#' @param mPT an object of class genoMatriXeR or a numerical matrix.
+#' @param type character, dimensional reduction algorithm to use ("PCA", "tSNE", "UMAP"). (default  = "PCA")
+#' @param GM_clust numeric, vector of assigned clusters used to cluster the matrix. If NA, the matrix will be clustered using the method defined by `clust_met`. (default = NA)
+#' @param clust_met character, unsupervised cluster strategy used ([hclust], [kmeans] or [pam]). (default = "hclust")
+#' @param nc numeric, number of clusters to define if using the default "kmeans" method. (default = 5)
+#' @param listRS list, a list of names of region sets of interest to be highlighted in the graph. (default = NULL)
 #' @param main character, title for the plot. (default = "")
-#' @param labSize numeric, size for point labels in the plot, if 0 no labels will be plotted (default = 2)
-#' @param emphasize logical, if listRS is not NULL and emphasize is TRUE only the cluster in which the elements of listRS are present will be highlighted. (default = FALSE)
-#' @param labAll logical, if TRUE data points which are not in listRS when emphasize = TRUE are labelled. (default = FALSE)
+#' @param labSize numeric, size for point labels in the plot. If 0, no labels will be plotted. (default = 2)
+#' @param emphasize logical, if TRUE, only the cluster in which the elements of `listRS` are present will be highlighted. (default = FALSE)
+#' @param labAll logical, if TRUE all data points are labelled, even if not in `listRS` when `emphasize` = TRUE. (default = FALSE)
 #' @param labMaxOverlap numeric, max.overlaps for \code{\link{geom_text_repel}}. (default = 100)
 #' @param ellipse logical, if TRUE ellipses will be drawn around the clusters. (default = FALSE)
-#' @param perplexity numeric, if type = "tSNE" value of perplexity for the function \code{\link{Rtsne}}. (default = 10)
-#' @param theta numeric, if type = "tSNE" value of theta for the function \code{\link{Rtsne}}. (default = 0.1)
+#' @param colPal character, colors to use as palette for the plot. If NULL, default colors will be used. (default = NULL)
+#' @param perplexity,theta numeric, if `type` = "tSNE" values of perplexity and theta for the function [Rtsne()]. (default = 10)
 #' @param return_table logical, if TRUE a table with the cluster assigned to each region is returned. (default = FALSE)
 #' @param return_plot logical, if TRUE a plot is returned. (default = TRUE)
-#' @param ... further arguments to be passed on to other functions.
-
+#' @param ... further arguments to be passed on to other methods
 #'
 #' @return A ggplot object or a table with cluster assignments is returned.
 #'
-#' @seealso \code{\link{crosswisePermTest}}
+#' @seealso [crosswisePermTest()]
 #'
 #' @examples
 #'
@@ -66,6 +65,7 @@
 #' @importFrom stats princomp
 #' @importFrom cluster pam
 #' @importFrom cluster silhouette
+#' @importFrom methods is
 
 plotCrosswiseDimRed <-
   function(mPT,
@@ -80,6 +80,7 @@ plotCrosswiseDimRed <-
            labAll = FALSE,
            labMaxOverlap = 100,
            ellipse = TRUE,
+           colPal = NULL,
            perplexity = 10,
            theta = 0.1,
            return_table = FALSE,
@@ -87,6 +88,8 @@ plotCrosswiseDimRed <-
            ...) {
     if (!methods::hasArg(mPT)) {
       stop("mPT is missing")
+    } else if (is.null(mPT@matrix[[1]])) {
+      stop("The matrix slot of mPT is empty, run first makeCrosswiseMatrix()")
     } else if (methods::is(mPT, "genoMatriXeR")) {
       GM <- mPT@matrix$GMat
     } else if (is.matrix(mPT)) {
@@ -265,6 +268,12 @@ plotCrosswiseDimRed <-
       )
     }
 
+    # Palette and theme
+    pal <- plotPal(colPal)
+    p <- p +
+      ggplot2::scale_color_manual(values = pal(nc)) +
+      ggplot2::scale_fill_manual(values = pal(nc)) +
+      mendel_theme()
 
     if (return_table == TRUE) {
       if (return_plot == TRUE) {

@@ -1,42 +1,35 @@
-#' Multiple Local Z-Score test
+#' multiLocalZscore
 #'
-#' Perform a multiple permutation test and local z-score calculation between a region set and
-#' list of regions set (or GrangedList)
+#' @description
 #'
+#' Perform multiple permutation tests between a region set and each element in
+#' a list of region sets using shifted positions to calculate a local z-score.
+#'
+#' @details
+#'
+#' This function performs multiple permutation tests between a single region set
+#' and each element in a list of region sets. For every pairwise combination, the
+#' evaluation step is repeated each time shifting the position of all the regions in the query region set
+#' by a fixed step inside a defined window (using [regioneR::localZScore()].
+#' This produces a "local z-score" profile that can be indicative of the nature
+#' of the association between region sets. For example, an association can occur
+#' "centrally" if the z-score value drops sharply when sifting the region set.
+#' On the other hand, two region sets may have a peak of local z-score away from
+#' the central position if they happen to occur often at a regular distance,
+#' showing a "lateral" association.
 #'
 #' @usage multiLocalZscore( A, Blist, ranFUN = "randomizeRegions", evFUN = "numOverlaps", sampling = FALSE,
-#' min_sampling = 5000, fraction = 0.15, universe = NULL, window = 1000, step = 100, adj_pv_method = "BH", min_regions = 1000,
+#' min_sampling = 5000, fraction = 0.15, universe = NULL, window = 1000, step = 100, adj_pv_method = "BH",
 #' max_pv = 0.05, genome = "hg19", ...)
 #'
-#' @param A Region Set of any accepted formats by  c package
-#' (\code{\link{GenomicRanges}}, \code{\link{data.frame}} etc...)
-#' @param Blist list of Region Set of any accepted formats by [regioneR](https://bioconductor.org/packages/release/bioc/html/regioneR.html) package
-#' (\code{\link{GenomicRanges}}, \code{\link{data.frame}} etc...)
-#' @param ranFUN Function, choose the randomization strategy used for the test (default = "randomizeRegions")
-#' for details see [regioneR](https://bioconductor.org/packages/release/bioc/html/regioneR.html)
-#' @param evFUN Function, choose the evaluation strategy used for the test (default = "numOverlaps")
-#' @param sampling Boolean, if is true the function will use only a sample of each element of Alist to perform the test.(default = FALSE)
-#' @param min_sampling Numeric, minimum number of regions in the region set that permit a sampling. (default = 5000)
-#' @param fraction Numeric, if sampling == TRUE is the fraction of the region sets used to perform the test. (default = 0.15)
-#' @param universe Region Set of any accepted formats by  [regioneR](https://bioconductor.org/packages/release/bioc/html/regioneR.html), using only when resamplinRegions function is
-#' selected (default = NULL)
-#' @param window window (number of base pairs) in which will be estimated the local Z-score. (default = 1000)
-#' @param step step (number of base pairs) in which will be estimated the local Z-score. (default = 100)
-#' @param adj_pv_method Charachter, the method used for the calculation of the adjusted p-value,
-#' to choose between the options of \code{\link{p.adjust}}. (default = "BH")
-#' @param min_regions minimun regions accepted after the sampling. (default = 1000)
-#' @param max_pv Numeric, the z-scores associate a p-values higher of this parameter will be transform in 0. (default =0.05)
-#' @param genome Charachter or GenomicRanges, genome used to compute the randomization. (default = "hg19")
+#' @inheritParams crosswisePermTest
+#'
+#' @param A query region set for which to estimate local z-score values.
+#' @param Blist [GRangesList] or list of region sets in any accepted formats by [regioneR](https://bioconductor.org/packages/release/bioc/html/regioneR.html) package
+#' ([GenomicRanges], [data.frame] etc...).
+#' @param window numeric, window (number of base pairs) in which the local z-score will be calculated. (default = 1000)
+#' @param step numeric, step (number of base pairs) by which will be estimated the local Z-score. (default = 100)
 #' @param ...  further arguments to be passed to other methods.
-#'
-#'
-#'
-#'
-#' @details  the permutation test core used in this function allows to change
-#' \code{"randomize.function"} \code{\link{randomizeRegions}},
-#' \code{\link{circularRandomizeRegions}}, \code{\link{resampleRegions}} or a
-#' custom function), but use only an \code{"evaluation.function"}
-#' \code{\link{numOverlaps}}
 #'
 #' @return
 #'
@@ -50,7 +43,7 @@
 #' }
 #'
 #'
-#' @seealso  \code{\link{localZScore}}
+#' @seealso  [regioneR::localZScore()]
 #'
 #' @examples
 #'
@@ -85,7 +78,6 @@ multiLocalZscore <- function(A,
                              window = 1000,
                              step = 100,
                              adj_pv_method = "BH",
-                             min_regions = 1000,
                              max_pv = 0.05,
                              genome = "hg19",
                              ...) {
@@ -111,12 +103,12 @@ multiLocalZscore <- function(A,
   A <- toGRanges(A)
 
   if (sampling == TRUE) {
-    if (length(A) >= min_regions) {
-      if (length(A) * fraction > min_regions) {
+    if (length(A) >= min_sampling) {
+      if (length(A) * fraction > min_sampling) {
         A <- A[sample(length(A), round(length(A) * fraction))]
 
       } else{
-        A <- A[sample(length(A), min_regions)]
+        A <- A[sample(length(A), min_sampling)]
       }
     }
   }

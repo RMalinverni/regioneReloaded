@@ -8,7 +8,7 @@
 #'
 #' @return a matrix filtered for a matrix of pvalue
 #'
-#' @seealso \code{\link{makeCrosswiseMatrix}}
+#' @seealso [makeCrosswiseMatrix()]
 #'
 #' @inheritParams makeCrosswiseMatrix
 #'

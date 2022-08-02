@@ -10,7 +10,7 @@
 #' if the number of regions is less than min_samplnig as subsempilng will be take the entire regionset
 #' @param fraction numeric, percentage of regions selected for the subsampling
 #'
-#'
+#' @keywords internal function
 #'
 #'
 

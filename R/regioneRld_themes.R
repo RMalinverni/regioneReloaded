@@ -1,6 +1,5 @@
 #' Themes used in the regioneReloaded package
 #'
-#'
 #' Ggplot2 themes created for the package.
 #'
 #' @usage
@@ -20,13 +19,11 @@
 #'
 #'
 
-colvec <- c("#57837B", "#F1ECC3", "#C9D8B6", "#515E63", "#C05555")
-
 mendel_theme <- function(base_size = 11, base_family = ""){
   ggplot2::theme(
     panel.background = ggplot2::element_rect(
-      fill = colvec[2],
-      colour = colvec[2],
+      fill = "#F7F4DB",
+      colour = "#F7F4DB",
       size = 0.5,
       linetype = "solid"
     ),
@@ -41,4 +38,27 @@ mendel_theme <- function(base_size = 11, base_family = ""){
       colour = "#FDFAF6"
     )
   )
+}
+
+#' plotPal
+#'
+#' @description
+#'
+#' Internal function to create a palette generating function for plots
+#'
+#' @param colPal
+#'
+#' @importFrom grDevices colorRampPalette
+#'
+#' @return A palette function
+
+plotPal <- function(colPal = NULL) {
+  if (is.null(colPal)) {
+    # colPal <- c("#434C6D", "#553B23", "#EF7E39", "#E23A79", "#6EA89E")
+    colPal <- c("#BD3241", "#802160", "#3E3C66", "#495C52", "#E67E45")
+    pal <- grDevices::colorRampPalette(colPal)
+  } else {
+    pal <- grDevices::colorRampPalette(colPal)
+  }
+  return(pal)
 }

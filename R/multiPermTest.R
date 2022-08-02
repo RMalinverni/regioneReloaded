@@ -1,23 +1,17 @@
-#' Multiple Permutation Test
+#' multiPermTest
+#'
+#' @details
 #'
 #' Perform a multiple permutation test
+#'
 #' @keywords internal function
-#' @usage multiPermTest (A, Blist, ranFUN, evFUN, universe, genome, rFUN, verbose = FALSE, ntimes, adj_pv_method, ...)
+#' @usage multiPermTest (A, Blist, ranFUN, evFUN, universe, genome, rFUN, ntimes, adj_pv_method, ...)
 #'
 #' @return a table obtained from parsing of [regioneR][permTest()] object
 #'
+#' @inheritParams crosswisePermTest
 #' @param A Genomic Ranges or any accepted formats by  [regioneR](https://bioconductor.org/packages/release/bioc/html/regioneR.html) package
 #' (\code{\link{GenomicRanges}}, \code{\link{data.frame}} etc...)
-#' @param Blist GRangesList or list of Region Set of any accepted formats by  [regioneR](https://bioconductor.org/packages/release/bioc/html/regioneR.html) package
-#' (\code{\link{GenomicRanges}}, \code{\link{data.frame}} etc...)
-#' @param ranFUN (default = "randomizeRegions") choose the randomization strategy used for the test see  [regioneR](https://bioconductor.org/packages/release/bioc/html/regioneR.html)
-#' @param evFUN  (default = "numOverlaps) choose the evaluation strategy used for the test see  [regioneR](https://bioconductor.org/packages/release/bioc/html/regioneR.html)
-#' @param universe (default = NULL) used only when \code{\link{resampleRegions}} function is selected
-#' @param adj_pv_method Charachter, the method used for the calculation of the adjusted p-value,
-#' to choose between the options of \code{\link{p.adjust}}. (default = "BH")
-#' @param genome Charachter or GenomicRanges, (defalut = "hg19") genome used to compute the randomization
-#' @param verbose Boolean, if verbose test
-#'
 #'
 #' @importFrom methods show
 #' @importFrom stats sd
@@ -33,7 +27,6 @@ multiPermTest <-
            universe,
            genome,
            rFUN,
-           verbose = FALSE,
            ntimes,
            adj_pv_method,
            ...) {
@@ -48,6 +41,21 @@ multiPermTest <-
                           values = Blist)
     ptm <- proc.time()
 
+<<<<<<< HEAD
+=======
+    # if (ranFUN == "resampleRegions") {
+    #   if (is.null(universe)) {
+    #
+    #     uniList <- data.frame()
+    #     for (u in seq_along(Alist)) {
+    #       df <- regioneR::toDataframe(Alist[[u]])[, 1:3]
+    #       uniList <- rbind(uniList, df)
+    #     }
+    #     universe <- uniList
+    #   }
+    # }
+
+>>>>>>> david_dev
     pt <- regioneR::permTest(
       A = A,
       evaluate.function = func.list,
@@ -60,9 +68,6 @@ multiPermTest <-
 
     time <- proc.time() - ptm
     time <- time[3] / 60
-    if (verbose == TRUE) {
-      methods::show(paste0(" run in ", time, "  minute"))
-    }
 
     tab <- data.frame()
 
@@ -96,11 +101,6 @@ multiPermTest <-
     #tab$std_zscore <- tab$z_score / max_zscore
     tab$adj.p_value <-
       round(stats::p.adjust(tab$p_value, method = adj_pv_method), digits = 4)
-
-    if (verbose == TRUE) {
-      methods::show(tab)
-    }
-
 
     return(tab)
   }

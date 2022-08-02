@@ -6,16 +6,16 @@
 #'
 #' @details
 #'
-#' This function performs multiple permutation test for all pairwise combinations
+#' This function performs multiple permutation tests for all pairwise combinations
 #' of the elements in two lists of region sets. Essentially, it uses the [regioneR::permTest()]
 #' function and its associated randomization and evaluation functions. It creates and returns a
 #' [genoMatriXeR-class] object with the result of the permutation tests stored in the `multiOverlaps` slot.
-#' In addition, all the paramteres used for the test are stored in the `parameters` slot.
+#' In addition, all the parameters used for the test are stored in the `parameters` slot.
 #'
 #' @usage crosswisePermTest(Alist, Blist = NULL, sampling = FALSE, fraction = 0.15,
 #'  min_sampling = 5000, ranFUN = "randomizeRegions", evFUN = "numOverlaps",
 #'  ntimes = 100, universe = NULL, adj_pv_method = "BH",
-#'  genome = "hg19", verbose = FALSE, ...)
+#'  genome = "hg19", ...)
 #'
 #'
 #' @param Alist,Blist [GRangesList] or list of region sets in any accepted formats by [regioneR](https://bioconductor.org/packages/release/bioc/html/regioneR.html) package
@@ -23,21 +23,18 @@
 #' @param sampling logical, if TRUE the function will use only a sample of each element of Alist to perform the test as specified in `fraction.` (default = FALSE)
 #' @param fraction logical, if `sampling=TRUE`, defines the fraction of the region sets used to perform the test. (default = 0.15)
 #' @param min_sampling numeric, minimum number of regions accepted after sampling is performed with the specified `fraction`. If the number of sampled
-#' regions is less than `min_sampling`, the number specified by `min_sampling` will be used as number of regions sampled instead.
-#' @param ranFUN (default = "randomizeRegions"), choose the randomization strategy used for the test, see [regioneR](https://bioconductor.org/packages/release/bioc/html/regioneR.html)
-#' @param evFUN  (default = "numOverlaps), choose the evaluation strategy used for the test, see  [regioneR](https://bioconductor.org/packages/release/bioc/html/regioneR.html)
+#' regions is less than `min_sampling`, the number specified by `min_sampling` will be used as number of regions sampled instead. (default = 5000)
+#' @param ranFUN character, the randomization strategy used for the test, see [regioneR](https://bioconductor.org/packages/release/bioc/html/regioneR.html). (default = "randomizeRegions")
+#' @param evFUN  character, the evaluation strategy used for the test, see  [regioneR](https://bioconductor.org/packages/release/bioc/html/regioneR.html). (default = "numOverlaps)
 #' @param ntimes numeric, number of permutations used in the test. (default = 100)
-#' @param universe (default = NULL) used only when [regioneR::resampleRegions()] function is selected.
-#' @param adj_pv_method character, the method used for the calculation of the adjusted p-value,
-#' to choose between the options of [p.adjust()]. (default = "BH")
-#' @param genome character or GenomicRanges, (defalut = "hg19") genome used to compute the randomization
-#' @param verbose Boolean, if verbose test
+#' @param universe  region set to use as universe, used only when [regioneR::resampleRegions()] function is selected. (default = NULL)
+#' @param adj_pv_method character, the method used for the calculation of the adjusted p-value, to choose between the options of [p.adjust()]. (default = "BH")
+#' @param genome character or [GRanges-class], genome used to compute the randomization. (default = "hg19")
 #' @param ... further arguments to be passed to other methods.
 #'
-#' @details ...
 #' @return
 #'
-#' A object of class [regioneRld][genoMatriXeR-class] containing three slots
+#' A object of class [genoMatriXeR][genoMatriXeR-class] containing three slots
 #'
 #' \itemize{
 #' \item \bold{\code{@parameters}}
@@ -46,8 +43,7 @@
 #'
 #' }
 #'
-#'
-#' @seealso    [regioneRld][genoMatriXeR-class], [regioneR](https://bioconductor.org/packages/release/bioc/html/regioneR.html), \code{\link{permTest}}, \code{\link{overlapPermTest}}
+#' @seealso [genoMatriXeR][genoMatriXeR-class], [`regioneR`](https://bioconductor.org/packages/release/bioc/html/regioneR.html), [regioneR::permTest()], [regioneR::overlapPermTest()]
 #'
 #' @examples
 #'
@@ -63,6 +59,7 @@
 #' @import regioneR
 #' @importFrom methods hasArg
 #' @importFrom methods new
+#'
 #' @export crosswisePermTest
 
 
@@ -78,7 +75,6 @@ crosswisePermTest <-
            universe = NULL,
            adj_pv_method = "BH",
            genome = "hg19",
-           verbose = FALSE,
            ...) {
 
     # control parameters
@@ -96,7 +92,7 @@ crosswisePermTest <-
       stop("min_sampling must be numeric")
     }
     if (!is.character(ranFUN)) {
-      stop("runFun must be charachter")
+      stop("ranFun must be charachter")
     }
     if (!is.character(evFUN)) {
       stop("evFun must be charachter")

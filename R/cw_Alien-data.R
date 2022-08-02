@@ -135,11 +135,11 @@ NULL #"cw_Alien"
 #' @details
 #'
 #' This region sets are generated for the purpose of demonstrating the functions
-#' of RegioneRld with a low computing time and "predictable" associations. The
+#' of RegioneReloaded with a low computing time and "predictable" associations. The
 #' regions are generated with by combining [createRandomRegions()] and
 #' [similarRegionSet()] so that there is a known overlap between certain region
 #' sets. To see a full description of this sample data and the code used to
-#' generate it, see the regioneRld vignette.
+#' generate it, see the RegioneReloaded vignette.
 #'
 #' @name AlienRSList_narrow
 #' @docType data

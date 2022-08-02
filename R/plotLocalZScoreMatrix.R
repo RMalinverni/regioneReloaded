@@ -62,8 +62,10 @@ plotLocalZScoreMatrix <- function(mLZ,
 
   if (!methods::hasArg(mLZ)) {
     stop("mLZ is missing")
-  } else if (!is(mLZ, "multiLocalZScore")) {
+  } else if (!methods::is(mLZ, "multiLocalZScore")) {
     stop("the object mLZA needs to be an multiLocalZScore object")
+  } else if (is.null(mLZ@matrix[[1]])) {
+    stop("The matrix slot of mLZ is empty, run first makeLZMatrix()")
   }
 
   if (matrix.type == "association") {
