@@ -18,3 +18,7 @@ setMethod("print", "genoMatriXeR", function(x)
     Alist_Sample_slot = names(x@multiOverlaps),
     matrix_slot = x@matrix$GMat
   ))
+
+
+
+
