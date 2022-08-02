@@ -40,7 +40,10 @@
 #'
 #'
 #' @import ggplot2
-#' @importFrom  reshape2 melt
+#' @importFrom reshape2 melt
+#' @importFrom methods hasArg
+#' @importFrom methods is
+#'
 #' @export plotCrosswiseMatrix
 #'
 
@@ -54,7 +57,15 @@ plotCrosswiseMatrix <- function(mPT,
                        main = "",
                        ord_mat=NULL) {
 
-  if (is(mPT,"genoMatriXeR")) {
+  if (!methods::hasArg(mPT)) {
+    stop("mPT is missing")
+  } else if (!(methods::is(mPT, "genoMatriXeR") | is.matrix(mPT))) {
+    stop("mPT needs to be a genoMatriXeR object or a numeric matrix")
+  } else if (is.null(mPT@matrix[[1]])) {
+    stop("The matrix slot of mPT is empty, run first makeCrosswiseMatrix()")
+  }
+
+  if (methods::is(mPT,"genoMatriXeR")) {
 
     if  (matrix_type == "crosswise") {
       GM <- mPT@matrix$GMat
