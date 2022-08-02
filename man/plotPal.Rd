@@ -7,7 +7,7 @@
 plotPal(colPal = NULL)
 }
 \arguments{
-\item{colPal}{}
+\item{colPal}{character, colors to use as palette for the plot. If NULL, default colors will be used. (default = NULL)}
 }
 \value{
 A palette function

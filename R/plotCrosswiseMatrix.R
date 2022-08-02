@@ -2,12 +2,12 @@
 #'
 #' @description
 #'
-#' Plot matrix of associations/correlations stored in a [genoMatriXeR][genomeMatriXeR-class] object.
+#' Plot matrix of associations/correlations stored in a [genoMatriXeR][genoMatriXeR-class] object.
 #'
 #' @details
 #'
 #' This functions creates a graphical representation of the matrix of associations
-#' stored in a [genoMatriXeR][genomeMatriXeR-class] object. The values plotted and
+#' stored in a [genoMatriXeR][genoMatriXeR-class] object. The values plotted and
 #' clustering options can be controlled when creating the matrix with the function
 #' [makeCrosswiseMatrix].
 #'
@@ -16,7 +16,7 @@
 #' maxVal = NA, main = "", ord_mat = NULL)
 
 #'
-#' @param mPT an object of class [genoMatriXeR][genomeMatriXeR-class] or a numerical matrix.
+#' @param mPT an object of class [genoMatriXeR][genoMatriXeR-class] or a numerical matrix.
 #' @param lineColor logical, color for the line grid delineating the tiles of the matrix plot. If NA, no line will be drawn. (default = NA)
 #' @param interpolate logical, if TRUE the image will be interpolated using the function [geom_raster()]. (default = FALSE)
 #' @param colMatrix character or vector of colors, if "default" will be used a default selection see..

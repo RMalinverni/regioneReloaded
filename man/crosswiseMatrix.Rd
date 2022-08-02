@@ -19,10 +19,5 @@ a numeric matrix
 \description{
 Create a matrix from a genoMatriXeR object.
 }
-\examples{
-
-data("cw_Alien")
-
-matrix_CW_Alien <- crosswiseMatrix(cw_Alien_ReG)
-
-}
+\keyword{functions}
+\keyword{internal}

@@ -46,7 +46,7 @@ mendel_theme <- function(base_size = 11, base_family = ""){
 #'
 #' Internal function to create a palette generating function for plots
 #'
-#' @param colPal
+#' @inheritParams plotSingleLZ
 #'
 #' @importFrom grDevices colorRampPalette
 #'

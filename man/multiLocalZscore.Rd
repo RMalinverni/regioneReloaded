@@ -4,15 +4,15 @@
 \alias{multiLocalZscore}
 \title{multiLocalZscore}
 \usage{
-multiLocalZscore( A, Blist, ranFUN = "randomizeRegions", evFUN = "numOverlaps", sampling = FALSE,
+multiLocalZscore( A, Blist = NULL, ranFUN = "randomizeRegions", evFUN = "numOverlaps", sampling = FALSE,
 min_sampling = 5000, fraction = 0.15, universe = NULL, window = 1000, step = 100, adj_pv_method = "BH",
-max_pv = 0.05, genome = "hg19", ...)
+genome = "hg19", ...)
 }
 \arguments{
 \item{A}{query region set for which to estimate local z-score values.}
 
 \item{Blist}{\link{GRangesList} or list of region sets in any accepted formats by \href{https://bioconductor.org/packages/release/bioc/html/regioneR.html}{regioneR} package
-(\link{GenomicRanges}, \link{data.frame} etc...).}
+(\link{GenomicRanges}, \link{data.frame} etc...). (default = NULL)}
 
 \item{ranFUN}{character, the randomization strategy used for the test, see \href{https://bioconductor.org/packages/release/bioc/html/regioneR.html}{regioneR}. (default = "randomizeRegions")}
 

@@ -12,7 +12,7 @@ DFfromLZ( mLZ, RS )
 \item{RS}{string name of single region set present in the mLZ object}
 }
 \value{
-a data.frame from \code{\link{mLZS_class}}
+a data.frame from \linkS4class{multiLocalZScore}
 }
 \description{
 Dataframe from MultiLocalZScore object

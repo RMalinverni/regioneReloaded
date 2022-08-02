@@ -1,14 +1,14 @@
 #' Plot Local Z-Score Matrix
 #'
 #'
-#' Plot Local Z-Score Matrix of associations/correlations stored in a multiLocaZScore object.
+#' Plot Local Z-Score Matrix of associations/correlations stored in a [multiLocalZScore-class] object.
 #'
 #' @usage plotLocalZScoreMatrix (mLZ, lineColor = NA, colMatrix = "default",
 #' matrix.type = "association", maxVal = "max", main = "", labSize = 6,
 #' revert = FALSE, highlight = NULL, highlight_size = 2.5, highlight_max = FALSE,
 #' smoothing = FALSE, ...)
 #'
-#' @param mLZ an object of class multiLocaZScore or a matrix
+#' @param mLZ an object of class [multiLocalZScore-class] or a matrix
 #' @param lineColor logic if TRUE a grid matrix will be draw (default: FALSE)
 #' @param colMatrix character or vector of colors, if "default" will be used a default selection see..
 #' @param matrix.type character ("association" or "correlation") is the kind of matrix that will be plotted (default = "association")
@@ -16,15 +16,15 @@
 #' @param main character, plot title
 #' @param labSize numeric, size for the plot lab
 #' @param revert logic, revert the order of the plotted elements
-#' @param highlight character vector indicating the regionset names to highlight by adding labels pointing to the 0 position (default = NULL)
-#' @param highlight_size numeric, size of the highlight labels
+#' @param highlight character vector indicating the region set names to highlight by adding labels pointing to the 0 shift position (default = NULL)
+#' @param highlight_size numeric, size of the highlight labels.
 #' @param highlight_max logical, if TRUE the highlight labels are placed at the maximum local z-score value instead of the 0 shift position. (default = FALSE)
-#' @param smoothing logical, if TRUE \code{\link{stats::smooth.spline}} function will be apply to a localZ-score profile. (default = FALSE)
+#' @param smoothing logical, if TRUE the [stats::smooth.spline] function will be applied to the local z-score profile. (default = FALSE)
 #' @param ...  further arguments to be passed to other methods.
 #'
 #' @return Returns a ggplot object.
 #'
-#' @seealso \code{\link{multiLocalZscore}} \code{\link{makeLZMatrix}}
+#' @seealso [multiLocalZscore] [makeLZMatrix] [multiLocalZScore-class]
 #'
 #' @examples
 #'

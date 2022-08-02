@@ -9,7 +9,7 @@ plotCrosswiseMatrix(mPT, lineColor = NA, interpolate = FALSE, colMatrix =
 maxVal = NA, main = "", ord_mat = NULL)
 }
 \arguments{
-\item{mPT}{an object of class \link[=genomeMatriXeR-class]{genoMatriXeR} or a numerical matrix.}
+\item{mPT}{an object of class \link[=genoMatriXeR-class]{genoMatriXeR} or a numerical matrix.}
 
 \item{lineColor}{logical, color for the line grid delineating the tiles of the matrix plot. If NA, no line will be drawn. (default = NA)}
 
@@ -32,10 +32,13 @@ If NULL, the order of the matrix is preserved as is. (default = NULL)}
 Returns a ggplot object.
 }
 \description{
-Plot matrix of associations/correlations stored in a \link[=genomeMatriXeR-class]{genoMatriXeR} object.
+Plot matrix of associations/correlations stored in a \link[=genoMatriXeR-class]{genoMatriXeR} object.
 }
 \details{
-Missing details.
+This functions creates a graphical representation of the matrix of associations
+stored in a \link[=genoMatriXeR-class]{genoMatriXeR} object. The values plotted and
+clustering options can be controlled when creating the matrix with the function
+\link{makeCrosswiseMatrix}.
 }
 \examples{
 
@@ -50,5 +53,5 @@ plotCrosswiseMatrix(cw_Alien_ReG, matrix_type = "correlation")
 
 }
 \seealso{
-\code{\link{crosswisePermTest}} \code{\link{makeCrosswiseMatrix}}
+\link{crosswisePermTest} \link{makeCrosswiseMatrix}
 }

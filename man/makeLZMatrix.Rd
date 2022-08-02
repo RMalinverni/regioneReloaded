@@ -25,7 +25,7 @@ makeLZMatrix(mlZA, normalize = TRUE, clusterize = TRUE, centralize = NA, hc.meth
 \item{...}{further arguments to be passed to other methods.}
 }
 \value{
-A object of class \link[=multiLocalZScore-class]{mLZS} containing three slots, with a populated \code{matrix} slot.
+A object of class \link[=multiLocalZScore-class]{multiLocalZScore} containing three slots, with a populated \code{matrix} slot.
 
 \itemize{
 \item \bold{\code{@parameters}}

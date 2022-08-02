@@ -10,7 +10,7 @@ revert = FALSE, highlight = NULL, highlight_size = 2.5, highlight_max = FALSE,
 smoothing = FALSE, ...)
 }
 \arguments{
-\item{mLZ}{an object of class multiLocaZScore or a matrix}
+\item{mLZ}{an object of class \linkS4class{multiLocalZScore} or a matrix}
 
 \item{lineColor}{logic if TRUE a grid matrix will be draw (default: FALSE)}
 
@@ -26,13 +26,13 @@ smoothing = FALSE, ...)
 
 \item{revert}{logic, revert the order of the plotted elements}
 
-\item{highlight}{character vector indicating the regionset names to highlight by adding labels pointing to the 0 position (default = NULL)}
+\item{highlight}{character vector indicating the region set names to highlight by adding labels pointing to the 0 shift position (default = NULL)}
 
-\item{highlight_size}{numeric, size of the highlight labels}
+\item{highlight_size}{numeric, size of the highlight labels.}
 
 \item{highlight_max}{logical, if TRUE the highlight labels are placed at the maximum local z-score value instead of the 0 shift position. (default = FALSE)}
 
-\item{smoothing}{logical, if TRUE \code{\link{stats::smooth.spline}} function will be apply to a localZ-score profile. (default = FALSE)}
+\item{smoothing}{logical, if TRUE the \link[stats:smooth.spline]{stats::smooth.spline} function will be applied to the local z-score profile. (default = FALSE)}
 
 \item{...}{further arguments to be passed to other methods.}
 }
@@ -40,7 +40,7 @@ smoothing = FALSE, ...)
 Returns a ggplot object.
 }
 \description{
-Plot Local Z-Score Matrix of associations/correlations stored in a multiLocaZScore object.
+Plot Local Z-Score Matrix of associations/correlations stored in a \linkS4class{multiLocalZScore} object.
 }
 \examples{
 
@@ -50,5 +50,5 @@ data("cw_Alien")
 
 }
 \seealso{
-\code{\link{multiLocalZscore}} \code{\link{makeLZMatrix}}
+\link{multiLocalZscore} \link{makeLZMatrix} \linkS4class{multiLocalZScore}
 }

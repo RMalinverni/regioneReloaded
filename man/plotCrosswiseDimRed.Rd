@@ -48,12 +48,12 @@ return_table = FALSE, return_plot = TRUE, ...)
 A ggplot object or a table with cluster assignments is returned.
 }
 \description{
-Plot a visualization of a \link[=genomeMatriXeR-class]{genoMatriXeR} object (or matrix) using different
+Plot a visualization of a \link[=genoMatriXeR-class]{genoMatriXeR} object (or matrix) using different
 dimensional reduction algorithms (PCA, tSNE and UMAP).
 }
 \details{
 This function generates a plot with a two-dimensional representation of the
-association data stored in a \link[=genomeMatriXeR-class]{genoMatriXeR} object by
+association data stored in a \link[=genoMatriXeR-class]{genoMatriXeR} object by
 using either PCA, tSNE or UMAP transformations of the data. This function
 incorporates a clustering step and allows to highlight specific region sets
 of interest and the clusters they belong to. In addition to generating a plot,

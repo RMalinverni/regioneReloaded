@@ -6,7 +6,7 @@
 \usage{
 makeCrosswiseMatrix(mPT, clusterize = TRUE, hc.method = NULL, dist.method = "euclidean",
 transform = FALSE, scale = FALSE, zs.type = 'norm_zscore', symm_matrix = TRUE,
-selectRow = NULL, selectCol = NULL, pvcut = 1, subEX = 0, GM_diag = NULL, ...)
+selectRow = NULL, selectCol = NULL, pvcut = 1, subEX = 0, GM_diag = TRUE, ...)
 }
 \arguments{
 \item{mPT}{an object of class \link[=genoMatriXeR-class]{genoMatriXeR}.}
@@ -31,7 +31,7 @@ selectRow = NULL, selectCol = NULL, pvcut = 1, subEX = 0, GM_diag = NULL, ...)
 
 \item{subEX}{numeric, value used to substitute the z-score values when the associated pvalue is higher than \code{pvcut}. (default = 0)}
 
-\item{GM_diag}{logic, if FALSE the values of the diagonal will be set as 0. (default = TRUE)}
+\item{GM_diag}{logic, if FALSE the values of the diagonal will be set to 0. (default = TRUE)}
 
 \item{...}{further arguments to be passed to other methods.}
 }
