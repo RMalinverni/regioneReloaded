@@ -6,7 +6,7 @@
 \usage{
 makeCrosswiseMatrix(mPT, clusterize = TRUE, hc.method = NULL, dist.method = "euclidean",
 transform = FALSE, scale = FALSE, zs.type = 'norm_zscore', symm_matrix = TRUE,
-selectRow = NULL, selectCol = NULL, pvcut = 1, GM_diag = NULL, subEX=0, ...)
+selectRow = NULL, selectCol = NULL, pvcut = 1, subEX = 0, GM_diag = NULL, ...)
 }
 \arguments{
 \item{mPT}{an object of class \link[=genoMatriXeR-class]{genoMatriXeR}.}
@@ -29,9 +29,9 @@ selectRow = NULL, selectCol = NULL, pvcut = 1, GM_diag = NULL, subEX=0, ...)
 
 \item{pvcut}{numeric, the z-score value is substituted by \code{subEX} (0 by default) for all the associations with an adj.pvalue (as calculated in \code{\link[=crosswisePermTest]{crosswisePermTest()}}) higher than \code{pvcut}. (default = 0.05)}
 
-\item{GM_diag}{numeric, if not NULL the values of the diagonal of the association matrix will be substituted by this value. (default = NULL)}
-
 \item{subEX}{numeric, value used to substitute the z-score values when the associated pvalue is higher than \code{pvcut}. (default = 0)}
+
+\item{GM_diag}{logic, if FALSE the values of the diagonal will be set as 0. (default = TRUE)}
 
 \item{...}{further arguments to be passed to other methods.}
 }

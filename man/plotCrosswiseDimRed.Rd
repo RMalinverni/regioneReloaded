@@ -5,7 +5,7 @@
 \title{plotCrosswiseDimRed}
 \usage{
 plotCrosswiseDimRed(mPT, type = "PCA", GM_clust = NA, clust_met =
-"kmeans", nc = 5, listRS = NULL, main = "", labSize = 2, emphasize = FALSE,
+"hclust", nc = 5, listRS = NULL, main = "", labSize = 2, emphasize = FALSE,
 labAll = FALSE, labMaxOverlap = 100, ellipse = TRUE, perplexity = 10, theta = 0.1,
 return_table = FALSE, return_plot = TRUE, ...)
 }

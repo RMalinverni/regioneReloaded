@@ -91,13 +91,16 @@ plotCrosswiseMatrix <- function(mPT,
     }
   }
 
-  if (!is.vector(colMatrix)) {
+  if (length(colMatrix) == 1) {
     if (colMatrix == "default") {
       colMatrix <-
         rev(c(rev(brewer.pal(9, "PuBuGn")), brewer.pal(9, "YlOrRd")))
 
     }
   }
+
+
+
 
   if (!is.null(ord_mat)){
     if (is.list(ord_mat)){
