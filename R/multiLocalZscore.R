@@ -81,6 +81,32 @@ multiLocalZscore <- function(A,
                              genome = "hg19",
                              ...) {
 
+  if (!methods::hasArg(A)) {
+    stop("Alist is missing")
+  }
+  if (!is.logical(sampling)) {
+    stop("sampling must be logical")
+  }
+  if (!is.numeric(fraction)) {
+    stop("fraction must be numeric")
+  }
+  if (!is.numeric(min_sampling)) {
+    stop("min_sampling must be numeric")
+  }
+  if (!is.character(ranFUN)) {
+    stop("ranFun must be charachter")
+  }
+  if (!is.character(evFUN)) {
+    stop("evFun must be charachter")
+  }
+  if (!is.numeric(ntimes)) {
+    stop("ntimes must be numeric")
+  }
+  if (!is.numeric(min_sampling)) {
+    stop("min_sampling must be numeric")
+  }
+
+
   paramList <- list(
     A = deparse(substitute(A)),
     Blist = deparse(substitute(Blist)),
@@ -95,8 +121,8 @@ multiLocalZscore <- function(A,
     adj_pv_method = adj_pv_method
   )
 
-  ranFUN <- eval(parse(text = ranFUN))
-  evFUN <- eval(parse(text = evFUN))
+  rFUN <- eval(parse(text = ranFUN))
+  eFUN <- eval(parse(text = evFUN))
 
   A <- toGRanges(A)
 
@@ -111,7 +137,6 @@ multiLocalZscore <- function(A,
     }
   }
 
-
   if (paramList$ranFUN == "resampleRegions" & is.null(universe)) {
     if (is.null(universe)) {
       methods::show(
@@ -121,21 +146,35 @@ multiLocalZscore <- function(A,
     }
   }
 
-
-  funct.list <-
-    regioneR::createFunctionsList(FUN = evFUN,
+  func.list <-
+    regioneR::createFunctionsList(FUN = eFUN,
                         param.name = "B",
                         values = Blist)
 
 
-  pt <- regioneR::permTest(
-    A = A,
-    evaluate.function = funct.list,
-    randomize.function = ranFUN,
-    genome = genome ,
-    universe = universe ,
-    ...
-  )
+  if(ranFUN == "resampleRegions"){
+
+    pt <- regioneR::permTest(
+      A = A,
+      evaluate.function = func.list,
+      randomize.function = rFUN,
+      genome = genome ,
+      ntimes = ntimes,
+      universe = universe,
+      ...
+    )
+
+  }else{
+
+    pt <- regioneR::permTest(
+      A = A,
+      evaluate.function = func.list,
+      randomize.function = rFUN,
+      genome = genome ,
+      ntimes = ntimes,
+      ...
+    )
+  }
 
   lZs <-
     lapply(
