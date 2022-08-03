@@ -149,7 +149,7 @@ crosswisePermTest <-
     # create @multiOverlaps slot
 
     list.tabs <- lapply(Alist,
-                        FUN = multiPermTest2, ..., Blist = Blist,
+                        FUN = multiPermTest, ..., Blist = Blist,
                         ranFUN = ranFUN, evFUN = evFUN, uni = universe,
                         genome = genome, rFUN = rFUN, ntimes = ntimes, adj_pv_method = adj_pv_method
     )
