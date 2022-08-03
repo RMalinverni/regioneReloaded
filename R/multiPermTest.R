@@ -26,35 +26,45 @@ multiPermTest <-
            Blist,
            ranFUN,
            evFUN,
-           universe,
+           uni,
            genome,
            rFUN,
            ntimes,
            adj_pv_method,
            ...) {
 
-    #print(deparse(substitute(A)))
-    methods::show(paste0("number of regions: ", length(A)))
+    #methods::show(paste0("number of regions: ", length(A)))
 
     new.names <- names(Blist)
     func.list <-
       regioneR::createFunctionsList(FUN = evFUN,
-                          param.name = "B",
-                          values = Blist)
-    ptm <- proc.time()
+                                    param.name = "B",
+                                    values = Blist)
 
-    pt <- regioneR::permTest(
-      A = A,
-      evaluate.function = func.list,
-      randomize.function = rFUN,
-      genome = genome ,
-      ntimes = ntimes,
-      universe = universe,
-      ...
-    )
+    if(ranFUN == "resampleRegions"){
 
-    time <- proc.time() - ptm
-    time <- time[3] / 60
+
+      pt <- regioneR::permTest(
+        A = A,
+        evaluate.function = func.list,
+        randomize.function = rFUN,
+        genome = genome ,
+        ntimes = ntimes,
+        universe = uni,
+        ...
+      )
+
+    }else{
+
+      pt <- regioneR::permTest(
+        A = A,
+        evaluate.function = func.list,
+        randomize.function = rFUN,
+        genome = genome ,
+        ntimes = ntimes,
+        ...
+      )
+    }
 
     tab <- data.frame()
 
@@ -63,7 +73,6 @@ multiPermTest <-
           is.na(pt[[j]]$zscore) |
           is.nan((pt[[j]]$zscore))) {
         zscore.norm <- 0
-        #zscore.std <- 0
       } else{
         zscore.norm <- pt[[j]]$zscore / sqrt(length(A))
       }
@@ -83,9 +92,6 @@ multiPermTest <-
     }
 
     tab$norm_zscore <- tab$z_score / sqrt(tab$n_regionA)
-    #max_zscore <-
-      (tab$n_regionA - tab$mean_perm_test) / tab$sd_perm_test
-    #tab$std_zscore <- tab$z_score / max_zscore
     tab$adj.p_value <-
       round(stats::p.adjust(tab$p_value, method = adj_pv_method), digits = 4)
 
