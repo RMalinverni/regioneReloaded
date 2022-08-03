@@ -4,7 +4,7 @@
 \alias{multiPermTest}
 \title{multiPermTest}
 \usage{
-multiPermTest (A, Blist, ranFUN, evFUN, universe, genome, rFUN, ntimes, adj_pv_method, ...)
+multiPermTest (A, Blist, ranFUN, evFUN, uni, genome, rFUN, ntimes, adj_pv_method, ...)
 }
 \arguments{
 \item{A}{Genomic Ranges or any accepted formats by  \href{https://bioconductor.org/packages/release/bioc/html/regioneR.html}{regioneR} package
@@ -14,7 +14,7 @@ multiPermTest (A, Blist, ranFUN, evFUN, universe, genome, rFUN, ntimes, adj_pv_m
 
 \item{evFUN}{character, the evaluation strategy used for the test, see  \href{https://bioconductor.org/packages/release/bioc/html/regioneR.html}{regioneR}. (default = "numOverlaps)}
 
-\item{universe}{region set to use as universe, used only when \code{\link[regioneR:resampleRegions]{regioneR::resampleRegions()}} function is selected. (default = NULL)}
+\item{uni}{region set to use as universe, used only when \code{\link[regioneR:resampleRegions]{regioneR::resampleRegions()}} function is selected. (default = NULL)}
 
 \item{genome}{character or \linkS4class{GRanges}, genome used to compute the randomization. (default = "hg19")}
 
