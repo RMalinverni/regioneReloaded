@@ -2,19 +2,19 @@
 #'
 #' @description
 #'
-#' get Parametes from genoMatriXeR or multiLocalZScore class
+#' Get parameters from a genoMatriXeR or multiLocalZScore class object.
 #'
 #' @usage getParameters(rR)
 #'
 #' @param rR A genoMatriXeR or multiLocalZScore class object.
 #'
-#' @return a dataframe with parameters and values.
+#' @return A dataframe with parameters and values.
 #'
 #' @seealso [genoMatriXeR][genoMatriXeR-class], [multiLocalZScore][multiLocalZScore-class]
 #'
 #' @export getParameters
 #'
-#'
+
 getParameters <- function(rR){
 
   if (!methods::hasArg(rR)) {
@@ -26,7 +26,7 @@ getParameters <- function(rR){
     param <- rR@parameters
 
   }else {
-    stop("getParameters function need an object of class genoMatriXeR or multiLocalZScore")
+    stop("getParameters function needs an object of class genoMatriXeR or multiLocalZScore")
   }
 
  res <- data.frame(parameter= names(param), value = as.character(param))
