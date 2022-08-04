@@ -10,10 +10,10 @@ getParameters(rR)
 \item{rR}{A genoMatriXeR or multiLocalZScore class object.}
 }
 \value{
-a dataframe with parameters and values.
+A dataframe with parameters and values.
 }
 \description{
-get Parametes from genoMatriXeR or multiLocalZScore class
+Get parameters from a genoMatriXeR or multiLocalZScore class object.
 }
 \examples{
 
