@@ -20,5 +20,4 @@ a sublist of GenomicRanges from an original GenomicRanges list
 \description{
 create a samples sublist starting from a list of Region Set
 }
-\keyword{function}
 \keyword{internal}

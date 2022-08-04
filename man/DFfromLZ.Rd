@@ -17,5 +17,4 @@ a data.frame from \linkS4class{multiLocalZScore}
 \description{
 Dataframe from MultiLocalZScore object
 }
-\keyword{function}
 \keyword{internal}
