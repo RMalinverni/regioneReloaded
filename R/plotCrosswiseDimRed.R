@@ -86,6 +86,8 @@ plotCrosswiseDimRed <-
            return_table = FALSE,
            return_plot = TRUE,
            ...) {
+
+    # Check mPT object
     if (!methods::hasArg(mPT)) {
       stop("mPT is missing")
     } else if (is.null(mPT@matrix[[1]])) {
@@ -96,6 +98,13 @@ plotCrosswiseDimRed <-
       GM <- mPT
     } else {
       stop("mPT needs to be a genoMatriXeR object or a numeric matrix")
+    }
+
+    # Check arguments
+    if (!(type %in% c("PCA", "tSNE", "UMAP"))) {
+      stop("type must be 'PCA', 'tSNE' or 'UMAP'")
+    } else if (!(clust_met %in% c("hclust", "kmeans", "pam"))) {
+      stop("clust_met must be 'hclust', 'kmeans' or 'pam'")
     }
 
     if (is.na(GM_clust)) {
@@ -140,6 +149,7 @@ plotCrosswiseDimRed <-
 
     if (type == "PCA") {
       pdr_out <- stats::princomp(GM, scores = TRUE)
+      PoV <- round(pdr_out$sdev^2/sum(pdr_out$sdev^2)*100, 2)
       pdr_df <- data.frame(pdr_out$scores)
       pdr_df <- pdr_df[, c("Comp.1", "Comp.2")]
       colnames(pdr_df) <- c("x", "y")
@@ -171,7 +181,7 @@ plotCrosswiseDimRed <-
 
 
     pdr_df$clust <-
-      paste0("clust_", as.factor(clust_tab)) # attenzione ###########################
+      paste0("clust_", as.factor(clust_tab))
 
     pdr_df$clust1 <- rep("none", nrow(pdr_df))
 
@@ -240,7 +250,9 @@ plotCrosswiseDimRed <-
       p <- p + ggplot2::labs(
         title = "PCA plot",
         subtitle = main,
-        caption = paste0("clusterization method: ", clust_met)
+        caption = paste0("clusterization method: ", clust_met),
+        x = paste0("PC1: ", PoV[1], "%"),
+        y = paste0("PC2: ", PoV[2], "%")
       )
     }
 
@@ -249,16 +261,19 @@ plotCrosswiseDimRed <-
         title = "tSNE plot",
         subtitle = main,
         caption = paste0("perplexity: ", perplexity, " theta: ", theta, "\n",
-          caption = paste0("clusterization method: ", clust_met)
+        "clusterization method: ", clust_met),
+        x = "tSNE-1",
+        y = "tSNE-2"
         )
-      )
     }
 
     if (type == "UMAP") {
       p <- p + ggplot2::labs(
         title = "UMAP plot",
         subtitle = main,
-        caption = paste0("clusterization method: ", clust_met)
+        caption = paste0("clusterization method: ", clust_met),
+        x = "UMAP-1",
+        y = "UMAP-2"
       )
     }
 
