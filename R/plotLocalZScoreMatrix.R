@@ -8,12 +8,9 @@
 #' revert = FALSE, highlight = NULL, highlight_size = 2.5, highlight_max = FALSE,
 #' smoothing = FALSE, ...)
 #'
+#' @inheritParams plotCrosswiseMatrix
+#'
 #' @param mLZ an object of class [multiLocalZScore-class] or a matrix
-#' @param lineColor logical, if TRUE a grid matrix will be draw. (default = FALSE)
-#' @param colMatrix character or vector of colors, if "default" preset colors will be used. (default = "default)
-#' @param matrix_type character, the kind of matrix that will be plotted ("association" or "correlation"). (default = "association")
-#' @param maxVal numeric, maximum abs(value) in the colors scale of the plot. (default = 2)
-#' @param main character, plot title. (default = "")
 #' @param labSize numeric, size for the plot labels. (default = 6)
 #' @param revert logical, if TRUE reverts the order of the plotted elements. (default = FALSE)
 #' @param highlight character, vector indicating the region set names to highlight by adding labels pointing to the 0 shift position (default = NULL)
