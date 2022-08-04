@@ -5,30 +5,30 @@
 \title{Plot Local Z-Score Matrix}
 \usage{
 plotLocalZScoreMatrix (mLZ, lineColor = NA, colMatrix = "default",
-matrix.type = "association", maxVal = "max", main = "", labSize = 6,
+matrix_type = "association", maxVal = "max", main = "", labSize = 6,
 revert = FALSE, highlight = NULL, highlight_size = 2.5, highlight_max = FALSE,
 smoothing = FALSE, ...)
 }
 \arguments{
 \item{mLZ}{an object of class \linkS4class{multiLocalZScore} or a matrix}
 
-\item{lineColor}{logic if TRUE a grid matrix will be draw (default: FALSE)}
+\item{lineColor}{logical, color for the line grid delineating the tiles of the matrix plot. If NA, no line will be drawn. (default = NA)}
 
 \item{colMatrix}{character or vector of colors, if "default" will be used a default selection see..}
 
-\item{matrix.type}{character ("association" or "correlation") is the kind of matrix that will be plotted (default = "association")}
+\item{matrix_type}{character, type of matrix to be plotted, either "association" or "correlation". (default = "association")}
 
-\item{maxVal}{numeric, maximum abs(value) reached by the plot. (default = 2)}
+\item{maxVal}{numeric, maximum absolute value displayed by the plot. If "max", the maximum values in the matrix are used. If NA, the 0.95 quantile of all absolute values is used. (default = NA)}
 
-\item{main}{character, plot title}
+\item{main}{character, title of the plot. (default = "")}
 
-\item{labSize}{numeric, size for the plot lab}
+\item{labSize}{numeric, size for the plot labels. (default = 6)}
 
-\item{revert}{logic, revert the order of the plotted elements}
+\item{revert}{logical, if TRUE reverts the order of the plotted elements. (default = FALSE)}
 
-\item{highlight}{character vector indicating the region set names to highlight by adding labels pointing to the 0 shift position (default = NULL)}
+\item{highlight}{character, vector indicating the region set names to highlight by adding labels pointing to the 0 shift position (default = NULL)}
 
-\item{highlight_size}{numeric, size of the highlight labels.}
+\item{highlight_size}{numeric, size of the highlight labels. (default = 2.5)}
 
 \item{highlight_max}{logical, if TRUE the highlight labels are placed at the maximum local z-score value instead of the 0 shift position. (default = FALSE)}
 

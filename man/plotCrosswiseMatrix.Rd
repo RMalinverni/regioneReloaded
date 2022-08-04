@@ -5,7 +5,7 @@
 \title{plotCrosswiseMatrix}
 \usage{
 plotCrosswiseMatrix(mPT, lineColor = NA, interpolate = FALSE, colMatrix =
-"default", matrix_type = "crosswise", cor = "row",
+"default", matrix_type = "association", cor = "row",
 maxVal = NA, main = "", ord_mat = NULL)
 }
 \arguments{
@@ -17,11 +17,11 @@ maxVal = NA, main = "", ord_mat = NULL)
 
 \item{colMatrix}{character or vector of colors, if "default" will be used a default selection see..}
 
-\item{matrix_type}{character, type of matrix to be plotted, either "crosswise" or "correlation". (default = "crosswise)}
+\item{matrix_type}{character, type of matrix to be plotted, either "association" or "correlation". (default = "association")}
 
-\item{cor}{character, if \code{matrix_type} is "correlation", choose if the function \code{\link[=cor]{cor()}} will be executed on each "row" or "column" of the matrix. (default = "row")}
+\item{cor}{character, if \code{matrix_type} is "correlation", choose if the function \code{\link[=cor]{cor()}} will be executed on each "row" or "col" of the matrix. (default = "row")}
 
-\item{maxVal}{numeric, maximum absolute value displayed by the plot. If NA, the 0.95 quantile of all absolute values is used. (default = NA)}
+\item{maxVal}{numeric, maximum absolute value displayed by the plot. If "max", the maximum values in the matrix are used. If NA, the 0.95 quantile of all absolute values is used. (default = NA)}
 
 \item{main}{character, title of the plot. (default = "")}
 
@@ -46,7 +46,7 @@ data("cw_Alien")
 
 cw_Alien_ReG <- makeCrosswiseMatrix( cw_Alien_ReG)
 
-plotCrosswiseMatrix(cw_Alien_ReG, matrix_type = "crosswise")
+plotCrosswiseMatrix(cw_Alien_ReG, matrix_type = "association")
 
 plotCrosswiseMatrix(cw_Alien_ReG, matrix_type = "correlation")
 
