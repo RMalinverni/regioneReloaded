@@ -10,7 +10,7 @@
 #'
 #' @return a numerical matrix from a
 #'
-#' @seealso [genoMatriXeR][genoMatriXeR-class], [multiLocalZScore][multiLocalZScore-class], [makeCrosswiseMatrix]
+#' @seealso [genoMatriXeR][genoMatriXeR-class], [multiLocalZScore][multiLocalZScore-class], [makeCrosswiseMatrix], [makeLZMatrix]
 #'
 #' @examples
 #'
