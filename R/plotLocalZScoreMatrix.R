@@ -4,20 +4,17 @@
 #' Plot Local Z-Score Matrix of associations/correlations stored in a [multiLocalZScore-class] object.
 #'
 #' @usage plotLocalZScoreMatrix (mLZ, lineColor = NA, colMatrix = "default",
-#' matrix.type = "association", maxVal = "max", main = "", labSize = 6,
+#' matrix_type = "association", maxVal = "max", main = "", labSize = 6,
 #' revert = FALSE, highlight = NULL, highlight_size = 2.5, highlight_max = FALSE,
 #' smoothing = FALSE, ...)
 #'
+#' @inheritParams plotCrosswiseMatrix
+#'
 #' @param mLZ an object of class [multiLocalZScore-class] or a matrix
-#' @param lineColor logic if TRUE a grid matrix will be draw (default: FALSE)
-#' @param colMatrix character or vector of colors, if "default" will be used a default selection see..
-#' @param matrix.type character ("association" or "correlation") is the kind of matrix that will be plotted (default = "association")
-#' @param maxVal numeric, maximum abs(value) reached by the plot. (default = 2)
-#' @param main character, plot title
-#' @param labSize numeric, size for the plot lab
-#' @param revert logic, revert the order of the plotted elements
-#' @param highlight character vector indicating the region set names to highlight by adding labels pointing to the 0 shift position (default = NULL)
-#' @param highlight_size numeric, size of the highlight labels.
+#' @param labSize numeric, size for the plot labels. (default = 6)
+#' @param revert logical, if TRUE reverts the order of the plotted elements. (default = FALSE)
+#' @param highlight character, vector indicating the region set names to highlight by adding labels pointing to the 0 shift position (default = NULL)
+#' @param highlight_size numeric, size of the highlight labels. (default = 2.5)
 #' @param highlight_max logical, if TRUE the highlight labels are placed at the maximum local z-score value instead of the 0 shift position. (default = FALSE)
 #' @param smoothing logical, if TRUE the [stats::smooth.spline] function will be applied to the local z-score profile. (default = FALSE)
 #' @param ...  further arguments to be passed to other methods.
@@ -32,7 +29,6 @@
 #'
 #'
 #'
-
 #' @import ggplot2
 #' @importFrom ggrepel geom_label_repel
 #' @importFrom reshape2 melt
@@ -43,13 +39,11 @@
 #' @importFrom stats aggregate
 #'
 #' @export plotLocalZScoreMatrix
-#'
-
 
 plotLocalZScoreMatrix <- function(mLZ,
                                   lineColor = NA,
                                   colMatrix = "default",
-                                  matrix.type = "association",
+                                  matrix_type = "association",
                                   maxVal = "max",
                                   main = "",
                                   labSize = 6,
@@ -68,7 +62,15 @@ plotLocalZScoreMatrix <- function(mLZ,
     stop("The matrix slot of mLZ is empty, run first makeLZMatrix()")
   }
 
-  if (matrix.type == "association") {
+  if (!(matrix_type %in% c("association", "correlation"))) {
+  stop("Invalid matrix_type, choose 'association' or 'correlation'")
+  } else if (!is.na(maxVal)) {
+  if(!(methods::is(maxVal, "numeric") | maxVal == "max")) {
+    stop("maxVal has to be a numerical value, 'max' or NA")
+  }
+}
+
+  if (matrix_type == "association") {
     GM <- t(mLZ@matrix$LZM)
     title <- "Association Matrix"
 
@@ -86,7 +88,7 @@ plotLocalZScoreMatrix <- function(mLZ,
     }
   }
 
-  if (matrix.type == "correlation") {
+  if (matrix_type == "correlation") {
     GM <- mLZ@matrix$LZM_cor
 
     title <- "Correlation Matrix"
