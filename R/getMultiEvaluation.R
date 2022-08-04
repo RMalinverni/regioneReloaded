@@ -10,9 +10,9 @@
 #' @returns
 #' If rR is a [genoMatriXeR][genoMatriXeR-class] object, a list of data frames resuming the associations results.
 #' If rR is a [multiLocalZScore][multiLocalZScore-class] object, a list of two elements: "resumeTable" that is the resume of the associations analysis and "shifts",
-#' a list of shifts computed from [multiLocalZScore()] function for the element indicated in the nameRS vector.
+#' a list of shifts computed from [multiLocalZscore()] function for the element indicated in the nameRS vector.
 #'
-#' @seealso [genoMatriXeR][genoMatriXeR-class], [multiLocalZScore][multiLocalZScore_class]
+#' @seealso [genoMatriXeR][genoMatriXeR-class], [multiLocalZScore][multiLocalZScore-class]
 #'
 #' @export getMultiEvaluation
 #'

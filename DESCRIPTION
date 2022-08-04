@@ -37,7 +37,6 @@ Imports:
     reshape2,
     methods,
     scales,
-    GenomeInfoDb,
     cluster,
     grid,
     grDevices

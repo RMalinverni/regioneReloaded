@@ -12,13 +12,13 @@ getMultiEvaluation( rR, namesRS = NA)
 \item{namesRS}{a vector of names. (default = NA)}
 }
 \value{
-If rR is a \link[=genoMatriXeR_class]{genoMatriXeR} object a list of data frames resuming the associations results.
-If rR is a \link[=multiLocalZScore_class]{multiLocalZScore} object return al list of two elements "resumeTable" that is the resume of the associations analysis and "shifts",
-a list of shifts computed from \code{\link[=multilocalZScore]{multilocalZScore()}} function for the element indicated in the nameRS vector.
+If rR is a \link[=genoMatriXeR-class]{genoMatriXeR} object, a list of data frames resuming the associations results.
+If rR is a \link[=multiLocalZScore-class]{multiLocalZScore} object, a list of two elements: "resumeTable" that is the resume of the associations analysis and "shifts",
+a list of shifts computed from \code{\link[=multiLocalZscore]{multiLocalZscore()}} function for the element indicated in the nameRS vector.
 }
 \description{
-get multiEvaluation Object from genoMatriXeR or multiLocalZScore class
+Get \code{multiEvaluation} slot from \link[=genoMatriXeR-class]{genoMatriXeR} or \link[=multiLocalZScore-class]{multiLocalZScore} class.
 }
 \seealso{
-\link[=genoMatriXeR-class]{genoMatriXeR}, \link[=multiLocalZScore_class]{multiLocalZScore}
+\link[=genoMatriXeR-class]{genoMatriXeR}, \link[=multiLocalZScore-class]{multiLocalZScore}
 }
