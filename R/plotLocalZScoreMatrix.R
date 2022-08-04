@@ -62,6 +62,14 @@ plotLocalZScoreMatrix <- function(mLZ,
     stop("The matrix slot of mLZ is empty, run first makeLZMatrix()")
   }
 
+  if (!(matrix_type %in% c("association", "correlation"))) {
+  stop("Invalid matrix_type, choose 'association' or 'correlation'")
+  } else if (!is.na(maxVal)) {
+  if(!(methods::is(maxVal, "numeric") | maxVal == "max")) {
+    stop("maxVal has to be a numerical value, 'max' or NA")
+  }
+}
+
   if (matrix_type == "association") {
     GM <- t(mLZ@matrix$LZM)
     title <- "Association Matrix"

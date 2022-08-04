@@ -12,7 +12,7 @@
 #' [makeCrosswiseMatrix].
 #'
 #' @usage plotCrosswiseMatrix(mPT, lineColor = NA, interpolate = FALSE, colMatrix =
-#' "default", matrix_type = "crosswise", cor = "row",
+#' "default", matrix_type = "association", cor = "row",
 #' maxVal = NA, main = "", ord_mat = NULL)
 
 #'
@@ -20,7 +20,7 @@
 #' @param lineColor logical, color for the line grid delineating the tiles of the matrix plot. If NA, no line will be drawn. (default = NA)
 #' @param interpolate logical, if TRUE the image will be interpolated using the function [geom_raster()]. (default = FALSE)
 #' @param colMatrix character or vector of colors, if "default" will be used a default selection see..
-#' @param matrix_type character, type of matrix to be plotted, either "crosswise" or "correlation". (default = "crosswise)
+#' @param matrix_type character, type of matrix to be plotted, either "association" or "correlation". (default = "association")
 #' @param cor character, if `matrix_type` is "correlation", choose if the function [cor()] will be executed on each "row" or "col" of the matrix. (default = "row")
 #' @param maxVal numeric, maximum absolute value displayed by the plot. If "max", the maximum values in the matrix are used. If NA, the 0.95 quantile of all absolute values is used. (default = NA)
 #' @param main character, title of the plot. (default = "")
@@ -37,7 +37,7 @@
 #'
 #' cw_Alien_ReG <- makeCrosswiseMatrix( cw_Alien_ReG)
 #'
-#' plotCrosswiseMatrix(cw_Alien_ReG, matrix_type = "crosswise")
+#' plotCrosswiseMatrix(cw_Alien_ReG, matrix_type = "association")
 #'
 #' plotCrosswiseMatrix(cw_Alien_ReG, matrix_type = "correlation")
 #'
@@ -55,7 +55,7 @@ plotCrosswiseMatrix <- function(mPT,
                        lineColor = NA,
                        interpolate = FALSE,
                        colMatrix = "default",
-                       matrix_type = "crosswise",
+                       matrix_type = "association",
                        cor = "row",
                        maxVal = NA,
                        main = "",
@@ -67,8 +67,8 @@ plotCrosswiseMatrix <- function(mPT,
     stop("mPT needs to be a genoMatriXeR object or a numeric matrix")
   } else if (is.null(mPT@matrix[[1]])) {
     stop("The matrix slot of mPT is empty, run first makeCrosswiseMatrix()")
-  } else if (!(matrix_type %in% c("crosswise", "correlation"))) {
-    stop("Invalid matrix_type, choose 'crosswise' or 'correlation'")
+  } else if (!(matrix_type %in% c("association", "correlation"))) {
+    stop("Invalid matrix_type, choose 'association' or 'correlation'")
   } else if (!(cor %in% c("row", "col"))) {
     stop("Invalid cor value, choose 'row' or 'col'")
   } else if (!is.na(maxVal)) {
@@ -79,7 +79,7 @@ plotCrosswiseMatrix <- function(mPT,
 
   if (methods::is(mPT,"genoMatriXeR")) {
 
-    if  (matrix_type == "crosswise") {
+    if  (matrix_type == "association") {
       GM <- mPT@matrix$GMat
       title <- "Association Matrix"
 
