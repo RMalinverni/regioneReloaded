@@ -10,6 +10,14 @@
 #'
 #' @return a numerical matrix from a
 #'
+#' @examples
+#'
+#' data("cw_Alien")
+#'
+#' mtx <- getMatrix(cw_Alien_ReG)
+#'
+#' mtx
+#'
 #' @seealso [genoMatriXeR][genoMatriXeR-class], [multiLocalZScore][multiLocalZScore-class], [makeCrosswiseMatrix], [makeLZMatrix]
 #'
 #' @examples
@@ -19,7 +27,10 @@
 #' cw_Alien_RaR <- makeCrosswiseMatrix(cw_Alien_RaR)
 #' GM <- getMatrix(cw_Alien_RaR)
 #'
+#' GM
+#'
 #' @importFrom methods is
+#' @importFrom methods hasArg
 #'
 #' @export getMatrix
 #'
@@ -28,6 +39,10 @@ getMatrix <- function(rR) {
 
   if (!methods::hasArg(rR)) {
     stop("rR is missing")
+  }
+
+  if(!(methods::is(rR , "genoMatriXeR") | methods::is(rR , "multiLocalZScore"))){
+    stop(" class of rR object need to be genoMatriXeR or multiLocalZScore")
   }
 
   if (methods::is(rR, "genoMatriXeR")) {

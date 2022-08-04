@@ -19,8 +19,17 @@ Returns the matrix from an \link[=genoMatriXeR-class]{genoMatriXeR} or \link[=mu
 
 data("cw_Alien")
 
+mtx <- getMatrix(cw_Alien_ReG)
+
+mtx
+
+
+data("cw_Alien")
+
 cw_Alien_RaR <- makeCrosswiseMatrix(cw_Alien_RaR)
 GM <- getMatrix(cw_Alien_RaR)
+
+GM
 
 }
 \seealso{

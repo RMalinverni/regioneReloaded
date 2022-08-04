@@ -15,6 +15,16 @@ a dataframe with parameters and values.
 \description{
 get Parametes from genoMatriXeR or multiLocalZScore class
 }
+\examples{
+
+data("cw_Alien")
+
+prm <- getParameters(cw_Alien_ReG)
+
+prm
+
+
+}
 \seealso{
 \link[=genoMatriXeR-class]{genoMatriXeR}, \link[=multiLocalZScore-class]{multiLocalZScore}
 }

@@ -19,6 +19,15 @@ a list of shifts computed from \code{\link[=multilocalZScore]{multilocalZScore()
 \description{
 get multiEvaluation Object from genoMatriXeR or multiLocalZScore class
 }
+\examples{
+
+data("cw_Alien")
+
+mevs <- getMultiEvaluation(cw_Alien_ReG, names = "regA")
+
+mevs
+
+}
 \seealso{
 \link[=genoMatriXeR-class]{genoMatriXeR}, \link[=multiLocalZScore_class]{multiLocalZScore}
 }

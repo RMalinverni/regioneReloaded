@@ -259,13 +259,31 @@ reg_no_ABC <-
   )
 ```
 
+To evaluate the "lateral" association (association with a region close to the one being tested), the Regions Set "regD" was created. It is associated with regions in the vicinity of Region Set "regA" but not with the Regions Set itself.
 
 ```{r}
+dst <- sample(c(-300,300),length(regA),replace = TRUE)
+regD <- regioneR::toGRanges(
+                    data.frame(
+                      chr=as.vector(GenomeInfoDb::seqnames(regA)),
+                      start = start(regA) + dst,
+                      end = end (regA) + dst
+                      )
+                    )
+
+RsetD <-
+  similarRegionSet(
+    GR = regD,
+    name = "regD",
+    genome = gnm,
+    vectorPerc = vectorPerc2
+  )
+
+
 ```
 
-
-
 Finally, we store all the generated sets of regions in a list called `AlienRSList` which we can use as input for the `crosswisePermTest()` function.
+
 ```{r}
 Rset_NO <- list(reg_no_A, reg_no_B, reg_no_C, reg_no_AB, reg_no_ABC)
 
@@ -273,7 +291,7 @@ names(Rset_NO) <- c("reg_no_A", "reg_no_B", "reg_no_C", "reg_no_AB", "reg_no_ABC
 
 
 
-AlienRSList_narrow <- c(RsetA, RsetB, RsetC, RsetAB, Rset_NO)
+AlienRSList_narrow <- c(RsetA, RsetB, RsetC, RsetD, RsetAB, Rset_NO)
 
 summary(AlienRSList_narrow)
 
@@ -282,7 +300,11 @@ summary(AlienRSList_narrow)
 ## Multi Permutation Test 
 ### Crosswise Analysis
 
-`crosswisePermTest()` is the core statistical function of the package. By Crosswise analysis we mean the calculation of permutation tests between all possible combinations of a regions set `Alist` to a second regions set `BList`. The result of `crosswisePermTest()`  is an S4 object of class `genoMatriXeR` that contains three slots: *parameteres*, *multiOverlaps* and *matrix*.
+`crosswisePermTest()` is the main statistical function of the package. Crosswise 
+analysis means the calculation of permutation tests between all possible 
+combinations of a set of `Alist` regions with a second set of `Blist` regions. 
+The result of `crosswisePermTest()` is an S4 object of class `genoMatriXeR` 
+that contains three slots: *parameters*, *multiOverlaps* and *matrix*.
 
 * gMXR_obj
   + @parameters
@@ -315,8 +337,9 @@ summary(AlienRSList_narrow)
 The slot "parameters" stores all the parameters used to obtain the genomicMatriXer object.
 
 ```{r }
+
 data("cw_Alien")
-print(cw_Alien_ReG@parameters)
+getParameters(cw_Alien_ReG)
 ```
 
 #### multiOverlaps
@@ -344,26 +367,26 @@ print(cw_Alien_ReG)
 ```
 
 #### matrix
-
 When the genoMatriXeR object is created, the "matrix" slot will have a NULL value.
 <!-- Explain here how to create the matrix, what is its purpose or where is this explained? -->
 
 ```{r}
 
-str(cw_Alien_ReG@matrix)
+getMatrix(cw_Alien_ReG)
 
 ```
 
 ### Evaluation functions
 regioneReload can use all the evaluation strategies present in
-`r BiocStyle::Biocpkg("regioneR")`.
+`r BiocStyle::Biocpkg("regioneR")`, it also allows the use of custom functions, as far as the examples considered by this vignette will be based on the default evaluation function [numOvelaps] [regionR::numOverlaps]
 
 ### Randomization functions
 
 regioneReload can use all the randomization strategies present in
-`r BiocStyle::Biocpkg("regioneR")`.
+`r BiocStyle::Biocpkg("regioneR")` and  it also allows the use of custom functions.
 
-(adding phrases for new approach of resampleRegions)
+differently from regionR the randomization function [resampleRegions][regioner::resampleRegions] can work without the presence of the parameter "universe". In this case a "universe" will be created by using all regions from the list of regions set "Alist" using the function [createUniverse].
+
 
 ```{r, eval=FALSE}
 #NOT RUN
@@ -411,6 +434,9 @@ cw_Alien_ReG <-  crosswisePermTest(
 #
 
 ```
+
+
+### Matrix Calculation
 
 Using the default option the matrix clusterization method will be automatically selected.
 

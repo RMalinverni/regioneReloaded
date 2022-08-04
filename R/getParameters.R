@@ -12,6 +12,18 @@
 #'
 #' @seealso [genoMatriXeR][genoMatriXeR-class], [multiLocalZScore][multiLocalZScore-class]
 #'
+#' @examples
+#'
+#' data("cw_Alien")
+#'
+#' prm <- getParameters(cw_Alien_ReG)
+#'
+#' prm
+#'
+#'
+#' @importFrom methods is
+#' @importFrom methods hasArg
+#'
 #' @export getParameters
 #'
 #'

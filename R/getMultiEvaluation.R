@@ -14,6 +14,17 @@
 #'
 #' @seealso [genoMatriXeR][genoMatriXeR-class], [multiLocalZScore][multiLocalZScore_class]
 #'
+#' @examples
+#'
+#' data("cw_Alien")
+#'
+#' mevs <- getMultiEvaluation(cw_Alien_ReG, names = "regA")
+#'
+#' mevs
+#'
+#' @importFrom methods is
+#' @importFrom methods hasArg
+#'
 #' @export getMultiEvaluation
 #'
 getMultiEvaluation <- function(rR,namesRS = NA){
@@ -22,6 +33,9 @@ getMultiEvaluation <- function(rR,namesRS = NA){
     stop("rR is missing")
   }
 
+  if(!(methods::is(rR , "genoMatriXeR") | methods::is(rR , "multiLocalZScore"))){
+    stop(" class of rR object need to be genoMatriXeR or multiLocalZScore")
+  }
 
   if(methods::is(rR , "genoMatriXeR" )){
 
