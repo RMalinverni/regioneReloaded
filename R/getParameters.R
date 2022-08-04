@@ -29,6 +29,6 @@ getParameters <- function(rR){
     stop("getParameters function need an object of class genoMatriXeR or multiLocalZScore")
   }
 
- res <- data.frame(parameter= names(param), value = unlist(param))
-  return(res)
+ res <- data.frame(parameter= names(param), value = as.character(param))
+ return(res)
 }
