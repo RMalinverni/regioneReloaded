@@ -176,7 +176,7 @@ plotCrosswiseDimRed <-
     }
 
     if (main == "") {
-      main <- deparse(substitute(mPt))
+      main <- deparse(substitute(mPT))
     }
 
 
