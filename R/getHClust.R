@@ -53,7 +53,11 @@ getHClust<-function(rR, hctype = "rows"){
 
     }
     if (hctype == "cols"){
+
       mod <- rR@matrix$FitCol
+
+      if (is.null(mod)) { mod <- rR@matrix$FitRow}
+
     }
 
   }

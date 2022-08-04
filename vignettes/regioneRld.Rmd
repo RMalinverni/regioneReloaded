@@ -105,7 +105,7 @@ data("cw_Alien")
 
 cw_Alien_ReG<-makeCrosswiseMatrix(cw_Alien_ReG, pvcut = 1)
 
-plotCrosswiseMatrix(cw_Alien_ReG, matrix_type = "crosswise")
+plotCrosswiseMatrix(cw_Alien_ReG, matrix_type = "association")
 
 plotCrosswiseMatrix(cw_Alien_ReG, matrix_type = "correlation")
 ```
@@ -371,13 +371,10 @@ print(cw_Alien_ReG)
 ```
 
 #### matrix
+
+
 When the genoMatriXeR object is created, the "matrix" slot will have a NULL value. 
 
-```{r}
-
-getMatrix(cw_Alien_ReG)
-
-```
 
 ### Evaluation functions
 regioneReload can use all the evaluation strategies present in
@@ -442,7 +439,7 @@ cw_Alien_ReG <-  crosswisePermTest(
 
 ### Matrix Calculation
 
-the association matrix will be computed with the function [makeCrosswiseMatrix]. This function returns the object with the matrix assigned to the "matrix" slot, the matrix will be able to be queried with the [getMatrix] function. As a default value the matrix will be created using *normalized z-score* for a more in-depth description of the parameters that can be used to create the matrix we refer you to the [makeCrosswiseMatrix] function manual. If no clustering method is chosen for the array, automatically the most efficient clustering method will be chosen from those in [hclust], as described in the [chooseHclustMet] function manual
+the association matrix will be computed with the function [makeCrosswiseMatrix]. This function returns the object with the matrix assigned to the "matrix" slot, the matrix will be able to be queried with the [getMatrix] function. As a default value the matrix will be created using *normalized z-score* for a more in-depth description of the parameters that can be used to create the matrix we refer you to the [makeCrosswiseMatrix] function manual. If no clustering method is chosen for the array, automatically the most efficient clustering method will be chosen from those in [hclust], as described in the [chooseHclustMet] function manual.
 
 
 
@@ -464,13 +461,15 @@ we need to use the fixed order of clusterization for all matrices.
 modX <- getHClust(cw_Alien_ReG,hctype = "rows")
 modY <- getHClust(cw_Alien_ReG,hctype = "cols")
 
-X<-modX$order
-Y<-modY$order
+
+
+X<-modX$labels[modX$order]
+Y<-modY$labels[modX$order]
 
 ord<-list(X=X,Y=Y)
 
-p_ReG <- plotCrosswiseMatrix(cw_Alien_ReG, matrix_type = "crosswise" ,ord_mat = ord)
-p_ReR <- plotCrosswiseMatrix(cw_Alien_ReR, matrix_type = "crosswise",ord_mat = ord)
+p_ReG <- plotCrosswiseMatrix(cw_Alien_ReG, matrix_type = "association", ord_mat = ord)
+p_ReR <- plotCrosswiseMatrix(cw_Alien_ReR, matrix_type = "association", ord_mat = ord)
 
 
 plot(p_ReG)
@@ -478,36 +477,40 @@ plot(p_ReR)
 
 ```
 
-
+getHClust] function returns an object of class [hclust] that you can use for furher analysis.
 
 ```{r}
 
-p_ReG_cor <- plotCrosswiseMatrix(cw_Alien_ReG,matrix_type = "correlation" ,ord_mat = ord)
-p_ReR_cor <- plotCrosswiseMatrix(cw_Alien_ReR,matrix_type = "correlation",ord_mat = ord)
+plot(modX)
+
+```
+
+the *matrix_type* parameter [plotCrosswiseMatrix] allows to choose between "association" matrix (where the z-score value obtained from the permutation test calculation will be shown), or "correlation" (where the Pearson's R-value between each Regions Set will be used).
+
+```{r}
+
+p_ReG_cor <- plotCrosswiseMatrix(cw_Alien_ReG, matrix_type = "correlation", ord_mat = ord)
+p_ReR_cor <- plotCrosswiseMatrix(cw_Alien_ReR, matrix_type = "correlation", ord_mat = ord)
 
 plot(p_ReG_cor)
 plot(p_ReR_cor)
 
 ```
 
-## Plot Single permutation test result
 
-With the function `plotSinglePT()`, it is possible to plot the association between just two regions sest from a gMXR object.
 
+## Plot Single permutation test 
+
+[regionReloded] allows us to extract and visualize the results of a single Region Sets comparison, the visualization resumes the previous graphs in [regioneR] by exploiting the power of [ggplot2].
 
 ```{r}
-
 plotSinglePT(cw_Alien_ReG, RS1 = "regA", RS2 = "regA_05")
 ```
 
 ```{r}
 p_sPT1 <- plotSinglePT(cw_Alien_ReG, RS1 = "regA", RS2 = "regC")
 
-p_sPT2 <- plotSinglePT(cw_Alien_ReG, RS1 = "regA", RS2 = "reg_no_A")
-
-ggpubr::ggarrange(p_sPT1, p_sPT2,
-          ncol = 2, nrow = 1)
- 
+plot(p_sPT1)
 ```
 
 ## Plot Dimensionally Reduction
@@ -519,6 +522,7 @@ The data is clustered using a clustering algorithm that can be selected from ("h
 ```{r}
 
 set.seed(42)
+
 plotCrosswiseDimRed(cw_Alien_ReG, nc = 6, type="PCA")
 
 ```
@@ -532,10 +536,9 @@ p_cdr_hc <- plotCrosswiseDimRed(cw_Alien_ReG, nc = 6, type="PCA", clust_met = "h
 set.seed(42)
 p_cdr_pam <- plotCrosswiseDimRed(cw_Alien_ReG, nc = 6, type="PCA", clust_met = "pam")
 
-ggpubr::ggarrange(p_cdr_hc, p_cdr_pam,
-          ncol = 2, nrow = 1)
+plot(p_cdr_hc) plot(p_cdr_pam)
+          
 ```
-
 
 
 ```{r}

@@ -41,6 +41,10 @@ getMatrix <- function(rR) {
     stop("rR is missing")
   }
 
+  if(!(methods::is(rR , "genoMatriXeR") | methods::is(rR , "multiLocalZScore"))){
+    stop(" class of rR object need to be genoMatriXeR or multiLocalZScore")
+
+  }
 
   if (methods::is(rR, "genoMatriXeR")) {
 
@@ -56,13 +60,6 @@ getMatrix <- function(rR) {
     }
 
     GM <- rR@matrix$LZM
-  }
-
-  if(!(methods::is(rR , "genoMatriXeR") | methods::is(rR , "multiLocalZScore"))){
-
-    warning(" class of rR object need to be genoMatriXeR or multiLocalZScore")
-    GM <- NULL
-
   }
 
   return(GM)
