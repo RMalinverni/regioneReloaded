@@ -9,15 +9,15 @@
 #' smoothing = FALSE, ...)
 #'
 #' @param mLZ an object of class [multiLocalZScore-class] or a matrix
-#' @param lineColor logic if TRUE a grid matrix will be draw (default: FALSE)
-#' @param colMatrix character or vector of colors, if "default" will be used a default selection see..
-#' @param matrix.type character ("association" or "correlation") is the kind of matrix that will be plotted (default = "association")
-#' @param maxVal numeric, maximum abs(value) reached by the plot. (default = 2)
-#' @param main character, plot title
-#' @param labSize numeric, size for the plot lab
-#' @param revert logic, revert the order of the plotted elements
-#' @param highlight character vector indicating the region set names to highlight by adding labels pointing to the 0 shift position (default = NULL)
-#' @param highlight_size numeric, size of the highlight labels.
+#' @param lineColor logical, if TRUE a grid matrix will be draw. (default = FALSE)
+#' @param colMatrix character or vector of colors, if "default" preset colors will be used. (default = "default)
+#' @param matrix.type character, the kind of matrix that will be plotted ("association" or "correlation"). (default = "association")
+#' @param maxVal numeric, maximum abs(value) in the colors scale of the plot. (default = 2)
+#' @param main character, plot title. (default = "")
+#' @param labSize numeric, size for the plot labels. (default = 6)
+#' @param revert logical, if TRUE reverts the order of the plotted elements. (default = FALSE)
+#' @param highlight character, vector indicating the region set names to highlight by adding labels pointing to the 0 shift position (default = NULL)
+#' @param highlight_size numeric, size of the highlight labels. (default = 2.5)
 #' @param highlight_max logical, if TRUE the highlight labels are placed at the maximum local z-score value instead of the 0 shift position. (default = FALSE)
 #' @param smoothing logical, if TRUE the [stats::smooth.spline] function will be applied to the local z-score profile. (default = FALSE)
 #' @param ...  further arguments to be passed to other methods.
@@ -32,7 +32,6 @@
 #'
 #'
 #'
-
 #' @import ggplot2
 #' @importFrom ggrepel geom_label_repel
 #' @importFrom reshape2 melt
