@@ -107,6 +107,10 @@ plotCrosswiseDimRed <-
       stop("clust_met must be 'hclust', 'kmeans' or 'pam'")
     }
 
+    if(!all(listRS %in% names(mPT@multiOverlaps))) {
+      warning("One or more elements in listRS do not match region set names in mPT")
+    }
+
     if (is.na(GM_clust)) {
       if (clust_met == "hclust") {
         clust_tab <- stats::cutree(mPT@matrix$FitRow, k = nc)
