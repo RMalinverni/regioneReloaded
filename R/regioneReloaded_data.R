@@ -2,8 +2,8 @@
 #'
 #' @description
 #'
-#' Alien Genome crosswise matrix using \code{\link{randomizeRegions}} , \code{\link{circularRandomizeRegions}},
-#' \code{\link{resampleRegions}}, \code{\link{resampleGenome}}    functions as permutation strategies
+#' Alien Genome crosswise matrix using [regioneR::randomizeRegions] , [regioneR::circularRandomizeRegions],
+#' [regioneR::resampleRegions], [regioneR::resampleGenome] functions as permutation strategies.
 #'
 #' @name cw_Alien
 #' @docType data
@@ -51,7 +51,7 @@ NULL #"cw_Alien"
 #'
 #' @description
 #'
-#' Alien Genome crosswise matrix using [resampleGenome()] function a permutation s
+#' Alien Genome crosswise matrix using [regioneR::resampleGenome()] function a permutation s
 #' trategy.
 #'
 #' @name cw_Alien_ReG
@@ -83,7 +83,7 @@ NULL #"cw_Alien"
 #'
 #' @description
 #'
-#' Alien Genome multiLocalZScore calculated for regA regionset from AlienRSList_narrow using [resampleGenome()] function as permutation s
+#' Alien Genome multiLocalZScore calculated for regA regionset from AlienRSList_narrow using [regioneR::resampleGenome()] function as permutation s
 #' trategy.
 #'
 #' @name cw_Alien_ReR
@@ -173,3 +173,4 @@ NULL
 #' @docType data
 #' @usage data(cw_Alien)
 #' @format An object of class [multiLocalZScore][multiLocalZScore-class]
+NULL
