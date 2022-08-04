@@ -219,7 +219,7 @@ plotSinglePT <-
         fill = "#FDFAF6",
         label = paste(
           paste0("Normal Z-score: ", round(tab$norm_zscore[n], digits = 2)),
-          paste0("Standard Z-score: ", round(tab$std_zscore[n], digits = 2)),
+          #paste0("Standard Z-score: ", round(tab$std_zscore[n], digits = 2)),
           sep = "\n"
         ),
         hjust = 1

@@ -19,4 +19,6 @@ a numeric matrix
 \description{
 Create a matrix from a genoMatriXeR object.
 }
+
+\keyword{functions}
 \keyword{internal}

@@ -116,7 +116,8 @@ crosswisePermTest <-
       ranFUN = ranFUN,
       evFUN = evFUN,
       ntimes = ntimes,
-      universe = deparse(substitute(universe)),
+      universe = NULL,
+      #universe = deparse(substitute(universe)),
       adj_pv_method = adj_pv_method,
       nc = NULL,
       matOrder = NULL
@@ -148,9 +149,9 @@ crosswisePermTest <-
     # create @multiOverlaps slot
 
     list.tabs <- lapply(Alist,
-      FUN = multiPermTest, ..., Blist = Blist,
-      ranFUN = ranFUN, evFUN = evFUN, universe = universe,
-      genome = genome, rFUN = rFUN, ntimes = ntimes, adj_pv_method = adj_pv_method
+                        FUN = multiPermTest, ..., Blist = Blist,
+                        ranFUN = ranFUN, evFUN = evFUN, uni = universe,
+                        genome = genome, rFUN = rFUN, ntimes = ntimes, adj_pv_method = adj_pv_method
     )
 
     names(list.tabs) <- names(Alist)
