@@ -20,5 +20,5 @@ a list of shifts computed from \code{\link[=multilocalZScore]{multilocalZScore()
 get multiEvaluation Object from genoMatriXeR or multiLocalZScore class
 }
 \seealso{
-\link[=genoMatriXeR-class]{genoMatriXeR}
+\link[=genoMatriXeR-class]{genoMatriXeR}, \link[=multiLocalZScore_class]{multiLocalZScore}
 }

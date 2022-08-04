@@ -159,7 +159,7 @@ multiLocalZscore <- function(A,
       evaluate.function = func.list,
       randomize.function = rFUN,
       genome = genome ,
-      ntimes = ntimes,
+      #ntimes = ntimes,
       universe = universe,
       ...
     )
@@ -171,7 +171,8 @@ multiLocalZscore <- function(A,
       evaluate.function = func.list,
       randomize.function = rFUN,
       genome = genome ,
-      ntimes = ntimes,
+      count.once = TRUE,
+      #ntimes = ntimes,
       ...
     )
   }
@@ -229,7 +230,7 @@ multiLocalZscore <- function(A,
 
   paramList$Nregions <- Nreg
 
-  #rownames(tab) <- NULL
+  rownames(tab) <- NULL
 
   mLZSobj <- mLZS(
     parameters = paramList ,

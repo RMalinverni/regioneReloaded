@@ -24,5 +24,5 @@ GM <- getMatrix(cw_Alien_RaR)
 
 }
 \seealso{
-\link[=genoMatriXeR-class]{genoMatriXeR}, \link[=multiLocalZScore-class]{multiLocalZScore}, \link{makeCrosswiseMatrix}
+\link[=genoMatriXeR-class]{genoMatriXeR}, \link[=multiLocalZScore-class]{multiLocalZScore}, \link{makeCrosswiseMatrix}, \link{makeLZMatrix}
 }
