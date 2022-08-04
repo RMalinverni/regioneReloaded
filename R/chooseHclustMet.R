@@ -25,12 +25,14 @@
 #'
 #' chooseHclustMet(GM)
 #'
-#' @export chooseHclustMet
+#'
 #' @importFrom stats dist
 #' @importFrom stats hclust
 #' @importFrom stats cor
 #' @importFrom stats cophenetic
 #' @importFrom methods show
+#'
+#' @export chooseHclustMet
 #'
 
 

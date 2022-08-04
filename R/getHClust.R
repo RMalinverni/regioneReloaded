@@ -40,6 +40,10 @@ getHClust<-function(rR, hctype = "rows"){
     stop(" class of rR object need to be genoMatriXeR or multiLocalZScore")
   }
 
+  if(!(hctype == "rows" | hctype == "cols")){
+    stop(" hctype need to be rows or cols ")
+  }
+
 
   if(methods::is(rR , "genoMatriXeR" )){
 
@@ -64,8 +68,8 @@ getHClust<-function(rR, hctype = "rows"){
               row clustering will be retrived instead.")
       }
 
-      return(mod)
 
   }
 
+  return(mod)
 }

@@ -199,6 +199,7 @@ RsetC <-
 Next we create a RegionSet of 100 regions which shares half the regions of regA and half of regB called regAB.  From this RegionSet we create similar region sets again using `similarRegionSet()`.
 
 ```{r}
+
 vectorPerc2 <- seq(0.2, 0.8, 0.2)
 regAB <- c(sample(regA, nreg / 2), sample(regB, nreg / 2))
 RsetAB <-
@@ -214,6 +215,7 @@ RsetAB <-
 As a negative count of, we create sets of random regions that contain no regions of regA, regB, regC, regAB or no regions of the preceding regABC.
 
 ```{r}
+
 reg_no_A <-
   createRandomRegions(
     nregions = nreg,
@@ -257,11 +259,13 @@ reg_no_ABC <-
     non.overlapping = TRUE,
     genome = subtractRegions(gnm, c(regA, regB, regC))
   )
+
 ```
 
 To evaluate the "lateral" association (association with a region close to the one being tested), the Regions Set "regD" was created. It is associated with regions in the vicinity of Region Set "regA" but not with the Regions Set itself.
 
 ```{r}
+
 dst <- sample(c(-300,300),length(regA),replace = TRUE)
 regD <- regioneR::toGRanges(
                     data.frame(
@@ -279,12 +283,12 @@ RsetD <-
     vectorPerc = vectorPerc2
   )
 
-
 ```
 
 Finally, we store all the generated sets of regions in a list called `AlienRSList` which we can use as input for the `crosswisePermTest()` function.
 
 ```{r}
+
 Rset_NO <- list(reg_no_A, reg_no_B, reg_no_C, reg_no_AB, reg_no_ABC)
 
 names(Rset_NO) <- c("reg_no_A", "reg_no_B", "reg_no_C", "reg_no_AB", "reg_no_ABC")
@@ -340,6 +344,7 @@ The slot "parameters" stores all the parameters used to obtain the genomicMatriX
 
 data("cw_Alien")
 getParameters(cw_Alien_ReG)
+
 ```
 
 #### multiOverlaps
@@ -363,12 +368,10 @@ The "multiOverlaps" slot contains a list of data frames. For each element of the
 
 print(cw_Alien_ReG)
 
-
 ```
 
 #### matrix
-When the genoMatriXeR object is created, the "matrix" slot will have a NULL value.
-<!-- Explain here how to create the matrix, what is its purpose or where is this explained? -->
+When the genoMatriXeR object is created, the "matrix" slot will have a NULL value. 
 
 ```{r}
 
@@ -389,6 +392,7 @@ differently from regionR the randomization function [resampleRegions][regioner::
 
 
 ```{r, eval=FALSE}
+
 #NOT RUN
 
 set.seed(42)
@@ -438,7 +442,9 @@ cw_Alien_ReG <-  crosswisePermTest(
 
 ### Matrix Calculation
 
-Using the default option the matrix clusterization method will be automatically selected.
+the association matrix will be computed with the function [makeCrosswiseMatrix]. This function returns the object with the matrix assigned to the "matrix" slot, the matrix will be able to be queried with the [getMatrix] function. As a default value the matrix will be created using *normalized z-score* for a more in-depth description of the parameters that can be used to create the matrix we refer you to the [makeCrosswiseMatrix] function manual. If no clustering method is chosen for the array, automatically the most efficient clustering method will be chosen from those in [hclust], as described in the [chooseHclustMet] function manual
+
+
 
 ```{r}
 
@@ -451,32 +457,36 @@ cw_Alien_ReR <- makeCrosswiseMatrix(cw_Alien_ReR)
 ```
 
 To compare the output of the matrices created with different randomization functions, 
-we need to use the fixed order of clusterization for all matrixes.
+we need to use the fixed order of clusterization for all matrices. 
 
 ```{r}
 
-X<-rownames(cw_Alien_ReG@matrix$GMat)
-Y<-colnames(cw_Alien_ReG@matrix$GMat)
+modX <- getHClust(cw_Alien_ReG,hctype = "rows")
+modY <- getHClust(cw_Alien_ReG,hctype = "cols")
+
+X<-modX$order
+Y<-modY$order
+
 ord<-list(X=X,Y=Y)
 
-p_RaR <- plotCrosswiseMatrix(cw_Alien_RaR,matrix_type = "crosswise",ord_mat = ord)
-p_ReG <- plotCrosswiseMatrix(cw_Alien_ReG,matrix_type = "crosswise" ,ord_mat = ord)
-p_ReR <- plotCrosswiseMatrix(cw_Alien_ReR,matrix_type = "crosswise",ord_mat = ord)
+p_ReG <- plotCrosswiseMatrix(cw_Alien_ReG, matrix_type = "crosswise" ,ord_mat = ord)
+p_ReR <- plotCrosswiseMatrix(cw_Alien_ReR, matrix_type = "crosswise",ord_mat = ord)
 
 
-plot(p_RaR)
+plot(p_ReG)
+plot(p_ReR)
 
-ggpubr::ggarrange(p_ReG, p_ReR, 
-          labels = c("ReG", "ReR"),
-          ncol = 2, nrow = 1)
+```
 
-p_RaR <- plotCrosswiseMatrix(cw_Alien_RaR,matrix_type = "correlation",ord_mat = ord)
-p_ReG <- plotCrosswiseMatrix(cw_Alien_ReG,matrix_type = "correlation" ,ord_mat = ord)
-p_ReR <- plotCrosswiseMatrix(cw_Alien_ReR,matrix_type = "correlation",ord_mat = ord)
 
-ggpubr::ggarrange(p_RaR, p_ReG,  p_ReR, 
-          labels = c("RaR", "ReG","ReR"),
-          ncol = 2, nrow = 2)
+
+```{r}
+
+p_ReG_cor <- plotCrosswiseMatrix(cw_Alien_ReG,matrix_type = "correlation" ,ord_mat = ord)
+p_ReR_cor <- plotCrosswiseMatrix(cw_Alien_ReR,matrix_type = "correlation",ord_mat = ord)
+
+plot(p_ReG_cor)
+plot(p_ReR_cor)
 
 ```
 

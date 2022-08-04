@@ -31,6 +31,7 @@ GM <- cbind(M1, M2)
 
 chooseHclustMet(GM)
 
+
 }
 \seealso{
 \code{\link[=hclust]{hclust()}}
