@@ -21,8 +21,8 @@
 #' @param interpolate logical, if TRUE the image will be interpolated using the function [geom_raster()]. (default = FALSE)
 #' @param colMatrix character or vector of colors, if "default" will be used a default selection see..
 #' @param matrix_type character, type of matrix to be plotted, either "crosswise" or "correlation". (default = "crosswise)
-#' @param cor character, if `matrix_type` is "correlation", choose if the function [cor()] will be executed on each "row" or "column" of the matrix. (default = "row")
-#' @param maxVal numeric, maximum absolute value displayed by the plot. If NA, the 0.95 quantile of all absolute values is used. (default = NA)
+#' @param cor character, if `matrix_type` is "correlation", choose if the function [cor()] will be executed on each "row" or "col" of the matrix. (default = "row")
+#' @param maxVal numeric, maximum absolute value displayed by the plot. If "max", the maximum values in the matrix are used. If NA, the 0.95 quantile of all absolute values is used. (default = NA)
 #' @param main character, title of the plot. (default = "")
 #' @param ord_mat numeric, list with two numeric vectors that represent the ordering of rows and column of the matrix to be used in the plot.
 #' If NULL, the order of the matrix is preserved as is. (default = NULL)
@@ -67,6 +67,14 @@ plotCrosswiseMatrix <- function(mPT,
     stop("mPT needs to be a genoMatriXeR object or a numeric matrix")
   } else if (is.null(mPT@matrix[[1]])) {
     stop("The matrix slot of mPT is empty, run first makeCrosswiseMatrix()")
+  } else if (!(matrix_type %in% c("crosswise", "correlation"))) {
+    stop("Invalid matrix_type, choose 'crosswise' or 'correlation'")
+  } else if (!(cor %in% c("row", "col"))) {
+    stop("Invalid cor value, choose 'row' or 'col'")
+  } else if (!is.na(maxVal)) {
+      if(!(methods::is(maxVal, "numeric") | maxVal == "max")) {
+        stop("maxVal has to be a numerical value, 'max' or NA")
+    }
   }
 
   if (methods::is(mPT,"genoMatriXeR")) {
