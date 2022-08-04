@@ -14,10 +14,9 @@
 #'
 #' @import ggplot2
 #'
+#' @keywords internal
 #'
-#' @keywords internal function
-#'
-#'
+#' @noRd
 
 mendel_theme <- function(base_size = 11, base_family = ""){
   ggplot2::theme(
@@ -49,8 +48,10 @@ mendel_theme <- function(base_size = 11, base_family = ""){
 #' @inheritParams plotSingleLZ
 #'
 #' @importFrom grDevices colorRampPalette
+#' @keywords internal
 #'
 #' @return A palette function
+#' @noRd
 
 plotPal <- function(colPal = NULL) {
   if (is.null(colPal)) {

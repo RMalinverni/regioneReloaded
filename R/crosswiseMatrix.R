@@ -10,7 +10,7 @@
 #'
 #' @return a numeric matrix
 #'
-#' @keywords internal functions
+#' @keywords internal
 
 crosswiseMatrix <- function(mPT,
                             zs.type = "norm_zscore",

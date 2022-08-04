@@ -2,8 +2,8 @@
 #'
 #' @description
 #'
-#' Alien Genome crosswise matrix using \code{\link{randomizeRegions}} , \code{\link{circularRandomizeRegions}},
-#' \code{\link{resampleRegions}}, \code{\link{resampleGenome}}    functions as permutation strategies
+#' Alien Genome crosswise matrix using [regioneR::randomizeRegions] , [regioneR::circularRandomizeRegions],
+#' [regioneR::resampleRegions], [regioneR::resampleGenome] functions as permutation strategies.
 #'
 #' @name cw_Alien
 #' @docType data
@@ -13,89 +13,6 @@
 #' @keywords datasets
 #'
 NULL #"cw_Alien"
-
-
-#' @title cw_Alien_cRaR
-#'
-#' @description
-#'
-#' Alien Genome crosswise matrix using [regioneR::circularRandomizeRegions()]
-#' function a permutation strategy.
-#'
-#' @name cw_Alien_cRaR
-#' @docType data
-#' @usage data(cw_Alien)
-#' @format An objects of class [genoMatriXeR][genoMatriXeR-class]; see [makeCrosswiseMatrix()].
-#'
-#' @keywords datasets
-#'
-NULL #"cw_Alien"
-
-#' @title cw_Alien_RaR
-#'
-#' @description
-#'
-#' Alien Genome crosswise matrix using [regioneR::randomizeRegions()]
-#' function a permutation strategy.
-#'
-#' @name cw_Alien_RaR
-#' @docType data
-#' @usage data(cw_Alien)
-#' @format An objects of class [genoMatriXeR][genoMatriXeR-class]; see [makeCrosswiseMatrix()].
-#'
-#' @keywords datasets
-#'
-NULL #"cw_Alien"
-
-#' @title cw_Alien_ReG
-#'
-#' @description
-#'
-#' Alien Genome crosswise matrix using [resampleGenome()] function a permutation s
-#' trategy.
-#'
-#' @name cw_Alien_ReG
-#' @docType data
-#' @usage data(cw_Alien)
-#' @format An objects of class [genoMatriXeR][genoMatriXeR-class]; see [makeCrosswiseMatrix()].
-#'
-#' @keywords datasets
-#'
-NULL #"cw_Alien"
-
-#' @title cw_Alien_ReR
-#'
-#' @description
-#'
-#' Alien Genome crosswise matrix using [regioneR::resampleRegions()] function a permutation s
-#' trategy.
-#'
-#' @name cw_Alien_ReR
-#' @docType data
-#' @usage data(cw_Alien)
-#' @format An objects of class [genoMatriXeR][genoMatriXeR-class]; see [makeCrosswiseMatrix()].
-#'
-#' @keywords datasets
-#'
-NULL #"cw_Alien"
-
-#' @title mLZ_regA_ReG
-#'
-#' @description
-#'
-#' Alien Genome multiLocalZScore calculated for regA regionset from AlienRSList_narrow using [resampleGenome()] function as permutation s
-#' trategy.
-#'
-#' @name cw_Alien_ReR
-#' @docType data
-#' @usage data(cw_Alien)
-#' @format An objects of class [multiLocalZScore][multiLocalZScore-class]; see [makeLZMatrix()].
-#'
-#' @keywords datasets
-#'
-NULL #"cw_Alien"
-
-
 
 #' @title AlienGenome
 #'
@@ -149,3 +66,131 @@ NULL #"cw_Alien"
 #' @keywords datasets
 #'
 NULL #"cw_Alien"
+
+#' @title AlienRSList_broad
+#'
+#' @description
+#'
+#' List of region sets (as [GRanges]) on the [AlienGenome].
+#'
+#' @details
+#'
+#' This region sets are generated for the purpose of demonstrating the functions
+#' of RegioneReloaded with a low computing time and "predictable" associations. The
+#' regions are generated with by combining [createRandomRegions()] and
+#' [similarRegionSet()] so that there is a known overlap between certain region
+#' sets. To see a full description of this sample data and the code used to
+#' generate it, see the RegioneReloaded vignette.
+#'
+#' @name AlienRSList_broad
+#' @docType data
+#' @usage data(cw_Alien)
+#' @format A list of [GRanges] objects.
+#'
+#' @keywords datasets
+#'
+NULL #"cw_Alien"
+
+#' @title cw_Alien_cRaR
+#'
+#' @description
+#'
+#' Alien Genome crosswise matrix using [regioneR::circularRandomizeRegions()]
+#' function a permutation strategy.
+#'
+#' @name cw_Alien_cRaR
+#' @docType data
+#' @usage data(cw_Alien)
+#' @format An objects of class [genoMatriXeR][genoMatriXeR-class]; see [makeCrosswiseMatrix()].
+#'
+#' @keywords datasets
+#'
+NULL #"cw_Alien"
+
+#' @title cw_Alien_RaR
+#'
+#' @description
+#'
+#' Alien Genome crosswise matrix using [regioneR::randomizeRegions()]
+#' function a permutation strategy.
+#'
+#' @name cw_Alien_RaR
+#' @docType data
+#' @usage data(cw_Alien)
+#' @format An objects of class [genoMatriXeR][genoMatriXeR-class]; see [makeCrosswiseMatrix()].
+#'
+#' @keywords datasets
+#'
+NULL #"cw_Alien"
+
+#' @title cw_Alien_ReG
+#'
+#' @description
+#'
+#' Alien Genome crosswise matrix using [regioneR::resampleGenome()] function a permutation s
+#' trategy.
+#'
+#' @name cw_Alien_ReG
+#' @docType data
+#' @usage data(cw_Alien)
+#' @format An objects of class [genoMatriXeR][genoMatriXeR-class]; see [makeCrosswiseMatrix()].
+#'
+#' @keywords datasets
+#'
+NULL #"cw_Alien"
+
+#' @title cw_Alien_ReR
+#'
+#' @description
+#'
+#' Alien Genome crosswise matrix using [regioneR::resampleRegions()] function a permutation
+#' strategy.
+#'
+#' @name cw_Alien_ReR
+#' @docType data
+#' @usage data(cw_Alien)
+#' @format An objects of class [genoMatriXeR][genoMatriXeR-class]; see [makeCrosswiseMatrix()].
+#'
+#' @keywords datasets
+#'
+NULL #"cw_Alien"
+
+#' @title mLZ_regA_ReG
+#'
+#' @description
+#'
+#' Alien Genome multiLocalZScore calculated for regA regionset from AlienRSList_narrow using [regioneR::resampleGenome()] function as permutation s
+#' trategy.
+#'
+#' @name cw_Alien_ReR
+#' @docType data
+#' @usage data(cw_Alien)
+#' @format An objects of class [multiLocalZScore][multiLocalZScore-class]; see [makeLZMatrix()].
+#'
+#' @keywords datasets
+#'
+NULL #"cw_Alien"
+
+#' @title mLZ_regA_ReG
+#'
+#' @description
+#'
+#' Placeholder
+#'
+#' @name mLZ_regA_ReG
+#' @docType data
+#' @usage data(cw_Alien)
+#' @format An object of class [multiLocalZScore][multiLocalZScore-class]
+NULL
+
+#' @title mLZ_regD_ReG
+#'
+#' @description
+#'
+#' Placeholder
+#'
+#' @name mLZ_regD_ReG
+#' @docType data
+#' @usage data(cw_Alien)
+#' @format An object of class [multiLocalZScore][multiLocalZScore-class]
+NULL

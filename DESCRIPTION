@@ -37,9 +37,9 @@ Imports:
     reshape2,
     methods,
     scales,
-    GenomeInfoDb,
     cluster,
-    grid
+    grid,
+    grDevices
 Suggests: 
     rmarkdown,
     knitr

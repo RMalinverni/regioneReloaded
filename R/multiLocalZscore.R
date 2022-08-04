@@ -99,9 +99,9 @@ multiLocalZscore <- function(A,
   if (!is.character(evFUN)) {
     stop("evFun must be charachter")
   }
-  if (!is.numeric(ntimes)) {
-    stop("ntimes must be numeric")
-  }
+  # if (!is.numeric(ntimes)) {
+  #   stop("ntimes must be numeric")
+  # }
   if (!is.numeric(min_sampling)) {
     stop("min_sampling must be numeric")
   }
