@@ -4,14 +4,14 @@
 #' Plot Local Z-Score Matrix of associations/correlations stored in a [multiLocalZScore-class] object.
 #'
 #' @usage plotLocalZScoreMatrix (mLZ, lineColor = NA, colMatrix = "default",
-#' matrix.type = "association", maxVal = "max", main = "", labSize = 6,
+#' matrix_type = "association", maxVal = "max", main = "", labSize = 6,
 #' revert = FALSE, highlight = NULL, highlight_size = 2.5, highlight_max = FALSE,
 #' smoothing = FALSE, ...)
 #'
 #' @param mLZ an object of class [multiLocalZScore-class] or a matrix
 #' @param lineColor logical, if TRUE a grid matrix will be draw. (default = FALSE)
 #' @param colMatrix character or vector of colors, if "default" preset colors will be used. (default = "default)
-#' @param matrix.type character, the kind of matrix that will be plotted ("association" or "correlation"). (default = "association")
+#' @param matrix_type character, the kind of matrix that will be plotted ("association" or "correlation"). (default = "association")
 #' @param maxVal numeric, maximum abs(value) in the colors scale of the plot. (default = 2)
 #' @param main character, plot title. (default = "")
 #' @param labSize numeric, size for the plot labels. (default = 6)
@@ -42,13 +42,11 @@
 #' @importFrom stats aggregate
 #'
 #' @export plotLocalZScoreMatrix
-#'
-
 
 plotLocalZScoreMatrix <- function(mLZ,
                                   lineColor = NA,
                                   colMatrix = "default",
-                                  matrix.type = "association",
+                                  matrix_type = "association",
                                   maxVal = "max",
                                   main = "",
                                   labSize = 6,
@@ -67,7 +65,7 @@ plotLocalZScoreMatrix <- function(mLZ,
     stop("The matrix slot of mLZ is empty, run first makeLZMatrix()")
   }
 
-  if (matrix.type == "association") {
+  if (matrix_type == "association") {
     GM <- t(mLZ@matrix$LZM)
     title <- "Association Matrix"
 
@@ -85,7 +83,7 @@ plotLocalZScoreMatrix <- function(mLZ,
     }
   }
 
-  if (matrix.type == "correlation") {
+  if (matrix_type == "correlation") {
     GM <- mLZ@matrix$LZM_cor
 
     title <- "Correlation Matrix"
