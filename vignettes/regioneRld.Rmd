@@ -587,9 +587,9 @@ As with the [crosswisePermTest] function, an object consisting of three slots *p
 ```{r}
 getParameters(mLZ_regA_ReG)
 
-getMultiEvaluation(rR = mLZ_regA_ReG, namesRS = c("regA","regD"))
+mlz_Me <- getMultiEvaluation(rR = mLZ_regA_ReG )
 
-
+mlz_Me$resumeTable
 ```
 
 The matrix will be created by the function [makeLZMatrix] in a similar manner as illustrated for the function [makeCrosswiseMatrix]. Again, it is possible to pass a clustering method to the function, and if not, the best clustering function calculated using [chooseHclustMet] will be chosen.
@@ -641,6 +641,7 @@ cw_Alien_ReG_no_Square <- makeCrosswiseMatrix(cw_Alien_ReG_no_Square)
 plotCrosswiseMatrix(cw_Alien_ReG_no_Square)
 ```
 
+In this case, the [multiLocalZscore] function works in exactly the same way as in the previous cases, but in order to see the form of the association, it is recommended to enlarge the *windows*.
 
 ```{r, eval=FALSE}
 
