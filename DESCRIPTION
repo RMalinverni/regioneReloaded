@@ -42,6 +42,8 @@ Imports:
     grDevices
 Suggests: 
     rmarkdown,
-    knitr
+    knitr,
+    testthat (>= 3.0.0)
 biocViews: Genetics, ChIPSeq, DNASeq, MethylSeq, CopyNumberVariation, Clustering
 VignetteBuilder: knitr
+Config/testthat/edition: 3
