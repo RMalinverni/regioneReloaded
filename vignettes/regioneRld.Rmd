@@ -24,7 +24,7 @@ knitr::opts_chunk$set(
 BiocStyle::markdown()
 ```
 
-# regioneReload
+# regioneReloaded
 
 The meaningful interpretation of overlaps between binding profiles of multiplechromatin regulators is a major challenge in epigenomics. To address this,  in 2015 we published `r BiocStyle::Biocpkg("regioneR")`, an R package that we developed for the statistical assessment of the association between genomic region sets. One limitation of regioneR is that it can only perform association analysis between two region sets at a time. Here, we now present **regioneReload**, an R package that is the natural evolution of `r BiocStyle::Biocpkg("regioneR")` and allows to  calculate the statistical association between multiple regions sets at the same time. It also incorporates a strategy to improve p-value calculations and normalize z-scores coming from multiple analysis to allow for their direct comparison. regioneReload also builds upon `r BiocStyle::Biocpkg("regioneR")` by adding new plotting functions for obtaining publication-ready graphs. Taken together, regioneReload aims to be a novel and valuable addition to the 
 repertoire of available tools for the analysis of high-content genomic datasets.
@@ -60,14 +60,10 @@ Another crucial factor for the calculation of the normal z-score is the number o
 ```{r setup}
 library("regioneReloaded")
 ```
-<!-- Consider moving this to the Crosswise Analysis section -->
-The permutation test can be performed on a list multiple region sets by the function `crosswisePermTest()`.
-This process is computing intensive and its calculation time depends on the 
-number of cores called by the parameter `mc.cores` (see `r BiocStyle::Biocpkg("regioneR")`).
-The result of the permutation test obtained by running the code below is included as a pre-computed example dataset
-which can be loaded into the environment by running the command `data("cw_Alien_RaR")`.
 
-`AlienGenome` and `AlienRSList` are described in the next section of the vignette. 
+The permutation test can be performed on a list multiple region sets by the function `crosswisePermTest()`. This process is computing intensive and its calculation time depends on the  number of cores called by the parameter `mc.cores` (see `r BiocStyle::Biocpkg("regioneR")`). The result of the permutation test obtained by running the code below is included as a pre-computed example dataset which can be loaded into the environment by running the command `data("cw_Alien_RaR")`.
+
+`AlienGenome` and `AlienRSList` are toy datasets described in the next section of the vignette. 
 
 ```{r load _data, eval=FALSE}
 #NOT RUN
@@ -84,10 +80,11 @@ which can be loaded into the environment by running the command `data("cw_Alien_
 #
 ```
 
+Once the multiple permutation tests are performed, we can generate a matrix of pairwise associations between the region sets with the function `makeCrosswiseMatrix` and visualize it with `plotCrosswiseMatrix`.
+
 ```{r}
 
 data("cw_Alien")
-
 
 cw_Alien_ReG<-makeCrosswiseMatrix(cw_Alien_ReG, pvcut = 1)
 
@@ -95,11 +92,10 @@ plotCrosswiseMatrix(cw_Alien_ReG, matrix_type = "association")
 
 plotCrosswiseMatrix(cw_Alien_ReG, matrix_type = "correlation")
 ```
-<!-- Briefly describe the plots? -->
 
-## Alien Genome and Alien RegionSet List
+# Example dataset: the Alien Genome
 
-Permutation test of regions set on a eukaryotic genome can take a long time. To show the different regionReloaded features, a fake genome called the 'AlienGenome' was created to overcome this problem. This genome consists of four chromosomes of different lengths ranging from 2Mb to 0.1Mb.
+Performing Permutation tests with region sets on an eukaryotic genome can take a long computation time. To demonstrate the different regionReloaded features on a small toy dataset with low computation times, we have created a fake genome called the 'AlienGenome' and an associated list of region sets. The Alien Genome consists of four chromosomes of  lengths ranging from 2Mb to 0.1Mb.
 
 ![Graphical descrition of the AlienGenome](figures/AlienGenome_scheme.png){width=100%}
 
@@ -115,7 +111,7 @@ AlienGenome <-
 
 ```
 
-Four basic region sets were created on this genome. The first three ("regA", "regB", "regC"), were created using the function in the regionR package `createRandomRegions`. Each Regions set consists of 100 regions with an average width of 100 bp (the widths of the regions will have a standard deviation of 50 bp). Being randomly originated, the three regions sets should show no associations with each other.
+Four basic region sets were created on this genome. The first three ("regA", "regB", "regC"), were created using the function `createRandomRegions` from the package `r BiocStyle::Biocpkg("regioneR")`. Each region set consists of 100 regions with an average width of 100 bp (and a standard deviation of 50 bp). Being randomly generated, the three region sets should show no significant associations with each other.
 
 
 ```{r}
@@ -152,7 +148,7 @@ regC <-
 
 ```
 
-To generate "artificial" associations we can use the `similarRegionSet()` function, which produces sets of random regions with some degree of similarity to the original. For each set of regions regA, regB and regC, we create a list of region sets that share a percentage (90% to 10%) of regions with the original set.
+To generate "artificial" associations we can use the `similarRegionSet()` function, which produces sets of random regions with some degree of similarity to the original input region set. For each set of regions regA, regB and regC, we create a list of region sets that share a percentage (90% to 10%) of similarity with the original set.
 
 ```{r}
 
@@ -182,7 +178,7 @@ RsetC <-
 
 ```
 
-Next we create a RegionSet of 100 regions which shares half the regions of regA and half of regB called regAB.  From this RegionSet we create similar region sets again using `similarRegionSet()`.
+Next we create a region set of 100 regions that shares half the regions with regA and half with regB called regAB.  From this region set we create similar region sets again using `similarRegionSet()`.
 
 ```{r}
 
@@ -198,7 +194,7 @@ RsetAB <-
 
 ```
 
-As a negative count of, we create sets of random regions that contain no regions of regA, regB, regC, regAB or no regions of the preceding regABC.
+As a negative association control, we create random region sets that contain no regions of "regA", "regB", "regC", "regAB or "regABC" using `createRandomRegions()` and `substractRegions()` functions from  `r BiocStyle::Biocpkg("regioneR")`.
 
 ```{r}
 
@@ -228,6 +224,7 @@ reg_no_C <-
     non.overlapping = TRUE,
     genome = subtractRegions(gnm, regC)
   )
+
 reg_no_AB <-
   createRandomRegions(
     nregions = nreg,
@@ -248,7 +245,7 @@ reg_no_ABC <-
 
 ```
 
-To evaluate the "lateral" association (association with a region close to the one being tested), the Regions Set "regD" was created. It is associated with regions in the vicinity of Region Set "regA" but not with the Regions Set itself.
+To demonstrate the detection of "lateral" association (association with a region close to the one being tested), we create the "regD" region set. It is composed of regions in the vicinity of region set "regA" but does not overlap with the regions of "regA" itself.
 
 ```{r}
 
@@ -271,7 +268,7 @@ RsetD <-
 
 ```
 
-Finally, we store all the generated sets of regions in a list called `AlienRSList` which we can use as input for the `crosswisePermTest()` function.
+Finally, we store all the generated sets of regions in a list called `AlienRSList` which we can use as input for the `crosswisePermTest()` function to perform the multiple permutation test.
 
 ```{r}
 
@@ -279,19 +276,18 @@ Rset_NO <- list(reg_no_A, reg_no_B, reg_no_C, reg_no_AB, reg_no_ABC)
 
 names(Rset_NO) <- c("reg_no_A", "reg_no_B", "reg_no_C", "reg_no_AB", "reg_no_ABC")
 
-
-
 AlienRSList_narrow <- c(RsetA, RsetB, RsetC, RsetD, RsetAB, Rset_NO)
 
 summary(AlienRSList_narrow)
 
 ```
 
-## Multi Permutation Test 
-### Crosswise Analysis
+# Multi Permutation Test with regioneReloaded
+## Crosswise Analysis and the genoMatriXeR object
 
-`crosswisePermTest()` is the main statistical function of the package. Crosswise analysis means the calculation of permutation tests between all possible combinations of a set of `Alist` regions with a second set of `Blist` regions. 
-The result of `crosswisePermTest()` is an S4 object of class `genoMatriXeR` that contains three slots: *parameters*, *multiOverlaps* and *matrix*.
+`crosswisePermTest()` is the main statistical function of the package. "Crosswise" analysis (in contrast to "pairwise") refers to the calculation of permutation tests between all possible combinations of elements in a first list of region sets (`Alist`) with those in a second list (`Blist`). The core statistical calculations of the permutation tests rely on `regioneR::permTest()`. 
+
+The result of `crosswisePermTest()` is stored in an S4 object of class `genoMatriXeR` that contains three slots: *parameters*, *multiOverlaps* and *matrix*.
 
 * gMXR_obj
   + @parameters
@@ -319,9 +315,9 @@ The result of `crosswisePermTest()` is an S4 object of class `genoMatriXeR` that
     + FitCol
 
 
-#### Parameters
+### Parameters
 
-The slot "parameters" stores all the parameters used to obtain the genomicMatriXer object.
+The slot "parameters" stores all the parameters that were used to obtain the `genoMatriXeR` object and can be retrieved with `getParameters()`.
 
 ```{r }
 
@@ -330,13 +326,13 @@ getParameters(cw_Alien_ReG)
 
 ```
 
-#### multiOverlaps
-<!-- The concept of Alist and Blist have not been introduced before this point, explain in the intro to the crosswiseAnalysis or in the example function call. -->
-The "multiOverlaps" slot contains a list of data frames. For each element of the list of region sets "Alist", a data frame is stored with 11 columns and a number of rows equal to the elements in "Blist". The columns of the data frame contain the following information:
+### multiOverlaps
 
-+ **order.id:**       order of comparison
-+ **name:**           name of Blist elements 
-+ **n_regionA:**       number of permuted Alist regions.
+The "multiOverlaps" slot contains a list of data frames that contain the results of each permutation test performed. For each region set in "Alist", a data frame is generated with 11 columns and a number of rows equal to the elements in "Blist". The columns of the data frame contain the following information:
+
++ **order.id:**        order of comparison
++ **name:**            name of region sets in Blist  
++ **n_regionA:**       number of permuted Alist regions
 + **n_regionB:**       number of regions in each regions set of Blist 
 + **z_score:**         z-score calculated by [regioneR::permTest()]
 + **p_value:**         p.value calculated by [regioneR::permTest()]
@@ -353,22 +349,19 @@ print(cw_Alien_ReG)
 
 ```
 
-#### matrix
+### Matrix
 
+When the genoMatriXeR object is initially created by running `crosswisePermTest()`, the "matrix" slot will have a NULL value. See the section [Matrix calculation and visualization] on how to generate, access and visualize the association matrix.
 
-When the genoMatriXeR object is created, the "matrix" slot will have a NULL value. 
+## Evaluation functions
 
+regioneReloaded can use all the evaluation strategies present in `r BiocStyle::Biocpkg("regioneR")`, and it also allows the use of custom evaluation functions. The examples considered by this vignette will be based on the default evaluation function `numOverlaps()`.
 
-### Evaluation functions
-regioneReload can use all the evaluation strategies present in
-`r BiocStyle::Biocpkg("regioneR")`, it also allows the use of custom functions, as far as the examples considered by this vignette will be based on the default evaluation function [numOvelaps] [regionR::numOverlaps]
+## Randomization functions
 
-### Randomization functions
+regioneReloaded can use all the randomization strategies present in `r BiocStyle::Biocpkg("regioneR")` and  it also allows the use of custom functions.
 
-regioneReload can use all the randomization strategies present in
-`r BiocStyle::Biocpkg("regioneR")` and  it also allows the use of custom functions.
-
-differently from regionR the randomization function [resampleRegions][regioner::resampleRegions] can work without the presence of the parameter "universe". In this case a "universe" will be created by using all regions from the list of regions set "Alist" using the function [createUniverse].
+A notable difference with regioneR is that the randomization function `resampleRegions()` can work without the presence of the parameter "universe". In this case a "universe" will be created by using all regions from the list of regions set "Alist" using the function `createUniverse()`. Three example pre-computed objects are included as sample data generated with three different randomization functions: "randomizeRegions", "resampleRegions" and "resampleGenome".
 
 
 ```{r, eval=FALSE}
@@ -419,12 +412,9 @@ cw_Alien_ReG <-  crosswisePermTest(
 
 ```
 
-
-### Matrix Calculation
+## Matrix Calculation and visualization
 
 the association matrix will be computed with the function [makeCrosswiseMatrix]. This function returns the object with the matrix assigned to the "matrix" slot, the matrix will be able to be queried with the [getMatrix] function. As a default value the matrix will be created using *normalized z-score* for a more in-depth description of the parameters that can be used to create the matrix we refer you to the [makeCrosswiseMatrix] function manual. If no clustering method is chosen for the array, automatically the most efficient clustering method will be chosen from those in [hclust], as described in the [chooseHclustMet] function manual.
-
-
 
 ```{r}
 
