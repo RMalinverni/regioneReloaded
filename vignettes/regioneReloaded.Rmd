@@ -26,12 +26,21 @@ BiocStyle::markdown()
 
 # regioneReload
 
-The meaningful interpretation of overlaps between binding profiles of multiplechromatin regulators is a major challenge in epigenomics. To address this,  in 2015 we published `r BiocStyle::Biocpkg("regioneR")`, an R package that we developed for the statistical assessment of the association between genomic region sets. One limitation of regioneR is that it can only perform association analysis between two region sets at a time. Here, we now present **regioneReload**, an R package that is the natural evolution of `r BiocStyle::Biocpkg("regioneR")` and allows to  calculate the statistical association between multiple regions sets at the same time. It also incorporates a strategy to improve p-value calculations and normalize z-scores coming from multiple analysis to allow for their direct comparison. regioneReload also builds upon `r BiocStyle::Biocpkg("regioneR")` by adding new plotting functions for obtaining publication-ready graphs. Taken together, regioneReload aims to be a novel and valuable addition to the 
-repertoire of available tools for the analysis of high-content genomic datasets.
+The meaningful interpretation of overlaps between binding profiles of multiple 
+chromatin regulators is a major challenge in epigenomics. To address this, 
+in 2015 we published `r BiocStyle::Biocpkg("regioneR")`, an R package that we developed for the statistical
+assessment of the association between genomic regions sets. One limitation of regioneR is that it can only
+perform association analyisis between two region sets at a time. Here, we now present 
+**regioneReload**, an R package that is the natural evolution of `r BiocStyle::Biocpkg("regioneR")` and allows to  calculate the statistical association between multiple regions sets at the same time. To compare z-scores coming from multiple analysis, different strategies have been introduced to normalize the z-score and to improve the 
+p-value calculations. regioneReload also improves `r BiocStyle::Biocpkg("regioneR")` by adding new randomization methods and different functions for obtaining publication-ready graphs. Taken together, regioneReload aims to be a novel and precious addition to NGS tools and for whole genome analysis.
 
-## regioneR
+## regioneR limitations
 
-`r BiocStyle::Biocpkg("regioneR")` is an R package published in 2015 created to statistically test the positional association between genomic region sets. The core of `r BiocStyle::Biocpkg("regioneR")` is a permutation test framework specifically designed to work in a genomic environment. For a detailed insight into the permutation test strategy implemented in `r BiocStyle::Biocpkg("regioneR")`, including the different randomization and evaluation strategies, please see the [regioneR vignette](https://bioconductor.org/packages/release/bioc/vignettes/regioneR/inst/doc/regioneR.html). The two main results that can be obtained with this statistical method can be summarized in two graphs. Figure 1A shows the association observed between the two region sets under study, highlighting the distance calculated in standard deviations from the random distribution. Figure 1B shows the local z-score: a narrow peak, as the one shown, indicates that the association is highly dependent on the exact location of the region. One the contrary, a flat profile would suggest a regional association.
+`r BiocStyle::Biocpkg("regioneR")` is an R package created to test the associations between genomic region sets. The core of `r BiocStyle::Biocpkg("regioneR")` is a permutation test framework specifically designed to work in a genomic environment. The two main results that can be obtained with this method can be summarized in two graphs. Figure 1A shows the association observed between the two region sets under study, highlighting the distance calculated in standard deviations from the random distribution. Figure 1B shows the local z-score: a narrow peak, as the one shown, indicates that the association is highly dependent on the exact location of the region. One the contrary, a flat profile would suggest a regional association.
+
+<!-- This section is titled regioneR limitations but it does not address this point directly. 
+Either highlight the limitation of pairwise comparisons or change the title? -->
+
 
 (figure 1)
 
@@ -39,21 +48,26 @@ repertoire of available tools for the analysis of high-content genomic datasets.
 
 ## Normalized Z-Score
 
-regioneReload aims to integrate the framework previously developed for `r BiocStyle::Biocpkg("regioneR")` to calculate associations of different region sets simultaneously. However, the values of z-score obtained in different tests can not be directly compared. In particular, the value of the z-score is directly associated to the square root of the number of regions present in the first region set of the test (RS1). 
-
-To compare the z-scores obtained in multip pairwise tests between region sets, we introduce the concept of **normalized z-score**, which allows not only to directly compare different association events but also to work with subsets of data and speed up the calculations.
-
-The normalized z-score is calculated as follows:
+regioneReload aims to integrate the framework previously developed for `r BiocStyle::Biocpkg("regioneR")` 
+to calculate associations of different region sets simultaneously. To compare
+associations deriving from different region sets, we introduce the concept of 
+**normalized z-score**, which allows not only to compare different association 
+events but also to work with subsets of data and speed up the calculations.
+To compare different z-scores is necessary to normalize them. The values of z-score of different test is not possible to compare.In particular z-score is directly associate to the square root of the  number of regions present in RS1.
+If we empirically evaluate the value of normal z-score using different number of regions.
+<!-- Explain what exactly the nZS corrects? I mean, describe what is the statistical/mathematical limitation that it aims to solve.
+The dependency of the ZS value on the number of regions in the region sets tested? -->
+The normalized Z-Score is calculated as follows:
 
 nZS = ZS / $\sqrt{n}$
 
-We can empirically evaluate how the value of z-score between two well known strongly associated proteins, CTCF and RAD21, increases with the number of regions included in the test. On the other hand, the value of the normalized z-score is much more stable with different number of regions. Importantly, we see that the value of normalized z-score is stable approximately after including only 30% of the regions in the dataset. This demonstrates than sampling a portion of the dataset is a viable strategy to reduce calculation time without impacting the capacity to obtain meaningful normalized z-score values.
 
-![Normal z-score empirical calculations](figures/normal_ZScore.png){width=90%}
+![local zscore  colculation (provisional)](figures/normal_ZScore.png){width=90%}
 
-Another crucial factor for the calculation of the normal z-score is the number of permutations performed in the test (`ntimes`). We suggest to use a minimum of 5000 permutations to achieve reproducible results.
-
-![Ntimes demonstration](figures/ntimes_stabilizations.png){width=90%}
+The normal z-score was stabilized using 30% of the sample, this can be used to reduce the calculation time.
+<!-- Missing Figure -->
+![local zscore  colculation (provisional)](figures/ntimes_stabilizations.png){width=90%}
+Other crucial factor for calculate the normal z-score is the ntime, the suggestion after our tests is to use a minimum of 5000 permutation to achieve a reproducible results.
 
 # Quick start
 
@@ -601,7 +615,6 @@ do.call("c",lapply(lapply(AlienRSList_narrow, width),mean))
 # average of the widths of AlienRSList_broad
 do.call("c",lapply(lapply(AlienRSList_broad, width),mean))
 ```
-
 ```{r eval=FALSE}
 
 ##NOT RUN
@@ -622,7 +635,7 @@ cw_Alien_RaR_no_Square <-  crosswisePermTest(
 
 the matrix calculated in this case is based on a double clustering of rows and columns
 
-```{r, eval = FALSE}
+```{r}
 cw_Alien_ReG_no_Square <- makeCrosswiseMatrix(cw_Alien_ReG_no_Square)
 
 plotCrosswiseMatrix(cw_Alien_ReG_no_Square)
@@ -642,7 +655,7 @@ mLZ_regA_ReG_br<-multiLocalZscore(A =
                                   step =100)
 ##
 ```
-```{r, eval = FALSE}
+```{r}
 mLZ_regA_ReG_br<-makeLZMatrix(mLZ_regA_ReG_br)
 
 plotLocalZScoreMatrix(mLZ_regA_ReG_br)
