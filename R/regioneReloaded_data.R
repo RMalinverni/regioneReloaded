@@ -91,28 +91,13 @@ NULL #"cw_Alien"
 #'
 NULL #"cw_Alien"
 
-#' @title cw_Alien_cRaR
-#'
-#' @description
-#'
-#' Alien Genome crosswise matrix using [regioneR::circularRandomizeRegions()]
-#' function a permutation strategy.
-#'
-#' @name cw_Alien_cRaR
-#' @docType data
-#' @usage data(cw_Alien)
-#' @format An objects of class [genoMatriXeR][genoMatriXeR-class]; see [makeCrosswiseMatrix()].
-#'
-#' @keywords datasets
-#'
-NULL #"cw_Alien"
 
 #' @title cw_Alien_RaR
 #'
 #' @description
 #'
 #' Alien Genome crosswise matrix using [regioneR::randomizeRegions()]
-#' function a permutation strategy.
+#' function a permutation strategy. Alist = AlienRSList_narrow, Blist = AlienRSList_narrow
 #'
 #' @name cw_Alien_RaR
 #' @docType data
@@ -127,8 +112,8 @@ NULL #"cw_Alien"
 #'
 #' @description
 #'
-#' Alien Genome crosswise matrix using [regioneR::resampleGenome()] function a permutation s
-#' trategy.
+#' Alien Genome crosswise matrix using [regioneR::resampleGenome()] function as permutations
+#' trategy. Alist = AlienRSList_narrow, Blist = AlienRSList_narrow
 #'
 #' @name cw_Alien_ReG
 #' @docType data
@@ -144,9 +129,25 @@ NULL #"cw_Alien"
 #' @description
 #'
 #' Alien Genome crosswise matrix using [regioneR::resampleRegions()] function a permutation
-#' strategy.
+#' strategy.Alist = AlienRSList_narrow, Blist = AlienRSList_narrow
 #'
 #' @name cw_Alien_ReR
+#' @docType data
+#' @usage data(cw_Alien)
+#' @format An objects of class [genoMatriXeR][genoMatriXeR-class]; see [makeCrosswiseMatrix()].
+#'
+#' @keywords datasets
+#'
+NULL #"cw_Alien"
+
+#' @title cw_Alien_ReG_no_square
+#'
+#' @description
+#'
+#' Alien Genome crosswise matrix using [regioneR::resampleGenome()] function as permutations
+#' trategy. Alist = AlienRSList_narrow, Blist = AlienRSList_broad
+#'
+#' @name cw_Alien_ReG
 #' @docType data
 #' @usage data(cw_Alien)
 #' @format An objects of class [genoMatriXeR][genoMatriXeR-class]; see [makeCrosswiseMatrix()].
@@ -171,11 +172,12 @@ NULL #"cw_Alien"
 #'
 NULL #"cw_Alien"
 
-#' @title mLZ_regA_ReG
+#' @title mLZ_regA_ReG_br
 #'
 #' @description
 #'
-#' Placeholder
+#' Alien Genome multiLocalZScore calculated for regA regionset from AlienRSList_broad using [regioneR::resampleGenome()] function as permutation s
+#' trategy.
 #'
 #' @name mLZ_regA_ReG
 #' @docType data
@@ -187,7 +189,8 @@ NULL
 #'
 #' @description
 #'
-#' Placeholder
+#' Alien Genome multiLocalZScore calculated for regD regionset from AlienRSList_narrow using [regioneR::resampleGenome()] function as permutation s
+#' trategy.
 #'
 #' @name mLZ_regD_ReG
 #' @docType data
