@@ -24,7 +24,7 @@ LazyData: false
 RoxygenNote: 7.2.1
 Roxygen: list(markdown = TRUE)
 Depends: 
-    R (>= 4.1),
+    R (>= 4.2),
     regioneR
 Imports:
     stats,
