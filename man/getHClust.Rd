@@ -15,12 +15,13 @@ getHClust( rR, hctype = "rows")
 an object of class \link{hclust}
 }
 \description{
-get Object of class \link{hclust} from  \link[=genoMatriXeR_class]{genoMatriXeR} or \link[=multiLocalZScore_class]{multiLocalZScore}
+get Object of class \link{hclust} from  \link[=genoMatriXeR-class]{genoMatriXeR} or \link[=multiLocalZScore-class]{multiLocalZScore}
 }
 \examples{
 
 data("cw_Alien")
 
+cw_Alien_ReG <- makeCrosswiseMatrix(cw_Alien_ReG)
 hc <- getHClust(cw_Alien_ReG)
 
 plot(hc)

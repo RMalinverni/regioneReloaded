@@ -140,14 +140,14 @@ NULL #"cw_Alien"
 #'
 NULL #"cw_Alien"
 
-#' @title cw_Alien_ReG_no_square
+#' @title cw_Alien_ReG_no_Square
 #'
 #' @description
 #'
 #' Alien Genome crosswise matrix using [regioneR::resampleGenome()] function as permutations
 #' trategy. Alist = AlienRSList_narrow, Blist = AlienRSList_broad
 #'
-#' @name cw_Alien_ReG
+#' @name cw_Alien_ReG_no_Square
 #' @docType data
 #' @usage data(cw_Alien)
 #' @format An objects of class [genoMatriXeR][genoMatriXeR-class]; see [makeCrosswiseMatrix()].
@@ -179,7 +179,7 @@ NULL #"cw_Alien"
 #' Alien Genome multiLocalZScore calculated for regA regionset from AlienRSList_broad using [regioneR::resampleGenome()] function as permutation s
 #' trategy.
 #'
-#' @name mLZ_regA_ReG
+#' @name mLZ_regA_ReG_br
 #' @docType data
 #' @usage data(cw_Alien)
 #' @format An object of class [multiLocalZScore][multiLocalZScore-class]

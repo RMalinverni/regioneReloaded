@@ -1,7 +1,7 @@
 #' getHClust
 #'
 #' @description
-#' get Object of class [hclust] from  [genoMatriXeR][genoMatriXeR_class] or [multiLocalZScore][multiLocalZScore_class]
+#' get Object of class [hclust] from  [genoMatriXeR][genoMatriXeR-class] or [multiLocalZScore][multiLocalZScore-class]
 #'
 #' @usage getHClust( rR, hctype = "rows")
 #'
@@ -19,6 +19,7 @@
 #'
 #' data("cw_Alien")
 #'
+#' cw_Alien_ReG <- makeCrosswiseMatrix(cw_Alien_ReG)
 #' hc <- getHClust(cw_Alien_ReG)
 #'
 #' plot(hc)
