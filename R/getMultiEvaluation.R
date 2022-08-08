@@ -3,7 +3,7 @@
 #' @description
 #' Get `multiEvaluation` slot from [genoMatriXeR][genoMatriXeR-class] or [multiLocalZScore][multiLocalZScore-class] class.
 #'
-#' @usage getMultiEvaluation( rR, namesRS = NA)
+#' @usage getMultiEvaluation( rR, namesRS = NULL)
 #' @param rR A genoMatriXeR or multiLocalZScore object.
 #' @param namesRS a vector of names. (default = NA)
 #'

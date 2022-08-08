@@ -19,6 +19,7 @@ Returns the matrix from an \link[=genoMatriXeR-class]{genoMatriXeR} or \link[=mu
 
 data("cw_Alien")
 
+cw_Alien_ReG <- makeCrosswiseMatrix(cw_Alien_ReG)
 mtx <- getMatrix(cw_Alien_ReG)
 
 mtx

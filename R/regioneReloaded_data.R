@@ -14,6 +14,9 @@
 #'
 NULL #"cw_Alien"
 
+
+
+
 #' @title AlienGenome
 #'
 #' @description
@@ -43,6 +46,10 @@ NULL #"cw_Alien"
 #'
 NULL #"cw_Alien"
 
+
+
+
+
 #' @title AlienRSList_narrow
 #'
 #' @description
@@ -66,6 +73,10 @@ NULL #"cw_Alien"
 #' @keywords datasets
 #'
 NULL #"cw_Alien"
+
+
+
+
 
 #' @title AlienRSList_broad
 #'
@@ -92,6 +103,8 @@ NULL #"cw_Alien"
 NULL #"cw_Alien"
 
 
+
+
 #' @title cw_Alien_RaR
 #'
 #' @description
@@ -107,6 +120,8 @@ NULL #"cw_Alien"
 #' @keywords datasets
 #'
 NULL #"cw_Alien"
+
+
 
 #' @title cw_Alien_ReG
 #'
@@ -124,6 +139,8 @@ NULL #"cw_Alien"
 #'
 NULL #"cw_Alien"
 
+
+
 #' @title cw_Alien_ReR
 #'
 #' @description
@@ -139,6 +156,8 @@ NULL #"cw_Alien"
 #' @keywords datasets
 #'
 NULL #"cw_Alien"
+
+
 
 #' @title cw_Alien_ReG_no_Square
 #'
@@ -156,6 +175,8 @@ NULL #"cw_Alien"
 #'
 NULL #"cw_Alien"
 
+
+
 #' @title mLZ_regA_ReG
 #'
 #' @description
@@ -163,7 +184,7 @@ NULL #"cw_Alien"
 #' Alien Genome multiLocalZScore calculated for regA regionset from AlienRSList_narrow using [regioneR::resampleGenome()] function as permutation s
 #' trategy.
 #'
-#' @name cw_Alien_ReR
+#' @name cw_Alien_ReG
 #' @docType data
 #' @usage data(cw_Alien)
 #' @format An objects of class [multiLocalZScore][multiLocalZScore-class]; see [makeLZMatrix()].
@@ -171,6 +192,8 @@ NULL #"cw_Alien"
 #' @keywords datasets
 #'
 NULL #"cw_Alien"
+
+
 
 #' @title mLZ_regA_ReG_br
 #'
@@ -184,6 +207,8 @@ NULL #"cw_Alien"
 #' @usage data(cw_Alien)
 #' @format An object of class [multiLocalZScore][multiLocalZScore-class]
 NULL
+
+
 
 #' @title mLZ_regD_ReG
 #'

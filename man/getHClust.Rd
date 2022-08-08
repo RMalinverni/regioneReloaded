@@ -28,5 +28,5 @@ plot(hc)
 
 }
 \seealso{
-\link[=genoMatriXeR-class]{genoMatriXeR}, \link[=multiLocalZScore_class]{multiLocalZScore}, \link{hclust}
+\link[=genoMatriXeR-class]{genoMatriXeR}, \link[=multiLocalZScore-class]{multiLocalZScore}, \link{hclust}
 }

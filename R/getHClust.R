@@ -13,7 +13,7 @@
 #'
 #' an object of class [hclust]
 #'
-#' @seealso [genoMatriXeR][genoMatriXeR-class], [multiLocalZScore][multiLocalZScore_class], [hclust]
+#' @seealso [genoMatriXeR][genoMatriXeR-class], [multiLocalZScore][multiLocalZScore-class], [hclust]
 #'
 #' @examples
 #'

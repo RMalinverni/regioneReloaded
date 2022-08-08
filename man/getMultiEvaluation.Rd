@@ -4,7 +4,7 @@
 \alias{getMultiEvaluation}
 \title{getMultiEvaluation}
 \usage{
-getMultiEvaluation( rR, namesRS = NA)
+getMultiEvaluation( rR, namesRS = NULL)
 }
 \arguments{
 \item{rR}{A genoMatriXeR or multiLocalZScore object.}
