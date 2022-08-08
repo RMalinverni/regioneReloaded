@@ -53,6 +53,8 @@ plotSinglePT <-
       stop("mPT is missing")
     } else if (!is(mPT,"genoMatriXeR")) {
       stop('mPT needs to be a "genoMatriXeR" class object')
+    } else if (is.null(mPT@matrix[[1]])) {
+      stop("The matrix slot of mPT is empty, run first makeCrosswiseMatrix()")
     }
 
     if (!(methods::hasArg(RS1) & methods::hasArg(RS2))) {
