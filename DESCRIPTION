@@ -1,7 +1,7 @@
 Package: regioneReloaded
 Type: Package
 Title: RegioneReloaded: Multiple Association for Genomic Region Sets
-Version: 0.1.0
+Version: 0.1.0.9000
 Authors@R: c(
     person(given = "Roberto",
            family = "Malinverni",
