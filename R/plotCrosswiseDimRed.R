@@ -90,9 +90,10 @@ plotCrosswiseDimRed <-
     # Check mPT object
     if (!methods::hasArg(mPT)) {
       stop("mPT is missing")
-    } else if (is.null(mPT@matrix[[1]])) {
-      stop("The matrix slot of mPT is empty, run first makeCrosswiseMatrix()")
     } else if (methods::is(mPT, "genoMatriXeR")) {
+        if (is.null(mPT@matrix[[1]])) {
+          stop("The matrix slot of mPT is empty, run first makeCrosswiseMatrix()")
+        }
       GM <- mPT@matrix$GMat
     } else if (is.matrix(mPT)) {
       GM <- mPT
