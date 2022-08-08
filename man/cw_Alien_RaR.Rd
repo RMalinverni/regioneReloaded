@@ -12,6 +12,6 @@ data(cw_Alien)
 }
 \description{
 Alien Genome crosswise matrix using \code{\link[regioneR:randomizeRegions]{regioneR::randomizeRegions()}}
-function a permutation strategy.
+function a permutation strategy. Alist = AlienRSList_narrow, Blist = AlienRSList_narrow
 }
 \keyword{datasets}

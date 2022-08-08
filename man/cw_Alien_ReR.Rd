@@ -6,19 +6,12 @@
 \title{cw_Alien_ReR}
 \format{
 An objects of class \link[=genoMatriXeR-class]{genoMatriXeR}; see \code{\link[=makeCrosswiseMatrix]{makeCrosswiseMatrix()}}.
-
-An objects of class \link[=multiLocalZScore-class]{multiLocalZScore}; see \code{\link[=makeLZMatrix]{makeLZMatrix()}}.
 }
 \usage{
-data(cw_Alien)
-
 data(cw_Alien)
 }
 \description{
 Alien Genome crosswise matrix using \code{\link[regioneR:resampleRegions]{regioneR::resampleRegions()}} function a permutation
-strategy.
-
-Alien Genome multiLocalZScore calculated for regA regionset from AlienRSList_narrow using \code{\link[regioneR:resampleGenome]{regioneR::resampleGenome()}} function as permutation s
-trategy.
+strategy.Alist = AlienRSList_narrow, Blist = AlienRSList_narrow
 }
 \keyword{datasets}

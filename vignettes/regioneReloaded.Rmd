@@ -26,7 +26,7 @@ BiocStyle::markdown()
 
 # regioneReloaded
 
-The meaningful interpretation of overlaps between binding profiles of multiplechromatin regulators is a major challenge in epigenomics. To address this,  in 2015 we published `r BiocStyle::Biocpkg("regioneR")`, an R package that we developed for the statistical assessment of the association between genomic region sets. One limitation of regioneR is that it can only perform association analysis between two region sets at a time. Here, we now present **regioneReload**, an R package that is the natural evolution of `r BiocStyle::Biocpkg("regioneR")` and allows to  calculate the statistical association between multiple regions sets at the same time. It also incorporates a strategy to improve p-value calculations and normalize z-scores coming from multiple analysis to allow for their direct comparison. regioneReload also builds upon `r BiocStyle::Biocpkg("regioneR")` by adding new plotting functions for obtaining publication-ready graphs. Taken together, regioneReload aims to be a novel and valuable addition to the 
+The meaningful interpretation of overlaps between binding profiles of multiplechromatin regulators is a major challenge in epigenomics. To address this,  in 2015 we published `r BiocStyle::Biocpkg("regioneR")`, an R package that we developed for the statistical assessment of the association between genomic region sets. One limitation of regioneR is that it can only perform association analysis between two region sets at a time. Here, we now present `r BiocStyle::Rpackage("regioneReloaded")`, an R package that is the natural evolution of `r BiocStyle::Biocpkg("regioneR")` and allows to  calculate the statistical association between multiple regions sets at the same time. It also incorporates a strategy to improve p-value calculations and normalize z-scores coming from multiple analysis to allow for their direct comparison. `r BiocStyle::Rpackage("regioneReloaded")` also builds upon `r BiocStyle::Biocpkg("regioneR")` by adding new plotting functions for obtaining publication-ready graphs. Taken together,  aims to be a novel and valuable addition to the 
 repertoire of available tools for the analysis of high-content genomic datasets.
 
 ## regioneR
@@ -39,15 +39,15 @@ repertoire of available tools for the analysis of high-content genomic datasets.
 
 ## Normalized Z-Score
 
-regioneReload aims to integrate the framework previously developed for `r BiocStyle::Biocpkg("regioneR")` to calculate associations of different region sets simultaneously. However, the values of z-score obtained in different tests can not be directly compared. In particular, the value of the z-score is directly associated to the square root of the number of regions present in the first region set of the test (RS1). 
+`r BiocStyle::Rpackage("regioneReloaded")` aims to integrate the framework previously developed for `r BiocStyle::Biocpkg("regioneR")` to calculate associations of different region sets simultaneously. However, the values of z-score obtained in different tests can not be directly compared. In particular, the value of the z-score is directly associated to the square root of the number of regions present in the first region set of the test (RS1). 
 
-To compare the z-scores obtained in multip pairwise tests between region sets, we introduce the concept of **normalized z-score**, which allows not only to directly compare different association events but also to work with subsets of data and speed up the calculations.
+To compare the z-scores obtained in multi pairwise tests between region sets, we introduce the concept of **normalized z-score**, which allows not only to directly compare different association events but also to work with subsets of data and speed up the calculations.
 
 The normalized z-score is calculated as follows:
 
 nZS = ZS / $\sqrt{n}$
 
-We can empirically evaluate how the value of z-score between two well known strongly associated proteins, CTCF and RAD21, increases with the number of regions included in the test. On the other hand, the value of the normalized z-score is much more stable with different number of regions. Importantly, we see that the value of normalized z-score is stable approximately after including only 30% of the regions in the dataset. This demonstrates than sampling a portion of the dataset is a viable strategy to reduce calculation time without impacting the capacity to obtain meaningful normalized z-score values.
+We can empirically evaluate how the value of z-score between two well known strongly associated proteins, CTCF (ENCFF237OKO) and RAD21 (ENCFF072UEX) in HepG2 cell line from ENCODE portal, (Sloan et al. 2016, https://www.encodeproject.org/) , increases with the number of regions included in the test. On the other hand, the value of the normalized z-score is much more stable with different number of regions. Importantly, we see that the value of normalized z-score is stable approximately after including only 30% of the regions in the dataset. This demonstrates than sampling a portion of the dataset is a viable strategy to reduce calculation time without impacting the capacity to obtain meaningful normalized z-score values.
 
 ![Normal z-score empirical calculations](figures/normal_ZScore.png){width=90%}
 
@@ -80,7 +80,7 @@ The permutation test can be performed on a list multiple region sets by the func
 #
 ```
 
-Once the multiple permutation tests are performed, we can generate a matrix of pairwise associations between the region sets with the function `makeCrosswiseMatrix` and visualize it with `plotCrosswiseMatrix`.
+Once the multiple permutation tests are performed, we can generate a matrix of pairwise associations between the region sets with the function `makeCrosswiseMatrix()` and visualize it with `plotCrosswiseMatrix()`.
 
 ```{r}
 
@@ -111,7 +111,7 @@ AlienGenome <-
 
 ```
 
-Four basic region sets were created on this genome. The first three ("regA", "regB", "regC"), were created using the function `createRandomRegions` from the package `r BiocStyle::Biocpkg("regioneR")`. Each region set consists of 100 regions with an average width of 100 bp (and a standard deviation of 50 bp). Being randomly generated, the three region sets should show no significant associations with each other.
+Four basic region sets were created on this genome. The first three ("regA", "regB", "regC"), were created using the function `createRandomRegions()` from the package `r BiocStyle::Biocpkg("regioneR")`. Each region set consists of 100 regions with an average width of 100 bp (and a standard deviation of 50 bp). Being randomly generated, the three region sets should show no significant associations with each other.
 
 
 ```{r}
@@ -285,7 +285,7 @@ summary(AlienRSList_narrow)
 # Multi Permutation Test with regioneReloaded
 ## Crosswise Analysis and the genoMatriXeR object
 
-`crosswisePermTest()` is the main statistical function of the package. "Crosswise" analysis (in contrast to "pairwise") refers to the calculation of permutation tests between all possible combinations of elements in a first list of region sets (`Alist`) with those in a second list (`Blist`). The core statistical calculations of the permutation tests rely on `regioneR::permTest()`. 
+`crosswisePermTest()` is the main statistical function of the package. "Crosswise" analysis (in contrast to "pairwise") refers to the calculation of permutation tests between all possible combinations of elements in a first list of region sets (`Alist`) with those in a second list (`Blist`). The core statistical calculations of the permutation tests rely on [permTest()](https://rdrr.io/bioc/regioneR/man/permTest.html). 
 
 The result of `crosswisePermTest()` is stored in an S4 object of class `genoMatriXeR` that contains three slots: *parameters*, *multiOverlaps* and *matrix*.
 
@@ -334,8 +334,8 @@ The "multiOverlaps" slot contains a list of data frames that contain the results
 + **name:**            name of region sets in Blist  
 + **n_regionA:**       number of permuted Alist regions
 + **n_regionB:**       number of regions in each regions set of Blist 
-+ **z_score:**         z-score calculated by [regioneR::permTest()]
-+ **p_value:**         p.value calculated by [regioneR::permTest()]
++ **z_score:**         z-score calculated by [permTest](https://rdrr.io/bioc/regioneR/man/permTest.html)
++ **p_value:**         p.value calculated by [permTest](https://rdrr.io/bioc/regioneR/man/permTest.html)
 + **n_hits:**          number of hits computed using the evaluation function on a regions set of Alist versus each regions set of Blists
 + **mean_perm_test:**  mean of hits computed using the evaluation function on the permutated region set
 + **sd_perm_test:**    standard deviation of hits computed using the evaluation function on the permutated region set
@@ -355,11 +355,11 @@ When the genoMatriXeR object is initially created by running `crosswisePermTest(
 
 ## Evaluation functions
 
-regioneReloaded can use all the evaluation strategies present in `r BiocStyle::Biocpkg("regioneR")`, and it also allows the use of custom evaluation functions. The examples considered by this vignette will be based on the default evaluation function `numOverlaps()`.
+`r BiocStyle::Rpackage("regioneReloaded")` can use all the evaluation strategies present in `r BiocStyle::Biocpkg("regioneR")`, and it also allows the use of custom evaluation functions. The examples considered by this vignette will be based on the default evaluation function `numOverlaps()`.
 
 ## Randomization functions
 
-regioneReloaded can use all the randomization strategies present in `r BiocStyle::Biocpkg("regioneR")` and  it also allows the use of custom functions.
+`r BiocStyle::Rpackage("regioneReloaded")` can use all the randomization strategies present in `r BiocStyle::Biocpkg("regioneR")` and  it also allows the use of custom functions.
 
 A notable difference with regioneR is that the randomization function `resampleRegions()` can work without the presence of the parameter "universe". In this case a "universe" will be created by using all regions from the list of regions set "Alist" using the function `createUniverse()`. Three example pre-computed objects are included as sample data generated with three different randomization functions: "randomizeRegions", "resampleRegions" and "resampleGenome".
 
@@ -414,7 +414,7 @@ cw_Alien_ReG <-  crosswisePermTest(
 
 ## Matrix Calculation and visualization
 
-the association matrix will be computed with the function [makeCrosswiseMatrix]. This function returns the object with the matrix assigned to the "matrix" slot, the matrix will be able to be queried with the [getMatrix] function. As a default value the matrix will be created using *normalized z-score* for a more in-depth description of the parameters that can be used to create the matrix we refer you to the [makeCrosswiseMatrix] function manual. If no clustering method is chosen for the array, automatically the most efficient clustering method will be chosen from those in [hclust], as described in the [chooseHclustMet] function manual.
+Association matrix will be computed with the function `makeCrosswiseMatrix()`. This function returns a *genoMatriXeR* object with the matrix assigned to the "matrix" slot, the matrix will be able to be queried with the `getMatrix()` function. As a default value the matrix will be created using *normalized z-score* for a more in-depth description of the parameters that can be used to create the matrix we refer you to the `makeCrosswiseMatrix()` function manual. If no clustering method is chosen, automatically the most efficient clustering method will be chosen from those in [hclust](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/hclust), as described in the `chooseHclustMet()` function manual.
 
 ```{r}
 
@@ -449,23 +449,23 @@ plot(p_ReR)
 
 ```
 
-getHClust] function returns an object of class [hclust] that you can use for furher analysis.
+`getHClust()` function returns an object of class [hclust](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/hclust) that you can use for further analysis.
 
 ```{r}
 
-plot(modX)
+plot(modX,cex = 0.8)
 
 ```
 
-the *matrix_type* parameter [plotCrosswiseMatrix] allows to choose between "association" matrix (where the z-score value obtained from the permutation test calculation will be shown), or "correlation" (where the Pearson's R-value between each Regions Set will be used).
+the *matrix_type* parameter `plotCrosswiseMatrix()` allows to choose between "association" matrix (where the z-score value obtained from the permutation test calculation will be shown), or "correlation" (where the Pearson's R-value between each Regions Set will be used).
 
 ```{r}
 
 p_ReG_cor <- plotCrosswiseMatrix(cw_Alien_ReG, matrix_type = "correlation", ord_mat = ord)
-p_ReR_cor <- plotCrosswiseMatrix(cw_Alien_ReR, matrix_type = "correlation", ord_mat = ord)
+# p_ReR_cor <- plotCrosswiseMatrix(cw_Alien_ReR, matrix_type = "correlation", ord_mat = ord)
 
 plot(p_ReG_cor)
-plot(p_ReR_cor)
+# plot(p_ReR_cor)
 
 ```
 
@@ -473,7 +473,7 @@ plot(p_ReR_cor)
 
 ## Plot Single permutation test 
 
-[regionReloded] allows us to extract and visualize the results of a single Region Sets comparison, the visualization resumes the previous graphs in [regioneR] by exploiting the power of [ggplot2].
+`r BiocStyle::Rpackage("regioneReloaded")` allows us to extract and visualize the results of a single Region Sets comparison, the visualization resumes the previous graphs in `r BiocStyle::Biocpkg("regioneR")` by exploiting the power of `r BiocStyle::Biocpkg("ggplot2")`.
 
 ```{r}
 plotSinglePT(cw_Alien_ReG, RS1 = "regA", RS2 = "regA_05")
@@ -485,7 +485,7 @@ p_sPT1 <- plotSinglePT(cw_Alien_ReG, RS1 = "regA", RS2 = "regC")
 plot(p_sPT1)
 ```
 
-## Plot Dimensionally Reduction
+## Plot Dimensionality Reduction
 
 Dimensionality reduction refers to a strategy capable of representing complex (high-density) data in a low-density space while retaining some meaningful properties of the original data. The plotCrosswiseDimRes function allows three of the most widely used algorithms (PCA, tRSNE, UMAP) to be applied to represent genoMatriXeR objects.
 
@@ -498,17 +498,17 @@ plotCrosswiseDimRed(cw_Alien_ReG, nc = 6, type="PCA")
 
 ```
 
-The data is clustered using a clustering algorithm that can be selected from ("hclust", "kmeans" or "pam" ), giving the possibility of importing an external clustering method.
+The data is clustered using a clustering algorithm that can be selected from (`hclust`, `kmeans` or `pam` ), giving the possibility of importing an external clustering method.
 
 ```{r}
 set.seed(42)
 p_cdr_hc <- plotCrosswiseDimRed(cw_Alien_ReG, nc = 6, type="PCA", clust_met = "hclust")
 
-set.seed(42)
-p_cdr_pam <- plotCrosswiseDimRed(cw_Alien_ReG, nc = 6, type="PCA", clust_met = "pam")
+# set.seed(42)
+# p_cdr_pam <- plotCrosswiseDimRed(cw_Alien_ReG, nc = 6, type="PCA", clust_met = "pam")
 
 plot(p_cdr_hc) 
-plot(p_cdr_pam)
+# plot(p_cdr_pam)
           
 ```
 
@@ -531,7 +531,7 @@ set.seed(67)
 plotCrosswiseDimRed(cw_Alien_ReG, nc = 6, type="UMAP",listRS = lsRegSet,ellipse = TRUE, emphasize =TRUE)
 
 ```
-The * return_table* parameter displays a table summarising the results of the clustering, incorporating the value *ASW* total mean of individual silhouette widths [silohuette][cluster::silhouette].
+The * return_table* parameter displays a table summarising the results of the clustering, incorporating the value *ASW* total mean of individual silhouette widths [silohuette](https://www.rdocumentation.org/packages/cluster/versions/2.1.3/topics/silhouette).
 
 ```{r}
 set.seed(67)
@@ -542,7 +542,7 @@ silTable
 
 # Multi Local Zscore
 
-The [multiLocalZscore] function allows the association of a single regions Set against a list of regions Sets to be analysed by applying the [localZScore][regioner::localZScore] function in a neighbourhood defined by the *window* parameter a number of times defined by the *step* parameter.
+The [multiLocalZscore] function allows the association of a single regions Set against a list of regions Sets to be analysed by applying the [localZScore](https://rdrr.io/bioc/regioneR/man/localZScore.html) function in a neighbourhood defined by the *window* parameter a number of times defined by the *step* parameter.
 
 ```{r, eval=FALSE }
 
@@ -558,33 +558,46 @@ mlz_Alien_ReG<-multiLocalZscore(A = AlienRSList_narrow$regA,
 ```
 
 
-As with the [crosswisePermTest] function, an object consisting of three slots *paremeters* *multiLocalZscores* and *matrix* will be created. These can be queried by the functions [getParametrs], [getMultiEvaluation] and [getMatrix] respectively. Again, the object thus created will have the matrix slot = NULL.
+As with the `crosswisePermTest()` function, an object consisting of three slots *paremeters* *multiLocalZscores* and *matrix* will be created. These can be queried by the functions `getParametrs()`, `getMultiEvaluation()` and `getMatrix()` respectively. Again, the object thus created will have the matrix slot = NULL.
 
 ```{r}
 getParameters(mLZ_regA_ReG)
 
 mlz_Me <- getMultiEvaluation(rR = mLZ_regA_ReG )
 
-mlz_Me$resumeTable
+head(mlz_Me$resumeTable)
 ```
 
-The matrix will be created by the function [makeLZMatrix] in a similar manner as illustrated for the function [makeCrosswiseMatrix]. Again, it is possible to pass a clustering method to the function, and if not, the best clustering function calculated using [chooseHclustMet] will be chosen.
+The matrix will be created by the function `makeLZMatrix()` in a similar manner as illustrated for the function `makeCrosswiseMatrix()`. Again, it is possible to pass a clustering method to the function, and if not, the best clustering function calculated using `chooseHclustMet()` will be chosen.
 
 ```{r}
 
 mLZ_regA_ReG <- makeLZMatrix(mLZ_regA_ReG)
 
-plot(getHClust(mLZ_regA_ReG))
+plot(getHClust(mLZ_regA_ReG),cex = 0.8)
 ```
-The [plotLocalZScoreMatrix] function allows the visualisation of an object of class [multilocalZScore]. This type of visualisation will also allow the association to be tested in the area adjacent to the tested Region Set. 
+The `plotLocalZScoreMatrix()` function allows the visualisation of an object of class *multilocalZScore*. This type of visualization will also allow the association to be tested in the area adjacent to the tested Region Set. 
 
 ```{r}
 plotLocalZScoreMatrix(mLZ_regA_ReG, maxVal = "max")
 ```
+## Single Local ZScore
+
+Similarly to as seen above for the `plotSinglePT()` function, the `plotSingleLZ()` function allows us to specifically display single associations drawn from a *multiLocalZScore* object.
+```{r}
+plotSingleLZ(mLZ = mLZ_regA_ReG, RS =c("regA"), smoothing = TRUE)
+```
+
+It is also possible to simultaneously display multiple associations in the same graph by introducing a vector of region set names
+
+```{r}
+plotSingleLZ(mLZ = mLZ_regA_ReG,RS =c("regA","regA_02","regA_06","regA_08","regD"),smoothing = TRUE)
+```
+
 
 # Analyses of non-square matrices
 
-regionReloaded allows the association of Regions Sets of any length to be calculated. AlienRSList_broad is a list of Regions Set created from AlienRSList_narrow, in which the [extendRegions][regionR::extendRegions] function has increased the width to an average of 5kb and added a completely random list of Regions Set (RegR).
+`r BiocStyle::Rpackage("regioneReloaded")` allows the association of Regions Sets of any length to be calculated. *AlienRSList_broad* is a list of Region Set created from *AlienRSList_narrow*, in which the [extendRegions](https://rdrr.io/bioc/regioneR/man/extendRegions.html) function has increased the width to an average of 5kb, to complete *AlienRSList_broad* a set of random region sets was added (RegR).
 ```{r}
 # average of the widths of AlienRSList_narrow
 do.call("c",lapply(lapply(AlienRSList_narrow, width),mean))
@@ -618,7 +631,7 @@ cw_Alien_ReG_no_Square <- makeCrosswiseMatrix(cw_Alien_ReG_no_Square)
 plotCrosswiseMatrix(cw_Alien_ReG_no_Square)
 ```
 
-In this case, the [multiLocalZscore] function works in exactly the same way as in the previous cases, but in order to see the form of the association, it is recommended to enlarge the *windows*.
+In this case, the `multiLocalZscore()` function works in exactly the same way as in the previous cases, but in order to see the form of the association, it is recommended to enlarge *window* parameter.
 
 ```{r, eval=FALSE}
 
@@ -632,11 +645,19 @@ mLZ_regA_ReG_br<-multiLocalZscore(A =
                                   step =100)
 ##
 ```
-```{r, eval = FALSE}
+```{r}
 mLZ_regA_ReG_br<-makeLZMatrix(mLZ_regA_ReG_br)
 
 plotLocalZScoreMatrix(mLZ_regA_ReG_br)
 ```
+
+
+```{r}
+plotSingleLZ(mLZ = mLZ_regA_ReG_br,RS =c("regA_br","regA_br_02","regA_br_06","regA_br_08","regD_br"), smoothing = TRUE)
+
+```
+
+
 # Session Info
 ```{r, sessionInfo}
 sessionInfo()

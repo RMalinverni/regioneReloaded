@@ -11,7 +11,7 @@ An objects of class \link[=genoMatriXeR-class]{genoMatriXeR}; see \code{\link[=m
 data(cw_Alien)
 }
 \description{
-Alien Genome crosswise matrix using \code{\link[regioneR:resampleGenome]{regioneR::resampleGenome()}} function a permutation s
-trategy.
+Alien Genome crosswise matrix using \code{\link[regioneR:resampleGenome]{regioneR::resampleGenome()}} function as permutations
+trategy. Alist = AlienRSList_narrow, Blist = AlienRSList_narrow
 }
 \keyword{datasets}

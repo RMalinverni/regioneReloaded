@@ -14,6 +14,7 @@
 #'
 #' data("cw_Alien")
 #'
+#' cw_Alien_ReG <- makeCrosswiseMatrix(cw_Alien_ReG)
 #' mtx <- getMatrix(cw_Alien_ReG)
 #'
 #' mtx

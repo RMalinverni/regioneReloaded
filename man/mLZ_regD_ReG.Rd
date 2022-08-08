@@ -11,5 +11,6 @@ An object of class \link[=multiLocalZScore-class]{multiLocalZScore}
 data(cw_Alien)
 }
 \description{
-Placeholder
+Alien Genome multiLocalZScore calculated for regD regionset from AlienRSList_narrow using \code{\link[regioneR:resampleGenome]{regioneR::resampleGenome()}} function as permutation s
+trategy.
 }

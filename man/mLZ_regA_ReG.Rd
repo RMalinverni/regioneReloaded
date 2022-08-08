@@ -5,11 +5,13 @@
 \alias{mLZ_regA_ReG}
 \title{mLZ_regA_ReG}
 \format{
-An object of class \link[=multiLocalZScore-class]{multiLocalZScore}
+An objects of class \link[=multiLocalZScore-class]{multiLocalZScore}; see \code{\link[=makeLZMatrix]{makeLZMatrix()}}.
 }
 \usage{
 data(cw_Alien)
 }
 \description{
-Placeholder
+Alien Genome multiLocalZScore calculated for regA regionset from AlienRSList_narrow using \code{\link[regioneR:resampleGenome]{regioneR::resampleGenome()}} function as permutation s
+trategy.
 }
+\keyword{datasets}
