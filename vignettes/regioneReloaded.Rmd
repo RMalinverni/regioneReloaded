@@ -26,7 +26,7 @@ BiocStyle::markdown()
 
 # regioneReloaded
 
-The meaningful interpretation of overlaps between binding profiles of multiplechromatin regulators is a major challenge in epigenomics. To address this,  in 2015 we published `r BiocStyle::Biocpkg("regioneR")`, an R package that we developed for the statistical assessment of the association between genomic region sets. One limitation of regioneR is that it can only perform association analysis between two region sets at a time. Here, we now present **regioneReload**, an R package that is the natural evolution of `r BiocStyle::Biocpkg("regioneR")` and allows to  calculate the statistical association between multiple regions sets at the same time. It also incorporates a strategy to improve p-value calculations and normalize z-scores coming from multiple analysis to allow for their direct comparison. regioneReload also builds upon `r BiocStyle::Biocpkg("regioneR")` by adding new plotting functions for obtaining publication-ready graphs. Taken together, regioneReload aims to be a novel and valuable addition to the 
+The meaningful interpretation of overlaps between binding profiles of multiplechromatin regulators is a major challenge in epigenomics. To address this,  in 2015 we published `r BiocStyle::Biocpkg("regioneR")`, an R package that we developed for the statistical assessment of the association between genomic region sets. One limitation of regioneR is that it can only perform association analysis between two region sets at a time. Here, we now present `r BiocStyle::Rpackage("regioneReloaded")`, an R package that is the natural evolution of `r BiocStyle::Biocpkg("regioneR")` and allows to  calculate the statistical association between multiple regions sets at the same time. It also incorporates a strategy to improve p-value calculations and normalize z-scores coming from multiple analysis to allow for their direct comparison. `r BiocStyle::Rpackage("regioneReloaded")` also builds upon `r BiocStyle::Biocpkg("regioneR")` by adding new plotting functions for obtaining publication-ready graphs. Taken together,  aims to be a novel and valuable addition to the 
 repertoire of available tools for the analysis of high-content genomic datasets.
 
 ## regioneR
@@ -39,7 +39,7 @@ repertoire of available tools for the analysis of high-content genomic datasets.
 
 ## Normalized Z-Score
 
-regioneReload aims to integrate the framework previously developed for `r BiocStyle::Biocpkg("regioneR")` to calculate associations of different region sets simultaneously. However, the values of z-score obtained in different tests can not be directly compared. In particular, the value of the z-score is directly associated to the square root of the number of regions present in the first region set of the test (RS1). 
+`r BiocStyle::Rpackage("regioneReloaded")` aims to integrate the framework previously developed for `r BiocStyle::Biocpkg("regioneR")` to calculate associations of different region sets simultaneously. However, the values of z-score obtained in different tests can not be directly compared. In particular, the value of the z-score is directly associated to the square root of the number of regions present in the first region set of the test (RS1). 
 
 To compare the z-scores obtained in multip pairwise tests between region sets, we introduce the concept of **normalized z-score**, which allows not only to directly compare different association events but also to work with subsets of data and speed up the calculations.
 
@@ -47,7 +47,7 @@ The normalized z-score is calculated as follows:
 
 nZS = ZS / $\sqrt{n}$
 
-We can empirically evaluate how the value of z-score between two well known strongly associated proteins, CTCF(ENCFF237OKO) and RAD21(ENCFF072UEX) in HepG2 cell line from ENCODE portal, (Sloan et al. 2016, https://www.encodeproject.org/) , increases with the number of regions included in the test. On the other hand, the value of the normalized z-score is much more stable with different number of regions. Importantly, we see that the value of normalized z-score is stable approximately after including only 30% of the regions in the dataset. This demonstrates than sampling a portion of the dataset is a viable strategy to reduce calculation time without impacting the capacity to obtain meaningful normalized z-score values.
+We can empirically evaluate how the value of z-score between two well known strongly associated proteins, CTCF (ENCFF237OKO) and RAD21 (ENCFF072UEX) in HepG2 cell line from ENCODE portal, (Sloan et al. 2016, https://www.encodeproject.org/) , increases with the number of regions included in the test. On the other hand, the value of the normalized z-score is much more stable with different number of regions. Importantly, we see that the value of normalized z-score is stable approximately after including only 30% of the regions in the dataset. This demonstrates than sampling a portion of the dataset is a viable strategy to reduce calculation time without impacting the capacity to obtain meaningful normalized z-score values.
 
 ![Normal z-score empirical calculations](figures/normal_ZScore.png){width=90%}
 
@@ -355,11 +355,11 @@ When the genoMatriXeR object is initially created by running `crosswisePermTest(
 
 ## Evaluation functions
 
-regioneReloaded can use all the evaluation strategies present in `r BiocStyle::Biocpkg("regioneR")`, and it also allows the use of custom evaluation functions. The examples considered by this vignette will be based on the default evaluation function `numOverlaps()`.
+`r BiocStyle::Rpackage("regioneReloaded")` can use all the evaluation strategies present in `r BiocStyle::Biocpkg("regioneR")`, and it also allows the use of custom evaluation functions. The examples considered by this vignette will be based on the default evaluation function `numOverlaps()`.
 
 ## Randomization functions
 
-regioneReloaded can use all the randomization strategies present in `r BiocStyle::Biocpkg("regioneR")` and  it also allows the use of custom functions.
+`r BiocStyle::Rpackage("regioneReloaded")` can use all the randomization strategies present in `r BiocStyle::Biocpkg("regioneR")` and  it also allows the use of custom functions.
 
 A notable difference with regioneR is that the randomization function `resampleRegions()` can work without the presence of the parameter "universe". In this case a "universe" will be created by using all regions from the list of regions set "Alist" using the function `createUniverse()`. Three example pre-computed objects are included as sample data generated with three different randomization functions: "randomizeRegions", "resampleRegions" and "resampleGenome".
 
@@ -453,7 +453,7 @@ getHClust] function returns an object of class [hclust] that you can use for fur
 
 ```{r}
 
-plot(modX)
+plot(modX,cex = 0.8)
 
 ```
 
@@ -565,7 +565,7 @@ getParameters(mLZ_regA_ReG)
 
 mlz_Me <- getMultiEvaluation(rR = mLZ_regA_ReG )
 
-mlz_Me$resumeTable
+head(mlz_Me$resumeTable)
 ```
 
 The matrix will be created by the function [makeLZMatrix] in a similar manner as illustrated for the function [makeCrosswiseMatrix]. Again, it is possible to pass a clustering method to the function, and if not, the best clustering function calculated using [chooseHclustMet] will be chosen.
@@ -574,13 +574,26 @@ The matrix will be created by the function [makeLZMatrix] in a similar manner as
 
 mLZ_regA_ReG <- makeLZMatrix(mLZ_regA_ReG)
 
-plot(getHClust(mLZ_regA_ReG))
+plot(getHClust(mLZ_regA_ReG),cex = 0.8)
 ```
 The [plotLocalZScoreMatrix] function allows the visualisation of an object of class [multilocalZScore]. This type of visualisation will also allow the association to be tested in the area adjacent to the tested Region Set. 
 
 ```{r}
 plotLocalZScoreMatrix(mLZ_regA_ReG, maxVal = "max")
 ```
+## Single Local ZScore
+
+Similarly to as seen above for the *plotSinglePT()* function, the plotSingleLZ function allows us to specifically display single associations drawn from a "multiLocalZScore" object.
+```{r}
+plotSingleLZ(mLZ = mLZ_regA_ReG, RS =c("regA"), smoothing = TRUE)
+```
+
+It is also possible to simultaneously display multiple associations in the same graph by introducing a vector of region set names
+
+```{r}
+plotSingleLZ(mLZ = mLZ_regA_ReG,RS =c("regA","regA_02","regA_06","regA_08","regD"),smoothing = TRUE)
+```
+
 
 # Analyses of non-square matrices
 
@@ -618,7 +631,7 @@ cw_Alien_ReG_no_Square <- makeCrosswiseMatrix(cw_Alien_ReG_no_Square)
 plotCrosswiseMatrix(cw_Alien_ReG_no_Square)
 ```
 
-In this case, the [multiLocalZscore] function works in exactly the same way as in the previous cases, but in order to see the form of the association, it is recommended to enlarge the *windows*.
+In this case, the [multiLocalZscore] function works in exactly the same way as in the previous cases, but in order to see the form of the association, it is recommended to enlarge *window* parameter.
 
 ```{r, eval=FALSE}
 
@@ -632,18 +645,15 @@ mLZ_regA_ReG_br<-multiLocalZscore(A =
                                   step =100)
 ##
 ```
-```{r, eval = FALSE}
+```{r}
 mLZ_regA_ReG_br<-makeLZMatrix(mLZ_regA_ReG_br)
 
 plotLocalZScoreMatrix(mLZ_regA_ReG_br)
 ```
 
+
 ```{r}
-plotSingleLZ(mLZ = mLZ_regA_ReG, RS =c("regA"), smoothing = TRUE)
-
-plotSingleLZ(mLZ = mLZ_regA_ReG,RS =c("regA","regA_02","regA_06","regA_08","regD"),smoothing = TRUE)
-
-plotSingleLZ(mLZ = mLZ_regA_ReG_br,RS =c("regA_br","regA_br_02","regA_br_06","regA_br_08","regD_br"),smoothing = TRUE)
+plotSingleLZ(mLZ = mLZ_regA_ReG_br,RS =c("regA_br","regA_br_02","regA_br_06","regA_br_08","regD_br"), smoothing = TRUE)
 
 ```
 
