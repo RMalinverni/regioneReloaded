@@ -47,7 +47,7 @@ The normalized z-score is calculated as follows:
 
 nZS = ZS / $\sqrt{n}$
 
-We can empirically evaluate how the value of z-score between two well known strongly associated proteins, CTCF and RAD21, increases with the number of regions included in the test. On the other hand, the value of the normalized z-score is much more stable with different number of regions. Importantly, we see that the value of normalized z-score is stable approximately after including only 30% of the regions in the dataset. This demonstrates than sampling a portion of the dataset is a viable strategy to reduce calculation time without impacting the capacity to obtain meaningful normalized z-score values.
+We can empirically evaluate how the value of z-score between two well known strongly associated proteins, CTCF(ENCFF237OKO) and RAD21(ENCFF072UEX) in HepG2 cell line from ENCODE portal, (Sloan et al. 2016, https://www.encodeproject.org/) , increases with the number of regions included in the test. On the other hand, the value of the normalized z-score is much more stable with different number of regions. Importantly, we see that the value of normalized z-score is stable approximately after including only 30% of the regions in the dataset. This demonstrates than sampling a portion of the dataset is a viable strategy to reduce calculation time without impacting the capacity to obtain meaningful normalized z-score values.
 
 ![Normal z-score empirical calculations](figures/normal_ZScore.png){width=90%}
 
@@ -637,6 +637,17 @@ mLZ_regA_ReG_br<-makeLZMatrix(mLZ_regA_ReG_br)
 
 plotLocalZScoreMatrix(mLZ_regA_ReG_br)
 ```
+
+```{r}
+plotSingleLZ(mLZ = mLZ_regA_ReG, RS =c("regA"), smoothing = TRUE)
+
+plotSingleLZ(mLZ = mLZ_regA_ReG,RS =c("regA","regA_02","regA_06","regA_08","regD"),smoothing = TRUE)
+
+plotSingleLZ(mLZ = mLZ_regA_ReG_br,RS =c("regA_br","regA_br_02","regA_br_06","regA_br_08","regD_br"),smoothing = TRUE)
+
+```
+
+
 # Session Info
 ```{r, sessionInfo}
 sessionInfo()
