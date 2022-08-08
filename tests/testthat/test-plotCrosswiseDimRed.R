@@ -7,5 +7,7 @@ test_that("Argument checks", {
 test_that("Returns the correct class", {
   cw_Alien_ReG <- makeCrosswiseMatrix(cw_Alien_ReG)
   expect_s3_class(plotCrosswiseDimRed(cw_Alien_ReG), "ggplot")
-  expect_s3_class(plotCrosswiseDimRed(cw_Alien_ReG, return_table = TRUE), "data.frame")
+  expect_s3_class(plotCrosswiseDimRed(cw_Alien_ReG, type = "UMAP"), "ggplot")
+  expect_s3_class(plotCrosswiseDimRed(cw_Alien_ReG, type = "tSNE"), "ggplot")
+  expect_s3_class(plotCrosswiseDimRed(cw_Alien_ReG, return_table = TRUE, return_plot = FALSE), "data.frame")
 })
