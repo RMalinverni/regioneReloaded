@@ -184,7 +184,7 @@ NULL #"cw_Alien"
 #' Alien Genome multiLocalZScore calculated for regA regionset from AlienRSList_narrow using [regioneR::resampleGenome()] function as permutation s
 #' trategy.
 #'
-#' @name cw_Alien_ReG
+#' @name mLZ_regA_ReG
 #' @docType data
 #' @usage data(cw_Alien)
 #' @format An objects of class [multiLocalZScore][multiLocalZScore-class]; see [makeLZMatrix()].
