@@ -72,6 +72,8 @@ plotSingleLZ <-
       stop("mLZ is missing")
     } else if (!methods::is(mLZ, "multiLocalZScore")) {
       stop("mLZ needs to be a multiLocalZScore object")
+    } else if (is.null(mLZ@matrix[[1]])) {
+      stop("The matrix slot of mLZ is empty, run first makeLZMatrix()")
     } else if (!methods::hasArg(RS)) {
       stop("RS is missing")
     } else if (!(all(RS %in% names(mLZ@multiLocalZscores$shifed_ZSs)))) {
