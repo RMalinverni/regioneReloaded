@@ -462,10 +462,10 @@ the *matrix_type* parameter `plotCrosswiseMatrix()` allows to choose between "as
 ```{r}
 
 p_ReG_cor <- plotCrosswiseMatrix(cw_Alien_ReG, matrix_type = "correlation", ord_mat = ord)
-p_ReR_cor <- plotCrosswiseMatrix(cw_Alien_ReR, matrix_type = "correlation", ord_mat = ord)
+# p_ReR_cor <- plotCrosswiseMatrix(cw_Alien_ReR, matrix_type = "correlation", ord_mat = ord)
 
 plot(p_ReG_cor)
-plot(p_ReR_cor)
+# plot(p_ReR_cor)
 
 ```
 
@@ -504,11 +504,11 @@ The data is clustered using a clustering algorithm that can be selected from (`h
 set.seed(42)
 p_cdr_hc <- plotCrosswiseDimRed(cw_Alien_ReG, nc = 6, type="PCA", clust_met = "hclust")
 
-set.seed(42)
-p_cdr_pam <- plotCrosswiseDimRed(cw_Alien_ReG, nc = 6, type="PCA", clust_met = "pam")
+# set.seed(42)
+# p_cdr_pam <- plotCrosswiseDimRed(cw_Alien_ReG, nc = 6, type="PCA", clust_met = "pam")
 
 plot(p_cdr_hc) 
-plot(p_cdr_pam)
+# plot(p_cdr_pam)
           
 ```
 
