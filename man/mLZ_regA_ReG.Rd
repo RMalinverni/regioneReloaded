@@ -3,7 +3,7 @@
 \docType{data}
 \name{mLZ_regA_ReG}
 \alias{mLZ_regA_ReG}
-\title{mLZ_regA_ReG}
+\title{mLZ_regA_ReG_br}
 \format{
 An object of class \link[=multiLocalZScore-class]{multiLocalZScore}
 }
@@ -11,5 +11,6 @@ An object of class \link[=multiLocalZScore-class]{multiLocalZScore}
 data(cw_Alien)
 }
 \description{
-Placeholder
+Alien Genome multiLocalZScore calculated for regA regionset from AlienRSList_broad using \code{\link[regioneR:resampleGenome]{regioneR::resampleGenome()}} function as permutation s
+trategy.
 }

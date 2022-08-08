@@ -16,7 +16,7 @@ data(cw_Alien)
 }
 \description{
 Alien Genome crosswise matrix using \code{\link[regioneR:resampleRegions]{regioneR::resampleRegions()}} function a permutation
-strategy.
+strategy.Alist = AlienRSList_narrow, Blist = AlienRSList_narrow
 
 Alien Genome multiLocalZScore calculated for regA regionset from AlienRSList_narrow using \code{\link[regioneR:resampleGenome]{regioneR::resampleGenome()}} function as permutation s
 trategy.

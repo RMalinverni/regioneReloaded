@@ -17,7 +17,7 @@ Authors@R: c(
            role = c("aut"),
            email = "bgel@igtp.org"))
 URL: https://github.com/RMalinverni/regioneReload           
-Description: RegioneReloaded is a package that allows simultaneous analysis of associations between genomic region sets, enabling clustering of data and the creation of ready-to-publish graphs. It takes over and expands on all the features of its predecessor regioneR.
+Description: RegioneReloaded is a package that allows simultaneous analysis of associations between genomic region sets, enabling clustering of data and the creation of ready-to-publish graphs. It takes over and expands on all the features of its predecessor regioneR. It also incorporates a strategy to improve p-value calculations and normalize z-scores coming from multiple analysis to allow for their direct comparison. RegioneReloaded builds upon regioneR by adding new plotting functions for obtaining publication-ready graphs. 
 License: Artistic-2.0
 Encoding: UTF-8
 LazyData: false
