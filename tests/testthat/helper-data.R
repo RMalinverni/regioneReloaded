@@ -1,1 +1,0 @@
-data("cw_Alien")
