@@ -1,6 +1,6 @@
 # Load sample data included in the package
 
-data("cw_Alien")
+data("cw_Alien", package = "regioneReloaded")
 
 # Define small subsets of the region set lists to test crosswisePermTest() with
 # a small computation time
