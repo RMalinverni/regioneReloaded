@@ -203,9 +203,13 @@ plotCrosswiseDimRed <-
       pdr_df$clust2[pdr_df$clust == sel_clust[i]] <- sel_clust[i]
     }
 
+    # Create a data frame for emphasized RS, use "none" as cluster for all RS
+    # not emphasized
     if (!is.null(listRS) & emphasize) {
       pdr_df$clust <- pdr_df$clust2
       pdr_df_emph <- pdr_df[pdr_df$clust != "none", ]
+    } else if (emphasize) {
+      warning("Emphasize is TRUE but nothing was supplied as listRS, emphasize will be ignored")
     }
 
     p <-
@@ -217,7 +221,7 @@ plotCrosswiseDimRed <-
       )) +
       ggplot2::geom_point()
 
-    if (emphasize & ellipse) { # ellipse only for emphasized clusters
+    if (!is.null(listRS) & emphasize & ellipse) { # ellipse only for emphasized clusters
       p <- p + ggplot2::stat_ellipse(
         data = pdr_df_emph,
         type = "t",
@@ -232,7 +236,7 @@ plotCrosswiseDimRed <-
       )
     }
 
-    if (emphasize & !labAll) { # label all clusters
+    if (!is.null(listRS) & emphasize & !labAll) { # label only emphasized clusters
       p <- p + ggrepel::geom_text_repel(
         data = pdr_df_emph,
         size = labSize,
@@ -241,7 +245,7 @@ plotCrosswiseDimRed <-
         point.padding = 0.5,
         segment.color = "grey"
       )
-    } else {
+    } else { # label all clusters
       p <- p + ggrepel::geom_text_repel(
         size = labSize,
         ggplot2::aes_string(label = "Name"),
