@@ -120,7 +120,8 @@ crosswisePermTest <-
       #universe = deparse(substitute(universe)),
       adj_pv_method = adj_pv_method,
       nc = NULL,
-      matOrder = NULL
+      matOrder = NULL,
+      errors = NULL
     )
 
     if (is.null(Blist)) {
@@ -149,12 +150,43 @@ crosswisePermTest <-
     # create @multiOverlaps slot
 
     list.tabs <- lapply(Alist,
-                        FUN = multiPermTest, ..., Blist = Blist,
+                        FUN = function(x,...){
+                          return(
+                            tryCatch(
+                              res<-multiPermTest(x,...), error = function(e) list(NULL, e)
+                              )
+                            )
+                        },
+                        ..., Blist = Blist,
                         ranFUN = ranFUN, evFUN = evFUN, uni = universe,
                         genome = genome, rFUN = rFUN, ntimes = ntimes, adj_pv_method = adj_pv_method
     )
 
     names(list.tabs) <- names(Alist)
+
+    # Save error list
+    list.errors <- NULL
+    list.errors <- lapply(list.tabs, FUN = function(x) {
+      if (!is.data.frame(x)) {
+        return(x[[2]])
+      }
+    })
+    list.errors <- list.errors[!unlist(lapply(list.errors, FUN = is.null))]
+
+    if(!is.null(unlist(list.errors))) {
+      paramList$errors <- list.errors
+      warning("There was an error in one or more of the permutation test iterations(note that the evaluation for this test has been set to NULL)",
+              call. = FALSE)
+    }
+
+    # Clean list.tabs of errors
+    list.tabs <- lapply(list.tabs, FUN = function(x) {
+      if (is.data.frame(x)) {
+        return(x)
+      } else {
+        return(NULL)
+      }
+    })
 
     # create S4 object (matrix slot is = NULL)
 
