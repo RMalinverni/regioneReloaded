@@ -34,7 +34,6 @@ multiPermTest <-
            ...) {
 
         #methods::show(paste0("number of regions: ", length(A)))
-tryCatch({
     new.names <- names(Blist)
     func.list <-
       regioneR::createFunctionsList(FUN = evFUN,
@@ -95,11 +94,5 @@ tryCatch({
     tab$adj.p_value <-
       round(stats::p.adjust(tab$p_value, method = adj_pv_method), digits = 4)
 
-    return(tab)},
-    error = function(e) {
-      warning(paste("There was an error in one of the permutation test iterations with the following message (note that the evaluation for this test has been set to NULL):\n",
-                    e),
-              call. = FALSE)
-      NULL
-      })
+    return(tab)
   }
