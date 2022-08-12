@@ -129,33 +129,36 @@ crosswisePermTest <-
 
     # create multiOverlaps slot
 
-    list.tabs <- lapply(Alist,
-                        FUN = function(A, ...){
-                          return(
+    list.tabs <- mapply(FUN = function(A, nameA, i, ...){
+                            show(paste0("Performing permutation tests for ", nameA, " (", i, " of ", length(Alist), ")"))
                             tryCatch(
-                              res<-multiPermTest(A, ...), error = function(e) list(NULL, e)
-                              )
+                              res <- multiPermTest(A, ...), error = function(e) {
+                                message(paste0("There was an error when performing the permutation test for: ", nameA))
+                                return(list(NULL, e))
+                              }
                             )
                         },
-                        ..., Blist = Blist,
+                        Alist,
+                        names(Alist),
+                        seq_along(Alist),
+                        MoreArgs = list(Blist = Blist,
                         ranFUN = ranFUN, evFUN = evFUN, uni = universe,
-                        genome = genome, rFUN = rFUN, ntimes = ntimes, adj_pv_method = adj_pv_method
+                        genome = genome, rFUN = rFUN, ntimes = ntimes, adj_pv_method = adj_pv_method),
+                        SIMPLIFY = FALSE
     )
 
     names(list.tabs) <- names(Alist)
 
     # Save error list
-    list.errors <- NULL
     list.errors <- lapply(list.tabs, FUN = function(x) {
-      if (!is.data.frame(x)) {
+      if (is.null(x[[1]])) {
         return(x[[2]])
       }
     })
 
     list.errors <- list.errors[!unlist(lapply(list.errors, FUN = is.null))]
 
-    #
-    if(!is.null(unlist(list.errors))) {
+    if(length(list.errors) > 0) {
       paramList$errors <- data.frame(call = unlist(lapply(list.errors, FUN = function(x) deparse(x[["call"]]))),
                                      errorMessage = unlist(lapply(list.errors, FUN = function(x) x[["message"]])))
       warning("There was an error in one or more of the permutation test iterations (note that the evaluation for these test has been set to NULL)",
