@@ -27,20 +27,23 @@
 #' @export getParameters
 #'
 
-getParameters <- function(rR){
+getParameters <- function(rR, show_errors = FALSE){
 
   if (!methods::hasArg(rR)) {
     stop("rR is missing")
   }
 
   if(methods::is(rR , "genoMatriXeR") | methods::is(rR , "multiLocalZScore")){
-
-    param <- rR@parameters
-
-  }else {
+      param <- rR@parameters[names(rR@parameters) != "errors"]
+      errors <- rR@parameters$errors
+      res <- data.frame(parameter = names(param), value = as.character(param))
+  } else {
     stop("getParameters function needs an object of class genoMatriXeR or multiLocalZScore")
   }
 
- res <- data.frame(parameter= names(param), value = as.character(param))
+  if (show_errors) {
+    res <- list(parameters = res, errors = errors)
+  }
+
  return(res)
 }

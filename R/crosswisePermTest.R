@@ -150,10 +150,10 @@ crosswisePermTest <-
     # create @multiOverlaps slot
 
     list.tabs <- lapply(Alist,
-                        FUN = function(x,...){
+                        FUN = function(A, ...){
                           return(
                             tryCatch(
-                              res<-multiPermTest(x,...), error = function(e) list(NULL, e)
+                              res<-multiPermTest(A, ...), error = function(e) list(NULL, e)
                               )
                             )
                         },
@@ -171,11 +171,14 @@ crosswisePermTest <-
         return(x[[2]])
       }
     })
+
     list.errors <- list.errors[!unlist(lapply(list.errors, FUN = is.null))]
 
+    #
     if(!is.null(unlist(list.errors))) {
-      paramList$errors <- list.errors
-      warning("There was an error in one or more of the permutation test iterations(note that the evaluation for this test has been set to NULL)",
+      paramList$errors <- data.frame(call = unlist(lapply(list.errors, FUN = function(x) deparse(x[["call"]]))),
+                                     errorMessage = unlist(lapply(list.errors, FUN = function(x) x[["message"]])))
+      warning("There was an error in one or more of the permutation test iterations (note that the evaluation for these test has been set to NULL)",
               call. = FALSE)
     }
 
