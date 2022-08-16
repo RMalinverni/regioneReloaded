@@ -15,7 +15,7 @@ test_that("crosswisePermTest: different randomization functions", {
       per.chromosome = TRUE,
       ranFUN = "resampleGenome",
       evFUN = "numOverlaps",
-      ntimes = 5,
+      ntimes = 10,
       mc.cores = 2
     )
   )
@@ -28,7 +28,7 @@ test_that("crosswisePermTest: different randomization functions", {
       genome = AlienGenome,
       ranFUN = "resampleRegions",
       evFUN = "numOverlaps",
-      ntimes = 5,
+      ntimes = 10,
       mc.cores = 2
     )
   )
@@ -41,7 +41,7 @@ test_that("crosswisePermTest: different randomization functions", {
       genome = AlienGenome,
       ranFUN = "randomizeRegions",
       evFUN = "numOverlaps",
-      ntimes = 5,
+      ntimes = 10,
       mc.cores = 2
     )
   )
@@ -54,7 +54,7 @@ test_that("crosswisePermTest: different randomization functions", {
       genome = AlienGenome,
       ranFUN = "circularRandomizeRegions",
       evFUN = "numOverlaps",
-      ntimes = 5,
+      ntimes = 10,
       mc.cores = 2
     )
   )
@@ -73,7 +73,7 @@ test_that("crosswisePermTest: different evaluation functions", {
       per.chromosome = TRUE,
       ranFUN = "circularRandomizeRegions",
       evFUN = "numOverlaps",
-      ntimes = 5,
+      ntimes = 10,
       mc.cores = 2
     )
   )
@@ -86,7 +86,7 @@ test_that("crosswisePermTest: different evaluation functions", {
       genome = AlienGenome,
       ranFUN = "circularRandomizeRegions",
       evFUN = "meanDistance",
-      ntimes = 5,
+      ntimes = 10,
       mc.cores = 2
     )
   )
@@ -106,7 +106,7 @@ test_that("crosswisePermTest: resampling and fraction", {
       per.chromosome = TRUE,
       ranFUN = "resampleGenome",
       evFUN = "numOverlaps",
-      ntimes = 5,
+      ntimes = 10,
       mc.cores = 2
     )
   )
@@ -121,7 +121,7 @@ test_that("crosswisePermTest: resampling and fraction", {
       per.chromosome = TRUE,
       ranFUN = "resampleGenome",
       evFUN = "numOverlaps",
-      ntimes = 5,
+      ntimes = 10,
       mc.cores = 2
     )
   )
