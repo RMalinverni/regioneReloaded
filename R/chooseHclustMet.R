@@ -2,7 +2,7 @@
 #'
 #' @description
 #'
-#' Evaluate and choose the best method for clustering a matrix using the [hclust()] function
+#' Evaluate and choose the best method for clustering a matrix using the [hclust()] function.
 #'
 #' @usage chooseHclustMet(GM, scale = FALSE, vecMet = NULL, distHC = "euclidean")
 #'
