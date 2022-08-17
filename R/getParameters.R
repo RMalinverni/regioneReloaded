@@ -33,14 +33,21 @@ getParameters <- function(rR){
     stop("rR is missing")
   }
 
-  if(methods::is(rR , "genoMatriXeR") | methods::is(rR , "multiLocalZScore")){
+  if( methods::is(rR , "genoMatriXeR") | methods::is(rR , "multiLocalZScore" )){
 
-    param <- rR@parameters
+    if(methods::is(rR , "genoMatriXeR")){
+      param <- gmxrParam(rR)
+    }
 
-  }else {
+    if(methods::is(rR , "multiLocalZScore")){
+      param <- mlzsParam(rR)
+    }
+
+  }else{
     stop("getParameters function needs an object of class genoMatriXeR or multiLocalZScore")
   }
 
- res <- data.frame(parameter= names(param), value = as.character(param))
- return(res)
+  res <- data.frame(parameter= names(param), value = as.character(param))
+  return(res)
+
 }
