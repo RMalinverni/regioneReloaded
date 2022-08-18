@@ -78,32 +78,14 @@ crosswisePermTest <-
            ...) {
 
     # control parameters
-
-    if (!methods::hasArg(Alist)) {
-      stop("Alist is missing")
-    }
-    if (!is.logical(sampling)) {
-      stop("sampling must be logical")
-    }
-    if (!is.numeric(fraction)) {
-      stop("fraction must be numeric")
-    }
-    if (!is.numeric(min_sampling)) {
-      stop("min_sampling must be numeric")
-    }
-    if (!is.character(ranFUN)) {
-      stop("ranFun must be charachter")
-    }
-    if (!is.character(evFUN)) {
-      stop("evFun must be charachter")
-    }
-    if (!is.numeric(ntimes)) {
-      stop("ntimes must be numeric")
-    }
-    if (!is.numeric(min_sampling)) {
-      stop("min_sampling must be numeric")
-    }
-
+    stopifnot("Alist is missing" = methods::hasArg(Alist))
+    stopifnot("fraction must be numeric" = is.numeric(fraction))
+    stopifnot("sampling must be logical" = is.logical(sampling))
+    stopifnot("min_sampling must be numeric" = is.numeric(min_sampling))
+    stopifnot("ranFun must be charachter" = is.character(ranFUN))
+    stopifnot("evFun must be charachter" = is.character(evFUN))
+    stopifnot("ntimes must be numeric" = is.numeric(ntimes))
+    stopifnot("min_sampling must be numeric" = is.numeric(min_sampling))
 
     # create @parameters slot
 
