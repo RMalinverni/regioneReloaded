@@ -53,22 +53,18 @@ plotLocalZScoreMatrix <- function(mLZ,
                                   highlight_max = FALSE,
                                   smoothing = FALSE,
                                   ...) {
+  # Check mLZ object
+  stopifnot("mLZ is missing" = methods::hasArg(mLZ))
+  stopifnot("mLZ needs to be a multiLocalZScore object" = {
+    methods::is(mLZ, "multiLocalZScore") | methods::is(mLZ, "matrix")
+  })
+  stopifnot("The matrix slot of mLZ is empty, run first makeCrosswiseMatrix()" = !is.null(mLZ@matrix[[1]]))
 
-  if (!methods::hasArg(mLZ)) {
-    stop("mLZ is missing")
-  } else if (!methods::is(mLZ, "multiLocalZScore")) {
-    stop("the object mLZA needs to be an multiLocalZScore object")
-  } else if (is.null(mLZ@matrix[[1]])) {
-    stop("The matrix slot of mLZ is empty, run first makeLZMatrix()")
-  }
-
-  if (!(matrix_type %in% c("association", "correlation"))) {
-  stop("Invalid matrix_type, choose 'association' or 'correlation'")
-  } else if (!is.na(maxVal)) {
-  if(!(methods::is(maxVal, "numeric") | maxVal == "max")) {
-    stop("maxVal has to be a numerical value, 'max' or NA")
-  }
-}
+  # Check arguments
+  stopifnot("Invalid matrix_type, choose 'association' or 'correlation'" = matrix_type %in% c("association", "correlation"))
+  stopifnot("maxVal has to be a numerical value, 'max' or NA" = {
+    is.na(maxVal) | methods::is(maxVal, "numeric") | maxVal == "max"
+  })
 
   if (matrix_type == "association") {
     GM <- t(mLZ@matrix$LZM)
