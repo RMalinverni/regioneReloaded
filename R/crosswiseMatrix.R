@@ -15,7 +15,8 @@
 crosswiseMatrix <- function(mPT,
                             zs.type = "norm_zscore",
                             ...) {
-  A.obj <- mPT@multiOverlaps
+
+  A.obj <- getMultiEvaluation(mPT)
 
   mat <- vector()
   for (i in seq_along(A.obj)) {

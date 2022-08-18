@@ -50,14 +50,14 @@ getHClust<-function(rR, hctype = "rows"){
 
     if (hctype == "rows"){
 
-      mod <- rR@matrix$FitRow
+      mod <- gmxrMatrix(rR)$FitRow
 
     }
     if (hctype == "cols"){
 
-      mod <- rR@matrix$FitCol
+      mod <- gmxrMatrix(rR)$FitCol
 
-      if (is.null(mod)) { mod <- rR@matrix$FitRow}
+      if (is.null(mod)) { mod <- gmxrMatrix(rR)$FitRow}
 
     }
 
@@ -65,7 +65,7 @@ getHClust<-function(rR, hctype = "rows"){
 
   if(methods::is(rR , "multiLocalZScore")){
 
-      mod <- rR@matrix$FitRow
+      mod <- mlzsMatrix(rR)$FitRow
 
       if (hctype == "cols"){
 

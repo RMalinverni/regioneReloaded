@@ -49,18 +49,18 @@ getMatrix <- function(rR) {
 
   if (methods::is(rR, "genoMatriXeR")) {
 
-    if (is.null(rR@matrix[[1]])){
+    if (is.null(gmxrMatrix(rR)[[1]])){
       stop ("no matrix computed for genoMatriXeR object")
     }
-    GM <- rR@matrix$GMat
+    GM <- gmxrMatrix(rR)$Gmat
   }
 
   if (methods::is(rR, "multiLocalZScore")) {
-    if (is.null(rR@matrix[[1]])){
+    if (is.null(mlzsMatrix(rR)[[1]])){
       stop ("no matrix computed for multiLocalZScore object")
     }
 
-    GM <- rR@matrix$LZM
+    GM <- mlzsMatrix(rR)$LZM
   }
 
   return(GM)
