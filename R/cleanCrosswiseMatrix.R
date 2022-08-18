@@ -30,9 +30,8 @@ cleanCrosswiseMatrix <-
     }
 
     GM[is.nan(GM)] <- subEX
-    if (sum(GM) == 0) {
-      stop("all values of the matrix is 0")
-    }
+
+    stopifnot("All values of the matrix are 0" = sum(GM) != 0)
 
     return(GM)
   }
