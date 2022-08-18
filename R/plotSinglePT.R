@@ -49,17 +49,13 @@ plotSinglePT <-
            RS2,
            xlab = NA,
            main = NA) {
-    if (!methods::hasArg(mPT)) {
-      stop("mPT is missing")
-    } else if (!is(mPT,"genoMatriXeR")) {
-      stop('mPT needs to be a "genoMatriXeR" class object')
-    }
 
-    if (!(methods::hasArg(RS1) & methods::hasArg(RS2))) {
-      stop("RS1 and RS2 are required")
-    } else if (!all(c(RS1, RS2) %in% names(mPT@multiOverlaps))) {
-      stop("RS1 or RS2 do not match region set names in the mPT genoMatriXeR object")
-    }
+    # Check mPT object
+    stopifnot("mPT is missing" = methods::hasArg(mPT))
+    stopifnot("mPT needs to be a genoMatriXeR object or a numeric matrix" = methods::is(mPT, "genoMatriXeR"))
+
+    stopifnot("RS1 and RS2 are required" = methods::hasArg(RS1) & methods::hasArg(RS2))
+    stopifnot("RS1 or RS2 do not match region set names in the mPT genoMatriXeR object" = all(c(RS1, RS2) %in% names(mPT@multiOverlaps)))
 
     if (is.na(xlab) & mPT@parameters$evFUN == "numOverlaps") {
       xlab <- "N of overlaps"
