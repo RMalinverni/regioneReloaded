@@ -31,13 +31,10 @@
 
 getMultiEvaluation <- function(rR,namesRS = NULL){
 
-  if (!methods::hasArg(rR)) {
-    stop("rR is missing")
-  }
-
-  if(!(methods::is(rR , "genoMatriXeR") | methods::is(rR , "multiLocalZScore"))){
-    stop(" class of rR object need to be genoMatriXeR or multiLocalZScore")
-  }
+  stopifnot("rR is missing" = methods::hasArg(rR))
+  stopifnot("rR must be an object of class genoMatriXeR or multiLocalZScore" = {
+    methods::is(rR , "genoMatriXeR") | methods::is(rR , "multiLocalZScore")
+  })
 
   if(methods::is(rR , "genoMatriXeR" )){
 

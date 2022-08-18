@@ -88,23 +88,20 @@ plotCrosswiseDimRed <-
            ...) {
 
     # Check mPT object
-    if (!methods::hasArg(mPT)) {
-      stop("mPT is missing")
-    } else if (is.null(mPT@matrix[[1]])) {
-      stop("The matrix slot of mPT is empty, run first makeCrosswiseMatrix()")
-    } else if (methods::is(mPT, "genoMatriXeR")) {
+    stopifnot("mPT is missing" = methods::hasArg(mPT))
+    stopifnot("mPT needs to be a genoMatriXeR object or a numeric matrix" = {
+      methods::is(mPT, "genoMatriXeR") | methods::is(mPT, "matrix")
+    })
+    stopifnot("The matrix slot of mPT is empty, run first makeCrosswiseMatrix()" = !is.null(mPT@matrix[[1]]))
+
+    # Check arguments
+    stopifnot("type must be 'PCA', 'tSNE' or 'UMAP'" = type %in% c("PCA", "tSNE", "UMAP"))
+    stopifnot("clust_met must be 'hclust', 'kmeans' or 'pam'" = clust_met %in% c("hclust", "kmeans", "pam"))
+
+    if (methods::is(mPT, "genoMatriXeR")) {
       GM <- mPT@matrix$GMat
     } else if (is.matrix(mPT)) {
       GM <- mPT
-    } else {
-      stop("mPT needs to be a genoMatriXeR object or a numeric matrix")
-    }
-
-    # Check arguments
-    if (!(type %in% c("PCA", "tSNE", "UMAP"))) {
-      stop("type must be 'PCA', 'tSNE' or 'UMAP'")
-    } else if (!(clust_met %in% c("hclust", "kmeans", "pam"))) {
-      stop("clust_met must be 'hclust', 'kmeans' or 'pam'")
     }
 
     if(!all(listRS %in% names(mPT@multiOverlaps))) {
