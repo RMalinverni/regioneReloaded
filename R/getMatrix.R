@@ -42,7 +42,7 @@ getMatrix <- function(rR) {
   stopifnot("rR must be of class genoMatriXeR or multiLocalZScore" = {
     methods::is(rR , "genoMatriXeR") | methods::is(rR , "multiLocalZScore")
   })
-  stopifnot("no matrix computed for genoMatriXeR object" = !is.null(rR@matrix[[1]]))
+  stopifnot("no matrix computed for genoMatriXeR or multiLocalZScore object, run first makeCrosswiseMatrix()" = !is.null(rR@matrix[[1]]))
 
   if (methods::is(rR, "genoMatriXeR")) {
     GM <- rR@matrix$GMat
