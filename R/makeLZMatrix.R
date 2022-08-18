@@ -45,11 +45,8 @@ makeLZMatrix <- function(mlZA,
                          dist.method = "euclidean",
                          scale = FALSE,
                          ...) {
-
-
-  if (!methods::is(mlZA,"multiLocalZScore")) {
-    stop("the object mlZA must be a multiLocalZScore object")
-  }
+  stopifnot("mlZA is missing" = methods::hasArg(mlZA))
+  stopifnot("mlZA must be an object of class multiLocalZScore" = methods::is(mlZA,"multiLocalZScore"))
 
   mat <- vector(length = length(mlZA@multiLocalZscores$shifts))
 
