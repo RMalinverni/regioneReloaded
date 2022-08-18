@@ -68,15 +68,11 @@ plotSingleLZ <-
            labMax = FALSE,
            smoothing = FALSE,
            ...) {
-    if (!methods::hasArg(mLZ)) {
-      stop("mLZ is missing")
-    } else if (!methods::is(mLZ, "multiLocalZScore")) {
-      stop("mLZ needs to be a multiLocalZScore object")
-    } else if (!methods::hasArg(RS)) {
-      stop("RS is missing")
-    } else if (!(all(RS %in% names(mLZ@multiLocalZscores$shifed_ZSs)))) {
-      stop("One or more elements in RS do not match region set names in mLZ")
-    }
+
+    stopifnot("mLZ is missing" = methods::hasArg(mLZ))
+    stopifnot("mLZ needs to be a multiLocalZScore object" = methods::is(mLZ, "multiLocalZScore"))
+    stopifnot("RS is missing" = methods::hasArg(RS))
+    stopifnot("One or more elements in RS do not match region set names in mLZ" = all(RS %in% names(mLZ@multiLocalZscores$shifed_ZSs)))
 
     RS <- as.list(RS)
     df <- do.call("rbind", lapply(X = RS, FUN = DFfromLZ, mLZ = mLZ))
