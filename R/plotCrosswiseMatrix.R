@@ -61,21 +61,19 @@ plotCrosswiseMatrix <- function(mPT,
                        main = "",
                        ord_mat=NULL) {
 
-  if (!methods::hasArg(mPT)) {
-    stop("mPT is missing")
-  } else if (!(methods::is(mPT, "genoMatriXeR") | is.matrix(mPT))) {
-    stop("mPT needs to be a genoMatriXeR object or a numeric matrix")
-  } else if (is.null(mPT@matrix[[1]])) {
-    stop("The matrix slot of mPT is empty, run first makeCrosswiseMatrix()")
-  } else if (!(matrix_type %in% c("association", "correlation"))) {
-    stop("Invalid matrix_type, choose 'association' or 'correlation'")
-  } else if (!(cor %in% c("row", "col"))) {
-    stop("Invalid cor value, choose 'row' or 'col'")
-  } else if (!is.na(maxVal)) {
-      if(!(methods::is(maxVal, "numeric") | maxVal == "max")) {
-        stop("maxVal has to be a numerical value, 'max' or NA")
-    }
-  }
+  # Check mPT object
+  stopifnot("mPT is missing" = methods::hasArg(mPT))
+  stopifnot("mPT needs to be a genoMatriXeR object or a numeric matrix" = {
+    methods::is(mPT, "genoMatriXeR") | methods::is(mPT, "matrix")
+  })
+  stopifnot("The matrix slot of mPT is empty, run first makeCrosswiseMatrix()" = !is.null(mPT@matrix[[1]]))
+
+  # Check arguments
+  stopifnot("Invalid matrix_type, choose 'association' or 'correlation'" = matrix_type %in% c("association", "correlation"))
+  stopifnot("Invalid cor value, choose 'row' or 'col'" = cor %in% c("row", "col"))
+  stopifnot("maxVal has to be a numerical value, 'max' or NA" = {
+    is.na(maxVal) | methods::is(maxVal, "numeric") | maxVal == "max"
+  })
 
   if (methods::is(mPT,"genoMatriXeR")) {
 
