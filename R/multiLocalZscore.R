@@ -87,7 +87,6 @@ multiLocalZscore <- function(A,
   stopifnot("min_sampling must be numeric" = is.numeric(min_sampling))
   stopifnot("ranFun must be charachter" = is.character(ranFUN))
   stopifnot("evFun must be charachter" = is.character(evFUN))
-  stopifnot("min_sampling must be numeric" = is.numeric(min_sampling))
 
   paramList <- list(
     A = deparse(substitute(A)),
