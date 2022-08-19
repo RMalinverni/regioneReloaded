@@ -85,7 +85,6 @@ crosswisePermTest <-
     stopifnot("ranFun must be charachter" = is.character(ranFUN))
     stopifnot("evFun must be charachter" = is.character(evFUN))
     stopifnot("ntimes must be numeric" = is.numeric(ntimes))
-    stopifnot("min_sampling must be numeric" = is.numeric(min_sampling))
 
     # create @parameters slot
 
