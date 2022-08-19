@@ -64,6 +64,13 @@ setGeneric("gmxrMatrix", function(x) standardGeneric("gmxrMatrix"))
 
 setMethod("gmxrMatrix", "genoMatriXeR", function(x) x@matrix)
 
+setGeneric("gmxrMatrix<-", function(x, value) standardGeneric("gmxrMatrix<-"))
+setMethod("gmxrMatrix<-", "genoMatriXeR", function(x, value){
+  x@matrix <- value
+  validObject(x)
+  x
+} )
+
 
 #' Export parameters from multiLocalZScore objects
 #'
@@ -108,8 +115,14 @@ setMethod("mlzsMultiLocalZscores", "multiLocalZScore", function(x) x@multiLocalZ
 #' @export "mlzsMatrix"
 #'
 setGeneric("mlzsMatrix", function(x) standardGeneric("mlzsMatrix"))
+setGeneric("mlzsMatrix<-", function(x,value) standardGeneric("mlzsMatrix<-"))
 
 setMethod("mlzsMatrix", "multiLocalZScore", function(x) x@matrix)
+setMethod("mlzsMatrix<-", "multiLocalZScore", function(x, value){
+  x@matrix <- value
+  validObject(x)
+  x
+} )
 
 
 

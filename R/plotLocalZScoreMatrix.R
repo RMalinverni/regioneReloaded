@@ -58,7 +58,7 @@ plotLocalZScoreMatrix <- function(mLZ,
   stopifnot("mLZ needs to be a multiLocalZScore object" = {
     methods::is(mLZ, "multiLocalZScore") | methods::is(mLZ, "matrix")
   })
-  stopifnot("The matrix slot of mLZ is empty, run first makeCrosswiseMatrix()" = !is.null(mLZ@matrix[[1]]))
+  stopifnot("The matrix slot of mLZ is empty, run first makeCrosswiseMatrix()" = !is.null(mlzsMatrix(mLZ)[[1]]))
 
   # Check arguments
   stopifnot("Invalid matrix_type, choose 'association' or 'correlation'" = matrix_type %in% c("association", "correlation"))
@@ -67,7 +67,7 @@ plotLocalZScoreMatrix <- function(mLZ,
   })
 
   if (matrix_type == "association") {
-    GM <- t(mLZ@matrix$LZM)
+    GM <- t(getMatrix(mLZ))
     title <- "Association Matrix"
 
     if (is.na(maxVal)){
@@ -85,7 +85,7 @@ plotLocalZScoreMatrix <- function(mLZ,
   }
 
   if (matrix_type == "correlation") {
-    GM <- mLZ@matrix$LZM_cor
+    GM <- gmxrMatrix(mLZ)$LZM_cor
 
     title <- "Correlation Matrix"
     maxVal <- 1
@@ -129,7 +129,7 @@ plotLocalZScoreMatrix <- function(mLZ,
     ggplot2::labs(
       subtitle = title,
       title = main,
-      caption = mLZ@parameters$ranFUN
+      caption = gmxrParam(mLZ)$ranFUN
     )
 
   if (!is.null(highlight)) {

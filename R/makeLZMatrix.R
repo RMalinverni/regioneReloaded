@@ -48,20 +48,20 @@ makeLZMatrix <- function(mlZA,
   stopifnot("mlZA is missing" = methods::hasArg(mlZA))
   stopifnot("mlZA must be an object of class multiLocalZScore" = methods::is(mlZA,"multiLocalZScore"))
 
-  mat <- vector(length = length(mlZA@multiLocalZscores$shifts))
+  mat <- vector(length = length(mlzsMultiLocalZscores(mlZA)$shifts))
 
   if (normalize == TRUE) {
 
-    for (i in seq_along(mlZA@multiLocalZscores$shifed_ZSs)) {
+    for (i in seq_along(mlzsMultiLocalZscores(mlZA)$shifed_ZSs)) {
       mat <-
         rbind(
           mat,
-          mlZA@multiLocalZscores$shifed_ZSs[[i]] / sqrt(mlZA@multiLocalZscores$max_zscores[i])
+          mlzsMultiLocalZscores(mlZA)$shifed_ZSs[[i]] / sqrt(mlzsMultiLocalZscores(mlZA)$max_zscores[i])
         )
     }
   } else{
-    for (i in seq_along(mlZA@multiLocalZscores$shifed_ZSs)) {
-      mat <- rbind(mat, mlZA@multiLocalZscores$shifed_ZSs[[i]])
+    for (i in seq_along(mlzsMultiLocalZscores(mlZA)$shifed_ZSs)) {
+      mat <- rbind(mat, mlzsMultiLocalZscores(mlZA)$shifed_ZSs[[i]])
     }
   }
 
@@ -70,8 +70,8 @@ makeLZMatrix <- function(mlZA,
   if (is.vector(mat)) {
     mat <- t(as.data.frame(mat))
   }
-  rownames(mat) <- names(mlZA@multiLocalZscores$shifed_ZSs)
-  colnames(mat) <- mlZA@multiLocalZscores$shifts
+  rownames(mat) <- names(mlzsMultiLocalZscores(mlZA)$shifed_ZSs)
+  colnames(mat) <- mlzsMultiLocalZscores(mlZA)$shifts
 
   # I need to add a matLim integration
 
@@ -104,13 +104,15 @@ makeLZMatrix <- function(mlZA,
   ind <- fit2$labels[fit2$order]
   mat_corX <- mat_corX[ind, ind]
 
-  mlZA@matrix <-
+  matL <-
     list(
       LZM = mat,
       LZM_cor = mat_corX,
       FitRow = fit,
       FitCorr = fit2
     )
+
+  mlzsMatrix(mlZA) <- matL
 
   return(mlZA)
 }

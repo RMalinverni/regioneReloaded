@@ -92,25 +92,25 @@ plotCrosswiseDimRed <-
     stopifnot("mPT needs to be a genoMatriXeR object or a numeric matrix" = {
       methods::is(mPT, "genoMatriXeR") | methods::is(mPT, "matrix")
     })
-    stopifnot("The matrix slot of mPT is empty, run first makeCrosswiseMatrix()" = !is.null(mPT@matrix[[1]]))
+    stopifnot("The matrix slot of mPT is empty, run first makeCrosswiseMatrix()" = !is.null(gmxrMatrix(mPT)[[1]]))
 
     # Check arguments
     stopifnot("type must be 'PCA', 'tSNE' or 'UMAP'" = type %in% c("PCA", "tSNE", "UMAP"))
     stopifnot("clust_met must be 'hclust', 'kmeans' or 'pam'" = clust_met %in% c("hclust", "kmeans", "pam"))
 
     if (methods::is(mPT, "genoMatriXeR")) {
-      GM <- mPT@matrix$GMat
+      GM <- getMatrix(mPT)
     } else if (is.matrix(mPT)) {
       GM <- mPT
     }
 
-    if(!all(listRS %in% names(mPT@multiOverlaps))) {
+    if(!all(listRS %in% names(gmxrMultiOverlaps(mPT)))) {
       warning("One or more elements in listRS do not match region set names in mPT")
     }
 
     if (is.na(GM_clust)) {
       if (clust_met == "hclust") {
-        clust_tab <- stats::cutree(mPT@matrix$FitRow, k = nc)
+        clust_tab <- stats::cutree(gmxrMatrix(mPT)$FitRow, k = nc)
         clust_tab <- clust_tab[rownames(GM)]
       }
 

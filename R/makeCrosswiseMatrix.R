@@ -167,7 +167,8 @@ makeCrosswiseMatrix <-
         FitRow = fit,
         FitCol = fit2
       )
-    mPT@matrix <- mat1
+
+    gmxrMatrix(mPT) <- mat1
 
     return(mPT)
 

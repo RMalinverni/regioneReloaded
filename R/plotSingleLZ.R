@@ -72,21 +72,21 @@ plotSingleLZ <-
     stopifnot("mLZ is missing" = methods::hasArg(mLZ))
     stopifnot("mLZ needs to be a multiLocalZScore object" = methods::is(mLZ, "multiLocalZScore"))
     stopifnot("RS is missing" = methods::hasArg(RS))
-    stopifnot("One or more elements in RS do not match region set names in mLZ" = all(RS %in% names(mLZ@multiLocalZscores$shifed_ZSs)))
+    stopifnot("One or more elements in RS do not match region set names in mLZ" = all(RS %in% names(mlzsMultiLocalZscores(mLZ)$shifed_ZSs)))
 
     RS <- as.list(RS)
     df <- do.call("rbind", lapply(X = RS, FUN = DFfromLZ, mLZ = mLZ))
 
     if (is.na(main)) {
-      main <- mLZ@parameters$A
+      main <- mlzsParam(mLZ)$A
     }
-    evfun <- mLZ@parameters$evFUN
-    ranfun <- mLZ@parameters$ranFUN
+    evfun <- mlzsParam(mLZ)$evFUN
+    ranfun <- mlzsParam(mLZ)$ranFUN
 
     pal <- plotPal(colPal) #palette
 
-    if (mLZ@parameters$evFUN == "numOverlaps") {
-      mLZ@parameters$evFUN <- "N. of overlaps"
+    if (mlzsParam(mLZ)$evFUN == "numOverlaps") {
+      mlzsParam(mLZ)$evFUN <- "N. of overlaps"
     }
 
     if (normZS) { # Raw or norm ZS

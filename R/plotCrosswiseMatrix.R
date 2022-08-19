@@ -66,7 +66,7 @@ plotCrosswiseMatrix <- function(mPT,
   stopifnot("mPT needs to be a genoMatriXeR object or a numeric matrix" = {
     methods::is(mPT, "genoMatriXeR") | methods::is(mPT, "matrix")
   })
-  stopifnot("The matrix slot of mPT is empty, run first makeCrosswiseMatrix()" = !is.null(mPT@matrix[[1]]))
+  stopifnot("The matrix slot of mPT is empty, run first makeCrosswiseMatrix()" = !is.null(gmxrMatrix(mPT)[[1]]))
 
   # Check arguments
   stopifnot("Invalid matrix_type, choose 'association' or 'correlation'" = matrix_type %in% c("association", "correlation"))
@@ -78,7 +78,7 @@ plotCrosswiseMatrix <- function(mPT,
   if (methods::is(mPT,"genoMatriXeR")) {
 
     if  (matrix_type == "association") {
-      GM <- mPT@matrix$GMat
+      GM <- getMatrix(mPT)
       title <- "Association Matrix"
 
       if (is.na(maxVal)){
@@ -93,10 +93,10 @@ plotCrosswiseMatrix <- function(mPT,
 
     if  (matrix_type == "correlation") {
       if (cor == "row") {
-        GM <- mPT@matrix$GMat_corX
+        GM <- gmxrMatrix(mPT)$GMat_corX
       }
       if (cor == "col") {
-        GM <- mPT@matrix$GMat_corY
+        GM <- gmxrMatrix(mPT)$GMat_corY
       }
       title <- "Correlation Matrix"
       maxVal<-1
@@ -151,7 +151,7 @@ plotCrosswiseMatrix <- function(mPT,
         ),
         axis.text.y = ggplot2::element_text(size = 6)
       ) +
-      ggplot2::labs(subtitle = title, title=main, caption = mPT@parameters$ranFUN) +
+      ggplot2::labs(subtitle = title, title=main, caption = gmxrParam(mPT)$ranFUN) +
       ggplot2::coord_equal()
   } else{
     ggplot2::ggplot(DF, ggplot2::aes_string(x = "X", y = "Y")) +
@@ -170,7 +170,7 @@ plotCrosswiseMatrix <- function(mPT,
         ),
         axis.text.y = ggplot2::element_text(size = 6)
       ) +
-      ggplot2::labs(subtitle =  title, title=main,caption = mPT@parameters$ranFUN) +
+      ggplot2::labs(subtitle =  title, title=main,caption = gmxrParam(mPT)$ranFUN) +
        ggplot2::coord_equal()
   }
 }

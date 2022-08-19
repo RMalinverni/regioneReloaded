@@ -55,15 +55,15 @@ plotSinglePT <-
     stopifnot("mPT needs to be a genoMatriXeR object or a numeric matrix" = methods::is(mPT, "genoMatriXeR"))
 
     stopifnot("RS1 and RS2 are required" = methods::hasArg(RS1) & methods::hasArg(RS2))
-    stopifnot("RS1 or RS2 do not match region set names in the mPT genoMatriXeR object" = all(c(RS1, RS2) %in% names(mPT@multiOverlaps)))
+    stopifnot("RS1 or RS2 do not match region set names in the mPT genoMatriXeR object" = all(c(RS1, RS2) %in% names(gmxrMultiOverlaps(mPT))))
 
-    if (is.na(xlab) & mPT@parameters$evFUN == "numOverlaps") {
+    if (is.na(xlab) & gmxrParam(mPT)$evFUN == "numOverlaps") {
       xlab <- "N of overlaps"
     }
 
     colvec <- c("#57837B", "#F1ECC3", "#C9D8B6", "#515E63", "#C05555")
 
-    tab <- mPT@multiOverlaps[[RS1]]
+    tab <- gmxrMultiOverlaps(mPT)[[RS1]]
     n <- grep(paste0("^", RS2, "$"), tab$name)
     mean.1 <- tab$mean_perm_test[n]
     sd.1 <- tab$sd_perm_test[n]
@@ -95,7 +95,7 @@ plotSinglePT <-
       ggplot2::labs(
         title = main,
         subtitle = paste0("PermTest:  ", RS1, " vs ", RS2),
-        caption = paste0("Number of Permutations:  ", mPT@parameters$ntimes)
+        caption = paste0("Number of Permutations:  ", gmxrParam(mPT)$ntimes)
       ) +
       ggplot2::xlab(paste0(xlab, " on ", tab$n_regionA[n], " regions")) +
       ggplot2::ylab("Freq") +
@@ -225,7 +225,7 @@ plotSinglePT <-
         "text",
         x = eplot * 0.5,
         y = max_curve * 0.99,
-        label = mPT@parameters$ranFUN
+        label = gmxrParam(mPT)$ranFUN
       ) +
       # Observed and mean random overlaps
       ggplot2::annotate(
