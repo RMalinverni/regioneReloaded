@@ -198,6 +198,9 @@ plotCrosswiseDimRed <-
     if (!is.null(listRS) & emphasize) {
       pdr_df$clust <- pdr_df$clust2
       pdr_df_emph <- pdr_df[pdr_df$clust != "none", ]
+    } else if (emphasize) {
+      warning("Emphasize is set to TRUE but listRS is NULL, ignoring emphasize")
+      pdr_df_emph <- pdr_df
     }
 
     p <-
@@ -224,7 +227,7 @@ plotCrosswiseDimRed <-
       )
     }
 
-    if (emphasize & !labAll) { # label all clusters
+    if (emphasize & !labAll) { # label only emphasized clusters
       p <- p + ggrepel::geom_text_repel(
         data = pdr_df_emph,
         size = labSize,
@@ -233,7 +236,7 @@ plotCrosswiseDimRed <-
         point.padding = 0.5,
         segment.color = "grey"
       )
-    } else {
+    } else { # label all clusters
       p <- p + ggrepel::geom_text_repel(
         size = labSize,
         ggplot2::aes_string(label = "Name"),
