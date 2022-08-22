@@ -46,7 +46,7 @@ getMultiEvaluation <- function(rR,namesRS = NULL){
       namesRS <- names(gmxrMultiOverlaps(rR))
     }
     res <- gmxrMultiOverlaps(rR)[namesRS]
-    res <- res[!sapply(res, is.null)]
+    res <- res[!vapply(res, is.null, TRUE)]
   }
 
   if(methods::is(rR , "multiLocalZScore" )){
@@ -63,7 +63,7 @@ getMultiEvaluation <- function(rR,namesRS = NULL){
     resTable <- resTable[,-8, drop = FALSE]
     res <- list(resumeTable = resTable,
                 shifts = mlzsMultiLocalZscores(rR)$shifed_ZSs[namesRS])
-    res[["shifts"]] <- res[["shifts"]][!sapply(res[["shifts"]], is.null)]
+    res[["shifts"]] <- res[["shifts"]][!vapply(res[["shifts"]], is.null, TRUE)]
     }
 
   return(res)
