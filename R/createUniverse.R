@@ -17,6 +17,8 @@
 #'
 #' universe <- createUniverse(AlienRSList_narrow)
 #'
+#' @importFrom methods as
+#'
 #' @export
 
 createUniverse <- function(Alist, joinR = TRUE) {
@@ -24,11 +26,7 @@ createUniverse <- function(Alist, joinR = TRUE) {
     is.integer(x) && length(x) == 0L
   }
 
-  uniList <- GenomicRanges::GRanges()
-
-  for (u in seq_along(Alist)) {
-    uniList <- c(uniList, Alist[[u]])
-  }
+  uniList <- unlist(methods::as(Alist, "GRangesList"))
 
   if (joinR == TRUE) {
     uniList <- regioneR::joinRegions(uniList)
