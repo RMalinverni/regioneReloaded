@@ -132,19 +132,15 @@ plotCrosswiseDimRed <-
 
     df <- df1 <- data.frame()
     vec <- vec2 <- vec3 <- vector()
-
-    for (i in seq_len(nc)) {
+    df1 <- do.call("rbind", lapply(seq_len(nc), function(i) {
       nms <- names(clust_tab[clust_tab == i])
-
       df <- data.frame(
         Name = nms,
         Cluster = rep(paste0("clust_", i), length(nms)),
-
         ASW = rep(vecSil[i], length(nms))
       )
-
-      df1 <- rbind(df1, df)
-    }
+    })
+    )
 
     df1[is.na(df1)] <- 0
 
