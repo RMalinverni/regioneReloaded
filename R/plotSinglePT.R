@@ -148,12 +148,12 @@ plotSinglePT <-
         args = list(mean = mean.1, sd = sd.1)
       ) +
 
-      # hline at y = 0
+
       ggplot2::geom_hline(yintercept = 0,
                  color = colvec[4],
                  size = 0.6) +
 
-      # vline at x = 0
+
       ggplot2::geom_vline(
         xintercept = 0,
         color = colvec[4],
@@ -215,7 +215,6 @@ plotSinglePT <-
         fill = "#FDFAF6",
         label = paste(
           paste0("Normal Z-score: ", round(tab$norm_zscore[n], digits = 2)),
-          #paste0("Standard Z-score: ", round(tab$std_zscore[n], digits = 2)),
           sep = "\n"
         ),
         hjust = 1

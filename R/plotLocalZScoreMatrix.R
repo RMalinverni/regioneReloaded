@@ -110,7 +110,6 @@ plotLocalZScoreMatrix <- function(mLZ,
 
   p <- ggplot2::ggplot(DF, ggplot2::aes_string(x = "X", y = "Y")) +
 
-    #geom_raster(aes(fill = value), interpolate = FALSE, color  = "white") +
     ggplot2::geom_tile(ggplot2::aes_string(fill = "value"), color = lineColor) +
     ggplot2::scale_fill_gradientn(
       colours = rev(colMatrix),

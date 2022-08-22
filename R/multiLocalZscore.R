@@ -123,7 +123,7 @@ multiLocalZscore <- function(A,
       methods::show(
         "resampleRegions function need that universe parameters in not NULL universe will created using all the regions present in Blist"
       )
-      universe <- createUniverse(Blist) # check well this option
+      universe <- createUniverse(Blist)
     }
   }
 
@@ -153,7 +153,7 @@ multiLocalZscore <- function(A,
       randomize.function = rFUN,
       genome = genome ,
       count.once = TRUE,
-      #ntimes = ntimes,
+
       ...
     )
   }

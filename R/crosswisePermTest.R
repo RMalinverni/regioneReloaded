@@ -98,7 +98,6 @@ crosswisePermTest <-
       evFUN = evFUN,
       ntimes = ntimes,
       universe = NULL,
-      #universe = deparse(substitute(universe)),
       adj_pv_method = adj_pv_method,
       nc = NULL,
       matOrder = NULL
