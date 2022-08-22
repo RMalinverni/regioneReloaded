@@ -38,42 +38,37 @@
 #' @export makeLZMatrix
 #'
 makeLZMatrix <- function(mlZA,
-                         normalize = TRUE,
-                         clusterize = TRUE,
-                         centralize = NA,
-                         hc.method = NULL,
-                         dist.method = "euclidean",
-                         scale = FALSE,
-                         ...) {
+                          normalize = TRUE,
+                          clusterize = TRUE,
+                          centralize = NA,
+                          hc.method = NULL,
+                          dist.method = "euclidean",
+                          scale = FALSE,
+                          ...) {
   stopifnot("mlZA is missing" = methods::hasArg(mlZA))
   stopifnot("mlZA must be an object of class multiLocalZScore" = methods::is(mlZA,"multiLocalZScore"))
 
-  mat <- vector(length = length(mlzsMultiLocalZscores(mlZA)$shifts))
+
 
   if (normalize == TRUE) {
 
-    for (i in seq_along(mlzsMultiLocalZscores(mlZA)$shifed_ZSs)) {
-      mat <-
-        rbind(
-          mat,
-          mlzsMultiLocalZscores(mlZA)$shifed_ZSs[[i]] / sqrt(mlzsMultiLocalZscores(mlZA)$max_zscores[i])
-        )
-    }
-  } else{
-    for (i in seq_along(mlzsMultiLocalZscores(mlZA)$shifed_ZSs)) {
-      mat <- rbind(mat, mlzsMultiLocalZscores(mlZA)$shifed_ZSs[[i]])
-    }
+    mat <- do.call("rbind",lapply(seq_along(mlzsMultiLocalZscores(mlZA)$shifed_ZSs),
+                                  FUN = function(i, mlZA){
+                                    mlzsMultiLocalZscores(mlZA)$shifed_ZSs[[i]] / sqrt(mlzsMultiLocalZscores(mlZA)$max_zscores[i])},
+                                  mlZA))
+
+  }else{
+
+
+    mat <- do.call("rbind",lapply(seq_along(mlzsMultiLocalZscores(mlZA)$shifed_ZSs),
+                                  FUN = function(i, mlZA){
+                                    mlzsMultiLocalZscores(mlZA)$shifed_ZSs[[i]]},
+                                  mlZA))
   }
 
-  mat <- mat[-1, , drop = FALSE]
-
-  if (is.vector(mat)) {
-    mat <- t(as.data.frame(mat))
-  }
   rownames(mat) <- names(mlzsMultiLocalZscores(mlZA)$shifed_ZSs)
   colnames(mat) <- mlzsMultiLocalZscores(mlZA)$shifts
 
-  # I need to add a matLim integration
 
   if (clusterize == TRUE) {
     st <- 1
@@ -116,6 +111,3 @@ makeLZMatrix <- function(mlZA,
 
   return(mlZA)
 }
-
-
-
