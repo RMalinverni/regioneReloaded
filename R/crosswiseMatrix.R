@@ -18,10 +18,12 @@ crosswiseMatrix <- function(mPT,
 
   A.obj <- getMultiEvaluation(mPT)
 
-  mat <- vector()
-  for (i in seq_along(A.obj)) {
-    mat <- cbind(mat, as.numeric(A.obj[[i]][, zs.type]))
-  }
+
+  mat <- do.call("cbind",lapply(seq_along(A.obj),
+                                FUN =  function(i,A.obj, zs.type){
+                                  as.numeric(A.obj[[i]][, zs.type])
+                                },
+                                A.obj, zs.type))
 
   colnames(mat) <- names(A.obj)
   rownames(mat) <- A.obj[[1]][, 2]
