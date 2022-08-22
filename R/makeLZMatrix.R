@@ -65,7 +65,7 @@ makeLZMatrix <- function(mlZA,
     }
   }
 
-  mat <- mat[-1,]
+  mat <- mat[-1, , drop = FALSE]
 
   if (is.vector(mat)) {
     mat <- t(as.data.frame(mat))
@@ -84,12 +84,12 @@ makeLZMatrix <- function(mlZA,
       en <- (center + centralize)
     }
     fit <-
-      chooseHclustMet(mat[, seq(st,en)],
+      chooseHclustMet(mat[, seq(st,en), drop = FALSE],
                       scale = scale,
                       vecMet = hc.method,
                       distHC = dist.method)
     ind <- fit$labels[fit$order]
-    mat <- mat[ind,]
+    mat <- mat[ind, , drop = FALSE]
 
   }
 
@@ -102,7 +102,7 @@ makeLZMatrix <- function(mlZA,
                     vecMet = hc.method,
                     distHC = dist.method)
   ind <- fit2$labels[fit2$order]
-  mat_corX <- mat_corX[ind, ind]
+  mat_corX <- mat_corX[ind, ind, drop = FALSE]
 
   matL <-
     list(

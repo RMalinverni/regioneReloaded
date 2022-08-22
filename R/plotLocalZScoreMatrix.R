@@ -80,7 +80,7 @@ plotLocalZScoreMatrix <- function(mLZ,
 
 
     if(revert == TRUE){
-      GM <-GM[rev(rownames(GM)),]
+      GM <-GM[rev(rownames(GM)), , drop = FALSE]
     }
   }
 
@@ -133,12 +133,12 @@ plotLocalZScoreMatrix <- function(mLZ,
 
   if (!is.null(highlight)) {
     if (highlight_max) {
-      DF_label <- DF[DF$Y %in% highlight,]
+      DF_label <- DF[DF$Y %in% highlight, , drop = FALSE]
       DF_label <- merge(stats::aggregate(value ~ Y, data = DF_label, FUN = max), DF_label)
-      DF_label <- DF_label[order(DF_label$Y),]
-      DF_label <- DF_label[!duplicated(DF_label$Y),]
+      DF_label <- DF_label[order(DF_label$Y), , drop = FALSE]
+      DF_label <- DF_label[!duplicated(DF_label$Y), , drop = FALSE]
     } else {
-      DF_label <- DF[DF$Y %in% highlight & DF$X == 0,]
+      DF_label <- DF[DF$Y %in% highlight & DF$X == 0, , drop = FALSE]
     }
     p <- p + ggrepel::geom_label_repel(data = DF_label, ggplot2::aes_string(label = "Y"), max.overlaps = Inf, size = highlight_size,
                               min.segment.length = 0, xlim = c(0.4 * max(DF$X), NA),

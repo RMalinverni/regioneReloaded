@@ -126,7 +126,7 @@ plotCrosswiseMatrix <- function(mPT,
   if (!is.null(ord_mat)){
     if (is.list(ord_mat)){
       if(length(ord_mat)==2){
-        GM<-GM[ord_mat[[1]],ord_mat[[2]]]
+        GM<-GM[ord_mat[[1]],ord_mat[[2]],drop = FALSE]
       }
     }
   }

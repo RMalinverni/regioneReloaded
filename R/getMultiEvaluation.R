@@ -60,7 +60,7 @@ getMultiEvaluation <- function(rR,namesRS = NULL){
     }
     resTable<-mlzsMultiLocalZscores(rR)$resumeTab
     rownames(resTable)<- NULL
-    resTable <- resTable[,-8]
+    resTable <- resTable[,-8, drop = FALSE]
     res <- list(resumeTable = resTable,
                 shifts = mlzsMultiLocalZscores(rR)$shifed_ZSs[namesRS])
     res[["shifts"]] <- res[["shifts"]][!sapply(res[["shifts"]], is.null)]

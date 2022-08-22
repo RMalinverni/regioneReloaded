@@ -110,10 +110,10 @@ multiLocalZscore <- function(A,
   if (sampling == TRUE) {
     if (length(A) >= min_sampling) {
       if (length(A) * fraction > min_sampling) {
-        A <- A[sample(length(A), round(length(A) * fraction))]
+        A <- A[sample(length(A), round(length(A) * fraction)), drop = FALSE]
 
       } else{
-        A <- A[sample(length(A), min_sampling)]
+        A <- A[sample(length(A), min_sampling), drop = FALSE]
       }
     }
   }

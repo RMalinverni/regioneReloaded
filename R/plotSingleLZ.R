@@ -121,10 +121,10 @@ plotSingleLZ <-
     if (labValues) {
       if (labMax) {
         df_label <- merge(stats::aggregate(score ~ name, data = df, FUN = max), df)
-        df_label <- df_label[order(df_label$shift),]
-        df_label <- df_label[!duplicated(df_label$name),]
+        df_label <- df_label[order(df_label$shift), , drop = FALSE]
+        df_label <- df_label[!duplicated(df_label$name), , drop = FALSE]
       } else {
-        df_label <- df[df$shift == 0, ]
+        df_label <- df[df$shift == 0, , drop = FALSE]
       }
       df_label$text <- paste(df_label$name, "\nZS: ", round(df_label$score, digits = 2), sep = "")
       p <- p +
