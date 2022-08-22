@@ -128,7 +128,7 @@ plotLocalZScoreMatrix <- function(mLZ,
     ggplot2::labs(
       subtitle = title,
       title = main,
-      caption = gmxrParam(mLZ)$ranFUN
+      caption = mlzsParam(mLZ)$ranFUN
     )
 
   if (!is.null(highlight)) {
