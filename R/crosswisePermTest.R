@@ -78,6 +78,7 @@ crosswisePermTest <-
            ...) {
 
     # control parameters
+
     stopifnot("Alist is missing" = methods::hasArg(Alist))
     stopifnot("fraction must be numeric" = is.numeric(fraction))
     stopifnot("sampling must be logical" = is.logical(sampling))
