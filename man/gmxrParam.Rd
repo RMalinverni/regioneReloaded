@@ -10,7 +10,7 @@ gmxrParam(x)
 \item{x}{A genoMatriXeR object.}
 }
 \value{
-A printed output for genoMatriXeR parameters slot.
+Parameters slot of a genoMatriXeR object.
 }
 \description{
 Export parameters from genoMatriXeR objects
@@ -18,3 +18,4 @@ Export parameters from genoMatriXeR objects
 \seealso{
 \link[=genoMatriXeR-class]{genoMatriXeR}
 }
+\keyword{internal}

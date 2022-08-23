@@ -10,7 +10,7 @@ mlzsMultiLocalZscores(x)
 \item{x}{A multiLocalZScore object.}
 }
 \value{
-A printed output for multiLocalZScore multiLocalZscores slot.
+multiLocalZscores slot of a multiLocalZScore object.
 }
 \description{
 Export multiLocalZscores slot from multiLocalZScore objects
@@ -18,3 +18,4 @@ Export multiLocalZscores slot from multiLocalZScore objects
 \seealso{
 \link[=multiLocalZScore-class]{multiLocalZScore}
 }
+\keyword{internal}

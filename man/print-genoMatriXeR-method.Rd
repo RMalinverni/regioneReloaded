@@ -18,3 +18,4 @@ Print method for genoMatriXeR class
 \seealso{
 \link[=genoMatriXeR-class]{genoMatriXeR}
 }
+\keyword{internal}

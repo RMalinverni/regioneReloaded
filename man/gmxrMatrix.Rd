@@ -10,7 +10,7 @@ gmxrMatrix(x)
 \item{x}{A genoMatriXeR object.}
 }
 \value{
-A printed output for genoMatriXeR matrix slot.
+matrix slot of a genoMatriXeR object.
 }
 \description{
 Export matrix slot from genoMatriXeR objects
@@ -18,3 +18,4 @@ Export matrix slot from genoMatriXeR objects
 \seealso{
 \link[=genoMatriXeR-class]{genoMatriXeR}
 }
+\keyword{internal}

@@ -18,3 +18,4 @@ Export matrix from multiLocalZScore objects
 \seealso{
 \link[=multiLocalZScore-class]{multiLocalZScore}
 }
+\keyword{internal}

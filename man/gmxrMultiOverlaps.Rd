@@ -10,7 +10,7 @@ gmxrMultiOverlaps(x)
 \item{x}{A genoMatriXeR object.}
 }
 \value{
-A printed output for genoMatriXeR multiOverlaps slot.
+multiOverlaps slot of a genoMatriXeR.
 }
 \description{
 Export multiOverlaps slot from genoMatriXeR objects
@@ -18,3 +18,4 @@ Export multiOverlaps slot from genoMatriXeR objects
 \seealso{
 \link[=genoMatriXeR-class]{genoMatriXeR}
 }
+\keyword{internal}

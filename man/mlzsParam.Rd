@@ -10,7 +10,7 @@ mlzsParam(x)
 \item{x}{A multiLocalZScore object.}
 }
 \value{
-A printed output for multiLocalZScore parameters slot.
+parameters slot of a multiLocalZScore object.
 }
 \description{
 Export parameters from multiLocalZScore objects
@@ -18,3 +18,4 @@ Export parameters from multiLocalZScore objects
 \seealso{
 \link[=multiLocalZScore-class]{multiLocalZScore}
 }
+\keyword{internal}
