@@ -6,8 +6,7 @@
 #'
 #' @seealso [genoMatriXeR][genoMatriXeR-class]
 #'
-#' @export
-
+#' @keywords internal
 
 setMethod("print", "genoMatriXeR", function(x)
   list(
@@ -19,29 +18,35 @@ setMethod("print", "genoMatriXeR", function(x)
     matrix_slot = x@matrix$GMat
   ))
 
+
+
 #' Export parameters from genoMatriXeR objects
 #'
 #' @param x A genoMatriXeR object.
 #'
-#' @return A printed output for genoMatriXeR parameters slot.
+#' @return Parameters slot of a genoMatriXeR object.
 #'
 #' @seealso [genoMatriXeR][genoMatriXeR-class]
 #'
+#' @keywords internal
 #'
+
 setGeneric("gmxrParam", function(x) standardGeneric("gmxrParam"))
 
 setMethod("gmxrParam", "genoMatriXeR", function(x) x@parameters)
+
 
 
 #' Export multiOverlaps slot from genoMatriXeR objects
 #'
 #' @param x A genoMatriXeR object.
 #'
-#' @return A printed output for genoMatriXeR multiOverlaps slot.
+#' @return multiOverlaps slot of a genoMatriXeR.
 #'
 #' @seealso [genoMatriXeR][genoMatriXeR-class]
 #'
-#'
+#' @keywords internal
+
 setGeneric("gmxrMultiOverlaps", function(x) standardGeneric("gmxrMultiOverlaps"))
 
 setMethod("gmxrMultiOverlaps", "genoMatriXeR", function(x) x@multiOverlaps)
@@ -51,17 +56,31 @@ setMethod("gmxrMultiOverlaps", "genoMatriXeR", function(x) x@multiOverlaps)
 #'
 #' @param x A genoMatriXeR object.
 #'
-#' @return A printed output for genoMatriXeR matrix slot.
+#' @return matrix slot of a genoMatriXeR object.
 #'
 #' @seealso [genoMatriXeR][genoMatriXeR-class]
 #'
-#'
-#'
+#' @keywords internal
+
 setGeneric("gmxrMatrix", function(x) standardGeneric("gmxrMatrix"))
 
 setMethod("gmxrMatrix", "genoMatriXeR", function(x) x@matrix)
 
+
+
+#' Set matrix slot value of a genoMatriXeR object
+#'
+#' @param x A genoMatriXeR object.
+#' @param value Value to assign to the matrix slot.
+#'
+#' @return A genoMatriXeR object.
+#'
+#' @importFrom methods validObject
+#'
+#' @keywords internal
+
 setGeneric("gmxrMatrix<-", function(x, value) standardGeneric("gmxrMatrix<-"))
+
 setMethod("gmxrMatrix<-", "genoMatriXeR", function(x, value){
   x@matrix <- value
   validObject(x)
@@ -69,18 +88,33 @@ setMethod("gmxrMatrix<-", "genoMatriXeR", function(x, value){
 } )
 
 
+
 #' Export parameters from multiLocalZScore objects
 #'
 #' @param x A multiLocalZScore object.
 #'
-#' @return A printed output for multiLocalZScore parameters slot.
+#' @return parameters slot of a multiLocalZScore object.
 #'
 #' @seealso [multiLocalZScore][multiLocalZScore-class]
 #'
-#'
+#' @keywords internal
+
 setGeneric("mlzsParam", function(x) standardGeneric("mlzsParam"))
 
 setMethod("mlzsParam", "multiLocalZScore", function(x) x@parameters)
+
+
+
+#' Set parameters slot value of a multiLocalZScore object
+#'
+#' @param x A multiLocalZScore object.
+#' @param value Value to assign to the parameters slot.
+#'
+#' @return A multiLocalZScore object.
+#'
+#' @importFrom methods validObject
+#'
+#' @keywords internal
 
 setGeneric("mlzsParam<-", function(x, value) standardGeneric("mlzsParam<-"))
 
@@ -91,19 +125,20 @@ setMethod("mlzsParam<-", "multiLocalZScore", function(x, value){
 } )
 
 
+
 #' Export multiLocalZscores slot from multiLocalZScore objects
 #'
 #' @param x A multiLocalZScore object.
 #'
-#' @return A printed output for multiLocalZScore multiLocalZscores slot.
+#' @return multiLocalZscores slot of a multiLocalZScore object.
 #'
 #' @seealso [multiLocalZScore][multiLocalZScore-class]
 #'
-#'
+#' @keywords internal
+
 setGeneric("mlzsMultiLocalZscores", function(x) standardGeneric("mlzsMultiLocalZscores"))
 
 setMethod("mlzsMultiLocalZscores", "multiLocalZScore", function(x) x@multiLocalZscores)
-
 
 
 
@@ -115,11 +150,27 @@ setMethod("mlzsMultiLocalZscores", "multiLocalZScore", function(x) x@multiLocalZ
 #'
 #' @seealso [multiLocalZScore][multiLocalZScore-class]
 #'
-#'
+#' @keywords internal
+
 setGeneric("mlzsMatrix", function(x) standardGeneric("mlzsMatrix"))
-setGeneric("mlzsMatrix<-", function(x,value) standardGeneric("mlzsMatrix<-"))
 
 setMethod("mlzsMatrix", "multiLocalZScore", function(x) x@matrix)
+
+
+
+#' Set matrix slot value of a multiLocalZScore object.
+#'
+#' @param x A multiLocalZScore object.
+#' @param value Value to assign to the multiLocalZScore slot.
+#'
+#' @return A multiLocalZScore object.
+#'
+#' @importFrom methods validObject
+#'
+#' @keywords internal
+
+setGeneric("mlzsMatrix<-", function(x,value) standardGeneric("mlzsMatrix<-"))
+
 setMethod("mlzsMatrix<-", "multiLocalZScore", function(x, value){
   x@matrix <- value
   validObject(x)
