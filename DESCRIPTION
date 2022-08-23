@@ -30,7 +30,6 @@ Imports:
     stats,
     RColorBrewer,
     Rtsne,
-    GenomicRanges,
     umap,
     ggplot2,
     ggrepel,
