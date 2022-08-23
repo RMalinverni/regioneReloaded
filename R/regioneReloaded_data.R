@@ -54,7 +54,7 @@ NULL #"cw_Alien"
 #'
 #' @description
 #'
-#' List of region sets (as [GRanges]) on the [AlienGenome].
+#' List of region sets (as [GRanges][GenomicRanges::GRanges]) on the [AlienGenome].
 #'
 #' @details
 #'
@@ -68,7 +68,7 @@ NULL #"cw_Alien"
 #' @name AlienRSList_narrow
 #' @docType data
 #' @usage data(cw_Alien)
-#' @format A list of [GRanges] objects.
+#' @format A list of [GRanges][GenomicRanges::GRanges] objects.
 #'
 #' @keywords datasets
 #'
@@ -82,7 +82,7 @@ NULL #"cw_Alien"
 #'
 #' @description
 #'
-#' List of region sets (as [GRanges]) on the [AlienGenome].
+#' List of region sets (as [GRanges][GenomicRanges::GRanges]) on the [AlienGenome].
 #'
 #' @details
 #'
@@ -96,7 +96,7 @@ NULL #"cw_Alien"
 #' @name AlienRSList_broad
 #' @docType data
 #' @usage data(cw_Alien)
-#' @format A list of [GRanges] objects.
+#' @format A list of [GRanges][GenomicRanges::GRanges] objects.
 #'
 #' @keywords datasets
 #'
