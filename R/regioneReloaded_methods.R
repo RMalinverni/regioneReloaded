@@ -86,6 +86,14 @@ setGeneric("mlzsParam", function(x) standardGeneric("mlzsParam"))
 
 setMethod("mlzsParam", "multiLocalZScore", function(x) x@parameters)
 
+setGeneric("mlzsParam<-", function(x, value) standardGeneric("mlzsParam<-"))
+
+setMethod("mlzsParam<-", "multiLocalZScore", function(x, value){
+  x@parameters <- value
+  validObject(x)
+  x
+} )
+
 
 #' Export multiLocalZscores slot from multiLocalZScore objects
 #'
