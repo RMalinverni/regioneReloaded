@@ -66,30 +66,30 @@ multiPermTest <-
       )
     }
 
-    tab <- data.frame()
+    tab <- do.call("rbind",lapply(seq_along(pt),
+                                  FUN = function(j, pt){
 
-    for (j in seq_along(pt)) {
-      if (pt[[j]]$zscore == 0 |
-          is.na(pt[[j]]$zscore) |
-          is.nan((pt[[j]]$zscore))) {
-        zscore.norm <- 0
-      } else{
-        zscore.norm <- pt[[j]]$zscore / sqrt(length(A))
-      }
+                                    if (pt[[j]]$zscore == 0 |
+                                        is.na(pt[[j]]$zscore) |
+                                        is.nan((pt[[j]]$zscore))) {
+                                      zscore.norm <- 0
+                                    } else{
+                                      zscore.norm <- pt[[j]]$zscore / sqrt(length(A))
+                                    }
 
-      vec <- data.frame(
-        order.id = j,
-        name = new.names[j],
-        n_regionA = length(A),
-        n_regionB = length(Blist[[j]]),
-        z_score = pt[[j]]$zscore,
-        p_value = pt[[j]]$pval,
-        n_overlaps = pt[[j]]$observed,
-        mean_perm_test = mean(pt[[j]]$permuted),
-        sd_perm_test = stats::sd(pt[[j]]$permuted)
-      )
-      tab <- rbind(vec, tab)
-    }
+                                    vec <- data.frame(
+                                      order.id = j,
+                                      name = new.names[j],
+                                      n_regionA = length(A),
+                                      n_regionB = length(Blist[[j]]),
+                                      z_score = pt[[j]]$zscore,
+                                      p_value = pt[[j]]$pval,
+                                      n_overlaps = pt[[j]]$observed,
+                                      mean_perm_test = mean(pt[[j]]$permuted),
+                                      sd_perm_test = stats::sd(pt[[j]]$permuted)
+                                    )
+
+                                  }, pt))
 
     tab$norm_zscore <- tab$z_score / sqrt(tab$n_regionA)
     tab$adj.p_value <-
