@@ -104,16 +104,15 @@ crosswisePermTest <-
       matOrder = NULL
     )
 
+    Alist <- as.list(Alist)
+
     if (is.null(Blist)) {
       Blist <- Alist
     }
 
-    list.tabs <- list()
-    list.pt <- list()
-
+    Blist <- as.list(Blist)
 
     rFUN <- eval(parse(text = ranFUN))
-
 
     if (sampling == TRUE) {
       Alist <-
@@ -127,7 +126,7 @@ crosswisePermTest <-
       universe <- createUniverse(Alist)
     }
 
-    # create @multiOverlaps slot
+    # create multiOverlaps slot
 
     list.tabs <- lapply(Alist,
                         FUN = multiPermTest, ..., Blist = Blist,

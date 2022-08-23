@@ -74,15 +74,10 @@ makeCrosswiseMatrix <-
            GM_diag = TRUE,
            ...) {
 
-    if (methods::is(mPT,"genoMatriXeR")) {
-      mat <- crosswiseMatrix(mPT, zs.type = zs.type)
-      mat_pv <- crosswiseMatrix(mPT, zs.type = "adj.p_value")
+    stopifnot("mPT must be an object of class genoMatriXeR" = methods::is(mPT,"genoMatriXeR"))
 
-
-    } else {
-      stop(' mPT need to be a "genoMatriXeR" class object ')
-    }
-
+    mat <- crosswiseMatrix(mPT, zs.type = zs.type)
+    mat_pv <- crosswiseMatrix(mPT, zs.type = "adj.p_value")
 
     if (!is.null(selectRow)) {
       indRow <- grep(paste(selectRow, collapse = "|"), rownames(mat))

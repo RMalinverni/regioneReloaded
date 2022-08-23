@@ -106,6 +106,7 @@ multiLocalZscore <- function(A,
   eFUN <- eval(parse(text = evFUN))
 
   A <- toGRanges(A)
+  Blist <- as.list(Blist)
 
   if (sampling == TRUE) {
     if (length(A) >= min_sampling) {
