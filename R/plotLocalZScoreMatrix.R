@@ -63,7 +63,7 @@ plotLocalZScoreMatrix <- function(mLZ,
   # Check arguments
   stopifnot("Invalid matrix_type, choose 'association' or 'correlation'" = matrix_type %in% c("association", "correlation"))
   stopifnot("maxVal has to be a numerical value, 'max' or NA" = {
-    is.na(maxVal) | methods::is(maxVal, "numeric") | maxVal == "max"
+    is.na(maxVal) | is.numeric(maxVal) | maxVal == "max"
   })
 
   if (matrix_type == "association") {
@@ -128,7 +128,7 @@ plotLocalZScoreMatrix <- function(mLZ,
     ggplot2::labs(
       subtitle = title,
       title = main,
-      caption = gmxrParam(mLZ)$ranFUN
+      caption = mlzsParam(mLZ)$ranFUN
     )
 
   if (!is.null(highlight)) {

@@ -13,7 +13,7 @@ DFfromLZ <- function(mLZ, RS) {
   nelem <- grep(paste0("\\b",RS,"\\b"), names(mlzsMultiLocalZscores(mLZ)$shifed_ZSs))
 
   lineLZ <- mlzsMultiLocalZscores(mLZ)$shifed_ZSs[[nelem]]
-  nreg <- mlzsParameters(mLZ)$Nregions
+  nreg <- mlzsParam(mLZ)$Nregions
 
   zs <- mlzsMultiLocalZscores(mLZ)$resumeTab$z_score[nelem]
   pv <- mlzsMultiLocalZscores(mLZ)$resumeTab$adj.p_value[nelem]

@@ -72,7 +72,7 @@ plotCrosswiseMatrix <- function(mPT,
   stopifnot("Invalid matrix_type, choose 'association' or 'correlation'" = matrix_type %in% c("association", "correlation"))
   stopifnot("Invalid cor value, choose 'row' or 'col'" = cor %in% c("row", "col"))
   stopifnot("maxVal has to be a numerical value, 'max' or NA" = {
-    is.na(maxVal) | methods::is(maxVal, "numeric") | maxVal == "max"
+    is.na(maxVal) | is.numeric(maxVal) | maxVal == "max"
   })
 
   if (methods::is(mPT,"genoMatriXeR")) {
