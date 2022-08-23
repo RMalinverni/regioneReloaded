@@ -5,7 +5,7 @@
 \alias{AlienGenome}
 \title{AlienGenome}
 \format{
-An objects of class \link{GRanges}.
+An objects of class \link[GenomicRanges:GRanges-class]{GRanges}.
 }
 \usage{
 data(cw_Alien)

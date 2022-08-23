@@ -7,7 +7,7 @@
 randomizeRegionsPerc(GR, genome = "hg19", frac = 0.2, ...)
 }
 \arguments{
-\item{GR}{a \linkS4class{GRanges} object with the input region set.}
+\item{GR}{a \link[GenomicRanges:GRanges-class]{GRanges} object with the input region set.}
 
 \item{genome}{genome of reference to generate the similar region sets. (default = "hg19)}
 
@@ -16,7 +16,7 @@ randomizeRegionsPerc(GR, genome = "hg19", frac = 0.2, ...)
 \item{...}{further arguments to be passed to other methods.}
 }
 \value{
-a \linkS4class{GRanges} object
+a \link[GenomicRanges:GRanges-class]{GRanges} object
 }
 \description{
 Create a random region set similar to a reference region set.

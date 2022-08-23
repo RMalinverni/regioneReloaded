@@ -11,8 +11,8 @@ genome = "hg19", ...)
 \arguments{
 \item{A}{query region set for which to estimate local z-score values.}
 
-\item{Blist}{\link{GRangesList} or list of region sets in any accepted formats by \href{https://bioconductor.org/packages/release/bioc/html/regioneR.html}{regioneR} package
-(\link{GenomicRanges}, \link{data.frame} etc...). (default = NULL)}
+\item{Blist}{\link[GenomicRanges:GRangesList-class]{GRangesList} or list of region sets in any accepted formats by \href{https://bioconductor.org/packages/release/bioc/html/regioneR.html}{regioneR} package
+(\link[GenomicRanges:GRanges-class]{GRanges}, \link{data.frame} etc.).}
 
 \item{ranFUN}{character, the randomization strategy used for the test, see \href{https://bioconductor.org/packages/release/bioc/html/regioneR.html}{regioneR}. (default = "randomizeRegions")}
 
@@ -33,7 +33,7 @@ regions is less than \code{min_sampling}, the number specified by \code{min_samp
 
 \item{adj_pv_method}{character, the method used for the calculation of the adjusted p-value, to choose between the options of \code{\link[=p.adjust]{p.adjust()}}. (default = "BH")}
 
-\item{genome}{character or \linkS4class{GRanges}, genome used to compute the randomization. (default = "hg19")}
+\item{genome}{character or \link[GenomicRanges:GRanges-class]{GRanges}, genome used to compute the randomization. (default = "hg19")}
 
 \item{...}{further arguments to be passed to other methods.}
 }

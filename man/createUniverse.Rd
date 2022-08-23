@@ -12,7 +12,7 @@ createUniverse(Alist, joinR = TRUE)
 \item{joinR}{logical, if TRUE all the regions will be joined using the function \code{\link[regioneR:joinRegions]{regioneR::joinRegions()}}.(default == TRUE)}
 }
 \value{
-A list of \link[=GenomicRanges-class]{GenomicRanges} objects
+A list of \link[GenomicRanges:GRanges-class]{GRanges} objects
 }
 \description{
 Create the universe parameter for \code{\link[regioneR:resampleRegions]{regioneR::resampleRegions()}} using all unique regions present in Alist.

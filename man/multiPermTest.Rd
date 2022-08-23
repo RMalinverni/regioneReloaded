@@ -8,7 +8,7 @@ multiPermTest (A, Blist, ranFUN, evFUN, uni, genome, rFUN, ntimes, adj_pv_method
 }
 \arguments{
 \item{A}{Genomic Ranges or any accepted formats by  \href{https://bioconductor.org/packages/release/bioc/html/regioneR.html}{regioneR} package
-(\code{\link{GenomicRanges}}, \code{\link{data.frame}} etc...)}
+(\link[GenomicRanges:GRanges-class]{GRanges}, \link{data.frame} etc.).}
 
 \item{ranFUN}{character, the randomization strategy used for the test, see \href{https://bioconductor.org/packages/release/bioc/html/regioneR.html}{regioneR}. (default = "randomizeRegions")}
 
@@ -16,7 +16,7 @@ multiPermTest (A, Blist, ranFUN, evFUN, uni, genome, rFUN, ntimes, adj_pv_method
 
 \item{uni}{region set to use as universe, used only when \code{\link[regioneR:resampleRegions]{regioneR::resampleRegions()}} function is selected. (default = NULL)}
 
-\item{genome}{character or \linkS4class{GRanges}, genome used to compute the randomization. (default = "hg19")}
+\item{genome}{character or \link[GenomicRanges:GRanges-class]{GRanges}, genome used to compute the randomization. (default = "hg19")}
 
 \item{ntimes}{numeric, number of permutations used in the test. (default = 100)}
 
