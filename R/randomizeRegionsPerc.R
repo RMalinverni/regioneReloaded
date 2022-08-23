@@ -11,7 +11,7 @@
 #'
 #' @usage randomizeRegionsPerc(GR, genome = "hg19", frac = 0.2, ...)
 #'
-#' @return a [GRanges-class] object
+#' @return a [GRanges][GenomicRanges::GRanges] object
 #'
 #' @inheritParams similarRegionSet
 #'

@@ -40,7 +40,7 @@ NULL #"cw_Alien"
 #' @name AlienGenome
 #' @docType data
 #' @usage data(cw_Alien)
-#' @format An objects of class [GRanges].
+#' @format An objects of class [GRanges][GenomicRanges::GRanges].
 #'
 #' @keywords datasets
 #'

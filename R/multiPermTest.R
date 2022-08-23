@@ -11,7 +11,7 @@
 #'
 #' @inheritParams crosswisePermTest
 #' @param A Genomic Ranges or any accepted formats by  [regioneR](https://bioconductor.org/packages/release/bioc/html/regioneR.html) package
-#' (\code{\link{GenomicRanges}}, \code{\link{data.frame}} etc...)
+#' ([GRanges][GenomicRanges::GRanges], [data.frame] etc.).
 #' @param uni region set to use as universe, used only when [regioneR::resampleRegions()] function is selected. (default = NULL)
 #' @seealso [regioneR::permTest()]
 #'

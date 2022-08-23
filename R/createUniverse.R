@@ -9,7 +9,7 @@
 #' @param Alist list of regions set in a format accepted for [regioneR](https://bioconductor.org/packages/release/bioc/html/regioneR.html)
 #' @param joinR logical, if TRUE all the regions will be joined using the function [regioneR::joinRegions()].(default == TRUE)
 #'
-#' @return A list of [GenomicRanges][GenomicRanges-class] objects
+#' @return A list of [GRanges][GenomicRanges::GRanges] objects
 #'
 #' @examples
 #'

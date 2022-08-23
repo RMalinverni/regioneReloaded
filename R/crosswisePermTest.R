@@ -18,8 +18,8 @@
 #'  genome = "hg19", ...)
 #'
 #'
-#' @param Alist,Blist [GRangesList] or list of region sets in any accepted formats by [regioneR](https://bioconductor.org/packages/release/bioc/html/regioneR.html) package
-#' ([GenomicRanges], [data.frame] etc...).
+#' @param Alist,Blist [GRangesList][GenomicRanges::GRangesList] or list of region sets in any accepted formats by [regioneR](https://bioconductor.org/packages/release/bioc/html/regioneR.html) package
+#' ([GRanges][GenomicRanges::GRanges], [data.frame] etc.).
 #' @param sampling logical, if TRUE the function will use only a sample of each element of Alist to perform the test as specified in `fraction.` (default = FALSE)
 #' @param fraction logical, if `sampling=TRUE`, defines the fraction of the region sets used to perform the test. (default = 0.15)
 #' @param min_sampling numeric, minimum number of regions accepted after sampling is performed with the specified `fraction`. If the number of sampled
@@ -29,7 +29,7 @@
 #' @param ntimes numeric, number of permutations used in the test. (default = 100)
 #' @param universe  region set to use as universe, used only when [regioneR::resampleRegions()] function is selected. (default = NULL)
 #' @param adj_pv_method character, the method used for the calculation of the adjusted p-value, to choose between the options of [p.adjust()]. (default = "BH")
-#' @param genome character or [GRanges-class], genome used to compute the randomization. (default = "hg19")
+#' @param genome character or [GRanges][GenomicRanges::GRanges], genome used to compute the randomization. (default = "hg19")
 #' @param ... further arguments to be passed to other methods.
 #'
 #' @return
