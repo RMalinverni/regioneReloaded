@@ -81,7 +81,7 @@ multiLocalZscore <- function(A,
                              genome = "hg19",
                              ...) {
 
-  stopifnot("Alist is missing" = methods::hasArg(Alist))
+  stopifnot("Alist is missing" = methods::hasArg(A))
   stopifnot("fraction must be numeric" = is.numeric(fraction))
   stopifnot("sampling must be logical" = is.logical(sampling))
   stopifnot("min_sampling must be numeric" = is.numeric(min_sampling))
