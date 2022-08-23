@@ -45,10 +45,9 @@ makeLZMatrix <- function(mlZA,
                           dist.method = "euclidean",
                           scale = FALSE,
                           ...) {
+
   stopifnot("mlZA is missing" = methods::hasArg(mlZA))
   stopifnot("mlZA must be an object of class multiLocalZScore" = methods::is(mlZA,"multiLocalZScore"))
-
-
 
   if (normalize == TRUE) {
 

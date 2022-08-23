@@ -59,11 +59,13 @@ Another crucial factor for the calculation of the normal z-score is the number o
 
 # Installation
 
-```{r}
+```{r, eval=FALSE}
+
 if (!require("BiocManager", quietly = TRUE))
     install.packages("BiocManager")
 
 BiocManager::install("regioneReloaded")
+
 ```
 
 

@@ -27,7 +27,6 @@ setMethod("print", "genoMatriXeR", function(x)
 #'
 #' @seealso [genoMatriXeR][genoMatriXeR-class]
 #'
-#' @export "gmxrParam"
 #'
 setGeneric("gmxrParam", function(x) standardGeneric("gmxrParam"))
 
@@ -42,7 +41,6 @@ setMethod("gmxrParam", "genoMatriXeR", function(x) x@parameters)
 #'
 #' @seealso [genoMatriXeR][genoMatriXeR-class]
 #'
-#' @export "gmxrMultiOverlaps"
 #'
 setGeneric("gmxrMultiOverlaps", function(x) standardGeneric("gmxrMultiOverlaps"))
 
@@ -57,7 +55,6 @@ setMethod("gmxrMultiOverlaps", "genoMatriXeR", function(x) x@multiOverlaps)
 #'
 #' @seealso [genoMatriXeR][genoMatriXeR-class]
 #'
-#' @export "gmxrMatrix"
 #'
 #'
 setGeneric("gmxrMatrix", function(x) standardGeneric("gmxrMatrix"))
@@ -80,7 +77,6 @@ setMethod("gmxrMatrix<-", "genoMatriXeR", function(x, value){
 #'
 #' @seealso [multiLocalZScore][multiLocalZScore-class]
 #'
-#' @export "mlzsParam"
 #'
 setGeneric("mlzsParam", function(x) standardGeneric("mlzsParam"))
 
@@ -103,7 +99,6 @@ setMethod("mlzsParam<-", "multiLocalZScore", function(x, value){
 #'
 #' @seealso [multiLocalZScore][multiLocalZScore-class]
 #'
-#' @export "mlzsMultiLocalZscores"
 #'
 setGeneric("mlzsMultiLocalZscores", function(x) standardGeneric("mlzsMultiLocalZscores"))
 
@@ -120,7 +115,6 @@ setMethod("mlzsMultiLocalZscores", "multiLocalZScore", function(x) x@multiLocalZ
 #'
 #' @seealso [multiLocalZScore][multiLocalZScore-class]
 #'
-#' @export "mlzsMatrix"
 #'
 setGeneric("mlzsMatrix", function(x) standardGeneric("mlzsMatrix"))
 setGeneric("mlzsMatrix<-", function(x,value) standardGeneric("mlzsMatrix<-"))
