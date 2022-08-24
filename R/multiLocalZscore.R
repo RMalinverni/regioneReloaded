@@ -18,9 +18,10 @@
 #' the central position if they happen to occur often at a regular distance,
 #' showing a "lateral" association.
 #'
-#' @usage multiLocalZscore( A, Blist = NULL, ranFUN = "randomizeRegions", evFUN = "numOverlaps", sampling = FALSE,
-#' min_sampling = 5000, fraction = 0.15, universe = NULL, window = 1000, step = 100, adj_pv_method = "BH",
-#' genome = "hg19", ...)
+#' @usage multiLocalZscore(A, Blist = NULL, sampling = FALSE, fraction = 0.15,
+#' min_sampling = 5000, ranFUN = "randomizeRegions", evFUN = "numOverlaps",
+#' ntimes = 100, adj_pv_method = "BH", genome = "hg19", universe = NULL,
+#' window = 1000, step = 100, ...)
 #'
 #' @inheritParams crosswisePermTest
 #'
@@ -69,16 +70,17 @@
 
 multiLocalZscore <- function(A,
                              Blist = NULL,
+                             sampling = FALSE,
+                             fraction = 0.15,
+                             min_sampling = 5000,
                              ranFUN = "randomizeRegions",
                              evFUN = "numOverlaps",
-                             sampling = FALSE,
-                             min_sampling = 5000,
-                             fraction = 0.15,
+                             ntimes = 100,
+                             adj_pv_method = "BH",
+                             genome = "hg19",
                              universe = NULL,
                              window = 1000,
                              step = 100,
-                             adj_pv_method = "BH",
-                             genome = "hg19",
                              ...) {
 
   stopifnot("Alist is missing" = methods::hasArg(A))
@@ -152,7 +154,7 @@ multiLocalZscore <- function(A,
       A = A,
       evaluate.function = func.list,
       randomize.function = rFUN,
-      genome = genome ,
+      genome = genome,
       count.once = TRUE,
 
       ...
