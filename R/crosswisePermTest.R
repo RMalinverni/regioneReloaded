@@ -114,6 +114,8 @@ crosswisePermTest <-
 
     if (is.null(Blist)) {
       Blist <- Alist
+    }else{
+      Blist <- as.list(Blist)
     }
 
     Blist <- as.list(Blist)
