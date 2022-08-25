@@ -143,7 +143,7 @@ multiLocalZscore <- function(A,
       evaluate.function = func.list,
       randomize.function = rFUN,
       genome = genome ,
-      #ntimes = ntimes,
+      ntimes = ntimes,
       universe = universe,
       ...
     )
@@ -156,6 +156,7 @@ multiLocalZscore <- function(A,
       randomize.function = rFUN,
       genome = genome,
       count.once = TRUE,
+      ntimes = ntimes,
 
       ...
     )
