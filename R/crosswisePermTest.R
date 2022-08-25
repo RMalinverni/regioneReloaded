@@ -107,6 +107,11 @@ crosswisePermTest <-
 
     Alist <- as.list(Alist)
 
+    Alist <- lapply(Alist, function(GR,genome){
+      newGR <- GR[regioneR::overlapRegions(GR, genome, only.boolean = TRUE)]
+    } ,genome)
+
+
     if (is.null(Blist)) {
       Blist <- Alist
     }
