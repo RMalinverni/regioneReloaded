@@ -109,9 +109,8 @@ data("cw_Alien")
 
 cw_Alien_ReG<-makeCrosswiseMatrix(cw_Alien_ReG, pvcut = 1)
 
-plotCrosswiseMatrix(cw_Alien_ReG, matrix_type = "association")
+plotCrosswiseMatrix(cw_Alien_ReG)
 
-plotCrosswiseMatrix(cw_Alien_ReG, matrix_type = "correlation")
 ```
 
 # Example dataset: the Alien Genome
