@@ -2,7 +2,7 @@
 
 # regioneReloaded 0.99.3 (2022-08-26)
 
-- Same as previous version.
+- Fix build warnings and minor bugs.
 
 
 # regioneReloaded 0.99.2 (2022-08-26)
