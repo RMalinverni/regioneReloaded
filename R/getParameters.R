@@ -4,7 +4,7 @@
 #'
 #' Get parameters from a genoMatriXeR or multiLocalZScore class object.
 #'
-#' @usage getParameters(rR)
+#' @usage getParameters(rR, show_errors)
 #'
 #' @param rR A genoMatriXeR or multiLocalZScore class object.
 #' @param show_errors logical, if TRUE the function returns a list with two dataframes:
