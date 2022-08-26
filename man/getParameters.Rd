@@ -4,7 +4,7 @@
 \alias{getParameters}
 \title{getParameters}
 \usage{
-getParameters(rR, , show_errors = FALSE)
+getParameters(rR, show_errors = FALSE)
 }
 \arguments{
 \item{rR}{A genoMatriXeR or multiLocalZScore class object.}
