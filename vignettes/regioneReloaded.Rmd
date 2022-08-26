@@ -363,13 +363,6 @@ The "multiOverlaps" slot contains a list of data frames that contain the results
 + **norm_zscore:**     normalized z-scores 
 + **adj_p_value:**     adjusted p.value 
 
-
-```{r}
-
-print(cw_Alien_ReG)
-
-```
-
 ### Matrix
 
 When the genoMatriXeR object is initially created by running `crosswisePermTest()`, the "matrix" slot will have a NULL value. See the section [Matrix calculation and visualization] on how to generate, access and visualize the association matrix.
