@@ -639,7 +639,7 @@ cw_Alien_RaR_no_Square <-  crosswisePermTest(
 
 the matrix calculated in this case is based on a double clustering of rows and columns
 
-```{r, eval = FALSE}
+```{r}
 cw_Alien_ReG_no_Square <- makeCrosswiseMatrix(cw_Alien_ReG_no_Square)
 
 plotCrosswiseMatrix(cw_Alien_ReG_no_Square)
