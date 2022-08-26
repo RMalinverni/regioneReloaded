@@ -85,7 +85,7 @@ plotLocalZScoreMatrix <- function(mLZ,
   }
 
   if (matrix_type == "correlation") {
-    GM <- gmxrMatrix(mLZ)$LZM_cor
+    GM <- mlzsMatrix(mLZ)$LZM_cor
 
     title <- "Correlation Matrix"
     maxVal <- 1
