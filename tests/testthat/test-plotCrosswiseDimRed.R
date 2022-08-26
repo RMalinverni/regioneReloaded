@@ -16,7 +16,7 @@ test_that("Returns the correct class without errors", {
   expect_s3_class(plotCrosswiseDimRed(cw_Alien_ReR, type = "UMAP"), "ggplot")
   # Graphical parameters
   expect_s3_class(plotCrosswiseDimRed(cw_Alien_ReR, ellipse = TRUE), "ggplot")
-  expect_warning(plotCrosswiseDimRed(cw_Alien_ReR, ellipse = TRUE, emphasize = TRUE), "ggplot")
+  expect_warning(plotCrosswiseDimRed(cw_Alien_ReR, ellipse = TRUE, emphasize = TRUE))
   expect_s3_class(plotCrosswiseDimRed(cw_Alien_ReR, ellipse = TRUE,
                                       emphasize = TRUE,
                                       listRS = list(regA = "regA", regAB = "regAB")), "ggplot")
