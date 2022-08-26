@@ -20,7 +20,7 @@ If NULL, the following methods will be tested: "complete", "average", "single", 
 An object of class \link{hclust}
 }
 \description{
-Evaluate and choose the best method for clustering a matrix using the \code{\link[=hclust]{hclust()}} function
+Evaluate and choose the best method for clustering a matrix using the \code{\link[=hclust]{hclust()}} function.
 }
 \examples{
 

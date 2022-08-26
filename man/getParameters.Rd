@@ -8,9 +8,14 @@ getParameters(rR)
 }
 \arguments{
 \item{rR}{A genoMatriXeR or multiLocalZScore class object.}
+
+\item{show_errors}{logical, if TRUE the function returns a list with two dataframes:
+one containing the parameter values and one with any error messages that have been
+generated during the permutation test iterations when running \link{crosswisePermTest}.}
 }
 \value{
-A dataframe with parameters and values.
+A dataframe with parameters and values, or a list with two dataframes
+with parameters and errors information.
 }
 \description{
 Get parameters from a genoMatriXeR or multiLocalZScore class object.
