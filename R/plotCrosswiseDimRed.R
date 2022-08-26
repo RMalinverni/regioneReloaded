@@ -88,32 +88,29 @@ plotCrosswiseDimRed <-
            ...) {
 
     # Check mPT object
-    if (!methods::hasArg(mPT)) {
-      stop("mPT is missing")
-    } else if (is.null(mPT@matrix[[1]])) {
-      stop("The matrix slot of mPT is empty, run first makeCrosswiseMatrix()")
-    } else if (methods::is(mPT, "genoMatriXeR")) {
-      GM <- mPT@matrix$GMat
-    } else if (is.matrix(mPT)) {
-      GM <- mPT
-    } else {
-      stop("mPT needs to be a genoMatriXeR object or a numeric matrix")
-    }
+    stopifnot("mPT is missing" = methods::hasArg(mPT))
+    stopifnot("mPT needs to be a genoMatriXeR object or a numeric matrix" = {
+      methods::is(mPT, "genoMatriXeR") | methods::is(mPT, "matrix")
+    })
+    stopifnot("The matrix slot of mPT is empty, run first makeCrosswiseMatrix()" = !is.null(gmxrMatrix(mPT)[[1]]))
 
     # Check arguments
-    if (!(type %in% c("PCA", "tSNE", "UMAP"))) {
-      stop("type must be 'PCA', 'tSNE' or 'UMAP'")
-    } else if (!(clust_met %in% c("hclust", "kmeans", "pam"))) {
-      stop("clust_met must be 'hclust', 'kmeans' or 'pam'")
+    stopifnot("type must be 'PCA', 'tSNE' or 'UMAP'" = type %in% c("PCA", "tSNE", "UMAP"))
+    stopifnot("clust_met must be 'hclust', 'kmeans' or 'pam'" = clust_met %in% c("hclust", "kmeans", "pam"))
+
+    if (methods::is(mPT, "genoMatriXeR")) {
+      GM <- getMatrix(mPT)
+    } else if (is.matrix(mPT)) {
+      GM <- mPT
     }
 
-    if(!all(listRS %in% names(mPT@multiOverlaps))) {
+    if(!all(listRS %in% names(gmxrMultiOverlaps(mPT)))) {
       warning("One or more elements in listRS do not match region set names in mPT")
     }
 
     if (is.na(GM_clust)) {
       if (clust_met == "hclust") {
-        clust_tab <- stats::cutree(mPT@matrix$FitRow, k = nc)
+        clust_tab <- stats::cutree(gmxrMatrix(mPT)$FitRow, k = nc)
         clust_tab <- clust_tab[rownames(GM)]
       }
 
@@ -135,19 +132,15 @@ plotCrosswiseDimRed <-
 
     df <- df1 <- data.frame()
     vec <- vec2 <- vec3 <- vector()
-
-    for (i in seq_len(nc)) {
+    df1 <- do.call("rbind", lapply(seq_len(nc), function(i) {
       nms <- names(clust_tab[clust_tab == i])
-
       df <- data.frame(
         Name = nms,
         Cluster = rep(paste0("clust_", i), length(nms)),
-
         ASW = rep(vecSil[i], length(nms))
       )
-
-      df1 <- rbind(df1, df)
-    }
+    })
+    )
 
     df1[is.na(df1)] <- 0
 
@@ -205,6 +198,9 @@ plotCrosswiseDimRed <-
     if (!is.null(listRS) & emphasize) {
       pdr_df$clust <- pdr_df$clust2
       pdr_df_emph <- pdr_df[pdr_df$clust != "none", ]
+    } else if (emphasize) {
+      warning("Emphasize is set to TRUE but listRS is NULL, ignoring emphasize")
+      pdr_df_emph <- pdr_df
     }
 
     p <-
@@ -231,7 +227,7 @@ plotCrosswiseDimRed <-
       )
     }
 
-    if (emphasize & !labAll) { # label all clusters
+    if (emphasize & !labAll) { # label only emphasized clusters
       p <- p + ggrepel::geom_text_repel(
         data = pdr_df_emph,
         size = labSize,
@@ -240,7 +236,7 @@ plotCrosswiseDimRed <-
         point.padding = 0.5,
         segment.color = "grey"
       )
-    } else {
+    } else { # label all clusters
       p <- p + ggrepel::geom_text_repel(
         size = labSize,
         ggplot2::aes_string(label = "Name"),

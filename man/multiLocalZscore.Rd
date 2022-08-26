@@ -4,36 +4,39 @@
 \alias{multiLocalZscore}
 \title{multiLocalZscore}
 \usage{
-multiLocalZscore( A, Blist = NULL, ranFUN = "randomizeRegions", evFUN = "numOverlaps", sampling = FALSE,
-min_sampling = 5000, fraction = 0.15, universe = NULL, window = 1000, step = 100, adj_pv_method = "BH",
-genome = "hg19", ...)
+multiLocalZscore(A, Blist = NULL, sampling = FALSE, fraction = 0.15,
+min_sampling = 5000, ranFUN = "randomizeRegions", evFUN = "numOverlaps",
+ntimes = 100, adj_pv_method = "BH", genome = "hg19", universe = NULL,
+window = 1000, step = 100, ...)
 }
 \arguments{
 \item{A}{query region set for which to estimate local z-score values.}
 
-\item{Blist}{\link{GRangesList} or list of region sets in any accepted formats by \href{https://bioconductor.org/packages/release/bioc/html/regioneR.html}{regioneR} package
-(\link{GenomicRanges}, \link{data.frame} etc...). (default = NULL)}
+\item{Blist}{\link[GenomicRanges:GRangesList-class]{GRangesList} or list of region sets in any accepted formats by \href{https://bioconductor.org/packages/release/bioc/html/regioneR.html}{regioneR} package
+(\link[GenomicRanges:GRanges-class]{GRanges}, \link{data.frame} etc.).}
+
+\item{sampling}{logical, if TRUE the function will use only a sample of each element of Alist to perform the test as specified in \code{fraction.} (default = FALSE)}
+
+\item{fraction}{logical, if \code{sampling=TRUE}, defines the fraction of the region sets used to perform the test. (default = 0.15)}
+
+\item{min_sampling}{numeric, minimum number of regions accepted after sampling is performed with the specified \code{fraction}. If the number of sampled
+regions is less than \code{min_sampling}, the number specified by \code{min_sampling} will be used as number of regions sampled instead. (default = 5000)}
 
 \item{ranFUN}{character, the randomization strategy used for the test, see \href{https://bioconductor.org/packages/release/bioc/html/regioneR.html}{regioneR}. (default = "randomizeRegions")}
 
 \item{evFUN}{character, the evaluation strategy used for the test, see  \href{https://bioconductor.org/packages/release/bioc/html/regioneR.html}{regioneR}. (default = "numOverlaps)}
 
-\item{sampling}{logical, if TRUE the function will use only a sample of each element of Alist to perform the test as specified in \code{fraction.} (default = FALSE)}
+\item{ntimes}{numeric, number of permutations used in the test. (default = 100)}
 
-\item{min_sampling}{numeric, minimum number of regions accepted after sampling is performed with the specified \code{fraction}. If the number of sampled
-regions is less than \code{min_sampling}, the number specified by \code{min_sampling} will be used as number of regions sampled instead. (default = 5000)}
+\item{adj_pv_method}{character, the method used for the calculation of the adjusted p-value, to choose between the options of \code{\link[=p.adjust]{p.adjust()}}. (default = "BH")}
 
-\item{fraction}{logical, if \code{sampling=TRUE}, defines the fraction of the region sets used to perform the test. (default = 0.15)}
+\item{genome}{character or \link[GenomicRanges:GRanges-class]{GRanges}, genome used to compute the randomization. (default = "hg19")}
 
 \item{universe}{region set to use as universe, used only when \code{\link[regioneR:resampleRegions]{regioneR::resampleRegions()}} function is selected. (default = NULL)}
 
 \item{window}{numeric, window (number of base pairs) in which the local z-score will be calculated. (default = 1000)}
 
 \item{step}{numeric, step (number of base pairs) by which will be estimated the local Z-score. (default = 100)}
-
-\item{adj_pv_method}{character, the method used for the calculation of the adjusted p-value, to choose between the options of \code{\link[=p.adjust]{p.adjust()}}. (default = "BH")}
-
-\item{genome}{character or \linkS4class{GRanges}, genome used to compute the randomization. (default = "hg19")}
 
 \item{...}{further arguments to be passed to other methods.}
 }

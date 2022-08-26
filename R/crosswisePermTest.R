@@ -18,8 +18,8 @@
 #'  genome = "hg19", ...)
 #'
 #'
-#' @param Alist,Blist [GRangesList] or list of region sets in any accepted formats by [regioneR](https://bioconductor.org/packages/release/bioc/html/regioneR.html) package
-#' ([GenomicRanges], [data.frame] etc...).
+#' @param Alist,Blist [GRangesList][GenomicRanges::GRangesList] or list of region sets in any accepted formats by [regioneR](https://bioconductor.org/packages/release/bioc/html/regioneR.html) package
+#' ([GRanges][GenomicRanges::GRanges], [data.frame] etc.).
 #' @param sampling logical, if TRUE the function will use only a sample of each element of Alist to perform the test as specified in `fraction.` (default = FALSE)
 #' @param fraction logical, if `sampling=TRUE`, defines the fraction of the region sets used to perform the test. (default = 0.15)
 #' @param min_sampling numeric, minimum number of regions accepted after sampling is performed with the specified `fraction`. If the number of sampled
@@ -29,7 +29,7 @@
 #' @param ntimes numeric, number of permutations used in the test. (default = 100)
 #' @param universe  region set to use as universe, used only when [regioneR::resampleRegions()] function is selected. (default = NULL)
 #' @param adj_pv_method character, the method used for the calculation of the adjusted p-value, to choose between the options of [p.adjust()]. (default = "BH")
-#' @param genome character or [GRanges-class], genome used to compute the randomization. (default = "hg19")
+#' @param genome character or [GRanges][GenomicRanges::GRanges], genome used to compute the randomization. (default = "hg19")
 #' @param ... further arguments to be passed to other methods.
 #'
 #' @return
@@ -79,31 +79,13 @@ crosswisePermTest <-
 
     # control parameters
 
-    if (!methods::hasArg(Alist)) {
-      stop("Alist is missing")
-    }
-    if (!is.logical(sampling)) {
-      stop("sampling must be logical")
-    }
-    if (!is.numeric(fraction)) {
-      stop("fraction must be numeric")
-    }
-    if (!is.numeric(min_sampling)) {
-      stop("min_sampling must be numeric")
-    }
-    if (!is.character(ranFUN)) {
-      stop("ranFun must be charachter")
-    }
-    if (!is.character(evFUN)) {
-      stop("evFun must be charachter")
-    }
-    if (!is.numeric(ntimes)) {
-      stop("ntimes must be numeric")
-    }
-    if (!is.numeric(min_sampling)) {
-      stop("min_sampling must be numeric")
-    }
-
+    stopifnot("Alist is missing" = methods::hasArg(Alist))
+    stopifnot("fraction must be numeric" = is.numeric(fraction))
+    stopifnot("sampling must be logical" = is.logical(sampling))
+    stopifnot("min_sampling must be numeric" = is.numeric(min_sampling))
+    stopifnot("ranFun must be charachter" = is.character(ranFUN))
+    stopifnot("evFun must be charachter" = is.character(evFUN))
+    stopifnot("ntimes must be numeric" = is.numeric(ntimes))
 
     # create @parameters slot
 
@@ -117,22 +99,28 @@ crosswisePermTest <-
       evFUN = evFUN,
       ntimes = ntimes,
       universe = NULL,
-      #universe = deparse(substitute(universe)),
       adj_pv_method = adj_pv_method,
       nc = NULL,
-      matOrder = NULL
+      matOrder = NULL,
+      errors = NULL
     )
+
+    Alist <- as.list(Alist)
+
+    Alist <- lapply(Alist, function(GR,genome){
+      newGR <- GR[regioneR::overlapRegions(GR, genome, only.boolean = TRUE)]
+    } ,genome)
+
 
     if (is.null(Blist)) {
       Blist <- Alist
+    }else{
+      Blist <- as.list(Blist)
     }
 
-    list.tabs <- list()
-    list.pt <- list()
-
+    Blist <- as.list(Blist)
 
     rFUN <- eval(parse(text = ranFUN))
-
 
     if (sampling == TRUE) {
       Alist <-
@@ -146,15 +134,52 @@ crosswisePermTest <-
       universe <- createUniverse(Alist)
     }
 
-    # create @multiOverlaps slot
+    # create multiOverlaps slot
 
-    list.tabs <- lapply(Alist,
-                        FUN = multiPermTest, ..., Blist = Blist,
+    list.tabs <- mapply(FUN = function(A, nameA, i, ...){
+                            show(paste0("Performing permutation tests for ", nameA, " (", i, " of ", length(Alist), ")"))
+                            tryCatch(
+                              res <- multiPermTest(A, ...), error = function(e) {
+                                message(paste0("There was an error when performing the permutation test for: ", nameA))
+                                return(list(NULL, e))
+                              }
+                            )
+                        },
+                        Alist,
+                        names(Alist),
+                        seq_along(Alist),
+                        MoreArgs = list(Blist = Blist,
                         ranFUN = ranFUN, evFUN = evFUN, uni = universe,
-                        genome = genome, rFUN = rFUN, ntimes = ntimes, adj_pv_method = adj_pv_method
+                        genome = genome, rFUN = rFUN, ntimes = ntimes, adj_pv_method = adj_pv_method),
+                        SIMPLIFY = FALSE
     )
 
     names(list.tabs) <- names(Alist)
+
+    # Save error list
+    list.errors <- lapply(list.tabs, FUN = function(x) {
+      if (is.null(x[[1]])) {
+        return(x[[2]])
+      }
+    })
+
+    list.errors <- list.errors[!unlist(lapply(list.errors, FUN = is.null))]
+
+    if(length(list.errors) > 0) {
+      paramList$errors <- data.frame(call = unlist(lapply(list.errors, FUN = function(x) deparse(x[["call"]]))),
+                                     errorMessage = unlist(lapply(list.errors, FUN = function(x) x[["message"]])))
+      warning("There was an error in one or more of the permutation test iterations (note that the evaluation for these test has been set to NULL)",
+              call. = FALSE)
+    }
+
+    # Clean list.tabs of errors
+    list.tabs <- lapply(list.tabs, FUN = function(x) {
+      if (is.data.frame(x)) {
+        return(x)
+      } else {
+        return(NULL)
+      }
+    })
 
     # create S4 object (matrix slot is = NULL)
 

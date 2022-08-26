@@ -23,7 +23,7 @@ subList <- function(Alist,
       if (subN < min_sampling) {
         subN <- min_sampling
       }
-      A <- A[sample(length(A), subN)]
+      A <- A[sample(length(A), subN), drop = FALSE]
       subAlist <- A
     } else {
       subAlist <- A

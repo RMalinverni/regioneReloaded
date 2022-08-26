@@ -61,26 +61,24 @@ plotCrosswiseMatrix <- function(mPT,
                        main = "",
                        ord_mat=NULL) {
 
-  if (!methods::hasArg(mPT)) {
-    stop("mPT is missing")
-  } else if (!(methods::is(mPT, "genoMatriXeR") | is.matrix(mPT))) {
-    stop("mPT needs to be a genoMatriXeR object or a numeric matrix")
-  } else if (is.null(mPT@matrix[[1]])) {
-    stop("The matrix slot of mPT is empty, run first makeCrosswiseMatrix()")
-  } else if (!(matrix_type %in% c("association", "correlation"))) {
-    stop("Invalid matrix_type, choose 'association' or 'correlation'")
-  } else if (!(cor %in% c("row", "col"))) {
-    stop("Invalid cor value, choose 'row' or 'col'")
-  } else if (!is.na(maxVal)) {
-      if(!(methods::is(maxVal, "numeric") | maxVal == "max")) {
-        stop("maxVal has to be a numerical value, 'max' or NA")
-    }
-  }
+  # Check mPT object
+  stopifnot("mPT is missing" = methods::hasArg(mPT))
+  stopifnot("mPT needs to be a genoMatriXeR object or a numeric matrix" = {
+    methods::is(mPT, "genoMatriXeR") | methods::is(mPT, "matrix")
+  })
+  stopifnot("The matrix slot of mPT is empty, run first makeCrosswiseMatrix()" = !is.null(gmxrMatrix(mPT)[[1]]))
+
+  # Check arguments
+  stopifnot("Invalid matrix_type, choose 'association' or 'correlation'" = matrix_type %in% c("association", "correlation"))
+  stopifnot("Invalid cor value, choose 'row' or 'col'" = cor %in% c("row", "col"))
+  stopifnot("maxVal has to be a numerical value, 'max' or NA" = {
+    is.na(maxVal) | is.numeric(maxVal) | maxVal == "max"
+  })
 
   if (methods::is(mPT,"genoMatriXeR")) {
 
     if  (matrix_type == "association") {
-      GM <- mPT@matrix$GMat
+      GM <- getMatrix(mPT)
       title <- "Association Matrix"
 
       if (is.na(maxVal)){
@@ -95,10 +93,10 @@ plotCrosswiseMatrix <- function(mPT,
 
     if  (matrix_type == "correlation") {
       if (cor == "row") {
-        GM <- mPT@matrix$GMat_corX
+        GM <- gmxrMatrix(mPT)$GMat_corX
       }
       if (cor == "col") {
-        GM <- mPT@matrix$GMat_corY
+        GM <- gmxrMatrix(mPT)$GMat_corY
       }
       title <- "Correlation Matrix"
       maxVal<-1
@@ -128,7 +126,7 @@ plotCrosswiseMatrix <- function(mPT,
   if (!is.null(ord_mat)){
     if (is.list(ord_mat)){
       if(length(ord_mat)==2){
-        GM<-GM[ord_mat[[1]],ord_mat[[2]]]
+        GM<-GM[ord_mat[[1]],ord_mat[[2]],drop = FALSE]
       }
     }
   }
@@ -153,7 +151,7 @@ plotCrosswiseMatrix <- function(mPT,
         ),
         axis.text.y = ggplot2::element_text(size = 6)
       ) +
-      ggplot2::labs(subtitle = title, title=main, caption = mPT@parameters$ranFUN) +
+      ggplot2::labs(subtitle = title, title=main, caption = gmxrParam(mPT)$ranFUN) +
       ggplot2::coord_equal()
   } else{
     ggplot2::ggplot(DF, ggplot2::aes_string(x = "X", y = "Y")) +
@@ -172,7 +170,7 @@ plotCrosswiseMatrix <- function(mPT,
         ),
         axis.text.y = ggplot2::element_text(size = 6)
       ) +
-      ggplot2::labs(subtitle =  title, title=main,caption = mPT@parameters$ranFUN) +
+      ggplot2::labs(subtitle =  title, title=main,caption = gmxrParam(mPT)$ranFUN) +
        ggplot2::coord_equal()
   }
 }

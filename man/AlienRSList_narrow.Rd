@@ -5,13 +5,13 @@
 \alias{AlienRSList_narrow}
 \title{AlienRSList_narrow}
 \format{
-A list of \link{GRanges} objects.
+A list of \link[GenomicRanges:GRanges-class]{GRanges} objects.
 }
 \usage{
 data(cw_Alien)
 }
 \description{
-List of region sets (as \link{GRanges}) on the \link{AlienGenome}.
+List of region sets (as \link[GenomicRanges:GRanges-class]{GRanges}) on the \link{AlienGenome}.
 }
 \details{
 This region sets are generated for the purpose of demonstrating the functions

@@ -53,25 +53,21 @@ plotLocalZScoreMatrix <- function(mLZ,
                                   highlight_max = FALSE,
                                   smoothing = FALSE,
                                   ...) {
+  # Check mLZ object
+  stopifnot("mLZ is missing" = methods::hasArg(mLZ))
+  stopifnot("mLZ needs to be a multiLocalZScore object" = {
+    methods::is(mLZ, "multiLocalZScore") | methods::is(mLZ, "matrix")
+  })
+  stopifnot("The matrix slot of mLZ is empty, run first makeCrosswiseMatrix()" = !is.null(mlzsMatrix(mLZ)[[1]]))
 
-  if (!methods::hasArg(mLZ)) {
-    stop("mLZ is missing")
-  } else if (!methods::is(mLZ, "multiLocalZScore")) {
-    stop("the object mLZA needs to be an multiLocalZScore object")
-  } else if (is.null(mLZ@matrix[[1]])) {
-    stop("The matrix slot of mLZ is empty, run first makeLZMatrix()")
-  }
-
-  if (!(matrix_type %in% c("association", "correlation"))) {
-  stop("Invalid matrix_type, choose 'association' or 'correlation'")
-  } else if (!is.na(maxVal)) {
-  if(!(methods::is(maxVal, "numeric") | maxVal == "max")) {
-    stop("maxVal has to be a numerical value, 'max' or NA")
-  }
-}
+  # Check arguments
+  stopifnot("Invalid matrix_type, choose 'association' or 'correlation'" = matrix_type %in% c("association", "correlation"))
+  stopifnot("maxVal has to be a numerical value, 'max' or NA" = {
+    is.na(maxVal) | is.numeric(maxVal) | maxVal == "max"
+  })
 
   if (matrix_type == "association") {
-    GM <- t(mLZ@matrix$LZM)
+    GM <- t(getMatrix(mLZ))
     title <- "Association Matrix"
 
     if (is.na(maxVal)){
@@ -84,12 +80,12 @@ plotLocalZScoreMatrix <- function(mLZ,
 
 
     if(revert == TRUE){
-      GM <-GM[rev(rownames(GM)),]
+      GM <-GM[rev(rownames(GM)), , drop = FALSE]
     }
   }
 
   if (matrix_type == "correlation") {
-    GM <- mLZ@matrix$LZM_cor
+    GM <- mlzsMatrix(mLZ)$LZM_cor
 
     title <- "Correlation Matrix"
     maxVal <- 1
@@ -114,7 +110,6 @@ plotLocalZScoreMatrix <- function(mLZ,
 
   p <- ggplot2::ggplot(DF, ggplot2::aes_string(x = "X", y = "Y")) +
 
-    #geom_raster(aes(fill = value), interpolate = FALSE, color  = "white") +
     ggplot2::geom_tile(ggplot2::aes_string(fill = "value"), color = lineColor) +
     ggplot2::scale_fill_gradientn(
       colours = rev(colMatrix),
@@ -133,17 +128,17 @@ plotLocalZScoreMatrix <- function(mLZ,
     ggplot2::labs(
       subtitle = title,
       title = main,
-      caption = mLZ@parameters$ranFUN
+      caption = mlzsParam(mLZ)$ranFUN
     )
 
   if (!is.null(highlight)) {
     if (highlight_max) {
-      DF_label <- DF[DF$Y %in% highlight,]
+      DF_label <- DF[DF$Y %in% highlight, , drop = FALSE]
       DF_label <- merge(stats::aggregate(value ~ Y, data = DF_label, FUN = max), DF_label)
-      DF_label <- DF_label[order(DF_label$Y),]
-      DF_label <- DF_label[!duplicated(DF_label$Y),]
+      DF_label <- DF_label[order(DF_label$Y), , drop = FALSE]
+      DF_label <- DF_label[!duplicated(DF_label$Y), , drop = FALSE]
     } else {
-      DF_label <- DF[DF$Y %in% highlight & DF$X == 0,]
+      DF_label <- DF[DF$Y %in% highlight & DF$X == 0, , drop = FALSE]
     }
     p <- p + ggrepel::geom_label_repel(data = DF_label, ggplot2::aes_string(label = "Y"), max.overlaps = Inf, size = highlight_size,
                               min.segment.length = 0, xlim = c(0.4 * max(DF$X), NA),

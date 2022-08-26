@@ -33,31 +33,26 @@
 
 getHClust<-function(rR, hctype = "rows"){
 
-  if (!methods::hasArg(rR)) {
-    stop("rR is missing")
-  }
-
-  if(!(methods::is(rR , "genoMatriXeR") | methods::is(rR , "multiLocalZScore"))){
-    stop(" class of rR object need to be genoMatriXeR or multiLocalZScore")
-  }
-
-  if(!(hctype == "rows" | hctype == "cols")){
-    stop(" hctype need to be rows or cols ")
-  }
-
+  stopifnot("rR is missing" = methods::hasArg(rR))
+  stopifnot("rR must be of class genoMatriXeR or multiLocalZScore" = {
+    methods::is(rR , "genoMatriXeR") | methods::is(rR , "multiLocalZScore")
+    })
+  stopifnot("hctype must be rows or cols" = {
+    hctype == "rows" | hctype == "cols"
+  })
 
   if(methods::is(rR , "genoMatriXeR" )){
 
     if (hctype == "rows"){
 
-      mod <- rR@matrix$FitRow
+      mod <- gmxrMatrix(rR)$FitRow
 
     }
     if (hctype == "cols"){
 
-      mod <- rR@matrix$FitCol
+      mod <- gmxrMatrix(rR)$FitCol
 
-      if (is.null(mod)) { mod <- rR@matrix$FitRow}
+      if (is.null(mod)) { mod <- gmxrMatrix(rR)$FitRow}
 
     }
 
@@ -65,7 +60,7 @@ getHClust<-function(rR, hctype = "rows"){
 
   if(methods::is(rR , "multiLocalZScore")){
 
-      mod <- rR@matrix$FitRow
+      mod <- mlzsMatrix(rR)$FitRow
 
       if (hctype == "cols"){
 

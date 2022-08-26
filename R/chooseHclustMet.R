@@ -38,38 +38,46 @@
 
 
 chooseHclustMet <-
-    function(GM,
-        scale = FALSE,
-        vecMet = NULL,
-        distHC = "euclidean") {
-        if (scale == TRUE) {
-            GM <- scale(GM)
-        }
+  function(GM,
+           scale = FALSE,
+           vecMet = NULL,
+           distHC = "euclidean") {
 
-        if (is.null(vecMet)) {
-            vecMet <-
-            c("complete",
-            "average",
-            "single",
-            "ward.D2",
-            "median",
-            "centroid",
-            "mcquitty"
-            )
-       }
+
+    if (scale == TRUE) {
+      GM <- scale(GM)
+    }
+
+    if (is.null(vecMet)) {
+      vecMet <-
+        c("complete",
+          "average",
+          "single",
+          "ward.D2",
+          "median",
+          "centroid",
+          "mcquitty"
+        )
+    }
 
     mat_dist <- stats::dist(x = GM, method = distHC)
 
-    resMetList <- list()
-    resMetVec <- vector()
-
-    for (i in seq_along(vecMet)) {
-      resMetList[[i]] <- stats::hclust(d = mat_dist, method = vecMet[[i]])
-      resMetVec[i] <-
-        stats::cor(x = mat_dist, stats::cophenetic(resMetList[[i]]))
-    }
+    resMetList<- lapply(seq_along(vecMet),
+                        FUN = function(i, mat_dist, vecMet){
+                          resMetList<- stats::hclust(d = mat_dist, method = vecMet[[i]])
+                        },
+                        mat_dist, vecMet)
 
     names(resMetList) <- vecMet
+
+    resMetVec <- unlist(lapply(seq_along(resMetList),
+                               FUN= function(i, mat_dist, resMetList){
+                                 resMetVec <- stats::cor(x = mat_dist,
+                                                         stats::cophenetic(resMetList[[i]]))
+                               },
+                               mat_dist, resMetList))
+
+
     names(resMetVec) <- vecMet
 
     name_model <- vecMet[which(resMetVec == max(resMetVec))]

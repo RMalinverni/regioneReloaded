@@ -24,12 +24,21 @@ knitr::opts_chunk$set(
 BiocStyle::markdown()
 ```
 
-# regioneReloaded
 
-The meaningful interpretation of overlaps between binding profiles of multiplechromatin regulators is a major challenge in epigenomics. To address this,  in 2015 we published `r BiocStyle::Biocpkg("regioneR")`, an R package that we developed for the statistical assessment of the association between genomic region sets. One limitation of regioneR is that it can only perform association analysis between two region sets at a time. Here, we now present `r BiocStyle::Rpackage("regioneReloaded")`, an R package that is the natural evolution of `r BiocStyle::Biocpkg("regioneR")` and allows to  calculate the statistical association between multiple regions sets at the same time. It also incorporates a strategy to improve p-value calculations and normalize z-scores coming from multiple analysis to allow for their direct comparison. `r BiocStyle::Rpackage("regioneReloaded")` also builds upon `r BiocStyle::Biocpkg("regioneR")` by adding new plotting functions for obtaining publication-ready graphs. Taken together,  aims to be a novel and valuable addition to the 
-repertoire of available tools for the analysis of high-content genomic datasets.
 
-## regioneR
+# Introduction
+
+In genetic and epigenetic research, high-throughput sequencing methods generate large amounts of data. The meaningful interpretation is one of the biggest challenges when analyzing multiple genomic datasets.
+
+Sequencing results can be summarized as ‘region sets’: a list of genomic regions defined by specific coordinates in a reference genome. This is true for all frequently used epigenomic methods such as chromatin immuprecipation (ChIP)-seq, CUT&RUN, DNA-methylation profiling and chromosome conformation capture-based methods. Genome-sequencing studies provide information on mutations, copy number variations and inversions that can be expressed as region sets. Transcriptomic data can be converted in region sets for instance by extracting the genomic position of differentially expressed genes or their regulatory elements. All regions can be further associated with metadata further characterizing them. Any annotated feature of interest in the genome itself, such as repetitive elements, conserved regions, or regulatory elements, can be chosen as regions set for further analysis.
+
+To interpret the meaning of overlaps between regions sets, in 2015 we published `r BiocStyle::Biocpkg("regioneR")`, an R package developed for the statistical evaluation of the association between sets of genomic regions. The main limitation of regioneR was that it can only perform pairwise association analysis. The resulting association value ("z-score") of different pairwise analyses could not be directly compared since z-scores depend on the size and nature of the input region sets. When scaling up the number of pairwise comparisons of larger data sets, the required increase in calculation time becomes a serious limitation.
+
+To address these issues, we now present `r BiocStyle::Rpackage("regioneReloaded")`: an R package that is the logically designed evolution of `r BiocStyle::Biocpkg("regioneR")` allowing to calculate the statistical association between multiple regions sets at the same time. `r BiocStyle::Rpackage("regionReloaded")` comprises a set of functions created to analyze clusters of associations and to facilitate the interpretation of results. Importantly, it includes strategies to improve p-value calculations and provides normalized z-scores allowing the direct comparison of multiple analysis. It also builds upon `r BiocStyle::Biocpkg("regioneR")` by adding new plotting functions for obtaining publication-ready graphs.
+
+Taken together, `r BiocStyle::Rpackage("regioneReloaded")`, aims to be a novel and valuable addition to the repertoire of available tools in the Bioconductor repository for the analysis of high-content genomic datasets.
+
+## regioneR and regioneReloaded
 
 `r BiocStyle::Biocpkg("regioneR")` is an R package published in 2015 created to statistically test the positional association between genomic region sets. The core of `r BiocStyle::Biocpkg("regioneR")` is a permutation test framework specifically designed to work in a genomic environment. For a detailed insight into the permutation test strategy implemented in `r BiocStyle::Biocpkg("regioneR")`, including the different randomization and evaluation strategies, please see the [regioneR vignette](https://bioconductor.org/packages/release/bioc/vignettes/regioneR/inst/doc/regioneR.html). The two main results that can be obtained with this statistical method can be summarized in two graphs. Figure 1A shows the association observed between the two region sets under study, highlighting the distance calculated in standard deviations from the random distribution. Figure 1B shows the local z-score: a narrow peak, as the one shown, indicates that the association is highly dependent on the exact location of the region. One the contrary, a flat profile would suggest a regional association.
 
@@ -54,6 +63,18 @@ We can empirically evaluate how the value of z-score between two well known stro
 Another crucial factor for the calculation of the normal z-score is the number of permutations performed in the test (`ntimes`). We suggest to use a minimum of 5000 permutations to achieve reproducible results.
 
 ![Ntimes demonstration](figures/ntimes_stabilizations.png){width=90%}
+
+# Installation
+
+```{r, eval=FALSE}
+
+if (!require("BiocManager", quietly = TRUE))
+    install.packages("BiocManager")
+
+BiocManager::install("regioneReloaded")
+
+```
+
 
 # Quick start
 
@@ -342,13 +363,6 @@ The "multiOverlaps" slot contains a list of data frames that contain the results
 + **norm_zscore:**     normalized z-scores 
 + **adj_p_value:**     adjusted p.value 
 
-
-```{r}
-
-print(cw_Alien_ReG)
-
-```
-
 ### Matrix
 
 When the genoMatriXeR object is initially created by running `crosswisePermTest()`, the "matrix" slot will have a NULL value. See the section [Matrix calculation and visualization] on how to generate, access and visualize the association matrix.
@@ -480,7 +494,7 @@ plotSinglePT(cw_Alien_ReG, RS1 = "regA", RS2 = "regA_05")
 ```
 
 ```{r}
-p_sPT1 <- plotSinglePT(cw_Alien_ReG, RS1 = "regA", RS2 = "regC")
+  p_sPT1 <- plotSinglePT(cw_Alien_ReG, RS1 = "regA", RS2 = "regC")
 
 plot(p_sPT1)
 ```
@@ -625,7 +639,7 @@ cw_Alien_RaR_no_Square <-  crosswisePermTest(
 
 the matrix calculated in this case is based on a double clustering of rows and columns
 
-```{r, eval = FALSE}
+```{r}
 cw_Alien_ReG_no_Square <- makeCrosswiseMatrix(cw_Alien_ReG_no_Square)
 
 plotCrosswiseMatrix(cw_Alien_ReG_no_Square)

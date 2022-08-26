@@ -18,15 +18,16 @@
 #' the central position if they happen to occur often at a regular distance,
 #' showing a "lateral" association.
 #'
-#' @usage multiLocalZscore( A, Blist = NULL, ranFUN = "randomizeRegions", evFUN = "numOverlaps", sampling = FALSE,
-#' min_sampling = 5000, fraction = 0.15, universe = NULL, window = 1000, step = 100, adj_pv_method = "BH",
-#' genome = "hg19", ...)
+#' @usage multiLocalZscore(A, Blist = NULL, sampling = FALSE, fraction = 0.15,
+#' min_sampling = 5000, ranFUN = "randomizeRegions", evFUN = "numOverlaps",
+#' ntimes = 100, adj_pv_method = "BH", genome = "hg19", universe = NULL,
+#' window = 1000, step = 100, ...)
 #'
 #' @inheritParams crosswisePermTest
 #'
 #' @param A query region set for which to estimate local z-score values.
-#' @param Blist [GRangesList] or list of region sets in any accepted formats by [regioneR](https://bioconductor.org/packages/release/bioc/html/regioneR.html) package
-#' ([GenomicRanges], [data.frame] etc...). (default = NULL)
+#' @param Blist [GRangesList][GenomicRanges::GRangesList] or list of region sets in any accepted formats by [regioneR](https://bioconductor.org/packages/release/bioc/html/regioneR.html) package
+#' ([GRanges][GenomicRanges::GRanges], [data.frame] etc.).
 #' @param window numeric, window (number of base pairs) in which the local z-score will be calculated. (default = 1000)
 #' @param step numeric, step (number of base pairs) by which will be estimated the local Z-score. (default = 100)
 #' @param ...  further arguments to be passed to other methods.
@@ -69,43 +70,25 @@
 
 multiLocalZscore <- function(A,
                              Blist = NULL,
+                             sampling = FALSE,
+                             fraction = 0.15,
+                             min_sampling = 5000,
                              ranFUN = "randomizeRegions",
                              evFUN = "numOverlaps",
-                             sampling = FALSE,
-                             min_sampling = 5000,
-                             fraction = 0.15,
+                             ntimes = 100,
+                             adj_pv_method = "BH",
+                             genome = "hg19",
                              universe = NULL,
                              window = 1000,
                              step = 100,
-                             adj_pv_method = "BH",
-                             genome = "hg19",
                              ...) {
 
-  if (!methods::hasArg(A)) {
-    stop("Alist is missing")
-  }
-  if (!is.logical(sampling)) {
-    stop("sampling must be logical")
-  }
-  if (!is.numeric(fraction)) {
-    stop("fraction must be numeric")
-  }
-  if (!is.numeric(min_sampling)) {
-    stop("min_sampling must be numeric")
-  }
-  if (!is.character(ranFUN)) {
-    stop("ranFun must be charachter")
-  }
-  if (!is.character(evFUN)) {
-    stop("evFun must be charachter")
-  }
-  # if (!is.numeric(ntimes)) {
-  #   stop("ntimes must be numeric")
-  # }
-  if (!is.numeric(min_sampling)) {
-    stop("min_sampling must be numeric")
-  }
-
+  stopifnot("Alist is missing" = methods::hasArg(A))
+  stopifnot("fraction must be numeric" = is.numeric(fraction))
+  stopifnot("sampling must be logical" = is.logical(sampling))
+  stopifnot("min_sampling must be numeric" = is.numeric(min_sampling))
+  stopifnot("ranFun must be charachter" = is.character(ranFUN))
+  stopifnot("evFun must be charachter" = is.character(evFUN))
 
   paramList <- list(
     A = deparse(substitute(A)),
@@ -125,14 +108,15 @@ multiLocalZscore <- function(A,
   eFUN <- eval(parse(text = evFUN))
 
   A <- toGRanges(A)
+  Blist <- as.list(Blist)
 
   if (sampling == TRUE) {
     if (length(A) >= min_sampling) {
       if (length(A) * fraction > min_sampling) {
-        A <- A[sample(length(A), round(length(A) * fraction))]
+        A <- A[sample(length(A), round(length(A) * fraction)), drop = FALSE]
 
       } else{
-        A <- A[sample(length(A), min_sampling)]
+        A <- A[sample(length(A), min_sampling), drop = FALSE]
       }
     }
   }
@@ -142,7 +126,7 @@ multiLocalZscore <- function(A,
       methods::show(
         "resampleRegions function need that universe parameters in not NULL universe will created using all the regions present in Blist"
       )
-      universe <- createUniverse(Blist) # check well this option
+      universe <- createUniverse(Blist)
     }
   }
 
@@ -159,7 +143,7 @@ multiLocalZscore <- function(A,
       evaluate.function = func.list,
       randomize.function = rFUN,
       genome = genome ,
-      #ntimes = ntimes,
+      ntimes = ntimes,
       universe = universe,
       ...
     )
@@ -170,9 +154,10 @@ multiLocalZscore <- function(A,
       A = A,
       evaluate.function = func.list,
       randomize.function = rFUN,
-      genome = genome ,
+      genome = genome,
       count.once = TRUE,
-      #ntimes = ntimes,
+      ntimes = ntimes,
+
       ...
     )
   }

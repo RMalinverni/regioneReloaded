@@ -74,26 +74,21 @@ makeCrosswiseMatrix <-
            GM_diag = TRUE,
            ...) {
 
-    if (methods::is(mPT,"genoMatriXeR")) {
-      mat <- crosswiseMatrix(mPT, zs.type = zs.type)
-      mat_pv <- crosswiseMatrix(mPT, zs.type = "adj.p_value")
+    stopifnot("mPT must be an object of class genoMatriXeR" = methods::is(mPT,"genoMatriXeR"))
 
-
-    } else {
-      stop(' mPT need to be a "genoMatriXeR" class object ')
-    }
-
+    mat <- crosswiseMatrix(mPT, zs.type = zs.type)
+    mat_pv <- crosswiseMatrix(mPT, zs.type = "adj.p_value")
 
     if (!is.null(selectRow)) {
       indRow <- grep(paste(selectRow, collapse = "|"), rownames(mat))
-      mat <- mat[indRow, ]
-      mat_pv <- mat_pv[indRow, ]
+      mat <- mat[indRow, , drop = FALSE]
+      mat_pv <- mat_pv[indRow, , drop = FALSE]
     }
 
     if (!is.null(selectCol)) {
       indCol <- grep(paste(selectCol, collapse = "|"), colnames(mat))
-      mat <- mat[, indCol]
-      mat_pv <- mat_pv[, indCol]
+      mat <- mat[, indCol, drop = FALSE]
+      mat_pv <- mat_pv[, indCol, drop = FALSE]
     }
 
 
@@ -123,8 +118,8 @@ makeCrosswiseMatrix <-
       ind <- fit$labels[fit$order]
 
       if (symm_matrix == TRUE) {
-        mat <- mat[ind, ind]
-        mat_pv <- mat_pv[ind, ind]
+        mat <- mat[ind, ind, drop = FALSE]
+        mat_pv <- mat_pv[ind, ind, drop = FALSE]
         fit2 <- NULL
 
       } else{
@@ -134,8 +129,8 @@ makeCrosswiseMatrix <-
                           vecMet = hc.method,
                           distHC = dist.method)
         ind2 <- fit2$labels[fit2$order]
-        mat <- mat[ind, ind2]
-        mat_pv <- mat_pv[ind, ind2]
+        mat <- mat[ind, ind2, drop = FALSE]
+        mat_pv <- mat_pv[ind, ind2, drop = FALSE]
 
       }
 
@@ -167,7 +162,8 @@ makeCrosswiseMatrix <-
         FitRow = fit,
         FitCol = fit2
       )
-    mPT@matrix <- mat1
+
+    gmxrMatrix(mPT) <- mat1
 
     return(mPT)
 

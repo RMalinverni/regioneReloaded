@@ -10,21 +10,21 @@
 
 DFfromLZ <- function(mLZ, RS) {
 
-  nelem <- grep(paste0("\\b",RS,"\\b"), names(mLZ@multiLocalZscores$shifed_ZSs))
+  nelem <- grep(paste0("\\b",RS,"\\b"), names(mlzsMultiLocalZscores(mLZ)$shifed_ZSs))
 
-  lineLZ <- mLZ@multiLocalZscores$shifed_ZSs[[nelem]]
-  nreg <- mLZ@parameters$Nregions
+  lineLZ <- mlzsMultiLocalZscores(mLZ)$shifed_ZSs[[nelem]]
+  nreg <- mlzsParam(mLZ)$Nregions
 
-  zs <- mLZ@multiLocalZscores$resumeTab$z_score[nelem]
-  pv <- mLZ@multiLocalZscores$resumeTab$adj.p_value[nelem]
-  mLZ@multiLocalZscores$resumeTab$n_overlaps == nreg
+  zs <- mlzsMultiLocalZscores(mLZ)$resumeTab$z_score[nelem]
+  pv <- mlzsMultiLocalZscores(mLZ)$resumeTab$adj.p_value[nelem]
+  mlzsMultiLocalZscores(mLZ)$resumeTab$n_overlaps == nreg
 
   df <-
     data.frame(
       name = rep(RS, length(lineLZ)),
       lzscore = lineLZ,
       normLocalZscore = lineLZ / (sqrt(nreg)),
-      shift = mLZ@multiLocalZscores$shifts
+      shift = mlzsMultiLocalZscores(mLZ)$shifts
     )
 
   return(df)

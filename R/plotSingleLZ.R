@@ -68,29 +68,25 @@ plotSingleLZ <-
            labMax = FALSE,
            smoothing = FALSE,
            ...) {
-    if (!methods::hasArg(mLZ)) {
-      stop("mLZ is missing")
-    } else if (!methods::is(mLZ, "multiLocalZScore")) {
-      stop("mLZ needs to be a multiLocalZScore object")
-    } else if (!methods::hasArg(RS)) {
-      stop("RS is missing")
-    } else if (!(all(RS %in% names(mLZ@multiLocalZscores$shifed_ZSs)))) {
-      stop("One or more elements in RS do not match region set names in mLZ")
-    }
+
+    stopifnot("mLZ is missing" = methods::hasArg(mLZ))
+    stopifnot("mLZ needs to be a multiLocalZScore object" = methods::is(mLZ, "multiLocalZScore"))
+    stopifnot("RS is missing" = methods::hasArg(RS))
+    stopifnot("One or more elements in RS do not match region set names in mLZ" = all(RS %in% names(mlzsMultiLocalZscores(mLZ)$shifed_ZSs)))
 
     RS <- as.list(RS)
     df <- do.call("rbind", lapply(X = RS, FUN = DFfromLZ, mLZ = mLZ))
 
     if (is.na(main)) {
-      main <- mLZ@parameters$A
+      main <- mlzsParam(mLZ)$A
     }
-    evfun <- mLZ@parameters$evFUN
-    ranfun <- mLZ@parameters$ranFUN
+    evfun <- mlzsParam(mLZ)$evFUN
+    ranfun <- mlzsParam(mLZ)$ranFUN
 
     pal <- plotPal(colPal) #palette
 
-    if (mLZ@parameters$evFUN == "numOverlaps") {
-      mLZ@parameters$evFUN <- "N. of overlaps"
+    if (mlzsParam(mLZ)$evFUN == "numOverlaps") {
+      mlzsParam(mLZ)$evFUN <- "N. of overlaps"
     }
 
     if (normZS) { # Raw or norm ZS
@@ -125,10 +121,10 @@ plotSingleLZ <-
     if (labValues) {
       if (labMax) {
         df_label <- merge(stats::aggregate(score ~ name, data = df, FUN = max), df)
-        df_label <- df_label[order(df_label$shift),]
-        df_label <- df_label[!duplicated(df_label$name),]
+        df_label <- df_label[order(df_label$shift), , drop = FALSE]
+        df_label <- df_label[!duplicated(df_label$name), , drop = FALSE]
       } else {
-        df_label <- df[df$shift == 0, ]
+        df_label <- df[df$shift == 0, , drop = FALSE]
       }
       df_label$text <- paste(df_label$name, "\nZS: ", round(df_label$score, digits = 2), sep = "")
       p <- p +
