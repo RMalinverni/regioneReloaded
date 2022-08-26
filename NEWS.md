@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# regioneReloaded 0.99.3 (2022-08-26)
+
+- Same as previous version.
+
+
 # regioneReloaded 0.99.2 (2022-08-26)
 
 - Fix build warnings and minor bugs.
