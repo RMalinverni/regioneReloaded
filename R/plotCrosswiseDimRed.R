@@ -104,7 +104,7 @@ plotCrosswiseDimRed <-
       GM <- mPT
     }
 
-    if(!all(listRS %in% names(gmxrMultiOverlaps(mPT)))) {
+    if(!all(unlist(listRS) %in% names(gmxrMultiOverlaps(mPT)))) {
       warning("One or more elements in listRS do not match region set names in mPT")
     }
 
@@ -180,22 +180,20 @@ plotCrosswiseDimRed <-
     pdr_df$clust <-
       paste0("clust_", as.factor(clust_tab))
 
-    pdr_df$clust1 <- rep("none", nrow(pdr_df))
-
-    for (i in seq_along(listRS)) {
-      for (x in seq_along(listRS[[i]])) {
-        pdr_df$clust1[pdr_df$Name == listRS[[i]][x]] <- names(listRS)[i]
-      }
-    }
-
-    pdr_df$clust2 <- rep("none", nrow(pdr_df))
-    sel_clust <- pdr_df$clust[pdr_df$clust1 != "none"]
-
-    for (i in seq_along(sel_clust)) {
-      pdr_df$clust2[pdr_df$clust == sel_clust[i]] <- sel_clust[i]
-    }
-
     if (!is.null(listRS) & emphasize) {
+      anno_clust <- do.call("rbind", mapply(FUN = function(x, y) {
+        data.frame("clust_name" = rep(y, length(x)),
+                   "rs_name" = x)
+      }, listRS, names(listRS), SIMPLIFY = FALSE))
+
+      pdr_df <- merge(pdr_df, anno_clust, by.x = "Name", by.y = "rs_name", all.x = TRUE, all.y = FALSE)
+      pdr_df$clust1 <- pdr_df$clust_name
+      pdr_df$clust1[is.na(pdr_df$clust1)] <- "none"
+
+      sel_clust <- pdr_df$clust[pdr_df$clust1 != "none"]
+
+      pdr_df$clust2 <- pdr_df$clust
+      pdr_df$clust2[!(pdr_df$clust %in% sel_clust)] <- "none"
       pdr_df$clust <- pdr_df$clust2
       pdr_df_emph <- pdr_df[pdr_df$clust != "none", ]
     } else if (emphasize) {
