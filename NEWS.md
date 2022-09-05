@@ -2,7 +2,7 @@
 
 # regioneReloaded 0.99.4 (2022-09-05)
 
-- Same as previous version.
+- 2nd review round for Bioconductor.
 
 
 # regioneReloaded 0.99.3 (2022-08-26)
