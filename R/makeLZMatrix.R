@@ -5,8 +5,9 @@
 #' Create a local z-score matrix from a [multiLocalZScore][multiLocalZScore-class]
 #' object and save it in its `matrix` slot.
 #'
-#' @usage makeLZMatrix(mlZA, normalize = TRUE, clusterize = TRUE, centralize = NA, hc.method = NULL, dist.method = "euclidean",
-#'                            scale = FALSE, ...)
+#' @usage makeLZMatrix(mlZA, normalize = TRUE, clusterize = TRUE,
+#'                 centralize = NA, hc.method = NULL, dist.method = "euclidean",
+#'                 scale = FALSE, ...)
 #'
 #' @inheritParams makeCrosswiseMatrix
 #'

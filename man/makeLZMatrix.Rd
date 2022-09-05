@@ -4,8 +4,9 @@
 \alias{makeLZMatrix}
 \title{Make Local Z-Score Matrix}
 \usage{
-makeLZMatrix(mlZA, normalize = TRUE, clusterize = TRUE, centralize = NA, hc.method = NULL, dist.method = "euclidean",
-                           scale = FALSE, ...)
+makeLZMatrix(mlZA, normalize = TRUE, clusterize = TRUE,
+                centralize = NA, hc.method = NULL, dist.method = "euclidean",
+                scale = FALSE, ...)
 }
 \arguments{
 \item{mlZA}{an object of class \link[=multiLocalZScore-class]{multiLocalZScore} or a numerical matrix.}
