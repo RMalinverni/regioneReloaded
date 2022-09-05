@@ -28,8 +28,12 @@
 #'
 #' data("cw_Alien")
 #'
-#' A<-createRandomRegions(nregions = 20, length.mean = 1000, length.sd = 100, genome = AlienGenome)
-#' similAList <- similarRegionSet(GR = A, genome = AlienGenome,vectorPerc = seq(0.1,0.9,0.2), name = "test")
+#' A<-createRandomRegions(nregions = 20, length.mean = 1000, length.sd = 100,
+#' genome = AlienGenome)
+#'
+#' similAList <- similarRegionSet(GR = A, genome = AlienGenome,
+#' vectorPerc = seq(0.1,0.9,0.2), name = "test")
+#'
 #' summary (similAList)
 #'
 #' @seealso [GRanges][GenomicRanges::GRanges]
