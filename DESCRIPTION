@@ -41,6 +41,8 @@ Imports:
     grDevices
 Suggests: 
     rmarkdown,
+    BiocStyle,
+    GenomeInfoDb,
     knitr,
     testthat (>= 3.0.0)
 biocViews: Genetics, ChIPSeq, DNASeq, MethylSeq, CopyNumberVariation, Clustering, MultipleComparison
