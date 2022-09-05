@@ -144,7 +144,7 @@ crosswisePermTest <-
                             show(paste0("Performing permutation tests for ", nameA, " (", i, " of ", length(Alist), ")"))
                             tryCatch(
                               res <- multiPermTest(A, ...), error = function(e) {
-                                message(paste0("There was an error when performing the permutation test for: ", nameA))
+                                message("There was an error when performing the permutation test for: ", nameA)
                                 return(list(NULL, e))
                               }
                             )
