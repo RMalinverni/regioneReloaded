@@ -2,7 +2,7 @@
 
 # regioneReloaded 0.99.6 (2022-09-06)
 
-- Same as previous version.
+- Minor fix.
 
 
 # regioneReloaded 0.99.5 (2022-09-06)
