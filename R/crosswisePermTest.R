@@ -144,7 +144,7 @@ crosswisePermTest <-
                             show(paste0("Performing permutation tests for ", nameA, " (", i, " of ", length(Alist), ")"))
                             tryCatch(
                               res <- multiPermTest(A, ...), error = function(e) {
-                                message("There was an error when performing the permutation test for: ", nameA)
+                                message("There was an issue when performing the permutation test for: ", nameA)
                                 return(list(NULL, e))
                               }
                             )
@@ -172,7 +172,7 @@ crosswisePermTest <-
     if(length(list.errors) > 0) {
       paramList$errors <- data.frame(call = unlist(lapply(list.errors, FUN = function(x) deparse(x[["call"]]))),
                                      errorMessage = unlist(lapply(list.errors, FUN = function(x) x[["message"]])))
-      warning("There was an error in one or more of the permutation test iterations (note that the evaluation for these test has been set to NULL)",
+      warning("There was an issue in one or more of the permutation test iterations (note that the evaluation for these test has been set to NULL)",
               call. = FALSE)
     }
 
