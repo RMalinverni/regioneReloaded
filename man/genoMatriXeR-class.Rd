@@ -18,3 +18,17 @@ An S4 class for "genoMatriXeR" object.
 \item{\code{matrix}}{List of numerical matrices containing z-score, pvalues and correlation values generated with \code{\link[=makeCrosswiseMatrix]{makeCrosswiseMatrix()}}}
 }}
 
+\examples{
+
+data("cw_Alien")
+
+AlienRSList_narrow_small  <- AlienRSList_narrow[c("regA","regB","regC")]
+
+cw_test <- crosswisePermTest(Alist = AlienRSList_narrow_small,Blist = AlienRSList_narrow_small,
+                            sampling = FALSE, genome = AlienGenome, per.chromosome = TRUE,
+                            ranFUN = "resampleGenome", evFUN = "numOverlaps",
+                            ntimes = 10, mc.cores = 2)
+
+class(cw_test)
+
+}
