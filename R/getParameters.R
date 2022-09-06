@@ -4,10 +4,10 @@
 #'
 #' Get parameters from a genoMatriXeR or multiLocalZScore class object.
 #'
-#' @usage getParameters(rR, show_errors = FALSE)
+#' @usage getParameters(rR, show_err = FALSE)
 #'
 #' @param rR A genoMatriXeR or multiLocalZScore class object.
-#' @param show_errors logical, if TRUE the function returns a list with two dataframes:
+#' @param show_err logical, if TRUE the function returns a list with two dataframes:
 #' one containing the parameter values and one with any error messages that have been
 #' generated during the permutation test iterations when running [crosswisePermTest].
 #'
@@ -31,7 +31,7 @@
 #' @export getParameters
 #'
 
-getParameters <- function(rR, show_errors = FALSE){
+getParameters <- function(rR, show_err = FALSE){
 
   stopifnot("rR is missing" = methods::hasArg(rR))
   stopifnot("rR must be an object of class genoMatriXeR or multiLocalZScore" = {
@@ -44,7 +44,7 @@ getParameters <- function(rR, show_errors = FALSE){
     param <- param[names(param) != "errors"]
     res <- data.frame(parameter = names(param), value = as.character(param))
 
-    if (show_errors) {
+    if (show_err) {
       res <- list(parameters = res, errors = errors)
     }
 
@@ -54,8 +54,8 @@ getParameters <- function(rR, show_errors = FALSE){
     param <- mlzsParam(rR)
     res <- data.frame(parameter = names(param), value = as.character(param))
 
-    if (show_errors) {
-      message("show_errors is only relevant for genoMatriXeR objects")
+    if (show_err) {
+      message("show_err is only relevant for genoMatriXeR objects")
     }
   }
 
