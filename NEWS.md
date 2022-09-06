@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# regioneReloaded 0.99.6 (2022-09-06)
+
+- Same as previous version.
+
+
 # regioneReloaded 0.99.5 (2022-09-06)
 
 - 3rd review round for Bioconductor.
