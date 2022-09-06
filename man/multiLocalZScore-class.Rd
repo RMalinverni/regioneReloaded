@@ -18,3 +18,17 @@ An S4 class for "multiLocalZScore" object.
 \item{\code{matrix}}{List of numerical matrices containing local z-scores and correlation values generated with \code{\link[=makeLZMatrix]{makeLZMatrix()}}.}
 }}
 
+\examples{
+
+data("cw_Alien")
+
+AlienRSList_narrow_small  <- AlienRSList_narrow[c("regA","regB","regC")]
+
+mlz_test <- multiLocalZscore(A = AlienRSList_narrow_small$regA, Blist = AlienRSList_narrow_small,
+                            sampling = FALSE, genome = AlienGenome, per.chromosome = TRUE,
+                            ranFUN = "resampleGenome", evFUN = "numOverlaps",
+                            ntimes = 10, mc.cores = 2)
+
+class(mlz_test)
+
+}
