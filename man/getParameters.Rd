@@ -4,12 +4,12 @@
 \alias{getParameters}
 \title{getParameters}
 \usage{
-getParameters(rR, show_errors = FALSE)
+getParameters(rR, show_err = FALSE)
 }
 \arguments{
 \item{rR}{A genoMatriXeR or multiLocalZScore class object.}
 
-\item{show_errors}{logical, if TRUE the function returns a list with two dataframes:
+\item{show_err}{logical, if TRUE the function returns a list with two dataframes:
 one containing the parameter values and one with any error messages that have been
 generated during the permutation test iterations when running \link{crosswisePermTest}.}
 }
