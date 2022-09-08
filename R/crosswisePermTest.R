@@ -113,6 +113,11 @@ crosswisePermTest <-
       genome <- getGenome(genome)
     }
 
+    if (is.null(names(Alist))){
+      names(Alist) <- paste0("RS1_",1:length(Alist))
+    }
+
+
     Alist <- as.list(Alist)
 
     Alist <- lapply(Alist, function(GR,genome){
@@ -127,6 +132,10 @@ crosswisePermTest <-
     }
 
     Blist <- as.list(Blist)
+
+    if (is.null(names(Blist))){
+      names(Blist) <- paste0("RS2_",1:length(Blist))
+    }
 
     rFUN <- eval(parse(text = ranFUN))
 
