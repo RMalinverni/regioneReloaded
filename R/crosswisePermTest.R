@@ -139,6 +139,7 @@ crosswisePermTest <-
     }
 
     # create multiOverlaps slot
+
     list.tabs <- mapply(FUN = function(A, nameA, i, ...){
                             show(paste0("Performing permutation tests for ", nameA, " (", i, " of ", length(Alist), ")"))
                             tryCatch(
@@ -166,9 +167,7 @@ crosswisePermTest <-
       }
     })
 
-    if(length(list.errors) > 0) {
-      list.errors <- list.errors[!unlist(lapply(list.errors, FUN = is.null))]
-    }
+    list.errors <- list.errors[!unlist(lapply(list.errors, FUN = is.null))]
 
     if(length(list.errors) > 0) {
       paramList$errors <- data.frame(call = unlist(lapply(list.errors, FUN = function(x) deparse(x[["call"]]))),
