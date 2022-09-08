@@ -109,6 +109,10 @@ crosswisePermTest <-
       errors = NULL
     )
 
+    if (is.character(genome)){
+      genome <- getGenome(genome)
+    }
+
     Alist <- as.list(Alist)
 
     Alist <- lapply(Alist, function(GR,genome){
