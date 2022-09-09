@@ -2,7 +2,8 @@
 
 # regioneReloaded 0.99.7 (2022-09-09)
 
-- Same as previous version.
+- Fix in crosswisePermTest() when region set list is unnamed.
+- Fix in crosswisePermTest() to accept string as genome name.
 
 
 # regioneReloaded 0.99.6 (2022-09-06)
