@@ -146,6 +146,17 @@ crosswisePermTest <-
       )
       universe <- createUniverse(Alist)
     }
+    
+    # List all arguments to be passed on to mapply including the ellipsis
+    mapargs <- list(Blist = Blist,
+                    ranFUN = ranFUN, 
+                    evFUN = evFUN, 
+                    uni = universe,
+                    genome = genome, 
+                    rFUN = rFUN, 
+                    ntimes = ntimes, 
+                    adj_pv_method = adj_pv_method,
+                    ...)
 
     # create @multiOverlaps slot
 
@@ -161,9 +172,7 @@ crosswisePermTest <-
                         Alist,
                         names(Alist),
                         seq_along(Alist),
-                        MoreArgs = list(Blist = Blist,
-                        ranFUN = ranFUN, evFUN = evFUN, uni = universe,
-                        genome = genome, rFUN = rFUN, ntimes = ntimes, adj_pv_method = adj_pv_method),
+                        MoreArgs = mapargs,
                         SIMPLIFY = FALSE
     )
 
