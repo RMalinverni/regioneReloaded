@@ -55,7 +55,7 @@ plotSinglePT <-
     stopifnot("mPT needs to be a genoMatriXeR object or a numeric matrix" = methods::is(mPT, "genoMatriXeR"))
 
     stopifnot("RS1 and RS2 are required" = methods::hasArg(RS1) & methods::hasArg(RS2))
-    stopifnot("RS1 or RS2 do not match region set names in the mPT genoMatriXeR object" = all(c(RS1, RS2) %in% names(gmxrMultiOverlaps(mPT))))
+    stopifnot("RS1 or RS2 do not match region set names in the mPT genoMatriXeR object" = all(c(RS1, RS2) %in% c(names(getMultiEvaluation(mPT)), getMultiEvaluation(mPT)[[1]]$name)))
 
     if (is.na(xlab) & gmxrParam(mPT)$evFUN == "numOverlaps") {
       xlab <- "N of overlaps"
