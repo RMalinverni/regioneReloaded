@@ -12,7 +12,7 @@
 #' @inheritParams makeCrosswiseMatrix
 #'
 #' @param mlZA an object of class [multiLocalZScore][multiLocalZScore-class] or a numerical matrix.
-#' @param normalize logical, if TRUE the z-score values in the matrix will be normalized. (default = FALSE)
+#' @param normalize logical, if TRUE the z-score values in the matrix will be normalized. (default = TRUE)
 #' @param centralize numeric, only z-score values in a number of steps (defined by `centralize`) around the center of the local association will be used for clustering. If NA, all the values in the matrix will be used for clustering. (default = NA)
 #' @param ...  further arguments to be passed to other methods.
 #'
