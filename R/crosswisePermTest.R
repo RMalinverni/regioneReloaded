@@ -150,14 +150,33 @@ crosswisePermTest <-
       )
       universe <- createUniverse(Alist)
     }
+    
+    # List all arguments to be passed on to mapply including the ellipsis
+    mapargs <- list(Blist = Blist,
+                    ranFUN = ranFUN, 
+                    evFUN = evFUN, 
+                    uni = universe,
+                    genome = genome, 
+                    rFUN = rFUN, 
+                    ntimes = ntimes, 
+                    adj_pv_method = adj_pv_method,
+                    ...)
 
+<<<<<<< HEAD
     # create multiOverlaps slot
+=======
+    # create @multiOverlaps slot
+>>>>>>> david_dev
 
     list.tabs <- mapply(FUN = function(A, nameA, i, ...){
                             show(paste0("Performing permutation tests for ", nameA, " (", i, " of ", length(Alist), ")"))
                             tryCatch(
                               res <- multiPermTest(A, ...), error = function(e) {
+<<<<<<< HEAD
                                 message("There was an issue when performing the permutation test for: ", nameA)
+=======
+                                message(paste0("There was an error when performing the permutation test for: ", nameA))
+>>>>>>> david_dev
                                 return(list(NULL, e))
                               }
                             )
@@ -165,9 +184,13 @@ crosswisePermTest <-
                         Alist,
                         names(Alist),
                         seq_along(Alist),
+<<<<<<< HEAD
                         MoreArgs = list(Blist = Blist,
                         ranFUN = ranFUN, evFUN = evFUN, uni = universe,
                         genome = genome, rFUN = rFUN, ntimes = ntimes, adj_pv_method = adj_pv_method),
+=======
+                        MoreArgs = mapargs,
+>>>>>>> david_dev
                         SIMPLIFY = FALSE
     )
 
@@ -185,7 +208,11 @@ crosswisePermTest <-
     if(length(list.errors) > 0) {
       paramList$errors <- data.frame(call = unlist(lapply(list.errors, FUN = function(x) deparse(x[["call"]]))),
                                      errorMessage = unlist(lapply(list.errors, FUN = function(x) x[["message"]])))
+<<<<<<< HEAD
       warning("There was an issue in one or more of the permutation test iterations (note that the evaluation for these test has been set to NULL)",
+=======
+      warning("There was an error in one or more of the permutation test iterations (note that the evaluation for these test has been set to NULL)",
+>>>>>>> david_dev
               call. = FALSE)
     }
 

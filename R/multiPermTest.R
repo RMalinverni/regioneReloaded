@@ -33,7 +33,6 @@ multiPermTest <-
            adj_pv_method,
            ...) {
 
-
     new.names <- names(Blist)
     func.list <-
       regioneR::createFunctionsList(FUN = evFUN,

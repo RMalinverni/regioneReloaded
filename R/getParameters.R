@@ -31,7 +31,11 @@
 #' @export getParameters
 #'
 
+<<<<<<< HEAD
 getParameters <- function(rR, show_err = FALSE){
+=======
+getParameters <- function(rR, show_errors = FALSE){
+>>>>>>> david_dev
 
   stopifnot("rR is missing" = methods::hasArg(rR))
   stopifnot("rR must be an object of class genoMatriXeR or multiLocalZScore" = {
